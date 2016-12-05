@@ -1,0 +1,7 @@
+name 'gusztavvargadr_nuget'
+maintainer 'Gusztav Varga'
+maintainer_email 'me@gusztavvargadr.me'
+license 'MIT'
+description 'Installs/Configures NuGet'
+long_description 'Installs/Configures NuGet'
+version '0.1.0'
