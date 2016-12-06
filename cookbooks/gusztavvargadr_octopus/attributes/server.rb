@@ -10,7 +10,6 @@ default['gusztavvargadr_octopus']['server'] = {
   'web_password' => '',
   'communication_port' => 10943,
   'node_name' => 'server',
-  'api_key' => '',
-  'environment_names' => ['default'],
-  'project_file_paths' => []
+  'import_directory_path' => '',
+  'import_password' => '',
 }
