@@ -14,27 +14,16 @@ gusztavvargadr_octopus_server server['instance_name'] do
   action [:install, :configure]
 end
 
-api_key = server['api_key']
-unless api_key.to_s == ''
-  chocolatey_package 'octopustools' do
-    action :upgrade
-  end
+import_directory_path = server['import_directory_path']
+import_password = server['import_password']
 
-  environment_names = server['environment_names']
-  environment_names.each do |environment_name|
-    gusztavvargadr_octopus_environment environment_name do
-      server_web_address server['web_address']
-      api_key api_key
-      action :create
-    end
-  end
-
-  project_file_paths = server['project_file_paths']
-  project_file_paths.each do |project_file_path|
-    gusztavvargadr_octopus_project project_file_path do
-      server_web_address server['web_address']
-      api_key api_key
-      action :import
-    end
+unless import_directory_path.to_s == '' || import_password.to_s == ''
+  executable_directory_path = 'C:\\Program Files\\Octopus Deploy\\Octopus'
+  powershell_script "Import from #{import_directory_path}" do
+    code <<-EOH
+      & "#{executable_directory_path}\\Octopus.Migrator.exe" import --instance "#{server['instance_name']}" --directory "#{import_directory_path.tr('/', '\\')}" --password "#{import_password}" --overwrite --console
+      & "#{executable_directory_path}\\Octopus.Server.exe" service --instance "#{server['instance_name']}" --stop --start --console
+    EOH
+    action :run
   end
 end

@@ -8,5 +8,6 @@ default['gusztavvargadr_octopus']['tentacle'] = {
   'api_key' => '',
   'node_name' => 'tentacle',
   'environment_name' => 'default',
-  'role_names' => ['tentacle']
+  'role_names' => ['tentacle'],
+  'project_file_paths' => []
 }
