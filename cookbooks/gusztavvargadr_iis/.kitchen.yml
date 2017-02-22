@@ -12,6 +12,9 @@ platforms:
   - name: windows10
     driver:
       box: gusztavvargadr/w10e
+  - name: windows16
+    driver:
+      box: gusztavvargadr/w16s
 
 suites:
   - name: default
