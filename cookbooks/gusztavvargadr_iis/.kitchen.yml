@@ -3,15 +3,15 @@ driver:
   name: vagrant
   customize:
     memory: 4096
-    cpus: 4
+    cpus: 2
 
 provisioner:
   name: chef_solo
 
 platforms:
-  - name: win12
+  - name: windows10
     driver:
-      box: gusztavvargadr/windows2012r2se
+      box: gusztavvargadr/w10e
 
 suites:
   - name: default

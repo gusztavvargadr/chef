@@ -4,6 +4,7 @@ property :password, String, default: node['gusztavvargadr_windows']['powershell_
 property :cwd, String, default: 'C:\\'
 property :code, String, required: true
 property :wait_poll, Integer, default: 5
+property :timeout, Integer, default: 3600
 
 action :run do
   script_directory_path = "#{Chef::Config[:file_cache_path]}/gusztavvargadr_windows"
@@ -20,14 +21,25 @@ action :run do
 
   windows_task_name = 'powershell_script_elevated'
   windows_task_command = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File '#{script_file_path.tr('/', '\\')}'"
-  windows_task windows_task_name do
-    user new_resource.user
-    password new_resource.password
-    cwd new_resource.cwd
-    command windows_task_command
-    action [ :create, :run ]
-    run_level :highest
-    force true
+
+  if new_resource.user == ''
+    windows_task windows_task_name do
+      cwd new_resource.cwd
+      command windows_task_command
+      action [:create, :run]
+      run_level :highest
+      force true
+    end
+  else
+    windows_task windows_task_name do
+      user new_resource.user
+      password new_resource.password
+      cwd new_resource.cwd
+      command windows_task_command
+      action [:create, :run]
+      run_level :highest
+      force true
+    end
   end
 
   powershell_script "Wait for task #{windows_task_name}" do
@@ -45,6 +57,7 @@ action :run do
           Start-Sleep #{wait_poll}
       }
     EOH
+    timeout new_resource.timeout
     action :run
   end
 
