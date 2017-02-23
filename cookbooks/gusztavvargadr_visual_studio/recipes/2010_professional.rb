@@ -1,6 +1,4 @@
-gusztavvargadr_visual_studio_2010_prerequisites '' do
-  action :install
-end
+include_recipe 'gusztavvargadr_iis::default'
 
 gusztavvargadr_visual_studio_2010 'professional' do
   action :install
