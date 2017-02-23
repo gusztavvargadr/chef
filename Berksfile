@@ -1,7 +1,5 @@
 source 'https://supermarket.chef.io'
 
-def local_cookbooks(directory_path)
-  Dir["#{directory_path}/**"].each do |cookbook_folder_path|
-    cookbook File.basename(cookbook_folder_path), path: cookbook_folder_path
-  end
+def gusztavvargadr_cookbook(name)
+  cookbook "gusztavvargadr_#{name}", path: "../gusztavvargadr_#{name}"
 end

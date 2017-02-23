@@ -1,10 +1,12 @@
 action :install do
   gusztavvargadr_windows_windows_updates '' do
-    action :enable
+    action [:enable, :start]
   end
 
-  gusztavvargadr_windows_windows_feature 'NetFx3' do
-    action :enable
+  ['NetFx3'].each do |windows_feature|
+    gusztavvargadr_windows_windows_feature windows_feature do
+      action :enable
+    end
   end
 
   gusztavvargadr_windows_windows_updates '' do
