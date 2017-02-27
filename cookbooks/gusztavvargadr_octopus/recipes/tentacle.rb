@@ -1,5 +1,8 @@
-chocolatey_package 'octopustools' do
-  action :upgrade
+powershell_script "Install octopustools" do
+  code <<-EOH
+    choco install -y octopustools
+  EOH
+  action :run
 end
 
 tentacle = node['gusztavvargadr_octopus']['tentacle']
