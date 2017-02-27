@@ -1,6 +1,6 @@
 default['gusztavvargadr_octopus']['tentacle'] = {
   'instance_name' => 'Tentacle',
-  'version' => '3.5.2-x64',
+  'version' => '',
   'home_directory_path' => 'C:\\Octopus',
   'communication_port' => 10933,
   'server_web_address' => 'http://localhost:80/',

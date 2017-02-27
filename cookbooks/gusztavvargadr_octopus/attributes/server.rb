@@ -1,6 +1,6 @@
 default['gusztavvargadr_octopus']['server'] = {
   'instance_name' => 'Server',
-  'version' => '3.5.2-x64',
+  'version' => '',
   'home_directory_path' => 'C:\\Octopus',
   'service_username' => 'NT AUTHORITY\\SYSTEM',
   'storage_server_name' => '(local)',

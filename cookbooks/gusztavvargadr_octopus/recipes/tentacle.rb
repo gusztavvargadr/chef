@@ -1,20 +1,19 @@
-powershell_script "Install octopustools" do
-  code <<-EOH
-    choco install -y octopustools
-  EOH
-  action :run
-end
-
 tentacle = node['gusztavvargadr_octopus']['tentacle']
 
 server_web_address = tentacle['server_web_address']
 api_key = tentacle['api_key']
 environment_name = tentacle['environment_name']
 
-gusztavvargadr_octopus_environment environment_name do
-  server_web_address server_web_address
-  api_key api_key
-  action :create
+chocolatey_package 'octopustools' do
+  action :install
+end
+
+unless api_key.to_s.empty?
+  gusztavvargadr_octopus_environment environment_name do
+    server_web_address server_web_address
+    api_key api_key
+    action :create
+  end
 end
 
 gusztavvargadr_octopus_tentacle tentacle['instance_name'] do
@@ -30,13 +29,15 @@ gusztavvargadr_octopus_tentacle tentacle['instance_name'] do
   action [:install, :configure]
 end
 
-project_file_paths = tentacle['project_file_paths']
-unless project_file_paths.nil?
-  project_file_paths.each do |project_file_path|
-    gusztavvargadr_octopus_project project_file_path do
-      server_web_address server_web_address
-      api_key api_key
-      action :import
+unless api_key.to_s.empty?
+  project_file_paths = tentacle['project_file_paths']
+  unless project_file_paths.nil?
+    project_file_paths.each do |project_file_path|
+      gusztavvargadr_octopus_project project_file_path do
+        server_web_address server_web_address
+        api_key api_key
+        action :import
+      end
     end
   end
 end
