@@ -41,7 +41,7 @@ suites:
   - name: tentacle-install
     run_list:
       - recipe[gusztavvargadr_octopus::tentacle]
-  - name: tentacle-configure
+  - name: tentacle-configure-username
     run_list:
       - recipe[gusztavvargadr_octopus::server]
       - recipe[gusztavvargadr_octopus::tentacle]
@@ -56,6 +56,29 @@ suites:
         tentacle:
           server_web_username: vagrant
           server_web_password: Vagrant42
+          environment_names:
+            - environment1
+            - environment2
+          tenant_names:
+            - tenant1
+            - tenant2
+          role_names:
+            - role1
+            - role2
+  - name: tentacle-configure-apikey
+    run_list:
+      - recipe[gusztavvargadr_octopus::server]
+      - recipe[gusztavvargadr_octopus::tentacle]
+    attributes:
+      gusztavvargadr_octopus:
+        server:
+          web_username: vagrant
+          web_password: Vagrant42
+          import:
+            C:\\vagrant-data\\server\\import1: Vagrant42
+            C:\\vagrant-data\\server\\import2: Vagrant42
+        tentacle:
+          server_api_key: API-TGBPZVAKBXBVIGOGUSTPPKBFMUY
           environment_names:
             - environment1
             - environment2
