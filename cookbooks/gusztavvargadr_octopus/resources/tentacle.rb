@@ -5,6 +5,7 @@ property :communication_port, Integer, default: node['gusztavvargadr_octopus']['
 property :server_web_address, String, default: node['gusztavvargadr_octopus']['tentacle']['server_web_address']
 property :server_web_username, String, default: node['gusztavvargadr_octopus']['tentacle']['server_web_username']
 property :server_web_password, String, default: node['gusztavvargadr_octopus']['tentacle']['server_web_password']
+property :server_api_key, String, default: node['gusztavvargadr_octopus']['tentacle']['server_api_key']
 property :server_communication_port, Integer, default: node['gusztavvargadr_octopus']['tentacle']['server_communication_port']
 property :node_name, String, default: node['gusztavvargadr_octopus']['tentacle']['node_name']
 property :environment_names, Array, default: node['gusztavvargadr_octopus']['tentacle']['environment_names']
@@ -25,10 +26,16 @@ action :install do
 end
 
 action :configure do
-  unless server_web_username.to_s.empty?
+  unless server_web_username.to_s.empty? && server_api_key.to_s.empty?
     instance_name = 'Tentacle' if instance_name.to_s.empty?
 
     executable_path = 'C:\\Program Files\\Octopus Deploy\\Tentacle\\Tentacle.exe'
+    credentials =
+      if server_web_username.to_s.empty?
+        "--apiKey=\"#{server_api_key}\""
+      else
+        "--username \"#{server_web_username}\" --password \"#{server_web_password}\""
+      end
     environments = environment_names.map { |environment_name| "--environment=\"#{environment_name}\"" }.join(' ')
     tenants = tenant_names.map { |tenant_name| "--tenant=\"#{tenant_name}\"" }.join(' ')
     roles = role_names.map { |role_name| "--role=\"#{role_name}\"" }.join(' ')
@@ -41,7 +48,7 @@ action :configure do
         & "#{executable_path}" service --instance "#{instance_name}" --stop --console
         & "#{executable_path}" polling-proxy --instance "#{instance_name}" --proxyEnable "False" --proxyUsername "" --proxyPassword "" --proxyHost "" --proxyPort ""  --console
         & "#{executable_path}" service --instance "#{instance_name}" --start  --console
-        & "#{executable_path}" register-with --instance "#{instance_name}" --server "#{server_web_address}" --name "#{node_name}" --comms-style "TentacleActive" --server-comms-port "#{server_communication_port}" --username "#{server_web_username}" --password "#{server_web_password}" --force #{environments} #{tenants} #{roles} --console
+        & "#{executable_path}" register-with --instance "#{instance_name}" --server "#{server_web_address}" --name "#{node_name}" --comms-style "TentacleActive" --server-comms-port "#{server_communication_port}" #{credentials} --force #{environments} #{tenants} #{roles} --console
         & "#{executable_path}" service --instance "#{instance_name}" --install --start --console
       EOH
       action :run
