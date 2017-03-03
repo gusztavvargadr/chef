@@ -1,4 +1,4 @@
-instance_eval(File.read(File.expand_path(File.join(File.dirname(__FILE__), '../../Berksfile'))))
+instance_eval(File.read(File.expand_path(File.join(File.dirname(__FILE__), '../../Berksfile.common.rb'))))
 
 gusztavvargadr_cookbook('iis')
 gusztavvargadr_cookbook('windows')
