@@ -6,7 +6,8 @@ unless profiles.nil?
 
     unless profile_username.nil? || profile_password.nil?
       profile_uri = URI.parse(profile_address)
-      profile_uri.userinfo = "#{profile_username}:#{profile_password}"
+      profile_uri.user = profile_username
+      profile_uri.password = profile_password
       profile_address = profile_uri.to_s
     end
 

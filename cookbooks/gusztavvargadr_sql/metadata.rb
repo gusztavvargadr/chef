@@ -4,6 +4,6 @@ maintainer_email 'me@gusztavvargadr.me'
 license 'MIT'
 description 'Installs/Configures SQL Server'
 long_description 'Installs/Configures SQL Server'
-version '0.2.0'
+version '0.2.2'
 
 depends 'gusztavvargadr_windows'

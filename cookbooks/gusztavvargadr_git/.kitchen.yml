@@ -9,9 +9,6 @@ provisioner:
   name: chef_solo
 
 platforms:
-  - name: windows10
-    driver:
-      box: gusztavvargadr/w10e
   - name: windows16
     driver:
       box: gusztavvargadr/w16s
@@ -19,8 +16,15 @@ platforms:
 suites:
   - name: profiles
     run_list:
+      - recipe[gusztavvargadr_windows::chocolatey_packages]    
       - recipe[gusztavvargadr_git::profiles]
     attributes:
+      gusztavvargadr_windows:
+        chocolatey_packages:
+          git:
+            version: '2.11.1.20170208'
+            options: >-
+              -params '"/GitAndUnixToolsOnPath"'
       gusztavvargadr_git:
         profiles:
           https://github.com:
