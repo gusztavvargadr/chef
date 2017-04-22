@@ -6,5 +6,4 @@ description 'Installs/Configures Visual Studio'
 long_description 'Installs/Configures  Visual Studio'
 version '0.2.2'
 
-depends 'gusztavvargadr_iis'
 depends 'gusztavvargadr_windows'
