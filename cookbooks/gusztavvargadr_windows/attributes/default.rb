@@ -5,6 +5,3 @@ default['gusztavvargadr_windows']['powershell_script_elevated'] = {
   'username' => '',
   'password' => ''
 }
-default['gusztavvargadr_windows']['virtualbox_guest'] = {
-  'version' => '5.1.2'
-}
