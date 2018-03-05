@@ -1,0 +1,6 @@
+require "#{File.dirname(__FILE__)}/../../core/berkshelf"
+
+gusztavvargadr_sources
+
+gusztavvargadr_cookbook 'windows'
+gusztavvargadr_cookbook 'windows', 'test'
