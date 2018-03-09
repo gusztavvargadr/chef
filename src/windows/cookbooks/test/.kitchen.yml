@@ -2,7 +2,8 @@
 driver:
   name: vagrant
   vagrantfiles:
-    - ../../core/kitchen.vagrant
+    - ../../../core/kitchen.vagrant
+  provider: <%= ENV['VAGRANT_PREFERRED_PROVIDERS'] || ENV['VAGRANT_DEFAULT_PROVIDER'] %>
 
 provisioner:
   name: chef_zero
@@ -43,7 +44,7 @@ suites:
               params: "'/GitAndUnixToolsOnPath /NoShellIntegration'"
           powershell:
             elevated: true
-  - name: environment_variables
+  - name: environment-variables
     run_list:
       - recipe[gusztavvargadr_windows_test::environment_variables]
     attributes:
