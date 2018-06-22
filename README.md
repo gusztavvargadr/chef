@@ -8,6 +8,7 @@ samples? (kitchen)
 
 windows firewall enable / disable
 windows update configure idempotence
+windows autologin
 -->
 
 This repository contains [Chef] cookbooks, mostly used by the [Packer] and [Vagrant] setups.
