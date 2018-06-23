@@ -1,0 +1,24 @@
+---
+defaults:
+  machines:
+    core: &machine_core
+      providers:
+        virtualbox:
+        hyperv:
+      synced_folders:
+        ../../../cookbooks: /vagrant-chef-cookbooks
+        ../../../policies: /vagrant-chef-policies
+
+environment: workstation.chef
+
+machines:
+  windows:
+    <<: *machine_core
+    box: gusztavvargadr/w16s
+    provisioners:
+      chef_zero:
+        run_list: recipe[gusztavvargadr_windows::chocolatey_packages]
+        json:
+          gusztavvargadr_windows:
+            chocolatey_packages:
+              chef-workstation:

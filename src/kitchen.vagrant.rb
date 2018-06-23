@@ -1,4 +1,4 @@
-require "#{File.dirname(__FILE__)}/../lib/gusztavvargadr/vagrant/src/vagrant"
+require "#{File.dirname(__FILE__)}/vagrant"
 
 VagrantMachine.defaults(
   'providers' => {
