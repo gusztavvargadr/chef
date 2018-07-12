@@ -66,12 +66,12 @@ end
 
 action :cleanup do
   gusztavvargadr_windows_powershell_script_elevated 'Clean up Updates' do
+    # DISM.exe /Online /Cleanup-Image /AnalyzeComponentStore
+    # DISM.exe /Online /Cleanup-Image /StartComponentCleanup
     code <<-EOH
-      DISM.exe /Online /Cleanup-Image /AnalyzeComponentStore
-      DISM.exe /Online /Cleanup-Image /StartComponentCleanup
       DISM.exe /Online /Cleanup-Image /StartComponentCleanup /ResetBase
-      DISM.exe /Online /Cleanup-Image /AnalyzeComponentStore
     EOH
+    # DISM.exe /Online /Cleanup-Image /AnalyzeComponentStore
     timeout 7_200
     action :run
   end
