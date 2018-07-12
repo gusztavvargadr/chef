@@ -6,15 +6,14 @@ defaults:
         virtualbox:
         hyperv:
       synced_folders:
-        ../../../cookbooks: /vagrant-chef-cookbooks
-        ../../../policies: /vagrant-chef-policies
+        ../../../..: /vagrant-repo
 
 environment: workstation.chef
 
 machines:
   windows:
     <<: *machine_core
-    box: gusztavvargadr/w16s
+    box: gusztavvargadr/w10e-dc
     provisioners:
       chef_zero:
         run_list: recipe[gusztavvargadr_windows::chocolatey_packages]
