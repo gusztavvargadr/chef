@@ -51,3 +51,35 @@ action :install do
     action :run
   end
 end
+
+action :patch do
+  directory_path = "#{Chef::Config[:file_cache_path]}/gusztavvargadr_mssql/2017_#{edition}"
+
+  directory directory_path do
+    recursive true
+    action :create
+  end
+
+  patch_file_path = "#{directory_path}/patch.exe"
+  patch_file_source = node['gusztavvargadr_mssql']["2017_#{edition}"]['patch_file_url']
+  remote_file patch_file_path do
+    source patch_file_source
+    action :create
+  end
+
+  extracted_directory_path = "#{directory_path}/patch"
+  gusztavvargadr_windows_powershell_script_elevated "Extract SQL Server 2017 #{edition} Patch" do
+    code <<-EOH
+      Start-Process "#{patch_file_path.tr('/', '\\')}" "/q /x:#{extracted_directory_path.tr('/', '\\')}" -Wait
+    EOH
+    action :run
+  end
+
+  extracted_file_path = "#{extracted_directory_path}/SETUP.EXE"
+  gusztavvargadr_windows_powershell_script_elevated "Patch SQL Server 2017 #{edition}" do
+    code <<-EOH
+      Start-Process "#{extracted_file_path.tr('/', '\\')}" "/ACTION=PATCH /ALLINSTANCES /IACCEPTSQLSERVERLICENSETERMS /QUIET" -Wait
+    EOH
+    action :run
+  end
+end

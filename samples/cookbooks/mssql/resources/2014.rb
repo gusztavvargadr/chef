@@ -34,8 +34,8 @@ action :install do
       action :mount
     end
   else
-    extracted_directory_path = "#{directory_path}/extracted"
-    gusztavvargadr_windows_powershell_script_elevated "Extract SQL Server 2014 #{edition}" do
+    extracted_directory_path = "#{directory_path}/install"
+    gusztavvargadr_windows_powershell_script_elevated "Extract SQL Server 2014 #{edition} Install" do
       code <<-EOH
         Start-Process "#{installer_file_path.tr('/', '\\')}" "/q /x:#{extracted_directory_path.tr('/', '\\')}" -Wait
       EOH
@@ -43,8 +43,7 @@ action :install do
     end
   end
 
-  extracted_installer_file_name = 'SETUP.EXE'
-  extracted_installer_file_path = "#{extracted_directory_path}/#{extracted_installer_file_name}"
+  extracted_installer_file_path = "#{extracted_directory_path}/SETUP.EXE"
   gusztavvargadr_windows_powershell_script_elevated "Install SQL Server 2014 #{edition}" do
     code <<-EOH
       Start-Process "#{extracted_installer_file_path.tr('/', '\\')}" "/CONFIGURATIONFILE=#{configuration_file_path.tr('/', '\\')} /IACCEPTSQLSERVERLICENSETERMS" -Wait
@@ -61,6 +60,38 @@ action :install do
   powershell_script 'Enable Firewall' do
     code <<-EOH
      netsh advfirewall firewall add rule name="SQL Server" dir=in localport=1433 protocol=TCP action=allow
+    EOH
+    action :run
+  end
+end
+
+action :patch do
+  directory_path = "#{Chef::Config[:file_cache_path]}/gusztavvargadr_mssql/2014_#{edition}"
+
+  directory directory_path do
+    recursive true
+    action :create
+  end
+
+  patch_file_path = "#{directory_path}/patch.exe"
+  patch_file_source = node['gusztavvargadr_mssql']["2014_#{edition}"]['patch_file_url']
+  remote_file patch_file_path do
+    source patch_file_source
+    action :create
+  end
+
+  extracted_directory_path = "#{directory_path}/patch"
+  gusztavvargadr_windows_powershell_script_elevated "Extract SQL Server 2014 #{edition} Patch" do
+    code <<-EOH
+      Start-Process "#{patch_file_path.tr('/', '\\')}" "/q /x:#{extracted_directory_path.tr('/', '\\')}" -Wait
+    EOH
+    action :run
+  end
+
+  extracted_file_path = "#{extracted_directory_path}/SETUP.EXE"
+  gusztavvargadr_windows_powershell_script_elevated "Patch SQL Server 2014 #{edition}" do
+    code <<-EOH
+      Start-Process "#{extracted_file_path.tr('/', '\\')}" "/ACTION=PATCH /ALLINSTANCES /IACCEPTSQLSERVERLICENSETERMS /QUIET" -Wait
     EOH
     action :run
   end
