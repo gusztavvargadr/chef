@@ -12,7 +12,7 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w
+  - name: w16s
     transport:
       name: winrm
     driver:

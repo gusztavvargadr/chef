@@ -12,11 +12,11 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w
+  - name: w16s
     transport:
       name: winrm
     driver:
-      box: gusztavvargadr/w16s
+      box: gusztavvargadr/w16s-de
 
 suites:
   - name: chocolatey-packages
@@ -32,8 +32,8 @@ suites:
             install:
               ignorechecksum:
               params: "'/GitAndUnixToolsOnPath /NoShellIntegration'"
-          powershell:
-            elevated: true
+          # powershell:
+          #   elevated: true
   - name: environment-variables
     run_list:
       - recipe[gusztavvargadr_windows_test::environment_variables]

@@ -12,12 +12,12 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w
+  - name: w16s
     transport:
       name: winrm
     driver:
       box: gusztavvargadr/w16s-de
-  - name: u
+  - name: u16s
     transport:
       name: ssh
     driver:

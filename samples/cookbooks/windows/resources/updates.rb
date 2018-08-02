@@ -3,20 +3,15 @@ property :msu_source, String, name_property: true
 default_action :install
 
 action :enable do
-  powershell_script 'Enable Updates' do
-    code <<-EOH
-      Set-Service wuauserv -StartupType Automatic
-    EOH
-    action :run
+  windows_service 'wuauserv' do
+    action :configure_startup
+    startup_type :manual
   end
 end
 
 action :start do
-  powershell_script 'Start Updates' do
-    code <<-EOH
-      Start-Service wuauserv
-    EOH
-    action :run
+  windows_service 'wuauserv' do
+    action :start
   end
 end
 
@@ -34,7 +29,7 @@ action :configure do
 end
 
 action :install do
-  if msu_source.to_s.empty?
+  if new_resource.msu_source.to_s.empty?
     gusztavvargadr_windows_powershell_script_elevated 'Install Updates' do
       code <<-EOH
         Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -IgnoreReboot
@@ -51,7 +46,7 @@ action :install do
 
     msu_file_path = "#{directory_path}/msu.msu"
     remote_file msu_file_path do
-      source msu_source
+      source new_resource.msu_source
       action :create
     end
 
@@ -78,17 +73,14 @@ action :cleanup do
 end
 
 action :stop do
-  powershell_script 'Stop Updates' do
-    code <<-EOH
-      Stop-Service wuauserv
-    EOH
+  windows_service 'wuauserv' do
+    action :stop
   end
 end
 
 action :disable do
-  powershell_script 'Disable Updates' do
-    code <<-EOH
-      Set-Service wuauserv -StartupType Disabled
-    EOH
+  windows_service 'wuauserv' do
+    action :configure_startup
+    startup_type :disabled
   end
 end

@@ -20,4 +20,4 @@ machines:
         json:
           gusztavvargadr_windows:
             chocolatey_packages:
-              chef-workstation:
+              chefdk:

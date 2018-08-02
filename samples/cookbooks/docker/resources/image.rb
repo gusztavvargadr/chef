@@ -8,16 +8,16 @@ action :pull do
 
   case image_platform
   when 'windows'
-    powershell_script "Pull Docker image '#{image_name}'" do
+    powershell_script "Pull Docker image '#{new_resource.image_name}'" do
       code <<-EOH
-        docker pull #{image_name}
+        docker pull #{new_resource.image_name}
       EOH
       action :run
     end
   when 'ubuntu'
-    bash "Pull Docker image '#{image_name}'" do
+    bash "Pull Docker image '#{new_resource.image_name}'" do
       code <<-EOH
-        docker pull #{image_name}
+        docker pull #{new_resource.image_name}
       EOH
       action :run
     end

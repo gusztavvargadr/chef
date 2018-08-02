@@ -5,7 +5,7 @@ default_action :install
 
 action :prepare do
   engine_platform = node['platform']
-  engine_options = node['gusztavvargadr_docker']['engine'][engine_platform][engine_edition]
+  engine_options = node['gusztavvargadr_docker']['engine'][engine_platform][new_resource.engine_edition]
 
   case engine_platform
   when 'windows'
@@ -13,7 +13,7 @@ action :prepare do
       features_options engine_options['features']
     end
 
-    case engine_edition
+    case new_resource.engine_edition
     when 'enterprise'
       powershell_script 'Install PowerShell module \'DockerProvider\'' do
         code <<-EOH
@@ -27,7 +27,7 @@ end
 
 action :install do
   engine_platform = node['platform']
-  engine_options = node['gusztavvargadr_docker']['engine'][engine_platform][engine_edition]
+  engine_options = node['gusztavvargadr_docker']['engine'][engine_platform][new_resource.engine_edition]
 
   case engine_platform
   when 'windows'
@@ -35,7 +35,7 @@ action :install do
       native_packages_options engine_options['native_packages']
     end
 
-    case engine_edition
+    case new_resource.engine_edition
     when 'enterprise'
       powershell_script 'Install PowerShell package \'Docker\'' do
         code <<-EOH
@@ -59,7 +59,7 @@ action :switch do
           & 'C:\\Program Files\\Docker\\Docker\\DockerCli.exe' -SwitchDaemon
         EOH
         action :run
-        not_if "(docker version --format '{{.Server.Os}}') -eq '#{engine_mode}'"
+        not_if "(docker version --format '{{.Server.Os}}') -eq '#{new_resource.engine_mode}'"
       end
     end
   end
