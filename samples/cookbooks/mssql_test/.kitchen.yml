@@ -16,7 +16,7 @@ platforms:
     transport:
       name: winrm
     driver:
-      box: gusztavvargadr/w16s
+      box: gusztavvargadr/w16s-de
 
 suites:
   # - name: 14x

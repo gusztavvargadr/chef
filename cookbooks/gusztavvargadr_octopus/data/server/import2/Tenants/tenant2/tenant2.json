@@ -1,8 +1,0 @@
-{
-  "$type": "Octopus.Core.Model.Tenants.Tenant, Octopus.Core",
-  "Id": "Tenants-2",
-  "Name": "tenant2",
-  "ProjectIds": [],
-  "ProjectEnvironments": {},
-  "TenantTags": []
-}

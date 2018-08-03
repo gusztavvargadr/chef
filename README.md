@@ -3,12 +3,13 @@
 <!-- TODOs
 
 chef 14
-  namespace collisions
   move to built-in resources
   check out other chef tooling
+  platform and chef version into metadata
 
   ruby, chef lint, warns
   kitchen machine name from env (suite), allow hostmanager -> multi-machine -> mention at kitchen issue
+  license, maintainer
 
 windows
   windows file from cookbook (static and template)

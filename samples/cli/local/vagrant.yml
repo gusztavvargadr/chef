@@ -1,0 +1,19 @@
+---
+defaults:
+  machines:
+    core: &machine_core
+      providers:
+        virtualbox:
+        hyperv:
+      synced_folders:
+        ../../..: /src/gusztavvargadr/chef
+
+environment: cli.chef
+tenant: local
+
+machines:
+  windows:
+    <<: *machine_core
+    box: gusztavvargadr/w10e-dc
+    provisioners:
+      chef_policyfile:

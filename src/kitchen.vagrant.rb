@@ -15,10 +15,11 @@ VagrantProvider.defaults(
 
 deployment = VagrantDeployment.new(
   File.dirname(__FILE__),
-  'environment' => 'chef',
+  'environment' => 'kitchen.chef',
+  'tenant' => 'local',
   'hostmanager' => false,
   'machines' => {
-    'kitchen' => {
+    'default' => {
     },
   }
 )
