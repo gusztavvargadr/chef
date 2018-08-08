@@ -1,7 +1,10 @@
+directory = File.dirname(__FILE__)
+
+require "#{directory}/../../src/Policyfile"
+
 name 'hello_world'
 
-run_list 'recipe[hello_world::default]'
-
-default_source :supermarket
-
+gusztavvargadr_chef_sources
 cookbook 'hello_world'
+
+run_list 'recipe[hello_world::default]'

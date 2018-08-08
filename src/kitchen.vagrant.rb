@@ -1,4 +1,6 @@
-require "#{File.dirname(__FILE__)}/vagrant"
+directory = File.dirname(__FILE__)
+
+require "#{directory}/vagrant"
 
 VagrantMachine.defaults(
   'providers' => {
@@ -14,7 +16,7 @@ VagrantProvider.defaults(
 )
 
 deployment = VagrantDeployment.new(
-  File.dirname(__FILE__),
+  directory,
   'environment' => 'kitchen.chef',
   'tenant' => 'local',
   'hostmanager' => false,

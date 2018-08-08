@@ -1,8 +1,8 @@
-require "#{File.dirname(__FILE__)}/../../../src/berkshelf"
+directory = File.dirname(__FILE__)
+
+require "#{directory}/../../../src/berkshelf"
 
 gusztavvargadr_chef_sources
-
 gusztavvargadr_chef_cookbook 'visualstudio_test'
 gusztavvargadr_chef_cookbook 'visualstudio'
-
 gusztavvargadr_chef_cookbook 'windows'

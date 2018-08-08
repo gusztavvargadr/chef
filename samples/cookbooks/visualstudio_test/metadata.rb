@@ -1,10 +1,11 @@
 name 'gusztavvargadr_visualstudio_test'
-maintainer 'Gusztáv Varga'
-maintainer_email 'chef@gusztavvargadr.me'
-license 'MIT'
 description 'Tests Visual Studio'
 long_description 'Tests Visual Studio'
-version '0.0.0'
 
+license 'MIT'
+maintainer 'Gusztáv Varga'
+maintainer_email 'chef@gusztavvargadr.me'
+
+version '0.0.0'
 depends 'gusztavvargadr_visualstudio'
 depends 'gusztavvargadr_windows'

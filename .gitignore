@@ -1,6 +1,6 @@
 .kitchen
-Berksfile.lock
 *.lock.json
+Berksfile.lock
 
 .vagrant
 vagrant.*override*.yml
