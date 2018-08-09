@@ -2,7 +2,7 @@
 defaults:
   providers:
     core: &provider_core
-      memory: 2048
+      memory: 4096
       cpus: 2
   machines:
     core: &machine_core
@@ -18,7 +18,7 @@ environment: cli.chef
 tenant: local
 
 machines:
-  windows:
+  w10e:
     <<: *machine_core
     box: gusztavvargadr/w10e-dc
     provisioners:
