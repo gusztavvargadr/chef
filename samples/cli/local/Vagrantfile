@@ -1,6 +1,19 @@
 directory = File.dirname(__FILE__)
 
-require "#{directory}/../../../src/vagrant"
+require "#{directory}/../../vagrant"
 
-deployment = VagrantDeployment.new(directory)
-deployment.configure
+VagrantMachine.defaults_include(
+  'synced_folders' => {
+    "#{directory}/../../.." => '/src/gusztavvargadr/chef',
+  },
+  'provisioners' => {
+    'chef_policyfile' => {},
+  }
+)
+
+VagrantProvider.defaults_include(
+  'memory' => '8192',
+  'cpus' => '4'
+)
+
+VagrantDeployment.configure(directory)

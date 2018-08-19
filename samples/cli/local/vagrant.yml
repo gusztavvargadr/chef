@@ -1,25 +1,5 @@
----
-defaults:
-  providers:
-    core: &provider_core
-      memory: 4096
-      cpus: 2
-  machines:
-    core: &machine_core
-      providers:
-        virtualbox:
-          <<: *provider_core
-        hyperv:
-          <<: *provider_core
-      synced_folders:
-        ../../..: /src/gusztavvargadr/chef
-
 environment: cli.chef
-tenant: local
 
 machines:
-  w10e:
-    <<: *machine_core
-    box: gusztavvargadr/w10e-dc
-    provisioners:
-      chef_policyfile:
+  windows:
+    box: <%= VagrantWindowsDesktopMachine.defaults['box'] %>

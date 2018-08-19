@@ -1,4 +1,3 @@
----
 driver:
   name: vagrant
   vagrantfiles:
@@ -12,16 +11,16 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w16s
+  - name: w16
     transport:
       name: winrm
     driver:
-      box: gusztavvargadr/w16s-de
-  - name: u16s
+      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16s-de' %>
+  - name: u16
     transport:
       name: ssh
     driver:
-      box: gusztavvargadr/u16s-dc
+      box: <%= ENV['VAGRANT_BOX_LINUX_SERVER'] || 'gusztavvargadr/u16s-dc' %>
 
 suites:
   - name: images

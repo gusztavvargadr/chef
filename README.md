@@ -7,6 +7,8 @@ chef 14
   check out other chef tooling
   platform and chef version into metadata
 
+  naming cli vs tools
+
   ruby, chef lint, warns
   kitchen machine name from env (suite), allow hostmanager -> multi-machine -> mention at kitchen issue
   license, maintainer
