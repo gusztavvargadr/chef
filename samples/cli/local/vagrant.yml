@@ -1,5 +1,7 @@
 environment: cli.chef
 
 machines:
-  windows:
-    box: <%= VagrantWindowsDesktopMachine.defaults['box'] %>
+  dk:
+    provisioners:
+      chef_policyfile_dk:
+        path: Policyfile.dk.rb
