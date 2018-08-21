@@ -1,0 +1,23 @@
+driver:
+  name: vagrant
+  vagrantfiles:
+    - ../../../src/kitchen.vagrant
+  provider: <%= ENV['VAGRANT_PREFERRED_PROVIDERS'] || ENV['VAGRANT_DEFAULT_PROVIDER'] %>
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: w16
+    transport:
+      name: winrm
+    driver:
+      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16s-de' %>
+
+suites:
+  - name: server
+    run_list:
+      - recipe[gusztavvargadr_iis_test::server]

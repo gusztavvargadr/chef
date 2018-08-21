@@ -1,0 +1,7 @@
+environment: cli.chef
+
+machines:
+  dk:
+    provisioners:
+      chef_policyfile_dk:
+        path: Policyfile.dk.rb
