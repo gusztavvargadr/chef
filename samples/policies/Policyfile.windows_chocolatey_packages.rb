@@ -10,4 +10,4 @@ cookbook 'gusztavvargadr_windows'
 
 run_list 'recipe[gusztavvargadr_windows::chocolatey_packages]'
 
-attributes "#{directory}/Policyfile.windows_chocolatey_packages.yml"
+attributes ["#{directory}/Policyfile.windows_chocolatey_packages.yml"]

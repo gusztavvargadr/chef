@@ -1,0 +1,7 @@
+environment: workstations.chef
+
+machines:
+  chef:
+    provisioners:
+      chef_policyfile_install:
+        path: Policyfile.install_chef.rb
