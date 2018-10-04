@@ -19,8 +19,8 @@ default['gusztavvargadr_iis']['server'] = {
         '/norestart',
       ],
     },
-    '.NET Core 2.1.3 Windows Server Hosting' => {
-      'source' => 'https://download.microsoft.com/download/6/E/B/6EBD972D-2E2F-41EB-9668-F73F5FDDC09C/dotnet-hosting-2.1.3-win.exe',
+    '.NET Core 2.1.5 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/86df96bb-384c-4d7a-82ce-2e4c2c871189/045870c1ab4004219cb312039c5a64d5/dotnet-hosting-2.1.5-win.exe',
       'install' => [
         '/install',
         '/quiet',
