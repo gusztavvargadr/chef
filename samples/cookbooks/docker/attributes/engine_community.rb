@@ -7,6 +7,7 @@ default['gusztavvargadr_docker']['engine_community'] = {
   'chocolatey_packages' => {
     'docker-for-windows' => {
       'elevated' => true,
+    },
   },
   'powershell_packages' => {},
 }
