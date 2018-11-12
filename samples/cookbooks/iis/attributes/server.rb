@@ -3,8 +3,8 @@ default['gusztavvargadr_iis']['server'] = {
     'IIS' => {},
   },
   'native_packages' => {
-    '.NET Core 1.0.12 / 1.1.9 Windows Server Hosting' => {
-      'source' => 'https://download.microsoft.com/download/3/7/f/37f3cf83-bed5-4ef1-bcd5-f24f7aef7c56/DotNetCore.1.0.12_1.1.9-WindowsHosting.exe',
+    '.NET Core 1.0.13 / 1.1.10 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/b84d0334-d56b-47b3-9da4-c48a553ce286/5079d35485214be3fbd72a4fdf21a655/dotnetcore.1.0.13_1.1.10-windowshosting.exe',
       'install' => [
         '/install',
         '/quiet',

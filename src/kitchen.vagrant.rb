@@ -14,7 +14,11 @@ VagrantDeployment.defaults_include(
 )
 
 VagrantMachine.defaults_include(
-  'no_synced_folders' => true,
+  'synced_folders' => {
+    '/vagrant' => {
+      'disabled' => true,
+    },
+  },
   'providers' => {
     'virtualbox' => {},
     'hyperv' => {},
