@@ -17,33 +17,22 @@ action :install do
     action :create
   end
 
-  installer_file_name = node['gusztavvargadr_mssql']["2014_#{new_resource.edition}"]['installer_file_name']
-  installer_file_path = "#{directory_path}/#{installer_file_name}"
-  installer_file_source = node['gusztavvargadr_mssql']["2014_#{new_resource.edition}"]['installer_file_url']
-  remote_file installer_file_path do
-    source installer_file_source
+  installer_iso_name = 'installer.iso'
+  installer_iso_path = "#{directory_path}/#{installer_iso_name}"
+  installer_iso_source = node['gusztavvargadr_mssql']["2014_#{new_resource.edition}"]['installer_iso_url']
+  remote_file installer_iso_path do
+    source installer_iso_source
     action :create
   end
 
-  extracted_directory_path = directory_path
-  installer_file_extension = ::File.extname(installer_file_name)
-  if installer_file_extension == '.iso'
-    extracted_directory_path = 'I:/'
-    gusztavvargadr_windows_iso installer_file_path do
-      iso_drive_letter 'I'
-      action :mount
-    end
-  else
-    extracted_directory_path = "#{directory_path}/install"
-    gusztavvargadr_windows_powershell_script_elevated "Extract SQL Server 2014 #{new_resource.edition} Install" do
-      code <<-EOH
-        Start-Process "#{installer_file_path.tr('/', '\\')}" "/q /x:#{extracted_directory_path.tr('/', '\\')}" -Wait
-      EOH
-      action :run
-    end
+  extracted_directory_path = 'I:/'
+  gusztavvargadr_windows_iso installer_iso_path do
+    iso_drive_letter 'I'
+    action :mount
   end
 
-  extracted_installer_file_path = "#{extracted_directory_path}/SETUP.EXE"
+  extracted_installer_file_name = 'SETUP.EXE'
+  extracted_installer_file_path = "#{extracted_directory_path}/#{extracted_installer_file_name}"
   gusztavvargadr_windows_powershell_script_elevated "Install SQL Server 2014 #{new_resource.edition}" do
     code <<-EOH
       Start-Process "#{extracted_installer_file_path.tr('/', '\\')}" "/CONFIGURATIONFILE=#{configuration_file_path.tr('/', '\\')} /IACCEPTSQLSERVERLICENSETERMS" -Wait
@@ -51,10 +40,8 @@ action :install do
     action :run
   end
 
-  if installer_file_extension == '.iso'
-    gusztavvargadr_windows_iso installer_file_path do
-      action :dismount
-    end
+  gusztavvargadr_windows_iso installer_iso_path do
+    action :dismount
   end
 
   powershell_script 'Enable Firewall' do

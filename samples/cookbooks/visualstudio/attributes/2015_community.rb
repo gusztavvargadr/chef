@@ -1,3 +1,3 @@
 default['gusztavvargadr_visualstudio']['2015_community'] = {
-  'installer_file_url' => 'https://onedrive.live.com/download?cid=EFF41AD5731FA3EA&resid=EFF41AD5731FA3EA%21706722&authkey=ACa69dL0LNU0GiM',
+  'installer_file_url' => "#{ENV['USERPROFILE']}/Downloads/en_visual_studio_community_2015_with_update_3_x86_x64_web_installer_8922963",
 }

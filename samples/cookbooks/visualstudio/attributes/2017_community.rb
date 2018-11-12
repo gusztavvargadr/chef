@@ -1,7 +1,7 @@
 default['gusztavvargadr_visualstudio']['2017_community'] = {
   'native_packages' => {
     'Visual Studio 2017 Community' => {
-      'source' => 'https://download.microsoft.com/download/4/3/3/433CE112-6BA4-49A1-A59F-E15F01E7B851/vs_Community.exe',
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/4035d2dd-2d45-48eb-9104-d4dc7d808a7b/f5675416a31cbf8c29e74d75a1790cf7/vs_community.exe',
       'install' => [
         '--installPath ""C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community""',
         '--add Microsoft.VisualStudio.Workload.CoreEditor',

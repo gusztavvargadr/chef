@@ -1,66 +1,37 @@
 property :engine_edition, String, name_property: true
-property :engine_mode, String, default: node['gusztavvargadr_docker']['engine']['mode']
 
 default_action :install
 
 action :prepare do
-  engine_platform = node['platform']
-  engine_options = node['gusztavvargadr_docker']['engine'][engine_platform][new_resource.engine_edition]
+  engine_options = node['gusztavvargadr_docker']["engine_#{new_resource.engine_edition}"]
 
-  case engine_platform
-  when 'windows'
-    gusztavvargadr_windows_features '' do
-      features_options engine_options['features']
-    end
+  gusztavvargadr_windows_features '' do
+    features_options engine_options['features']
+  end
 
-    case new_resource.engine_edition
-    when 'enterprise'
-      powershell_script 'Install PowerShell module \'DockerMsftProvider\'' do
-        code <<-EOH
-          Install-Module DockerMsftProvider -Force
-        EOH
-        action :run
-      end
+  engine_options['powershell_modules'].each do |module_name, module_options|
+    powershell_script "Install PowerShell module '#{module_name}'" do
+      code <<-EOH
+        Install-Module #{module_name} -Force
+      EOH
+      action :run
     end
   end
 end
 
 action :install do
-  engine_platform = node['platform']
-  engine_options = node['gusztavvargadr_docker']['engine'][engine_platform][new_resource.engine_edition]
+  engine_options = node['gusztavvargadr_docker']["engine_#{new_resource.engine_edition}"]
 
-  case engine_platform
-  when 'windows'
-    gusztavvargadr_windows_native_packages '' do
-      native_packages_options engine_options['native_packages']
-    end
-
-    case new_resource.engine_edition
-    when 'enterprise'
-      powershell_script 'Install PowerShell package \'Docker\'' do
-        code <<-EOH
-          Install-Package Docker -ProviderName DockerMsftProvider -Force
-        EOH
-        action :run
-      end
-    end
+  gusztavvargadr_windows_chocolatey_packages '' do
+    chocolatey_packages_options engine_options['chocolatey_packages']
   end
-end
 
-action :switch do
-  engine_platform = node['platform']
-
-  case engine_platform
-  when 'windows'
-    case engine_edition
-    when 'community'
-      powershell_script 'Switch Docker daemon' do
-        code <<-EOH
-          & 'C:\\Program Files\\Docker\\Docker\\DockerCli.exe' -SwitchDaemon
-        EOH
-        action :run
-        not_if "(docker version --format '{{.Server.Os}}') -eq '#{new_resource.engine_mode}'"
-      end
+  engine_options['powershell_packages'].each do |package_name, package_options|
+    powershell_script "Install PowerShell package '#{package_name}'" do
+      code <<-EOH
+        Install-Package #{package_name} -ProviderName #{package_options['provider']} -Force
+      EOH
+      action :run
     end
   end
 end
