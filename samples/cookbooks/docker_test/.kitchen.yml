@@ -11,14 +11,10 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w16
-    transport:
-      name: winrm
+  - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16s-de' %>
-  - name: u16
-    transport:
-      name: ssh
+      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16sc-de' %>
+  - name: linux
     driver:
       box: <%= ENV['VAGRANT_BOX_LINUX_SERVER'] || 'gusztavvargadr/u16s-dc' %>
 
