@@ -3,7 +3,7 @@ property :user, String, default: ''
 property :password, String, default: ''
 property :cwd, String, default: 'C:\\'
 property :code, String, required: true
-property :wait_poll, Integer, default: 1
+property :wait_poll, Integer, default: 60
 property :timeout, Integer, default: 3600
 
 default_action :run
@@ -38,7 +38,7 @@ action :run do
       command windows_task_command
       frequency :once
       start_time '00:00'
-      action [:create, :run]
+      action :create
       run_level :highest
     end
   else
@@ -49,9 +49,13 @@ action :run do
       command windows_task_command
       frequency :once
       start_time '00:00'
-      action [:create, :run]
+      action :create
       run_level :highest
     end
+  end
+
+  windows_task windows_task_name do
+    action :run
   end
 
   powershell_script "Wait for task '#{windows_task_name}'" do

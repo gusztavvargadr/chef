@@ -25,7 +25,7 @@ action :install do
     action :create
   end
 
-  extracted_directory_path = 'I:/'
+  extracted_directory_path = 'I:'
   gusztavvargadr_windows_iso installer_iso_path do
     iso_drive_letter 'I'
     action :mount
