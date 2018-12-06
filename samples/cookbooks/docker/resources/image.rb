@@ -1,23 +1,22 @@
-property :image_name, String, name_property: true
-property :image_options, Hash
+property :name, String, name_property: true
 
 default_action :pull
 
 action :pull do
-  image_platform = node['platform']
+  platform = node['platform']
 
-  case image_platform
+  case platform
   when 'windows'
-    powershell_script "Pull Docker image '#{new_resource.image_name}'" do
+    powershell_script "Pull Docker image '#{new_resource.name}'" do
       code <<-EOH
-        docker pull #{new_resource.image_name}
+        docker pull #{new_resource.name}
       EOH
       action :run
     end
   when 'ubuntu'
-    bash "Pull Docker image '#{new_resource.image_name}'" do
+    bash "Pull Docker image '#{new_resource.name}'" do
       code <<-EOH
-        docker pull #{new_resource.image_name}
+        docker pull #{new_resource.name}
       EOH
       action :run
     end

@@ -3,7 +3,8 @@ directory = File.dirname(__FILE__)
 require "#{directory}/vagrant"
 
 VagrantDeployment.defaults_include(
-  'environment' => 'kitchen.chef',
+  'component' => 'kitchen',
+  'stack' => 'chef',
 
   'hostmanager' => false,
 

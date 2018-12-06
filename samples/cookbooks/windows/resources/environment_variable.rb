@@ -1,15 +1,15 @@
-property :environment_variable_name, String, name_property: true
-property :environment_variable_options, Hash, required: true
+property :name, String, name_property: true
+property :options, Hash, default: {}
 
 default_action :create
 
 action :create do
-  environment_variable_value = new_resource.environment_variable_options['value']
-  environment_variable_type = new_resource.environment_variable_options['type'] || 'User'
+  value = new_resource.options['value']
+  type = new_resource.options['type'] || 'User'
 
-  powershell_script "Update environment variable '#{new_resource.environment_variable_name}'" do
+  powershell_script "Update environment variable '#{new_resource.name}'" do
     code <<-EOH
-      [Environment]::SetEnvironmentVariable("#{new_resource.environment_variable_name}", "#{environment_variable_value}", "#{environment_variable_type}")
+      [Environment]::SetEnvironmentVariable("#{new_resource.name}", "#{value}", "#{type}")
     EOH
     action :run
   end

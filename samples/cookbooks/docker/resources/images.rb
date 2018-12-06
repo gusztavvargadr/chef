@@ -1,11 +1,12 @@
-property :images_options, Hash, required: true
+property :options, Hash, required: true
 
 default_action :pull
 
 action :pull do
-  new_resource.images_options.each do |image_name, image_options|
-    gusztavvargadr_docker_image image_name do
-      image_options image_options
+  return if new_resource.options.nil?
+
+  new_resource.options.each do |name, options|
+    gusztavvargadr_docker_image name do
       action :pull
     end
   end

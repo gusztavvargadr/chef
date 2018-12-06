@@ -11,11 +11,9 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w16
-    transport:
-      name: winrm
+  - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16s-de' %>
+      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16sc-de' %>
 
 suites:
   - name: server

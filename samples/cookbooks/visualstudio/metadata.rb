@@ -2,9 +2,9 @@ name 'gusztavvargadr_visualstudio'
 description 'Installs/Configures Visual Studio'
 long_description 'Installs/Configures Visual Studio'
 
+license 'Unlicense'
 maintainer 'Gusztáv Varga'
-maintainer_email 'chef@gusztavvargadr.me'
-license 'MIT'
+maintainer_email 'mail@gusztavvargadr.me'
 
 version '0.0.0'
 depends 'gusztavvargadr_windows'

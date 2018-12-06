@@ -1,11 +1,13 @@
-property :files_options, Hash, required: true
+property :options, Hash, required: true
 
 default_action :create
 
 action :create do
-  new_resource.files_options.each do |file_name, file_options|
-    gusztavvargadr_windows_file file_name do
-      file_options file_options ? file_options : {}
+  return if new_resource.options.nil?
+
+  new_resource.options.each do |name, options|
+    gusztavvargadr_windows_file name do
+      options options
       action :create
     end
   end

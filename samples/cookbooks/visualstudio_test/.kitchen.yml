@@ -11,16 +11,14 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w10
-    transport:
-      name: winrm
+  - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_DESKTOP'] || 'gusztavvargadr/w10e-dc' %>
+      box: <%= ENV['VAGRANT_BOX_WINDOWS_DESKTOP'] || 'gusztavvargadr/w16s-dc' %>
 
 suites:
-  - name: 17c
+  - name: 2017-community
     run_list:
       - recipe[gusztavvargadr_visualstudio_test::2017_community]
-  - name: 17p
+  - name: 2017-professional
     run_list:
       - recipe[gusztavvargadr_visualstudio_test::2017_professional]

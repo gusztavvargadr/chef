@@ -76,7 +76,7 @@ action :patch do
   end
 
   extracted_file_path = "#{extracted_directory_path}/SETUP.EXE"
-  gusztavvargadr_windows_powershell_script_elevated "Patch SQL Server 2014 #{new_resource.edition}" do
+  gusztavvargadr_windows_powershell_script_elevated "Install SQL Server 2014 #{new_resource.edition} Patch" do
     code <<-EOH
       Start-Process "#{extracted_file_path.tr('/', '\\')}" "/ACTION=PATCH /ALLINSTANCES /IACCEPTSQLSERVERLICENSETERMS /QUIET" -Wait
     EOH

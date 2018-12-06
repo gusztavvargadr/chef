@@ -11,23 +11,11 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w16
-    transport:
-      name: winrm
+  - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16s-de' %>
+      box: <%= ENV['VAGRANT_BOX_WINDOWS_DESKTOP'] || 'gusztavvargadr/w16s-dc' %>
 
 suites:
-  # - name: 14x
-  #   run_list:
-  #     - recipe[gusztavvargadr_windows::updates]
-  #     - recipe[gusztavvargadr_sql::2014_requirements]
-  #     - recipe[gusztavvargadr_sql::2014_express]
-  # - name: 14d
-  #   run_list:
-  #     - recipe[gusztavvargadr_windows::updates]
-  #     - recipe[gusztavvargadr_sql::2014_requirements]
-  #     - recipe[gusztavvargadr_sql::2014_developer]
   - name: 2017-developer
     run_list:
       - recipe[gusztavvargadr_mssql_test::2017_developer]

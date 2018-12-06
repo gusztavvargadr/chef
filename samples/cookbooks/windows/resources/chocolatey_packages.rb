@@ -1,11 +1,13 @@
-property :chocolatey_packages_options, Hash, required: true
+property :options, Hash, required: true
 
 default_action :install
 
 action :install do
-  new_resource.chocolatey_packages_options.each do |chocolatey_package_name, chocolatey_package_options|
-    gusztavvargadr_windows_chocolatey_package chocolatey_package_name do
-      chocolatey_package_options chocolatey_package_options ? chocolatey_package_options : {}
+  return if new_resource.options.nil?
+
+  new_resource.options.each do |name, options|
+    gusztavvargadr_windows_chocolatey_package name do
+      options options
       action :install
     end
   end
