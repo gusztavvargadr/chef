@@ -1,0 +1,12 @@
+gusztavvargadr_windows:
+  chocolatey_packages:
+    googlechrome:
+      version: ''
+    lastpass:
+      version: ''
+    authy-desktop:
+      version: ''
+    keepass:
+      version: ''
+    keybase:
+      version: ''

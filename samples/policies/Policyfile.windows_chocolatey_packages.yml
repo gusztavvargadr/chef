@@ -1,4 +1,0 @@
-gusztavvargadr_windows:
-  chocolatey_packages:
-    chefdk:
-      version: 3.4.38

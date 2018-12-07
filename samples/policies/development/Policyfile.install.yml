@@ -1,0 +1,23 @@
+gusztavvargadr_windows:
+  chocolatey_packages:
+    conemu:
+      version: ''
+    far:
+      version: ''
+    treesizefree:
+      version: ''
+    vscode:
+      version: ''
+    beyondcompare:
+      version: ''
+
+    git:
+      version: ''
+      install:
+        params: '"/GitAndUnixToolsOnPath /NoShellIntegration"'
+    poshgit:
+      version: ''
+    jetbrainstoolbox:
+      version: ''
+
+    # docker:
