@@ -27,7 +27,7 @@ VagrantMachine.defaults_include(
 )
 
 VagrantProvider.defaults_include(
-  'memory' => 4096,
+  'memory' => 2048,
   'cpus' => 2
 )
 
