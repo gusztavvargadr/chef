@@ -3,24 +3,24 @@ default['gusztavvargadr_iis']['server'] = {
     'IIS' => {},
   },
   'native_packages' => {
-    '.NET Core 1.0.13 / 1.1.10 Windows Server Hosting' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/b84d0334-d56b-47b3-9da4-c48a553ce286/5079d35485214be3fbd72a4fdf21a655/dotnetcore.1.0.13_1.1.10-windowshosting.exe',
+    '.NET Core 1.0.14 / 1.1.11 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/3c1eea43-d933-414e-97bd-3b382f57a78c/7bad96a7fbee33cd15e210090e5413cc/dotnetcore.1.0.14_1.1.11-windowshosting.exe',
       'install' => [
         '/install',
         '/quiet',
         '/norestart',
       ],
     },
-    '.NET Core 2.0.9 Windows Server Hosting' => {
-      'source' => 'https://download.microsoft.com/download/3/a/3/3a3bda26-560d-4d8e-922e-6f6bc4553a84/DotNetCore.2.0.9-WindowsHosting.exe',
+    '.NET Core 2.1.8 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/c2b2968d-022d-4889-afd0-b02010813c94/bd315e931f55eecfdaea258cf3dee48e/dotnet-hosting-2.1.8-win.exe',
       'install' => [
         '/install',
         '/quiet',
         '/norestart',
       ],
     },
-    '.NET Core 2.1.5 Windows Server Hosting' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/86df96bb-384c-4d7a-82ce-2e4c2c871189/045870c1ab4004219cb312039c5a64d5/dotnet-hosting-2.1.5-win.exe',
+    '.NET Core 2.2.2 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/5efd5ee8-4df6-4b99-9feb-87250f1cd09f/552f4b0b0340e447bab2f38331f833c5/dotnet-hosting-2.2.2-win.exe',
       'install' => [
         '/install',
         '/quiet',

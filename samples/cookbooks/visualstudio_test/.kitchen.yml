@@ -13,7 +13,7 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_DESKTOP'] || 'gusztavvargadr/w16s-dc' %>
+      box: <%= ENV['VAGRANT_BOX_WINDOWS_DESKTOP'] || 'gusztavvargadr/windows-10' %>
 
 suites:
   - name: 2017-community

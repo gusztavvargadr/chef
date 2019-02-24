@@ -6,7 +6,7 @@ action :prepare do
   options = node['gusztavvargadr_docker']["engine_#{new_resource.edition}"]
 
   gusztavvargadr_windows_features '' do
-    features_options options['features']
+    options options['features']
   end
 
   options['powershell_modules'].each do |module_name, module_options|
@@ -23,7 +23,7 @@ action :install do
   options = node['gusztavvargadr_docker']["engine_#{new_resource.edition}"]
 
   gusztavvargadr_windows_native_packages '' do
-    native_packages_options options['native_packages']
+    options options['native_packages']
   end
 
   options['powershell_packages'].each do |package_name, package_options|

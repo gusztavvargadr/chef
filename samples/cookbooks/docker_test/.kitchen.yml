@@ -13,10 +13,10 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16sc-de' %>
+      box: <%= ENV['VAGRANT_BOX_DOCKER_WINDOWS'] || 'gusztavvargadr/docker-windows' %>
   - name: linux
     driver:
-      box: <%= ENV['VAGRANT_BOX_LINUX_SERVER'] || 'gusztavvargadr/u16s-dc' %>
+      box: <%= ENV['VAGRANT_BOX_DOCKER_LINUX'] || 'gusztavvargadr/docker-linux' %>
 
 suites:
   - name: images

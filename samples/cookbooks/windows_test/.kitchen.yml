@@ -13,7 +13,7 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16sc-de' %>
+      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/windows-server' %>
 
 suites:
   - name: chocolatey-packages
