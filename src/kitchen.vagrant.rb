@@ -3,7 +3,8 @@ directory = File.dirname(__FILE__)
 require "#{directory}/vagrant"
 
 VagrantDeployment.defaults_include(
-  'component' => 'kitchen',
+  'component' => 'suite',
+  'service' => 'kitchen',
   'stack' => 'chef',
 
   'hostmanager' => false,
@@ -21,14 +22,15 @@ VagrantMachine.defaults_include(
     },
   },
   'providers' => {
-    'virtualbox' => {},
-    'hyperv' => {},
-  }
-)
-
-VagrantProvider.defaults_include(
-  'memory' => 2048,
-  'cpus' => 2
+    'virtualbox' => {
+      'memory' => 4096,
+      'cpus' => 2,
+    },
+    'hyperv' => {
+      'memory' => 4096,
+      'cpus' => 2,
+    },
+  },
 )
 
 VagrantDeployment.configure(directory)
