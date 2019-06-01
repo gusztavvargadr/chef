@@ -1,7 +1,7 @@
 driver:
   name: vagrant
   vagrantfiles:
-    - ../../../src/kitchen.vagrant
+    - ../../../src/kitchen.vagrant.rb
   provider: <%= ENV['VAGRANT_PREFERRED_PROVIDERS'] || ENV['VAGRANT_DEFAULT_PROVIDER'] %>
 
 provisioner:
