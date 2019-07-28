@@ -1,8 +1,7 @@
 driver:
   name: vagrant
   vagrantfiles:
-    - ../../../src/kitchen.vagrant
-  provider: <%= ENV['VAGRANT_PREFERRED_PROVIDERS'] || ENV['VAGRANT_DEFAULT_PROVIDER'] %>
+    - ../../../src/kitchen.vagrant.rb
 
 provisioner:
   name: chef_zero
@@ -13,7 +12,7 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_DESKTOP'] || 'gusztavvargadr/windows-10' %>
+      box: gusztavvargadr/windows-server
 
 suites:
   - name: 2017-developer
@@ -22,3 +21,6 @@ suites:
   - name: 2017-ssms
     run_list:
       - recipe[gusztavvargadr_mssql_test::2017_ssms]
+  - name: 2018-ssms
+    run_list:
+      - recipe[gusztavvargadr_mssql_test::2018_ssms]

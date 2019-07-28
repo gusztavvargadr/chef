@@ -2,7 +2,6 @@ driver:
   name: vagrant
   vagrantfiles:
     - ../../../src/kitchen.vagrant.rb
-  provider: <%= ENV['VAGRANT_PREFERRED_PROVIDERS'] || ENV['VAGRANT_DEFAULT_PROVIDER'] %>
 
 provisioner:
   name: chef_zero
@@ -13,7 +12,7 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/windows-server' %>
+      box: gusztavvargadr/windows-server
 
 suites:
   - name: chocolatey-packages

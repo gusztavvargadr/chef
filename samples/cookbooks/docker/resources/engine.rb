@@ -22,10 +22,6 @@ end
 action :install do
   options = node['gusztavvargadr_docker']["engine_#{new_resource.edition}"]
 
-  gusztavvargadr_windows_native_packages '' do
-    options options['native_packages']
-  end
-
   options['powershell_packages'].each do |package_name, package_options|
     powershell_script "Install PowerShell package '#{package_name}'" do
       code <<-EOH
@@ -33,5 +29,9 @@ action :install do
       EOH
       action :run
     end
+  end
+
+  gusztavvargadr_windows_chocolatey_packages '' do
+    options options['chocolatey_packages']
   end
 end

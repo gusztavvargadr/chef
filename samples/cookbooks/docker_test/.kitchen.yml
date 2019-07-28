@@ -1,8 +1,7 @@
 driver:
   name: vagrant
   vagrantfiles:
-    - ../../../src/kitchen.vagrant
-  provider: <%= ENV['VAGRANT_PREFERRED_PROVIDERS'] || ENV['VAGRANT_DEFAULT_PROVIDER'] %>
+    - ../../../src/kitchen.vagrant.rb
 
 provisioner:
   name: chef_zero
@@ -11,14 +10,30 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows
+  - name: windows-base
     driver:
-      box: <%= ENV['VAGRANT_BOX_DOCKER_WINDOWS'] || 'gusztavvargadr/docker-windows' %>
-  - name: linux
+      box: gusztavvargadr/windows-server
+  - name: windows-docker
     driver:
-      box: <%= ENV['VAGRANT_BOX_DOCKER_LINUX'] || 'gusztavvargadr/docker-linux' %>
+      box: gusztavvargadr/docker-windows
+  - name: linux-base
+    driver:
+      box: gusztavvargadr/ubuntu-server
+  - name: linux-docker
+    driver:
+      box: gusztavvargadr/docker-linux
 
 suites:
+  - name: engine-community
+    run_list:
+      - recipe[gusztavvargadr_docker_test::engine_community]
+    includes:
+      - windows-base
+  - name: engine-enterprise
+    run_list:
+      - recipe[gusztavvargadr_docker_test::engine_enterprise]
+    includes:
+      - windows-base
   - name: images
     run_list:
       - recipe[gusztavvargadr_docker_test::images]
@@ -26,3 +41,6 @@ suites:
       gusztavvargadr_docker:
         images:
           hello-world:
+    includes:
+      - windows-docker
+      - linux-docker

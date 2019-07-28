@@ -6,10 +6,13 @@ default['gusztavvargadr_docker']['engine_enterprise'] = {
   'powershell_modules' => {
     'DockerMsftProvider' => {},
   },
-  'native_packages' => {},
   'powershell_packages' => {
     'Docker' => {
       'provider' => 'DockerMsftProvider',
     },
+  },
+  'chocolatey_packages' => {
+    'docker-compose' => {},
+    'docker-machine' => {},
   },
 }
