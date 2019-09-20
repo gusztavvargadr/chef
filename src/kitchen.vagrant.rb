@@ -9,7 +9,7 @@ VagrantMachine.defaults_include(
       'cpus' => 2,
     },
     'hyperv' => {
-      'memory' => 2048,
+      'memory' => 4096,
       'cpus' => 2,
     },
     'azure' => {
