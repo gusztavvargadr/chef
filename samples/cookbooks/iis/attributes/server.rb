@@ -1,5 +1,6 @@
 default['gusztavvargadr_iis']['server'] = {
   'features' => {
+    'NetFx3$' => {},
     'IIS' => {},
   },
   'native_packages' => {
@@ -7,22 +8,6 @@ default['gusztavvargadr_iis']['server'] = {
       'source' => 'https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/c9b8749dd99fc0d4453b2a3e4c37ba16/ndp48-web.exe',
       'install' => [
         '/q',
-        '/norestart',
-      ],
-    },
-    '.NET Core 1.0.16 / 1.1.13 Windows Server Hosting' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/85188c51-c71f-442e-ae3a-f46449564959/690b9e12e7da159576f67afd986b873d/dotnetcore.1.0.16_1.1.13-windowshosting.exe',
-      'install' => [
-        '/install',
-        '/quiet',
-        '/norestart',
-      ],
-    },
-    '.NET Core 2.0.9 Windows Server Hosting' => {
-      'source' => 'https://download.microsoft.com/download/3/a/3/3a3bda26-560d-4d8e-922e-6f6bc4553a84/DotNetCore.2.0.9-WindowsHosting.exe',
-      'install' => [
-        '/install',
-        '/quiet',
         '/norestart',
       ],
     },
