@@ -42,5 +42,13 @@ default['gusztavvargadr_iis']['server'] = {
         '/norestart',
       ],
     },
+    '.NET Core 3.0.0 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/bf608208-38aa-4a40-9b71-ae3b251e110a/bc1cecb14f75cc83dcd4bbc3309f7086/dotnet-hosting-3.0.0-win.exe',
+      'install' => [
+        '/install',
+        '/quiet',
+        '/norestart',
+      ],
+    },
   },
 }
