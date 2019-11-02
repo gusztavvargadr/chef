@@ -22,10 +22,13 @@ suites:
       gusztavvargadr_windows:
         chocolatey_packages:
           git:
-            version: '2.18.0'
+            version: '2.23.0'
             install:
-              params: "'/GitAndUnixToolsOnPath /NoShellIntegration'"
+              params: "'/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration'"
             elevated: true
+          vagrant:
+            version: '2.2.6'
+            reboot: true
   - name: environment-variables
     run_list:
       - recipe[gusztavvargadr_windows_test::environment_variables]
@@ -42,6 +45,8 @@ suites:
       gusztavvargadr_windows:
         features:
           TelnetClient:
+          Containers:
+            reboot: true
   - name: files
     run_list:
       - recipe[gusztavvargadr_windows_test::files]

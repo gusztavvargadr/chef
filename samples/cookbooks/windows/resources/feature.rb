@@ -4,11 +4,23 @@ property :options, Hash, default: {}
 default_action :install
 
 action :install do
-  gusztavvargadr_windows_powershell_script_elevated "Install feature '#{new_resource.name}'" do
+  feature_list = powershell_out("Get-WindowsOptionalFeature -Online | Where { $_.FeatureName -match \"#{new_resource.name}\" } | Where { $_.State -ne \"Enabled\" }").stdout
+  return if feature_list.strip.empty?
+
+  reboot = new_resource.options['reboot']
+
+  script_name = "Install feature '#{new_resource.name}'"
+
+  reboot '' do
+    action :nothing
+    reason script_name
+  end
+
+  gusztavvargadr_windows_powershell_script_elevated script_name do
     code <<-EOH
       Get-WindowsOptionalFeature -Online | Where { $_.FeatureName -match "#{new_resource.name}" } | Where { $_.State -ne "Enabled" } | ForEach { Enable-WindowsOptionalFeature -Online -FeatureName $_.FeatureName -All -NoRestart }
     EOH
     action :run
-    # not-if
+    notifies :request_reboot, "reboot['']" if reboot
   end
 end

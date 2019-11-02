@@ -10,6 +10,7 @@ action :install do
   version = new_resource.options['version']
   install = new_resource.options['install'].nil? ? {} : new_resource.options['install']
   elevated = new_resource.options['elevated']
+  reboot = new_resource.options['reboot']
 
   script_name = "Install Chocolatey package '#{new_resource.name}'"
   script_code = "choco install #{new_resource.name} --confirm"
@@ -19,17 +20,22 @@ action :install do
     script_code = "#{script_code} #{install_value}" unless install_value.to_s.empty?
   end
 
+  reboot '' do
+    action :nothing
+    reason script_name
+  end
+
   if elevated
     gusztavvargadr_windows_powershell_script_elevated script_name do
       code script_code
       action :run
+      notifies :request_reboot, "reboot['']" if reboot
     end
   else
     powershell_script script_name do
       code script_code
       action :run
+      notifies :request_reboot, "reboot['']" if reboot
     end
   end
-
-  # not-if
 end

@@ -5,11 +5,11 @@ require "#{directory}/vagrant"
 VagrantMachine.defaults_include(
   'providers' => {
     'virtualbox' => {
-      'memory' => 4096,
+      'memory' => 2048,
       'cpus' => 2,
     },
     'hyperv' => {
-      'memory' => 4096,
+      'memory' => 2048,
       'cpus' => 2,
     },
     'azure' => {
@@ -20,12 +20,12 @@ VagrantMachine.defaults_include(
     '/vagrant' => {
       'disabled' => true,
     },
-  },
+  }
 )
 
 VagrantDeployment.defaults_include(
-  'service' => 'cookbooks',
   'stack' => 'chef',
+  'service' => 'kitchen',
 
   'machines' => {
     'default' => {},

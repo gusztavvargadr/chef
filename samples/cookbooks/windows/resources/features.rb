@@ -19,6 +19,6 @@ action :cleanup do
       Get-WindowsOptionalFeature -Online | Where { $_.State -ne "Enabled" } | ForEach { Disable-WindowsOptionalFeature -Online -FeatureName $_.FeatureName -NoRestart -Remove }
     EOH
     action :run
-    # not-if
+    # not-if?
   end
 end
