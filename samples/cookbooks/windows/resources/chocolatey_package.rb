@@ -20,7 +20,7 @@ action :install do
     script_code = "#{script_code} #{install_value}" unless install_value.to_s.empty?
   end
 
-  reboot '' do
+  reboot 'Install' do
     action :nothing
     reason script_name
   end
@@ -29,13 +29,13 @@ action :install do
     gusztavvargadr_windows_powershell_script_elevated script_name do
       code script_code
       action :run
-      notifies :request_reboot, "reboot['']" if reboot
+      notifies :request_reboot, 'reboot[Install]' if reboot
     end
   else
     powershell_script script_name do
       code script_code
       action :run
-      notifies :request_reboot, "reboot['']" if reboot
+      notifies :request_reboot, 'reboot[Install]' if reboot
     end
   end
 end

@@ -11,7 +11,7 @@ action :install do
 
   script_name = "Install feature '#{new_resource.name}'"
 
-  reboot '' do
+  reboot 'Install' do
     action :nothing
     reason script_name
   end
@@ -21,6 +21,6 @@ action :install do
       Get-WindowsOptionalFeature -Online | Where { $_.FeatureName -match "#{new_resource.name}" } | Where { $_.State -ne "Enabled" } | ForEach { Enable-WindowsOptionalFeature -Online -FeatureName $_.FeatureName -All -NoRestart }
     EOH
     action :run
-    notifies :request_reboot, "reboot['']" if reboot
+    notifies :request_reboot, 'reboot[Install]' if reboot
   end
 end
