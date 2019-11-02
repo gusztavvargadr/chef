@@ -28,6 +28,8 @@ suites:
             elevated: true
           vagrant:
             version: '2.2.6'
+            install:
+              ignore-package-exit-codes:
             reboot: true
   - name: environment-variables
     run_list:
