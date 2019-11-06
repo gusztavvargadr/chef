@@ -31,7 +31,7 @@ stages:
                 pwd
 
                 kitchen list
-                kitchen converge ${{ suite.name }}
+                kitchen verify ${{ suite.name }}
               displayName: Test
 
             - script: |

@@ -27,8 +27,8 @@ stages:
               displayName: Init
 
             - script: |
-                cd ./samples/cookbooks/${{ cookbook }}_test
+                cd ./samples/cookbooks/${{ cookbook }}
                 pwd
 
-                kitchen list
+                chef exec rspec
               displayName: Test
