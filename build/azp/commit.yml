@@ -7,7 +7,7 @@ stages:
 
     jobs:
       - ${{ each cookbook in parameters.cookbooks }}:
-        - job: test_${{ cookbooks }}
+        - job: test_${{ cookbook }}
           displayName: Test ${{ cookbook }}
 
           pool:
