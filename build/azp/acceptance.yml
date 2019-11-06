@@ -28,9 +28,6 @@ stages:
 
             - script: |
                 cd ./samples/cookbooks/${{ suite.cookbook }}_test
-                pwd
-
-                kitchen list
                 kitchen verify ${{ suite.name }}
                 kitchen list
                 kitchen verify ${{ suite.name }}
@@ -38,11 +35,7 @@ stages:
 
             - script: |
                 cd ./samples/cookbooks/${{ suite.cookbook }}_test
-                pwd
-
-                kitchen list
                 kitchen destroy ${{ suite.name }}
                 kitchen list
-                kitchen destroy ${{ suite.name }}
               displayName: Clean
               condition: always()
