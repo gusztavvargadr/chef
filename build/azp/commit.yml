@@ -28,7 +28,5 @@ stages:
 
             - script: |
                 cd ./samples/cookbooks/${{ cookbook }}
-                pwd
-
                 chef exec rspec
               displayName: Test

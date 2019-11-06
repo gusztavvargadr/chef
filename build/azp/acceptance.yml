@@ -29,13 +29,11 @@ stages:
             - script: |
                 cd ./samples/cookbooks/${{ suite.cookbook }}_test
                 kitchen verify ${{ suite.name }}
-                kitchen list
-                kitchen verify ${{ suite.name }}
+                kitchen converge ${{ suite.name }}
               displayName: Test
 
             - script: |
                 cd ./samples/cookbooks/${{ suite.cookbook }}_test
                 kitchen destroy ${{ suite.name }}
-                kitchen list
               displayName: Clean
               condition: always()
