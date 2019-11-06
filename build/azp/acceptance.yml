@@ -30,6 +30,7 @@ stages:
                 cd ./samples/cookbooks/${{ suite.cookbook }}_test
                 kitchen verify ${{ suite.name }}
                 kitchen converge ${{ suite.name }}
+                kitchen verify ${{ suite.name }}
               displayName: Test
 
             - script: |
