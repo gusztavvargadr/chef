@@ -32,6 +32,7 @@ stages:
 
                 kitchen list
                 kitchen verify ${{ suite.name }}
+
               displayName: Test
 
             - script: |
@@ -40,5 +41,6 @@ stages:
 
                 kitchen list
                 kitchen destroy ${{ suite.name }}
+
               displayName: Clean
               condition: always()
