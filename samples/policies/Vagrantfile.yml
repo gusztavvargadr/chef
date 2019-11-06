@@ -1,0 +1,41 @@
+stack: chef
+service: samples
+component: policies
+
+machines:
+  defaults:
+    providers:
+      virtualbox:
+        memory: 2048
+        cpus: 2
+      hyperv:
+        memory: 2048
+        cpus: 2
+      azure:
+        size: Standard_B2s
+    provisioners:
+      chef_policyfile_prepare:
+        paths:
+          - ./core/Policyfile.prepare.rb
+      chef_policyfile_install:
+        paths:
+          - ./core/Policyfile.install.rb
+      chef_policyfile_configure:
+        paths:
+          - ./core/Policyfile.configure.rb
+  hosting:
+    provisioners:
+      chef_policyfile_install:
+        paths:
+          - ./hosting/Policyfile.install.rb
+      chef_policyfile_configure:
+        paths:
+          - ./hosting/Policyfile.configure.rb
+  development:
+    provisioners:
+      chef_policyfile_install:
+        paths:
+          - ./development/Policyfile.install.rb
+      chef_policyfile_configure:
+        paths:
+          - ./development/Policyfile.configure.rb

@@ -1,14 +1,11 @@
 directory = File.dirname(__FILE__)
 
-require "#{directory}/../vagrant"
+require "#{directory}/../../lib/gusztavvargadr/vagrant/samples/vagrant"
 
-VagrantMachine.defaults_include(
-  'box' => VagrantWindowsDesktopMachine.defaults['box']
+VagrantDeployment.defaults_include(
+  'machines' => {
+    'defaults' => VagrantDockerWindowsMachine.defaults,
+  }
 )
 
-VagrantProvider.defaults_include(
-  'memory' => 4096,
-  'cpus' => 2
-)
-
-VagrantDeployment.configure(directory, 'component' => 'policies')
+VagrantDeployment.configure(directory)

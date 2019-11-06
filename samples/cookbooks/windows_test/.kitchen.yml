@@ -1,7 +1,7 @@
 driver:
   name: vagrant
   vagrantfiles:
-    - ../../../src/kitchen.vagrant.rb
+    - ../vagrant.rb
 
 provisioner:
   name: chef_zero
@@ -11,8 +11,6 @@ verifier:
 
 platforms:
   - name: windows
-    driver:
-      box: gusztavvargadr/windows-server
 
 suites:
   - name: chocolatey-packages

@@ -20,9 +20,11 @@ action :install do
     script_code = "#{script_code} #{install_value}" unless install_value.to_s.empty?
   end
 
-  reboot 'Install' do
-    action :nothing
-    reason script_name
+  if reboot
+    reboot 'Install' do
+      action :nothing
+      reason script_name
+    end
   end
 
   if elevated

@@ -1,6 +1,6 @@
 directory = File.dirname(__FILE__)
 
-require "#{directory}/vagrant"
+require "#{directory}/../../lib/gusztavvargadr/vagrant/samples/vagrant"
 
 VagrantMachine.defaults_include(
   'providers' => {
@@ -25,10 +25,11 @@ VagrantMachine.defaults_include(
 
 VagrantDeployment.defaults_include(
   'stack' => 'chef',
-  'service' => 'kitchen',
+  'service' => 'samples',
+  'component' => 'cookbooks',
 
   'machines' => {
-    'default' => {},
+    'default' => VagrantWindowsServerMachine.defaults,
   }
 )
 

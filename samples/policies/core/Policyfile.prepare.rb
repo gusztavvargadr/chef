@@ -2,16 +2,16 @@ directory = File.dirname(__FILE__)
 
 require "#{directory}/../../../src/Policyfile"
 
-name 'install'
+name 'prepare'
 
 gusztavvargadr_chef_sources
 
 run_list(
-  'recipe[gusztavvargadr_windows::chocolatey_packages]'
+  'recipe[gusztavvargadr_docker::engine_enterprise]'
 )
 
 attributes(
   [
-    "#{directory}/Policyfile.install.yml",
+    "#{directory}/Policyfile.prepare.yml",
   ]
 )

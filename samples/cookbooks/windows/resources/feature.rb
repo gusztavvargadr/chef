@@ -11,9 +11,11 @@ action :install do
 
   script_name = "Install feature '#{new_resource.name}'"
 
-  reboot 'Install' do
-    action :nothing
-    reason script_name
+  if reboot
+    reboot 'Install' do
+      action :nothing
+      reason script_name
+    end
   end
 
   gusztavvargadr_windows_powershell_script_elevated script_name do

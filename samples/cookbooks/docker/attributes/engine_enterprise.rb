@@ -1,7 +1,11 @@
 default['gusztavvargadr_docker']['engine_enterprise'] = {
   'features' => {
-    'Containers' => {},
-    'Hyper-V' => {},
+    'Containers' => {
+      'reboot' => 'true',
+    },
+    'Hyper-V' => {
+      'reboot' => 'true',
+    },
   },
   'powershell_modules' => {
     'DockerMsftProvider' => {},
