@@ -6,3 +6,14 @@ pr: none
 
 stages:
   - template: ./build/azp/commit.yml
+    parameters:
+      cookbooks:
+        - docker
+        - windows
+  - template: ./build/azp/acceptance.yml
+    parameters:
+      suites:
+        - cookbook: windows
+          name: files
+        - cookbook: windows
+          name: features

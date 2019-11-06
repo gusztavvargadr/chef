@@ -1,0 +1,44 @@
+parameters:
+  suites: []
+
+stages:
+  - stage: acceptance
+    displayName: Acceptance
+
+    jobs:
+      - ${{ each suite in parameters.suites }}:
+        - job: test_${{ suite.cookbook }}_${{ suite.name }}
+          displayName: Test ${{ suite.cookbook }} with ${{ suite.name }}
+
+          pool:
+            name: Default
+            demands:
+              - AZP_AGENT_CHEF
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - script: |
+                chef --version
+              displayName: Init
+
+            - script: |
+                cd ./samples/cookbooks/${{ suite.cookbook }}_test
+                pwd
+
+                kitchen list
+                kitchen converge ${{ suite.name }}
+              displayName: Test
+
+            - script: |
+                cd ./samples/cookbooks/${{ suite.cookbook }}_test
+                pwd
+
+                kitchen list
+                kitchen destroy ${{ suite.name }}
+              displayName: Clean
+              condition: always()
