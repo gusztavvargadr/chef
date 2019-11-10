@@ -14,6 +14,6 @@ stages:
     parameters:
       options:
         - cookbook: windows
-          name: chocolatey-packages
+          name: chocolatey
         - cookbook: windows
           name: features
