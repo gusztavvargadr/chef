@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  chef:
+    build:
+      context: ./build
+      dockerfile: ./chef.Dockerfile
+    volumes:
+      - .:/opt/app
+    working_dir: /opt/app

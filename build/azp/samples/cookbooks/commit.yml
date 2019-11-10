@@ -11,9 +11,7 @@ stages:
           displayName: Build ${{ option.cookbook }}
 
           pool:
-            name: Default
-            demands:
-              - AZP_AGENT_CHEF
+            vmImage: ubuntu-16.04
 
           workspace:
             clean: all
@@ -23,10 +21,19 @@ stages:
               submodules: recursive
 
             - script: |
-                chef --version
+                docker version
+                docker-compose version
               displayName: Init
 
             - script: |
-                cd ./samples/cookbooks/${{ option.cookbook }}
-                chef exec rspec
+                docker-compose build chef
+              displayName: Restore
+
+            - script: |
+                docker-compose run --workdir /opt/app/samples/cookbooks/${{ option.cookbook }} chef exec rspec
               displayName: Test
+
+            - script: |
+                docker-compose down
+              displayName: Clean
+              condition: always()
