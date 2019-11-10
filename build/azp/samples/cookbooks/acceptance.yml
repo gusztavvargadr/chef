@@ -6,7 +6,7 @@ stages:
     displayName: Acceptance
 
     jobs:
-      - ${{ each options in parameters.options }}:
+      - ${{ each option in parameters.options }}:
         - job: test_${{ option.cookbook }}_${{ option.name }}
           displayName: Test ${{ option.cookbook }} with ${{ option.name }}
 
