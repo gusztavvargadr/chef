@@ -1,0 +1,19 @@
+trigger:
+  branches:
+    include:
+      - '*'
+pr: none
+
+stages:
+  - template: ../../../build/azp/samples/cookbooks/commit.yml
+    parameters:
+      options:
+        - cookbook: windows
+
+  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
+    parameters:
+      options:
+        - cookbook: windows
+          name: chocolatey-packages
+        - cookbook: windows
+          name: features

@@ -1,14 +1,14 @@
 parameters:
-  cookbooks: []
+  options: []
 
 stages:
   - stage: commit
     displayName: Commit
 
     jobs:
-      - ${{ each cookbook in parameters.cookbooks }}:
-        - job: test_${{ cookbook }}
-          displayName: Test ${{ cookbook }}
+      - ${{ each option in parameters.options }}:
+        - job: build_${{ option.cookbook }}
+          displayName: Build ${{ option.cookbook }}
 
           pool:
             name: Default
@@ -27,6 +27,6 @@ stages:
               displayName: Init
 
             - script: |
-                cd ./samples/cookbooks/${{ cookbook }}
+                cd ./samples/cookbooks/${{ option.cookbook }}
                 chef exec rspec
               displayName: Test

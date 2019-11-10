@@ -1,14 +1,14 @@
 parameters:
-  suites: []
+  options: []
 
 stages:
   - stage: acceptance
     displayName: Acceptance
 
     jobs:
-      - ${{ each suite in parameters.suites }}:
-        - job: test_${{ suite.cookbook }}_${{ suite.name }}
-          displayName: Test ${{ suite.cookbook }} with ${{ suite.name }}
+      - ${{ each options in parameters.options }}:
+        - job: test_${{ option.cookbook }}_${{ option.name }}
+          displayName: Test ${{ option.cookbook }} with ${{ option.name }}
 
           pool:
             name: Default
@@ -27,14 +27,14 @@ stages:
               displayName: Init
 
             - script: |
-                cd ./samples/cookbooks/${{ suite.cookbook }}_test
-                kitchen verify ${{ suite.name }}
-                kitchen converge ${{ suite.name }}
-                kitchen verify ${{ suite.name }}
+                cd ./samples/cookbooks/${{ option.cookbook }}_test
+                kitchen verify ${{ option.name }}
+                kitchen converge ${{ option.name }}
+                kitchen verify ${{ option.name }}
               displayName: Test
 
             - script: |
-                cd ./samples/cookbooks/${{ suite.cookbook }}_test
-                kitchen destroy ${{ suite.name }}
+                cd ./samples/cookbooks/${{ option.cookbook }}_test
+                kitchen destroy ${{ option.name }}
               displayName: Clean
               condition: always()
