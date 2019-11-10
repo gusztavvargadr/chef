@@ -29,6 +29,7 @@ suites:
             install:
               ignore-package-exit-codes:
             reboot: true
+
   - name: environment-variables
     run_list:
       - recipe[gusztavvargadr_windows_test::environment_variables]
@@ -38,6 +39,7 @@ suites:
           VARIABLE_TEST:
             value: test
             type: Machine
+
   - name: features
     run_list:
       - recipe[gusztavvargadr_windows_test::features]
@@ -47,6 +49,7 @@ suites:
           TelnetClient:
           Containers:
             reboot: true
+
   - name: files
     run_list:
       - recipe[gusztavvargadr_windows_test::files]
@@ -55,6 +58,7 @@ suites:
         files:
           /tmp/robots.txt:
             source: https://www.google.nl/robots.txt
+
   - name: native-packages
     run_list:
       - recipe[gusztavvargadr_windows_test::native_packages]
@@ -69,6 +73,7 @@ suites:
               - /norestart
             executable: C:/Program Files/dotnet/dotnet.exe
             elevated: true
+
   - name: updates
     run_list:
       - recipe[gusztavvargadr_windows_test::updates]

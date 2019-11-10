@@ -16,9 +16,11 @@ suites:
   - name: engine-community
     run_list:
       - recipe[gusztavvargadr_docker_test::engine_community]
+
   - name: engine-enterprise
     run_list:
       - recipe[gusztavvargadr_docker_test::engine_enterprise]
+
   - name: images
     run_list:
       - recipe[gusztavvargadr_docker_test::engine_enterprise]
@@ -27,3 +29,5 @@ suites:
       gusztavvargadr_docker:
         images:
           hello-world:
+    driver:
+      box: gusztavvargadr/docker-windows

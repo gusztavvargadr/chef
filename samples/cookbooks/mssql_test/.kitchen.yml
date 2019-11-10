@@ -16,9 +16,11 @@ suites:
   - name: 2017-developer
     run_list:
       - recipe[gusztavvargadr_mssql_test::2017_developer]
+
   - name: 2017-ssms
     run_list:
       - recipe[gusztavvargadr_mssql_test::2017_ssms]
+
   - name: 2018-ssms
     run_list:
       - recipe[gusztavvargadr_mssql_test::2018_ssms]

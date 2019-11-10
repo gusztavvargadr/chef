@@ -23,6 +23,7 @@ machines:
       chef_policyfile_configure:
         paths:
           - ./core/Policyfile.configure.rb
+
   hosting:
     provisioners:
       chef_policyfile_install:
@@ -31,6 +32,7 @@ machines:
       chef_policyfile_configure:
         paths:
           - ./hosting/Policyfile.configure.rb
+
   development:
     provisioners:
       chef_policyfile_install:
