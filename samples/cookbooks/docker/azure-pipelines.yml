@@ -1,0 +1,19 @@
+trigger:
+  branches:
+    include:
+      - '*'
+pr: none
+
+stages:
+  - template: ../../../build/azp/samples/cookbooks/commit.yml
+    parameters:
+      options:
+        - cookbook: docker
+
+  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
+    parameters:
+      options:
+        - cookbook: docker
+          name: enterprise
+        - cookbook: docker
+          name: images
