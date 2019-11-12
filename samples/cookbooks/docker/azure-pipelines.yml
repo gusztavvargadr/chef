@@ -2,6 +2,10 @@ trigger:
   branches:
     include:
       - '*'
+  paths:
+    include:
+      - samples/cookbooks/docker
+      - samples/cookbooks/docker_test
 pr: none
 
 stages:

@@ -2,6 +2,10 @@ trigger:
   branches:
     include:
       - '*'
+  paths:
+    include:
+      - samples/cookbooks/windows
+      - samples/cookbooks/windows_test
 pr: none
 
 stages:
