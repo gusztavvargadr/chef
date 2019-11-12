@@ -7,6 +7,7 @@ action :prepare do
 
   gusztavvargadr_windows_features '' do
     options options['features']
+    action :install
   end
 
   options['powershell_modules'].each do |module_name, module_options|
@@ -39,5 +40,6 @@ action :install do
 
   gusztavvargadr_windows_chocolatey_packages '' do
     options options['chocolatey_packages']
+    action :install
   end
 end
