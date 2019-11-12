@@ -9,8 +9,9 @@ verifier:
 
 platforms:
   - name: windows
-    vagrantfiles:
-      - ../vagrant.windows-server.rb
+    driver:
+      vagrantfiles:
+        - ../vagrant.windows-server.rb
 
 suites:
   - name: chocolatey-packages
