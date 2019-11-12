@@ -20,15 +20,10 @@ suites:
     attributes:
       gusztavvargadr_windows:
         chocolatey_packages:
-          git:
-            version: '2.23.0'
-            install:
-              params: "'/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration'"
+          conemu:
+            version: '19.10.12.0'
             elevated: true
-          vagrant:
-            version: '2.2.6'
-            install:
-              ignore-package-exit-codes:
+          far:
             reboot: true
 
   - name: environment-variables
