@@ -20,4 +20,8 @@ stages:
         - cookbook: windows
           name: chocolatey
         - cookbook: windows
+          name: environment
+        - cookbook: windows
           name: features
+        - cookbook: windows
+          name: files

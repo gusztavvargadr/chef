@@ -20,10 +20,12 @@ suites:
     attributes:
       gusztavvargadr_windows:
         chocolatey_packages:
-          conemu:
-            version: '19.10.12.0'
+          virtualbox:
+          vagrant:
+            version: '2.2.6'
+            install:
+              ignore-package-exit-codes:
             elevated: true
-          far:
             reboot: true
 
   - name: environment-variables
@@ -32,8 +34,10 @@ suites:
     attributes:
       gusztavvargadr_windows:
         environment_variables:
-          VARIABLE_TEST:
-            value: test
+          VARIABLE_TEST_USER:
+            value: Test User
+          VARIABLE_TEST_MACHINE:
+            value: Test Machine
             type: Machine
 
   - name: features

@@ -18,6 +18,8 @@ stages:
     parameters:
       options:
         - cookbook: docker
+          name: community
+        - cookbook: docker
           name: enterprise
         - cookbook: docker
           name: images
