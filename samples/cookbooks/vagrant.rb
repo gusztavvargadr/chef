@@ -26,11 +26,5 @@ VagrantMachine.defaults_include(
 VagrantDeployment.defaults_include(
   'stack' => 'chef',
   'service' => 'samples',
-  'component' => 'cookbooks',
-
-  'machines' => {
-    'default' => VagrantWindowsServerMachine.defaults,
-  }
+  'component' => 'cookbooks'
 )
-
-VagrantDeployment.configure(directory)

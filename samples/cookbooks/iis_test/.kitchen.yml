@@ -1,7 +1,5 @@
 driver:
   name: vagrant
-  vagrantfiles:
-    - ../vagrant.rb
 
 provisioner:
   name: chef_zero
@@ -11,6 +9,8 @@ verifier:
 
 platforms:
   - name: windows
+    vagrantfiles:
+      - ../vagrant.windows-server.rb
 
 suites:
   - name: server

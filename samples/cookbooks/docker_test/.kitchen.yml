@@ -1,7 +1,5 @@
 driver:
   name: vagrant
-  vagrantfiles:
-    - ../vagrant.rb
 
 provisioner:
   name: chef_zero
@@ -11,6 +9,10 @@ verifier:
 
 platforms:
   - name: windows
+    driver:
+      vagrantfiles:
+        - ../vagrant.windows-server.rb
+
 
 suites:
   - name: engine-community
@@ -23,11 +25,11 @@ suites:
 
   - name: images
     run_list:
-      - recipe[gusztavvargadr_docker_test::engine_enterprise]
       - recipe[gusztavvargadr_docker_test::images]
     attributes:
       gusztavvargadr_docker:
         images:
           hello-world:
     driver:
-      box: gusztavvargadr/docker-windows
+      vagrantfiles:
+        - ../vagrant.docker-windows.rb
