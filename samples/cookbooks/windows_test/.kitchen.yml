@@ -20,11 +20,11 @@ suites:
     attributes:
       gusztavvargadr_windows:
         chocolatey_packages:
-          virtualbox:
-          vagrant:
-            version: '2.2.6'
+          git:
+            version: '2.24.0'
             install:
-              ignore-package-exit-codes:
+              params: '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration"'
+          virtualbox:
             elevated: true
             reboot: true
 
@@ -34,9 +34,9 @@ suites:
     attributes:
       gusztavvargadr_windows:
         environment_variables:
-          VARIABLE_TEST_USER:
+          TEST_USER:
             value: Test User
-          VARIABLE_TEST_MACHINE:
+          TEST_MACHINE:
             value: Test Machine
             type: Machine
 
