@@ -1,0 +1,21 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/vagrant
+      - samples/cookbooks/vagrant_test
+pr: none
+
+stages:
+  - template: ../../../build/azp/samples/cookbooks/commit.yml
+    parameters:
+      options:
+        - cookbook: vagrant
+
+  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
+    parameters:
+      options:
+        - cookbook: vagrant
+          name: cli
