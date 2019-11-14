@@ -29,8 +29,6 @@ stages:
             - script: |
                 cd ./samples/cookbooks/${{ option.cookbook }}_test
                 kitchen verify ${{ option.name }}
-                kitchen converge ${{ option.name }}
-                kitchen verify ${{ option.name }}
               displayName: Test
 
             - script: |

@@ -20,11 +20,11 @@ suites:
     attributes:
       gusztavvargadr_windows:
         chocolatey_packages:
+          conemu:
           git:
             version: '2.24.0'
             install:
               params: '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration"'
-          virtualbox:
             elevated: true
             reboot: true
 

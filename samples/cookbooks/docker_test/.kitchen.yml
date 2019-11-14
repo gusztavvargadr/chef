@@ -13,7 +13,6 @@ platforms:
       vagrantfiles:
         - ../vagrant.windows-server.rb
 
-
 suites:
   - name: engine-community
     run_list:
