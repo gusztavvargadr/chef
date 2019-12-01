@@ -10,7 +10,7 @@ stages:
     jobs:
       - ${{ each option in parameters.options }}:
         - job: build_${{ option.directory }}_${{ option.policy }}
-          displayName: Build ${{ option.directory }} ${{ option.cookbook }}
+          displayName: Build ${{ option.directory }} ${{ option.policy }}
 
           pool:
             vmImage: ubuntu-16.04
@@ -36,8 +36,8 @@ stages:
               displayName: Test
 
             - publish: .chef/
-              artifact: policy
-              displayName: Publish Policy
+              artifact: policy_${{ option.directory }}_${{ option.policy }}
+              displayName: Publish ${{ option.directory }} ${{ option.policy }}
 
             - script: |
                 docker-compose down
