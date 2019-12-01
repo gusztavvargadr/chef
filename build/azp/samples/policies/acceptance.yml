@@ -34,14 +34,14 @@ stages:
             - task: CopyFiles@2
               inputs:
                 sourceFolder: $(Pipeline.Workspace)/policy_${{ option.directory }}_${{ option.policy }}
-                contents: **
+                contents: '**'
                 targetFolder: .chef/
               displayName: Restore - Artifacts - Copy
 
             - task: DeleteFiles@1
               inputs:
                 sourceFolder: $(Pipeline.Workspace)/policy_${{ option.directory }}_${{ option.policy }}
-                contents: **
+                contents: '**'
                 removeSourceFolder: true
               displayName: Restore - Artifacts - Delete
 
