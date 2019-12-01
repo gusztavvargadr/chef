@@ -16,3 +16,11 @@ stages:
           directory: core
         - policy: prepare
           directory: core
+
+  - template: ../../../build/azp/samples/policies/acceptance.yml
+    parameters:
+      options:
+        - policy: init
+          directory: core
+        - policy: prepare
+          directory: core

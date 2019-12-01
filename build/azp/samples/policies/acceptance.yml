@@ -4,16 +4,16 @@ parameters:
     #   directory: folder-name
 
 stages:
-  - stage: commit
-    displayName: Commit
+  - stage: acceptance
+    displayName: Acceptance
 
     jobs:
       - ${{ each option in parameters.options }}:
-        - job: build_${{ option.directory }}_${{ option.policy }}
-          displayName: Build ${{ option.directory }} ${{ option.policy }}
+        - job: test_${{ option.directory }}_${{ option.policy }}
+          displayName: Test ${{ option.directory }} ${{ option.policy }}
 
           pool:
-            vmImage: ubuntu-16.04
+            vmImage: windows-2019
 
           workspace:
             clean: all
@@ -27,17 +27,17 @@ stages:
                 docker-compose version
               displayName: Init
 
+            - download: current
+              artifact: policy_${{ option.directory }}_${{ option.policy }}
+              displayName: Download ${{ option.directory }} ${{ option.policy }}
+
             - script: |
-                docker-compose build --build-arg policy=${{ option.policy }} --build-arg directory=${{ option.directory }} policy_build
+                docker-compose build --build-arg policy=${{ option.policy }} --build-arg directory=${{ option.directory }} policy_deploy
               displayName: Restore
 
             - script: |
-                docker-compose run policy_build
+                docker-compose run policy_deploy
               displayName: Test
-
-            - publish: .chef/
-              artifact: policy_${{ option.directory }}_${{ option.policy }}
-              displayName: Publish
 
             - script: |
                 docker-compose down
