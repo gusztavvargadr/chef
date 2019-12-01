@@ -18,6 +18,6 @@ stages:
     parameters:
       options:
         - cookbook: docker
-          name: enterprise
+          suite: enterprise
         - cookbook: docker
-          name: images
+          suite: images

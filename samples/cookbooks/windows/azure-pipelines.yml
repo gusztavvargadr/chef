@@ -18,12 +18,12 @@ stages:
     parameters:
       options:
         - cookbook: windows
-          name: chocolatey
+          suite: chocolatey
         - cookbook: windows
-          name: environment
+          suite: environment
         - cookbook: windows
-          name: features
+          suite: features
         - cookbook: windows
-          name: node
+          suite: node
         - cookbook: windows
-          name: files
+          suite: files
