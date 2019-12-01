@@ -9,8 +9,8 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-        - job: test_${{ option.cookbook }}_${{ option.name }}
-          displayName: Test ${{ option.cookbook }} with ${{ option.name }}
+        - job: test_${{ option.cookbook }}_${{ option.suite }}
+          displayName: Test ${{ option.cookbook }} with ${{ option.suite }}
 
           pool:
             name: Default
@@ -55,6 +55,6 @@ stages:
 
             - script: |
                 cd ./samples/cookbooks/${{ option.cookbook }}_test
-                kitchen destroy ${{ option.name }}
+                kitchen destroy ${{ option.suite }}
               displayName: Clean
               condition: always()
