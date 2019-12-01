@@ -4,6 +4,7 @@ trigger:
       - '*'
   paths:
     include:
+      - build/azp/samples/cookbooks
       - samples/cookbooks/windows
       - samples/cookbooks/windows_test
 pr: none

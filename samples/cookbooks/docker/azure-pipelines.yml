@@ -4,6 +4,7 @@ trigger:
       - '*'
   paths:
     include:
+      - build/azp/samples/cookbooks
       - samples/cookbooks/docker
       - samples/cookbooks/docker_test
 pr: none

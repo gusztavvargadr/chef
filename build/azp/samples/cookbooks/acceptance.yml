@@ -10,7 +10,7 @@ stages:
     jobs:
       - ${{ each option in parameters.options }}:
         - job: test_${{ option.cookbook }}_${{ option.suite }}
-          displayName: Test ${{ option.cookbook }} with ${{ option.suite }}
+          displayName: Test ${{ option.cookbook }} ${{ option.suite }}
 
           pool:
             name: Default
@@ -29,32 +29,32 @@ stages:
               displayName: Init
 
             - script: |
-                cd ./samples/cookbooks/${{ option.cookbook }}_test
+                cd samples/cookbooks/${{ option.cookbook }}_test
                 kitchen create ${{ option.suite }}
               displayName: Restore
 
             - script: |
-                cd ./samples/cookbooks/${{ option.cookbook }}_test
+                cd samples/cookbooks/${{ option.cookbook }}_test
                 kitchen converge ${{ option.suite }}
-              displayName: Test 1 Converge
+              displayName: Test - 1 - Converge
 
             - script: |
-                cd ./samples/cookbooks/${{ option.cookbook }}_test
+                cd samples/cookbooks/${{ option.cookbook }}_test
                 kitchen verify ${{ option.suite }}
-              displayName: Test 1 Verify
+              displayName: Test - 1 - Verify
 
             - script: |
-                cd ./samples/cookbooks/${{ option.cookbook }}_test
+                cd samples/cookbooks/${{ option.cookbook }}_test
                 kitchen converge ${{ option.suite }}
-              displayName: Test 2 Converge
+              displayName: Test - 2 - Converge
 
             - script: |
-                cd ./samples/cookbooks/${{ option.cookbook }}_test
+                cd samples/cookbooks/${{ option.cookbook }}_test
                 kitchen verify ${{ option.suite }}
-              displayName: Test 2 Verify
+              displayName: Test - 2 - Verify
 
             - script: |
-                cd ./samples/cookbooks/${{ option.cookbook }}_test
+                cd samples/cookbooks/${{ option.cookbook }}_test
                 kitchen destroy ${{ option.suite }}
               displayName: Clean
               condition: always()
