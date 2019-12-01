@@ -14,8 +14,8 @@ services:
       context: .
       dockerfile: ./build/docker/policy.build.Dockerfile
       args:
-        directory: core/
-        name: init
+        policy: init
+        directory: core
     volumes:
       - ./.chef:/opt/gusztavvargadr/chef/.chef
 
@@ -24,7 +24,7 @@ services:
       context: ./build/docker
       dockerfile: ./policy.deploy.Dockerfile
       args:
-        directory: core/
-        name: init
+        policy: init
+        directory: core
     volumes:
       - ./.chef:C:/opt/gusztavvargadr/chef/.chef

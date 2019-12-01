@@ -1,7 +1,7 @@
 parameters:
   options: []
     # - cookbook: cookbook-name
-    # - suite: suite-name
+    #   suite: suite-name
 
 stages:
   - stage: acceptance
