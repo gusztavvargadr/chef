@@ -10,8 +10,8 @@ ENV CHEF_LICENSE accept-silent
 ARG policy
 ARG directory
 
-RUN echo cd ./.chef/policies/%directory%/%policy% >> ./entrypoint.ps1
-RUN echo chef-client -z >> ./entrypoint.ps1
+RUN echo cd .chef/policies/%directory%/%policy% >> entrypoint.ps1
+RUN echo chef-client -z >> entrypoint.ps1
 
 ENTRYPOINT [ "powershell" ]
-CMD [ "-F", "./entrypoint.ps1" ]
+CMD [ "-F", "entrypoint.ps1" ]
