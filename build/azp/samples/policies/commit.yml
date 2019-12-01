@@ -35,7 +35,7 @@ stages:
                 docker-compose run policy_build
               displayName: Test
 
-            - publish: .chef/
+            - publish: .chef
               artifact: policy_${{ option.directory }}_${{ option.policy }}
               displayName: Publish
 
