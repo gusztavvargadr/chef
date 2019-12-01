@@ -30,7 +30,7 @@ stages:
               displayName: Restore
 
             - script: |
-                docker-compose run --workdir /opt/app/samples/cookbooks/${{ option.cookbook }} chef exec rspec
+                docker-compose run chef exec rspec ./samples/cookbooks/${{ option.cookbook }}_test
               displayName: Test
 
             - script: |

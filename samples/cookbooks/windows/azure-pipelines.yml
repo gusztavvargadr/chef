@@ -24,4 +24,6 @@ stages:
         - cookbook: windows
           name: features
         - cookbook: windows
+          name: node
+        - cookbook: windows
           name: files

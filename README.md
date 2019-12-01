@@ -1,9 +1,5 @@
 # Chef
 
-<!--
-This repository contains [Chef] cookbooks, mostly used by the [Packer] and [Vagrant] setups.
+This repository contains common [Chef] helper tools and sample cookbooks and policies.
 
-[Chef]: https://www.chef.io/chef/
-[Packer]: https://github.com/gusztavvargadr/packer
-[Vagrant]: https://github.com/gusztavvargadr/vagrant
--->
+[Chef]: https://www.chef.sh/

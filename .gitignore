@@ -1,8 +1,9 @@
 .vagrant
-vagrant.override.yml
+Vagrantfile.override.yml
 
 *.lock.json
 .chef
 Berksfile.lock
 
 .kitchen
+.chef-workstation

@@ -14,6 +14,9 @@ machines:
       azure:
         size: Standard_B2s
     provisioners:
+      chef_policyfile_init:
+        paths:
+          - ./core/Policyfile.init.rb
       chef_policyfile_prepare:
         paths:
           - ./core/Policyfile.prepare.rb

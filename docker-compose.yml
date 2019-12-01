@@ -3,10 +3,28 @@ version: '3'
 services:
   chef:
     build:
-      context: ./build
+      context: ./build/docker
       dockerfile: ./chef.Dockerfile
     volumes:
-      - .:/opt/app
-    environment:
-      CHEF_LICENSE: accept-silent
-    working_dir: /opt/app
+      - .:/opt/gusztavvargadr/chef
+      - .chef-workstation:/root/.chef-workstation
+
+  policy_build:
+    build:
+      context: .
+      dockerfile: ./build/docker/policy.build.Dockerfile
+      args:
+        directory: core/
+        name: init
+    volumes:
+      - ./.chef:/opt/gusztavvargadr/chef/.chef
+
+  policy_deploy:
+    build:
+      context: ./build/docker
+      dockerfile: ./policy.deploy.Dockerfile
+      args:
+        directory: core/
+        name: init
+    volumes:
+      - ./.chef:C:/opt/gusztavvargadr/chef/.chef
