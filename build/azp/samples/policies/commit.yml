@@ -9,8 +9,8 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-        - job: build_${{ options.folder }}_${{ option.policy }}
-          displayName: Build ${{ option.folder }} ${{ option.cookbook }}
+        - job: build_${{ option.directory }}_${{ option.policy }}
+          displayName: Build ${{ option.directory }} ${{ option.cookbook }}
 
           pool:
             vmImage: ubuntu-16.04

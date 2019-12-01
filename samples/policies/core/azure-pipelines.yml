@@ -4,6 +4,7 @@ trigger:
       - '*'
   paths:
     include:
+      - build/azp/samples/policies
       - samples/policies/core
 pr: none
 
