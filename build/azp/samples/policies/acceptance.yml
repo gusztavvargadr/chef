@@ -29,7 +29,25 @@ stages:
 
             - download: current
               artifact: policy_${{ option.directory }}_${{ option.policy }}
-              displayName: Download ${{ option.directory }} ${{ option.policy }}
+              displayName: Download
+
+            - task: CopyFiles@2
+                inputs:
+                  sourceFolder: $(Pipeline.Workspace)/policy_${{ option.directory }}_${{ option.policy }}
+                  contents: **
+                  targetFolder: .chef/
+              displayName: Copy
+
+            - task: DeleteFiles@1
+                inputs:
+                  sourceFolder: $(Pipeline.Workspace)/policy_${{ option.directory }}_${{ option.policy }}
+                  contents: **
+                  removeSourceFolder: true
+              displayName: Delete
+
+            - script: |
+                dir .chef/ /s
+              displayName: Review
 
             - script: |
                 docker-compose build --build-arg policy=${{ option.policy }} --build-arg directory=${{ option.directory }} policy_deploy
