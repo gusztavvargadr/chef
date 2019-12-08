@@ -1,7 +1,6 @@
 parameters:
   options: []
-    # - directory: directory-name
-    #   policy: policy-name
+    # - machine: machine-name
 
 stages:
   - stage: acceptance
@@ -9,13 +8,14 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-        - job: test_${{ option.directory }}_${{ option.policy }}
-          displayName: Test ${{ option.directory }} ${{ option.policy }}
-          variables:
-            CHEF_LICENSE: accept-silent 
+        - job: test_${{ option.machine }}
+          displayName: Test ${{ option.machine }}
 
           pool:
-            vmImage: windows-2019
+            name: Default
+            demands:
+              - AZP_AGENT_CHEF
+              - AZP_AGENT_VAGRANT
 
           workspace:
             clean: all
@@ -24,44 +24,19 @@ stages:
             - checkout: self
               submodules: recursive
 
-            # - script: |
-            #     docker version
-            #     docker-compose version
-            #   displayName: Init
-
             - script: |
-                choco --version
+                chef --version
+                vagrant version
+                vagrant plugin list
               displayName: Init
 
-            - download: current
-              artifact: policy_${{ option.directory }}_${{ option.policy }}
-              displayName: Restore - Artifacts - Download
-
-            - task: CopyFiles@2
-              inputs:
-                sourceFolder: $(Pipeline.Workspace)/policy_${{ option.directory }}_${{ option.policy }}
-                contents: '**'
-                targetFolder: .chef
-              displayName: Restore - Artifacts - Copy
-
-            # - script: |
-            #     docker-compose build chef-client-windows
-            #   displayName: Restore - Chef
-
             - script: |
-                choco install --confirm chef-client
-              displayName: Restore - Chef
-
-            # - script: |
-            #     docker-compose run --workdir /opt/gusztavvargadr/chef/.chef/policies/${{ option.directory }}/${{ option.policy }} chef-client-windows -z
-            #   displayName: Test
-
-            - script: |
-                cd .chef/policies/${{ option.directory }}/${{ option.policy }}
-                C:/opscode/chef/bin/chef-client.bat -z
+                cd samples/policies
+                vagrant up ${option.machine}
               displayName: Test
 
-            # - script: |
-            #     docker-compose down
-            #   displayName: Clean
-            #   condition: always()
+            - script: |
+                cd samples/policies
+                vagrant destroy --force ${option.machine}
+              displayName: Clean
+              condition: always()
