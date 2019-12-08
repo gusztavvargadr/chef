@@ -40,10 +40,10 @@ stages:
 
             - script: |
                 docker-compose build chef-client-windows
-              displayName: Build
+              displayName: Restore - Docker
 
             - script: |
-                docker-compose run --workdir /opt/gusztavvargadr/chef/.chef/policies/${{ option.directory }}/${{ option.policy }} chef-client-windows
+                docker-compose run --workdir /opt/gusztavvargadr/chef/.chef/policies/${{ option.directory }}/${{ option.policy }} chef-client-windows -z
               displayName: Test
 
             - script: |
