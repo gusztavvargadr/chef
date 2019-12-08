@@ -23,8 +23,9 @@ stages:
               submodules: recursive
 
             - script: |
-                docker version
-                docker-compose version
+                # docker version
+                # docker-compose version
+                choco --version
               displayName: Init
 
             - download: current
@@ -39,14 +40,17 @@ stages:
               displayName: Restore - Artifacts - Copy
 
             - script: |
-                docker-compose build chef-client-windows
-              displayName: Restore - Docker
+                # docker-compose build chef-client-windows
+                choco install --confirm chef-client
+              displayName: Restore - Chef
 
             - script: |
-                docker-compose run --workdir /opt/gusztavvargadr/chef/.chef/policies/${{ option.directory }}/${{ option.policy }} chef-client-windows -z
+                # docker-compose run --workdir /opt/gusztavvargadr/chef/.chef/policies/${{ option.directory }}/${{ option.policy }} chef-client-windows -z
+                cd .chef/policies/${{ option.directory }}/${{ option.policy }}
+                chef-client -z
               displayName: Test
 
             - script: |
-                docker-compose down
+                # docker-compose down
               displayName: Clean
               condition: always()
