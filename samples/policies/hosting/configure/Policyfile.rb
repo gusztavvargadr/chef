@@ -1,8 +1,8 @@
 directory = File.dirname(__FILE__)
 
-require "#{directory}/../../../src/Policyfile"
+require "#{directory}/../../../../src/Policyfile"
 
-name 'configure'
+name 'gusztavvargadr_hosting_configure'
 
 gusztavvargadr_chef_sources
 
@@ -12,6 +12,6 @@ run_list(
 
 attributes(
   [
-    "#{directory}/Policyfile.configure.yml",
+    "#{directory}/Policyfile.yml",
   ]
 )

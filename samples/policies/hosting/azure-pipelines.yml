@@ -5,18 +5,19 @@ trigger:
   paths:
     include:
       - build/azp/samples/policies
-      - samples/policies/core
+      - samples/policies/hosting
 pr: none
 
 stages:
   - template: ../../../build/azp/samples/policies/commit.yml
     parameters:
       options:
-        - directory: core
-          policy: init
-        - directory: core
-          policy: prepare
-        - directory: core
+        - directory: hosting
           policy: install
-        - directory: core
+        - directory: hosting
           policy: configure
+
+  - template: ../../../build/azp/samples/policies/acceptance.yml
+    parameters:
+      options:
+        - machine: hosting

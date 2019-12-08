@@ -29,12 +29,12 @@ machines:
 
   hosting:
     provisioners:
-      # chef_policyfile_install:
-      #   paths:
-      #     - ./hosting/Policyfile.install.rb
-      # chef_policyfile_configure:
-      #   paths:
-      #     - ./hosting/Policyfile.configure.rb
+      chef_policyfile_install:
+        paths:
+          - ./hosting/install/Policyfile.rb
+      chef_policyfile_configure:
+        paths:
+          - ./hosting/configure/Policyfile.rb
 
   development:
     provisioners:
