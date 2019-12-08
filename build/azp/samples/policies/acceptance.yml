@@ -1,7 +1,7 @@
 parameters:
   options: []
-    # - policy: policy-name
-    #   directory: folder-name
+    # - directory: folder-name
+    #   policy: policy-name
 
 stages:
   - stage: acceptance
@@ -39,11 +39,11 @@ stages:
               displayName: Restore - Artifacts - Copy
 
             - script: |
-                docker-compose build --build-arg policy=${{ option.policy }} --build-arg directory=${{ option.directory }} policy_deploy
+                docker-compose build chef-client-windows
               displayName: Restore - Docker
 
             - script: |
-                docker-compose run policy_deploy
+                docker-compose run --workdir /opt/gusztavvargadr/chef/.chef/policies/${{ option.directory }}/${{ option.policy }} chef-client-windows
               displayName: Test
 
             - script: |

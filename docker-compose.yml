@@ -9,22 +9,27 @@ services:
       - .:/opt/gusztavvargadr/chef
       - .chef-workstation:/root/.chef-workstation
 
-  policy_build:
-    build:
-      context: .
-      dockerfile: ./build/docker/policy.build.Dockerfile
-      args:
-        policy: init
-        directory: core
-    volumes:
-      - ./.chef:/opt/gusztavvargadr/chef/.chef
-
-  policy_deploy:
+  chef-client:
     build:
       context: ./build/docker
-      dockerfile: ./policy.deploy.Dockerfile
-      args:
-        policy: init
-        directory: core
+      dockerfile: ./chef-client.Dockerfile
     volumes:
-      - ./.chef:C:/opt/gusztavvargadr/chef/.chef
+      - .:/opt/gusztavvargadr/chef
+      - .chef-workstation:/root/.chef-workstation
+
+  chef-client-windows:
+    build:
+      context: ./build/docker
+      dockerfile: ./chef-client-windows.Dockerfile
+    volumes:
+      - .:C:/opt/gusztavvargadr/chef
+
+  policy:
+    build:
+      context: .
+      dockerfile: ./build/docker/policy.Dockerfile
+      args:
+        directory: core
+        policy: init
+    volumes:
+      - ./.chef:/opt/gusztavvargadr/chef/.chef

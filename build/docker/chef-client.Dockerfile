@@ -4,5 +4,5 @@ WORKDIR /opt/gusztavvargadr/chef
 
 ENV CHEF_LICENSE accept-silent
 
-ENTRYPOINT [ "chef" ]
+ENTRYPOINT [ "chef-client" ]
 CMD [ "--version" ]

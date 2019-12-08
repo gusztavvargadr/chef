@@ -1,7 +1,7 @@
 parameters:
   options: []
-    # - policy: policy-name
-    #   directory: folder-name
+    # - directory: folder-name
+    #   policy: policy-name
 
 stages:
   - stage: commit
@@ -28,12 +28,12 @@ stages:
               displayName: Init
 
             - script: |
-                docker-compose build --build-arg policy=${{ option.policy }} --build-arg directory=${{ option.directory }} policy_build
+                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} policy
               displayName: Restore
 
             - script: |
-                docker-compose run policy_build
-              displayName: Test
+                docker-compose run policy
+              displayName: Package
 
             - publish: .chef
               artifact: policy_${{ option.directory }}_${{ option.policy }}
