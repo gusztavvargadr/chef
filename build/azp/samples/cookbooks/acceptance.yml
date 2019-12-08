@@ -16,6 +16,7 @@ stages:
             name: Default
             demands:
               - AZP_AGENT_CHEF
+              - AZP_AGENT_VAGRANT
 
           workspace:
             clean: all
@@ -26,6 +27,8 @@ stages:
 
             - script: |
                 chef --version
+                vagrant version
+                vagrant plugin list
               displayName: Init
 
             - script: |
