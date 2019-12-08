@@ -28,8 +28,12 @@ stages:
               displayName: Init
 
             - script: |
-                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} policy
+                docker-compose build chef
               displayName: Restore
+
+            - script: |
+                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} policy
+              displayName: Build
 
             - script: |
                 docker-compose run policy

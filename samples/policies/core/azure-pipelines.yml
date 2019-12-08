@@ -12,15 +12,15 @@ stages:
   - template: ../../../build/azp/samples/policies/commit.yml
     parameters:
       options:
-        - policy: init
-          directory: core
-        - policy: install
-          directory: core
+        - directory: core
+          policy: init
+        - directory: core
+          policy: install
 
   - template: ../../../build/azp/samples/policies/acceptance.yml
     parameters:
       options:
-        - policy: init
-          directory: core
-        - policy: install
-          directory: core
+        - directory: core
+          policy: init
+        - directory: core
+          policy: install

@@ -16,31 +16,31 @@ machines:
     provisioners:
       chef_policyfile_init:
         paths:
-          - ./core/Policyfile.init.rb
+          - ./core/init/Policyfile.rb
       chef_policyfile_prepare:
         paths:
-          - ./core/Policyfile.prepare.rb
+          - ./core/prepare/Policyfile.rb
       chef_policyfile_install:
         paths:
-          - ./core/Policyfile.install.rb
+          - ./core/install/Policyfile.rb
       chef_policyfile_configure:
         paths:
-          - ./core/Policyfile.configure.rb
+          - ./core/configure/Policyfile.rb
 
   hosting:
     provisioners:
-      chef_policyfile_install:
-        paths:
-          - ./hosting/Policyfile.install.rb
-      chef_policyfile_configure:
-        paths:
-          - ./hosting/Policyfile.configure.rb
+      # chef_policyfile_install:
+      #   paths:
+      #     - ./hosting/Policyfile.install.rb
+      # chef_policyfile_configure:
+      #   paths:
+      #     - ./hosting/Policyfile.configure.rb
 
   development:
     provisioners:
-      chef_policyfile_install:
-        paths:
-          - ./development/Policyfile.install.rb
-      chef_policyfile_configure:
-        paths:
-          - ./development/Policyfile.configure.rb
+      # chef_policyfile_install:
+      #   paths:
+      #     - ./development/Policyfile.install.rb
+      # chef_policyfile_configure:
+      #   paths:
+      #     - ./development/Policyfile.configure.rb
