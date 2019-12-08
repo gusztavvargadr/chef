@@ -1,6 +1,6 @@
 parameters:
   options: []
-    # - directory: folder-name
+    # - directory: directory-name
     #   policy: policy-name
 
 stages:

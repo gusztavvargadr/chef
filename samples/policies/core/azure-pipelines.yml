@@ -15,7 +15,11 @@ stages:
         - directory: core
           policy: init
         - directory: core
+          policy: prepare
+        - directory: core
           policy: install
+        - directory: core
+          policy: configure
 
   - template: ../../../build/azp/samples/policies/acceptance.yml
     parameters:
@@ -23,4 +27,8 @@ stages:
         - directory: core
           policy: init
         - directory: core
+          policy: prepare
+        - directory: core
           policy: install
+        - directory: core
+          policy: configure
