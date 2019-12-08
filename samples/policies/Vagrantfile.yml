@@ -38,9 +38,9 @@ machines:
 
   development:
     provisioners:
-      # chef_policyfile_install:
-      #   paths:
-      #     - ./development/Policyfile.install.rb
-      # chef_policyfile_configure:
-      #   paths:
-      #     - ./development/Policyfile.configure.rb
+      chef_policyfile_install:
+        paths:
+          - ./development/install/Policyfile.rb
+      chef_policyfile_configure:
+        paths:
+          - ./development/configure/Policyfile.rb
