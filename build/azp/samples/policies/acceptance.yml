@@ -11,6 +11,8 @@ stages:
       - ${{ each option in parameters.options }}:
         - job: test_${{ option.directory }}_${{ option.policy }}
           displayName: Test ${{ option.directory }} ${{ option.policy }}
+          variables:
+            CHEF_LICENSE: accept-silent 
 
           pool:
             vmImage: windows-2019
