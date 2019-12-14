@@ -1,0 +1,3 @@
+gusztavvargadr_windows:
+  chocolatey_packages:
+    dotnetcore-runtime:

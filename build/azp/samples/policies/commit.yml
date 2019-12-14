@@ -1,0 +1,49 @@
+parameters:
+  options: []
+    # - directory: directory-name
+    #   policy: policy-name
+
+stages:
+  - stage: commit
+    displayName: Commit
+
+    jobs:
+      - ${{ each option in parameters.options }}:
+        - job: build_${{ option.directory }}_${{ option.policy }}
+          displayName: Build ${{ option.directory }} ${{ option.policy }}
+
+          pool:
+            vmImage: ubuntu-16.04
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - script: |
+                docker version
+                docker-compose version
+              displayName: Init
+
+            - script: |
+                docker-compose build chef
+              displayName: Restore
+
+            - script: |
+                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} policy
+              displayName: Build
+
+            - script: |
+                docker-compose run policy
+              displayName: Package
+
+            - publish: .chef
+              artifact: policy_${{ option.directory }}_${{ option.policy }}
+              displayName: Publish
+
+            - script: |
+                docker-compose down
+              displayName: Clean
+              condition: always()

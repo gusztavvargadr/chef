@@ -1,26 +1,34 @@
 default['gusztavvargadr_iis']['server'] = {
   'features' => {
+    'NetFx3$' => {},
     'IIS' => {},
   },
   'native_packages' => {
-    '.NET Core 1.0.13 / 1.1.10 Windows Server Hosting' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/b84d0334-d56b-47b3-9da4-c48a553ce286/5079d35485214be3fbd72a4fdf21a655/dotnetcore.1.0.13_1.1.10-windowshosting.exe',
+    '.NET Framework 4.8 Runtime' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/7afca223-55d2-470a-8edc-6a1739ae3252/c9b8749dd99fc0d4453b2a3e4c37ba16/ndp48-web.exe',
+      'install' => [
+        '/q',
+        '/norestart',
+      ],
+    },
+    '.NET Core 2.1.13 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/070b4126-8c0c-445f-8c0e-7a29963b0a1c/d50548fc04e2e0063dad4fda8232cd9d/dotnet-hosting-2.1.13-win.exe',
       'install' => [
         '/install',
         '/quiet',
         '/norestart',
       ],
     },
-    '.NET Core 2.0.9 Windows Server Hosting' => {
-      'source' => 'https://download.microsoft.com/download/3/a/3/3a3bda26-560d-4d8e-922e-6f6bc4553a84/DotNetCore.2.0.9-WindowsHosting.exe',
+    '.NET Core 2.2.7 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/51c29196-43b3-47d6-a393-d0df24081ac1/8b8d720b3cd63d88a2fd69115ab713c5/dotnet-hosting-2.2.7-win.exe',
       'install' => [
         '/install',
         '/quiet',
         '/norestart',
       ],
     },
-    '.NET Core 2.1.5 Windows Server Hosting' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/86df96bb-384c-4d7a-82ce-2e4c2c871189/045870c1ab4004219cb312039c5a64d5/dotnet-hosting-2.1.5-win.exe',
+    '.NET Core 3.0.0 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/bf608208-38aa-4a40-9b71-ae3b251e110a/bc1cecb14f75cc83dcd4bbc3309f7086/dotnet-hosting-3.0.0-win.exe',
       'install' => [
         '/install',
         '/quiet',

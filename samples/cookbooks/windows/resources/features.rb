@@ -1,11 +1,13 @@
-property :features_options, Hash, default: {}
+property :options, Hash, required: true
 
 default_action :install
 
 action :install do
-  new_resource.features_options.each do |feature_name, feature_options|
-    gusztavvargadr_windows_feature feature_name do
-      feature_options feature_options ? feature_options : {}
+  return if new_resource.options.nil?
+
+  new_resource.options.each do |name, options|
+    gusztavvargadr_windows_feature name do
+      options options
       action :install
     end
   end
@@ -17,6 +19,6 @@ action :cleanup do
       Get-WindowsOptionalFeature -Online | Where { $_.State -ne "Enabled" } | ForEach { Disable-WindowsOptionalFeature -Online -FeatureName $_.FeatureName -NoRestart -Remove }
     EOH
     action :run
-    # not-if
+    # not-if?
   end
 end

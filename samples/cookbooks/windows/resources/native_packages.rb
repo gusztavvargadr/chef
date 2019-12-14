@@ -1,11 +1,13 @@
-property :native_packages_options, Hash, required: true
+property :options, Hash, required: true
 
 default_action :install
 
 action :install do
-  new_resource.native_packages_options.each do |native_package_name, native_package_options|
-    gusztavvargadr_windows_native_package native_package_name do
-      native_package_options native_package_options ? native_package_options : {}
+  return if new_resource.options.nil?
+
+  new_resource.options.each do |name, options|
+    gusztavvargadr_windows_native_package name do
+      options options
       action :install
     end
   end

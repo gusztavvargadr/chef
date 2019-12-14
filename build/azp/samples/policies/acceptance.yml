@@ -1,0 +1,42 @@
+parameters:
+  options: []
+    # - machine: machine-name
+
+stages:
+  - stage: acceptance
+    displayName: Acceptance
+
+    jobs:
+      - ${{ each option in parameters.options }}:
+        - job: test_${{ option.machine }}
+          displayName: Test ${{ option.machine }}
+
+          pool:
+            name: Default
+            demands:
+              - AZP_AGENT_CHEF
+              - AZP_AGENT_VAGRANT
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - script: |
+                chef --version
+                vagrant version
+                vagrant plugin list
+              displayName: Init
+
+            - script: |
+                cd samples/policies
+                vagrant up ${{ option.machine }}
+              displayName: Test
+
+            - script: |
+                cd samples/policies
+                vagrant destroy --force ${{ option.machine }}
+              displayName: Clean
+              condition: always()

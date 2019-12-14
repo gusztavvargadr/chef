@@ -1,3 +1,7 @@
 gusztavvargadr_windows_features '' do
-  features_options node['gusztavvargadr_visualstudio']['2017_requirements']['features']
+  options node['gusztavvargadr_visualstudio']['2017_requirements']['features']
+end
+
+gusztavvargadr_windows_native_packages '' do
+  options node['gusztavvargadr_visualstudio']['2017_requirements']['native_packages']
 end

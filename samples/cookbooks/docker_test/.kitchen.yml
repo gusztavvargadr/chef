@@ -1,8 +1,5 @@
 driver:
   name: vagrant
-  vagrantfiles:
-    - ../../../src/kitchen.vagrant
-  provider: <%= ENV['VAGRANT_PREFERRED_PROVIDERS'] || ENV['VAGRANT_DEFAULT_PROVIDER'] %>
 
 provisioner:
   name: chef_zero
@@ -11,18 +8,20 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w16
-    transport:
-      name: winrm
+  - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16s-de' %>
-  - name: u16
-    transport:
-      name: ssh
-    driver:
-      box: <%= ENV['VAGRANT_BOX_LINUX_SERVER'] || 'gusztavvargadr/u16s-dc' %>
+      vagrantfiles:
+        - ../vagrant.windows-server.rb
 
 suites:
+  - name: engine-community
+    run_list:
+      - recipe[gusztavvargadr_docker_test::engine_community]
+
+  - name: engine-enterprise
+    run_list:
+      - recipe[gusztavvargadr_docker_test::engine_enterprise]
+
   - name: images
     run_list:
       - recipe[gusztavvargadr_docker_test::images]
@@ -30,3 +29,6 @@ suites:
       gusztavvargadr_docker:
         images:
           hello-world:
+    driver:
+      vagrantfiles:
+        - ../vagrant.docker-windows.rb

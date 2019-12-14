@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  chef:
+    build:
+      context: ./build/docker
+      dockerfile: ./chef.Dockerfile
+    volumes:
+      - .:/opt/gusztavvargadr/chef
+      - .chef-workstation:/root/.chef-workstation
+
+  chef-client:
+    build:
+      context: ./build/docker
+      dockerfile: ./chef-client.Dockerfile
+    volumes:
+      - .:/opt/gusztavvargadr/chef
+      - .chef-workstation:/root/.chef-workstation
+
+  chef-client-windows:
+    build:
+      context: ./build/docker
+      dockerfile: ./chef-client-windows.Dockerfile
+    volumes:
+      - .:C:/opt/gusztavvargadr/chef
+
+  policy:
+    build:
+      context: .
+      dockerfile: ./build/docker/policy.Dockerfile
+      args:
+        directory: core
+        policy: init
+    volumes:
+      - ./.chef:/opt/gusztavvargadr/chef/.chef

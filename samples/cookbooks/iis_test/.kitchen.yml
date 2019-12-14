@@ -1,8 +1,5 @@
 driver:
   name: vagrant
-  vagrantfiles:
-    - ../../../src/kitchen.vagrant
-  provider: <%= ENV['VAGRANT_PREFERRED_PROVIDERS'] || ENV['VAGRANT_DEFAULT_PROVIDER'] %>
 
 provisioner:
   name: chef_zero
@@ -11,11 +8,10 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w16
-    transport:
-      name: winrm
+  - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_SERVER'] || 'gusztavvargadr/w16s-de' %>
+      vagrantfiles:
+        - ../vagrant.windows-server.rb
 
 suites:
   - name: server

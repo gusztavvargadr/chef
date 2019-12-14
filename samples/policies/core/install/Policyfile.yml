@@ -1,0 +1,8 @@
+gusztavvargadr_windows:
+  chocolatey_packages:
+    firefox:
+    conemu:
+    far:
+    treesizefree:
+    vscode:
+    beyondcompare:

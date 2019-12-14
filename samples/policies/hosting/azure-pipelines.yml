@@ -1,0 +1,23 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - build/azp/samples/policies
+      - samples/policies/hosting
+pr: none
+
+stages:
+  - template: ../../../build/azp/samples/policies/commit.yml
+    parameters:
+      options:
+        - directory: hosting
+          policy: install
+        - directory: hosting
+          policy: configure
+
+  - template: ../../../build/azp/samples/policies/acceptance.yml
+    parameters:
+      options:
+        - machine: hosting

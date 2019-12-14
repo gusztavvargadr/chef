@@ -1,35 +1,35 @@
-property :native_package_name, String, name_property: true
-property :native_package_options, Hash, required: true
+property :name, String, name_property: true
+property :options, Hash, default: {}
 
 default_action :install
 
 action :install do
-  native_package_source = new_resource.native_package_options['source']
-  native_package_install = new_resource.native_package_options['install'].nil? ? {} : new_resource.native_package_options['install']
-  native_package_executable = new_resource.native_package_options['executable']
-  native_package_elevated = new_resource.native_package_options['elevated']
+  source = new_resource.options['source']
+  install = new_resource.options['install'].nil? ? {} : new_resource.options['install']
+  executable = new_resource.options['executable']
+  elevated = new_resource.options['elevated']
 
-  return if !native_package_executable.nil? && ::File.exist?(native_package_executable)
+  return if !executable.nil? && ::File.exist?(executable)
 
-  native_package_download_directory_path = "#{Chef::Config[:file_cache_path]}/gusztavvargadr_windows"
-  native_package_download_file_path = "#{native_package_download_directory_path}/#{new_resource.native_package_name.tr(' ', '-')}.exe"
+  download_directory_path = "#{Chef::Config[:file_cache_path]}/gusztavvargadr_windows"
+  download_file_path = "#{download_directory_path}/#{new_resource.name.tr(' ', '-')}.exe"
 
-  gusztavvargadr_windows_file native_package_download_file_path do
-    file_options('source' => native_package_source)
+  gusztavvargadr_windows_file download_file_path do
+    options('source' => source)
     action :create
   end
 
-  native_package_script_name = "Install Native package '#{new_resource.native_package_name}'"
-  native_package_script_code = "Start-Process \"#{native_package_download_file_path.tr('/', '\\')}\" \"#{native_package_install.join(' ')}\" -Wait"
+  script_name = "Install Native package '#{new_resource.name}'"
+  script_code = "Start-Process \"#{download_file_path.tr('/', '\\')}\" \"#{install.join(' ')}\" -Wait"
 
-  if native_package_elevated
-    gusztavvargadr_windows_powershell_script_elevated native_package_script_name do
-      code native_package_script_code
+  if elevated
+    gusztavvargadr_windows_powershell_script_elevated script_name do
+      code script_code
       action :run
     end
   else
-    powershell_script native_package_script_name do
-      code native_package_script_code
+    powershell_script script_name do
+      code script_code
       action :run
     end
   end

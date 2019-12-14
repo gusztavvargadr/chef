@@ -1,13 +1,17 @@
 default['gusztavvargadr_docker']['engine_community'] = {
   'features' => {
-    'Containers' => {},
-    'Hyper-V' => {},
-  },
-  'powershell_modules' => {},
-  'chocolatey_packages' => {
-    'docker-for-windows' => {
-      'elevated' => true,
+    'Containers' => {
+      'reboot' => 'true',
+    },
+    'Hyper-V' => {
+      'reboot' => 'true',
     },
   },
+  'powershell_modules' => {},
   'powershell_packages' => {},
+  'chocolatey_packages' => {
+    'docker-desktop' => {
+      'reboot' => 'true',
+    },
+  },
 }

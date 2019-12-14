@@ -1,0 +1,22 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - build/azp/samples/policies
+      - samples/policies/core
+pr: none
+
+stages:
+  - template: ../../../build/azp/samples/policies/commit.yml
+    parameters:
+      options:
+        - directory: core
+          policy: init
+        - directory: core
+          policy: prepare
+        - directory: core
+          policy: install
+        - directory: core
+          policy: configure

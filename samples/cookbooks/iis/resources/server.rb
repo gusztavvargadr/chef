@@ -1,13 +1,15 @@
-property :server_options, Hash, required: true
+property :options, Hash, required: true
 
 default_action :install
 
 action :install do
+  return if new_resource.options.nil?
+
   gusztavvargadr_windows_features '' do
-    features_options new_resource.server_options['features']
+    options new_resource.options['features']
   end
 
   gusztavvargadr_windows_native_packages '' do
-    native_packages_options new_resource.server_options['native_packages']
+    options new_resource.options['native_packages']
   end
 end

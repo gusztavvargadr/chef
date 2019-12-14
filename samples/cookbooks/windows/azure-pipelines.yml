@@ -1,0 +1,30 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - build/azp/samples/cookbooks
+      - samples/cookbooks/windows
+      - samples/cookbooks/windows_test
+pr: none
+
+stages:
+  - template: ../../../build/azp/samples/cookbooks/commit.yml
+    parameters:
+      options:
+        - cookbook: windows
+
+  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
+    parameters:
+      options:
+        - cookbook: windows
+          suite: chocolatey
+        - cookbook: windows
+          suite: environment
+        - cookbook: windows
+          suite: features
+        - cookbook: windows
+          suite: node
+        - cookbook: windows
+          suite: files

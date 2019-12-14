@@ -1,8 +1,5 @@
 driver:
   name: vagrant
-  vagrantfiles:
-    - ../../../src/kitchen.vagrant
-  provider: <%= ENV['VAGRANT_PREFERRED_PROVIDERS'] || ENV['VAGRANT_DEFAULT_PROVIDER'] %>
 
 provisioner:
   name: chef_zero
@@ -11,16 +8,24 @@ verifier:
   name: inspec
 
 platforms:
-  - name: w10
-    transport:
-      name: winrm
+  - name: windows
     driver:
-      box: <%= ENV['VAGRANT_BOX_WINDOWS_DESKTOP'] || 'gusztavvargadr/w10e-dc' %>
+      vagrantfiles:
+        - ../vagrant.windows-server.rb
 
 suites:
-  - name: 17c
+  - name: 2017-community
     run_list:
       - recipe[gusztavvargadr_visualstudio_test::2017_community]
-  - name: 17p
+
+  - name: 2017-professional
     run_list:
       - recipe[gusztavvargadr_visualstudio_test::2017_professional]
+
+  - name: 2019-community
+    run_list:
+      - recipe[gusztavvargadr_visualstudio_test::2019_community]
+
+  - name: 2019-professional
+    run_list:
+      - recipe[gusztavvargadr_visualstudio_test::2019_professional]
