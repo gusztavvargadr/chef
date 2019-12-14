@@ -1,16 +1,18 @@
 gusztavvargadr_windows:
   chocolatey_packages:
-    dotnetcore-sdk:
     git:
       install:
         params: '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration"'
     poshgit:
+
+    dotnetcore-sdk:
     chef-workstation:
-      version: '0.10.41'
+
     vagrant:
-      version: '2.2.6'
       install:
         ignore-package-exit-codes:
+      reboot: true
+    docker-desktop:
       reboot: true
 
     # wsl
