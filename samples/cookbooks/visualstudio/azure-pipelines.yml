@@ -1,0 +1,22 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - build/azp/samples/cookbooks
+      - samples/cookbooks/visualstudio
+      - samples/cookbooks/visualstudio_test
+pr: none
+
+stages:
+  - template: ../../../build/azp/samples/cookbooks/commit.yml
+    parameters:
+      options:
+        - cookbook: visualstudio
+
+  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
+    parameters:
+      options:
+        - cookbook: visualstudio
+          suite: [ '2019', 'community' ]
