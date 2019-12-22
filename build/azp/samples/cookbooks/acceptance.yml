@@ -1,7 +1,7 @@
 parameters:
   options: []
     # - cookbook: cookbook-name
-    #   suite: suite-name
+    #   suite: [ 'suite-name-part-1', 'suite-name-part-2' ]
 
 stages:
   - stage: acceptance
@@ -9,8 +9,8 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-        - job: test_${{ option.cookbook }}_${{ option.suite }}
-          displayName: Test ${{ option.cookbook }} ${{ option.suite }}
+        - job: test_${{ option.cookbook }}_${{ join('_', option.suite) }}
+          displayName: Test ${{ option.cookbook }} ${{ join('-', option.suite) }}
 
           pool:
             name: Default
@@ -33,31 +33,31 @@ stages:
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen create ${{ option.suite }}
+                kitchen create ${{ join('-', option.suite) }}
               displayName: Restore
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen converge ${{ option.suite }}
+                kitchen converge ${{ join('-', option.suite) }}
               displayName: Test - 1 - Converge
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen verify ${{ option.suite }}
+                kitchen verify ${{ join('-', option.suite) }}
               displayName: Test - 1 - Verify
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen converge ${{ option.suite }}
+                kitchen converge ${{ join('-', option.suite) }}
               displayName: Test - 2 - Converge
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen verify ${{ option.suite }}
+                kitchen verify ${{ join('-', option.suite) }}
               displayName: Test - 2 - Verify
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen destroy ${{ option.suite }}
+                kitchen destroy ${{ join('-', option.suite) }}
               displayName: Clean
               condition: always()

@@ -19,4 +19,4 @@ stages:
     parameters:
       options:
         - cookbook: visualstudio
-          suite: 2019_community
+          suite: [ '2019', 'community' ]
