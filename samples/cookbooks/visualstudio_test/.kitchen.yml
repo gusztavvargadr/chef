@@ -14,18 +14,18 @@ platforms:
         - ../vagrant.windows-server.rb
 
 suites:
-  - name: 2017-community
+  - name: 2017_community
     run_list:
       - recipe[gusztavvargadr_visualstudio_test::2017_community]
 
-  - name: 2017-professional
+  - name: 2017_professional
     run_list:
       - recipe[gusztavvargadr_visualstudio_test::2017_professional]
 
-  - name: 2019-community
+  - name: 2019_community
     run_list:
       - recipe[gusztavvargadr_visualstudio_test::2019_community]
 
-  - name: 2019-professional
+  - name: 2019_professional
     run_list:
       - recipe[gusztavvargadr_visualstudio_test::2019_professional]
