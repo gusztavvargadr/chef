@@ -1,0 +1,22 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - build/azp/samples/cookbooks
+      - samples/cookbooks/iis
+      - samples/cookbooks/iis_test
+pr: none
+
+stages:
+  - template: ../../../build/azp/samples/cookbooks/commit.yml
+    parameters:
+      options:
+        - cookbook: iis
+
+  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
+    parameters:
+      options:
+        - cookbook: iis
+          suite: server
