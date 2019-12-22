@@ -11,24 +11,32 @@ default['gusztavvargadr_iis']['server'] = {
         '/norestart',
       ],
     },
-    '.NET Core 2.1.13 Windows Server Hosting' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/070b4126-8c0c-445f-8c0e-7a29963b0a1c/d50548fc04e2e0063dad4fda8232cd9d/dotnet-hosting-2.1.13-win.exe',
+    '.NET Core 2.1.14 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/d08902cf-87b0-4bfe-b25c-627ff77b8802/8293c56094f50ba8c4ed703aff95c325/dotnet-hosting-2.1.14-win.exe',
       'install' => [
         '/install',
         '/quiet',
         '/norestart',
       ],
     },
-    '.NET Core 2.2.7 Windows Server Hosting' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/51c29196-43b3-47d6-a393-d0df24081ac1/8b8d720b3cd63d88a2fd69115ab713c5/dotnet-hosting-2.2.7-win.exe',
+    '.NET Core 2.2.8 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/ba001109-03c6-45ef-832c-c4dbfdb36e00/e3413f9e47e13f1e4b1b9cf2998bc613/dotnet-hosting-2.2.8-win.exe',
       'install' => [
         '/install',
         '/quiet',
         '/norestart',
       ],
     },
-    '.NET Core 3.0.0 Windows Server Hosting' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/bf608208-38aa-4a40-9b71-ae3b251e110a/bc1cecb14f75cc83dcd4bbc3309f7086/dotnet-hosting-3.0.0-win.exe',
+    '.NET Core 3.0.1 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/32b71802-0b4d-4064-a7e6-083b5155d3b1/080cf60a5c06be4ed27e2eac6c693f2f/dotnet-hosting-3.0.1-win.exe',
+      'install' => [
+        '/install',
+        '/quiet',
+        '/norestart',
+      ],
+    },
+    '.NET Core 3.1.0 Windows Server Hosting' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/fa3f472e-f47f-4ef5-8242-d3438dd59b42/9b2d9d4eecb33fe98060fd2a2cb01dcd/dotnet-hosting-3.1.0-win.exe',
       'install' => [
         '/install',
         '/quiet',
