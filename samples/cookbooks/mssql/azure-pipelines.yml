@@ -1,0 +1,24 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - build/azp/samples/cookbooks
+      - samples/cookbooks/mssql
+      - samples/cookbooks/mssql_test
+pr: none
+
+stages:
+  - template: ../../../build/azp/samples/cookbooks/commit.yml
+    parameters:
+      options:
+        - cookbook: docker
+
+  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
+    parameters:
+      options:
+        - cookbook: mssql
+          suite: [ '2017', 'developer' ]
+        - cookbook: mssql
+          suite: [ '2018', 'ssms' ]
