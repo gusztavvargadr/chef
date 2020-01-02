@@ -23,6 +23,6 @@ action :install do
       Get-WindowsOptionalFeature -Online | Where { $_.FeatureName -match "#{new_resource.name}" } | Where { $_.State -ne "Enabled" } | ForEach { Enable-WindowsOptionalFeature -Online -FeatureName $_.FeatureName -All -NoRestart }
     EOH
     action :run
-    notifies :request_reboot, 'reboot[Install]' if reboot
+    # notifies :request_reboot, 'reboot[Install]' if reboot
   end
 end
