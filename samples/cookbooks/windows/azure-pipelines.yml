@@ -25,6 +25,10 @@ stages:
         - cookbook: windows
           suite: features
         - cookbook: windows
+          suite: files
+        - cookbook: windows
+          suite: native
+        - cookbook: windows
           suite: node
         - cookbook: windows
-          suite: files
+          suite: updates

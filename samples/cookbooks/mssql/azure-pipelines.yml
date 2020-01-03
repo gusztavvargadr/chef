@@ -19,6 +19,6 @@ stages:
     parameters:
       options:
         - cookbook: mssql
-          suite: [ '2017', 'developer' ]
+          suite: [ '2019', 'developer' ]
         - cookbook: mssql
           suite: [ '2018', 'ssms' ]
