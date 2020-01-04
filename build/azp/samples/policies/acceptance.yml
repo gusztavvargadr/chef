@@ -32,11 +32,11 @@ stages:
 
             - script: |
                 cd samples/policies
-                vagrant up ${{ option.machine }}
+                vagrant up ${{ option.machine }} || vagrant up ${{ option.machine }}
               displayName: Test
 
             - script: |
                 cd samples/policies
-                vagrant destroy --force ${{ option.machine }}
+                vagrant destroy --force ${{ option.machine }} || vagrant destroy --force ${{ option.machine }}
               displayName: Clean
               condition: always()
