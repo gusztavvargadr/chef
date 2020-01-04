@@ -4,10 +4,12 @@ stages:
   - template: ../../../build/azp/samples/cookbooks/commit.yml
     parameters:
       options:
-        - cookbook: iis
+        - cookbook: docker
 
   - template: ../../../build/azp/samples/cookbooks/acceptance.yml
     parameters:
       options:
-        - cookbook: iis
-          suite: server
+        - cookbook: mssql
+          suite: [ '2019', 'developer' ]
+        - cookbook: mssql
+          suite: [ '2018', 'ssms' ]

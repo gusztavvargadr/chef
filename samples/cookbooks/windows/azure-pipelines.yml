@@ -1,12 +1,3 @@
-trigger:
-  branches:
-    include:
-      - '*'
-  paths:
-    include:
-      - build/azp/samples/cookbooks
-      - samples/cookbooks/windows
-      - samples/cookbooks/windows_test
 pr: none
 
 stages:
@@ -25,6 +16,10 @@ stages:
         - cookbook: windows
           suite: features
         - cookbook: windows
+          suite: files
+        - cookbook: windows
+          suite: native
+        - cookbook: windows
           suite: node
         - cookbook: windows
-          suite: files
+          suite: updates
