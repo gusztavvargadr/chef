@@ -33,7 +33,7 @@ stages:
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen create ${{ join('-', option.suite) }}
+                kitchen create ${{ join('-', option.suite) }} || kitchen create ${{ join('-', option.suite) }}
               displayName: Restore
 
             - script: |
@@ -58,6 +58,6 @@ stages:
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen destroy ${{ join('-', option.suite) }}
+                kitchen destroy ${{ join('-', option.suite) }} || kitchen destroy ${{ join('-', option.suite) }}
               displayName: Clean
               condition: always()
