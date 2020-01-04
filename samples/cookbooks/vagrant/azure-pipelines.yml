@@ -1,12 +1,3 @@
-trigger:
-  branches:
-    include:
-      - '*'
-  paths:
-    include:
-      - build/azp/samples/cookbooks
-      - samples/cookbooks/vagrant
-      - samples/cookbooks/vagrant_test
 pr: none
 
 stages:

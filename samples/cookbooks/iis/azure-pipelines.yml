@@ -1,12 +1,3 @@
-trigger:
-  branches:
-    include:
-      - '*'
-  paths:
-    include:
-      - build/azp/samples/cookbooks
-      - samples/cookbooks/iis
-      - samples/cookbooks/iis_test
 pr: none
 
 stages:

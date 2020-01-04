@@ -31,13 +31,13 @@ action :install do
     gusztavvargadr_windows_powershell_script_elevated script_name do
       code script_code
       action :run
-      # notifies :request_reboot, 'reboot[Install]' if reboot
+      notifies :request_reboot, 'reboot[Install]' if reboot
     end
   else
     powershell_script script_name do
       code script_code
       action :run
-      # notifies :request_reboot, 'reboot[Install]' if reboot
+      notifies :request_reboot, 'reboot[Install]' if reboot
     end
   end
 end
