@@ -8,12 +8,12 @@ gusztavvargadr_windows:
     dotnetcore-sdk:
     chef-workstation:
 
-    vagrant:
-      install:
-        ignore-package-exit-codes:
-      reboot: true
-    docker-desktop:
-      reboot: true
+    # vagrant:
+    #   install:
+    #     ignore-package-exit-codes:
+    #   reboot: true
+    # docker-desktop:
+    #   reboot: true
 
     # wsl
     # docker

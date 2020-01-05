@@ -1,11 +1,3 @@
-trigger:
-  branches:
-    include:
-      - '*'
-  paths:
-    include:
-      - build/azp/samples/policies
-      - samples/policies/development
 pr: none
 
 stages:
@@ -14,10 +6,14 @@ stages:
       options:
         - directory: development
           policy: install
-        - directory: development
-          policy: configure
+        # - directory: development
+        #   policy: configure
 
   - template: ../../../build/azp/samples/policies/acceptance.yml
     parameters:
       options:
-        - machine: development
+        - directory: development
+          policy: install
+        # - directory: development
+        #   policy: configure
+  

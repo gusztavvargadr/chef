@@ -25,25 +25,26 @@ stages:
             - script: |
                 docker version
                 docker-compose version
-              displayName: Init
+              displayName: Docker Init
 
             - script: |
-                docker-compose build chef
-              displayName: Restore
+                docker-compose build chef-client-linux
+              displayName: Docker Restore
 
             - script: |
-                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} policy
-              displayName: Build
+                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} chef-policy
+              displayName: Docker Build
 
             - script: |
-                docker-compose run policy
-              displayName: Package
-
-            - publish: .chef
-              artifact: policy_${{ option.directory }}_${{ option.policy }}
-              displayName: Publish
+                docker-compose run chef-policy
+              displayName: Docker Package
 
             - script: |
                 docker-compose down --rmi all
-              displayName: Clean
+              displayName: Docker Clean
+              condition: always()
+
+            - publish: $(Build.SourcesDirectory)/.chef/
+              artifact: build-${{ option.directory }}-${{ option.policy }}-chef
+              displayName: Artifacts Chef Publish
               condition: always()

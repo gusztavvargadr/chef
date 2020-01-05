@@ -7,5 +7,11 @@ RUN powershell -Command iex ((new-object net.webclient).DownloadString('https://
 RUN choco install --confirm chef-client
 ENV CHEF_LICENSE accept-silent
 
-ENTRYPOINT [ "C:/opscode/chef/bin/chef-client.bat" ]
-CMD [ "--help" ]
+ARG directory
+ARG policy
+
+ENV CHEF_EXPORT_DIR C:/opt/chef/.chef/policies/${directory}/${policy}/
+
+ADD ./build/docker/chocolatey-package.entrypoint.ps1 C:/entrypoint.ps1
+
+ENTRYPOINT [ "powershell", "-File", "C:/entrypoint.ps1" ]

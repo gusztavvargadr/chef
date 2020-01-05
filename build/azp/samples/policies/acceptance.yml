@@ -1,6 +1,7 @@
 parameters:
   options: []
-    # - machine: machine-name
+    # - directory: directory-name
+    #   policy: policy-name
 
 stages:
   - stage: acceptance
@@ -8,14 +9,11 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-        - job: test_${{ option.machine }}
-          displayName: Test ${{ option.machine }}
+        - job: test_${{ option.directory }}_${{ option.policy }}
+          displayName: Test ${{ option.directory }} ${{ option.policy }}
 
           pool:
-            name: Default
-            demands:
-              - AZP_AGENT_CHEF
-              - AZP_AGENT_VAGRANT
+            vmImage: windows-2019
 
           workspace:
             clean: all
@@ -24,19 +22,30 @@ stages:
             - checkout: self
               submodules: recursive
 
-            - script: |
-                chef --version
-                vagrant version
-                vagrant plugin list
-              displayName: Init
-
-            # - script: |
-            #     cd samples/policies
-            #     vagrant up ${{ option.machine }} || vagrant up ${{ option.machine }}
-            #   displayName: Test
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                artifact: build-${{ option.directory }}-${{ option.policy }}-registry
+                path: $(Build.SourcesDirectory)/.chef/
+              displayName: Artifacts Chef Download
 
             - script: |
-                cd samples/policies
-                vagrant destroy --force ${{ option.machine }} || vagrant destroy --force ${{ option.machine }}
-              displayName: Clean
+                docker version
+                docker-compose version
+              displayName: Docker Init
+
+            - script: |
+                docker-compose build chef-client-windows
+              displayName: Docker Restore
+
+            - script: |
+                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} chocolatey-package
+              displayName: Docker Build
+
+            - script: |
+                docker-compose run chocolatey-package
+              displayName: Docker Package
+
+            - script: |
+                docker-compose down --rmi all
+              displayName: Docker Clean
               condition: always()
