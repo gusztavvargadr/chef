@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd">
+  <metadata>
+    <id>sample-policy-core-init</id>
+    <!-- <id>sample-policy-{directory}-{name}</id> -->
+    <version>0.0.1</version>
+    <!-- <version>{version}</version> -->
+    <packageSourceUrl>https://github.com/gusztavvargadr/chef/</packageSourceUrl>
+    <owners>Gusztav Varga</owners>
+    <title>Sample Policy {directory} {name}</title>
+    <authors>Gusztav Varga</authors>
+    <projectUrl>https://github.com/gusztavvargadr/chef/</projectUrl>
+    <!--<iconUrl>http://cdn.rawgit.com/__REPLACE_YOUR_REPO__/master/icons/test.png</iconUrl>-->
+    <copyright>2020 Gusztav Varga</copyright>
+    <licenseUrl>https://github.com/gusztavvargadr/chef/blob/{version}/LICENSE.md</licenseUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <projectSourceUrl>https://github.com/gusztavvargadr/chef/</projectSourceUrl>
+    <docsUrl>https://github.com/gusztavvargadr/chef/blob/{version}/README.md</docsUrl>
+    <bugTrackerUrl>https://github.com/gusztavvargadr/chef/issues/</bugTrackerUrl>
+    <tags>chef chef-policy</tags>
+    <summary>Sample Policy {directory} {name}</summary>
+    <description>Sample Policy {directory} {name}</description>
+    <releaseNotes>https://github.com/gusztavvargadr/chef/releases/tag/{version}/</releaseNotes>
+    <dependencies>
+      <dependency id="chef-client" version="15.5.17" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+  </files>
+</package>

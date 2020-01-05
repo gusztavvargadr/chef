@@ -1,17 +1,21 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
-WORKDIR C:/opt/chef/
-
 RUN powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'));
 
-RUN choco install chef-client --confirm --no-progress
-ENV CHEF_LICENSE accept-silent
+WORKDIR C:/opt/docker/
 
 ARG directory
 ARG policy
 
-ENV CHEF_EXPORT_DIR C:/opt/chef/.chef/policies/${directory}/${policy}/
+ENV CHEF_EXPORT_DIR C:/opt/docker/.chef/policies/${directory}/${policy}/
 
-ADD ./chocolatey-package.entrypoint.ps1 C:/entrypoint.ps1
+ENV CHOCOLATEY_SRC_DIR C:/opt/docker/src/
+ADD ./build/docker/chocolatey-package.nuspec ./src/sample-policy-${directory}-${policy}.nuspec
+ADD ./build/docker/chocolatey-package.chocolateyinstall.ps1 ./src/tools/chocolateyinstall.ps1
+ADD ./build/docker/chocolatey-package.chocolateyuninstall.ps1 ./src/tools/chocolateyuninstall.ps1
 
-ENTRYPOINT [ "powershell", "-File", "C:/entrypoint.ps1" ]
+ENV CHOCOLATEY_PACKAGE_DIR C:/opt/docker/.chocolatey/packages/sample-policy-${directory}-${policy}/
+
+ADD ./build/docker/chocolatey-package.entrypoint.ps1 ./entrypoint.ps1
+
+ENTRYPOINT [ "powershell", "-File", "C:/opt/docker/entrypoint.ps1" ]

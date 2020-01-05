@@ -35,7 +35,6 @@ stages:
 
             - script: |
                 docker-compose build chocolatey
-                docker-compose build chef-client-windows
               displayName: Docker Restore
 
             - script: |

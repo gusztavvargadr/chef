@@ -29,7 +29,6 @@ stages:
 
             - script: |
                 docker-compose build chef
-                docker-compose build chef-client-linux
               displayName: Docker Restore
 
             - script: |
