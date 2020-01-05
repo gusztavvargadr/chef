@@ -24,7 +24,7 @@ stages:
 
             - task: DownloadPipelineArtifact@2
               inputs:
-                artifact: build-${{ option.directory }}-${{ option.policy }}-registry
+                artifact: build-${{ option.directory }}-${{ option.policy }}-chef
                 path: $(Build.SourcesDirectory)/.chef/
               displayName: Artifacts Chef Download
 
