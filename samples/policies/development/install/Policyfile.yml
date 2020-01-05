@@ -4,14 +4,14 @@ gusztavvargadr_windows:
       install:
         params: '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration"'
     poshgit:
-
     dotnetcore-sdk:
-    chef-workstation:
+    # cake
 
     # vagrant:
     #   install:
     #     ignore-package-exit-codes:
     #   reboot: true
+    # chef-workstation:
     # docker-desktop:
     #   reboot: true
 

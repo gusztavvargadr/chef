@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
-WORKDIR C:/opt/chef/
+WORKDIR C:/opt/chocolatey/
 
 RUN powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'));
 
@@ -10,7 +10,7 @@ ENV CHEF_LICENSE accept-silent
 ARG directory
 ARG policy
 
-ENV CHEF_EXPORT_DIR C:/opt/chef/.chef/policies/${directory}/${policy}/
+ENV CHEF_EXPORT_DIR C:/opt/chocolatey/.chef/policies/${directory}/${policy}/
 
 ADD ./chocolatey-package.entrypoint.ps1 C:/entrypoint.ps1
 

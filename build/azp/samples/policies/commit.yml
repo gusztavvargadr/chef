@@ -28,7 +28,7 @@ stages:
               displayName: Docker Init
 
             - script: |
-                docker-compose build chef-client-linux
+                docker-compose build chef
               displayName: Docker Restore
 
             - script: |

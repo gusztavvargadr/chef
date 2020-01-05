@@ -15,7 +15,6 @@ services:
       dockerfile: ./chef-client-linux.Dockerfile
     volumes:
       - ./:/opt/chef/
-      - ./.chef-workstation/:/root/.chef-workstation/
 
   chef-client-windows:
     build:
