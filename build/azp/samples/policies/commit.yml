@@ -44,6 +44,6 @@ stages:
               displayName: Publish
 
             - script: |
-                docker-compose down
+                docker-compose down --rmi all
               displayName: Clean
               condition: always()

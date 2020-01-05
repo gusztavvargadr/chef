@@ -31,30 +31,30 @@ stages:
                 vagrant plugin list
               displayName: Init
 
-            - script: |
-                cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen create ${{ join('-', option.suite) }} || kitchen create ${{ join('-', option.suite) }}
-              displayName: Restore
+            # - script: |
+            #     cd samples/cookbooks/${{ option.cookbook }}_test
+            #     kitchen create ${{ join('-', option.suite) }} || kitchen create ${{ join('-', option.suite) }}
+            #   displayName: Restore
 
-            - script: |
-                cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen converge ${{ join('-', option.suite) }}
-              displayName: Test - 1 - Converge
+            # - script: |
+            #     cd samples/cookbooks/${{ option.cookbook }}_test
+            #     kitchen converge ${{ join('-', option.suite) }}
+            #   displayName: Test - 1 - Converge
 
-            - script: |
-                cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen verify ${{ join('-', option.suite) }}
-              displayName: Test - 1 - Verify
+            # - script: |
+            #     cd samples/cookbooks/${{ option.cookbook }}_test
+            #     kitchen verify ${{ join('-', option.suite) }}
+            #   displayName: Test - 1 - Verify
 
-            - script: |
-                cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen converge ${{ join('-', option.suite) }}
-              displayName: Test - 2 - Converge
+            # - script: |
+            #     cd samples/cookbooks/${{ option.cookbook }}_test
+            #     kitchen converge ${{ join('-', option.suite) }}
+            #   displayName: Test - 2 - Converge
 
-            - script: |
-                cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen verify ${{ join('-', option.suite) }}
-              displayName: Test - 2 - Verify
+            # - script: |
+            #     cd samples/cookbooks/${{ option.cookbook }}_test
+            #     kitchen verify ${{ join('-', option.suite) }}
+            #   displayName: Test - 2 - Verify
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
