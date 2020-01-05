@@ -12,6 +12,6 @@ ARG policy
 
 ENV CHEF_EXPORT_DIR C:/opt/chef/.chef/policies/${directory}/${policy}/
 
-ADD ./build/docker/chocolatey-package.entrypoint.ps1 C:/entrypoint.ps1
+ADD ./chocolatey-package.entrypoint.ps1 C:/entrypoint.ps1
 
 ENTRYPOINT [ "powershell", "-File", "C:/entrypoint.ps1" ]
