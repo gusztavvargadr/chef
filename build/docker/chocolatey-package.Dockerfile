@@ -4,7 +4,7 @@ WORKDIR C:/opt/chef/
 
 RUN powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'));
 
-RUN choco install --confirm chef-client
+RUN choco install chef-client --confirm --no-progress
 ENV CHEF_LICENSE accept-silent
 
 ARG directory

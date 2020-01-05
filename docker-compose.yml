@@ -34,10 +34,17 @@ services:
     volumes:
       - ./.chef/:/opt/chef/.chef/
 
+  chocolatey:
+    build:
+      context: ./build/docker/
+      dockerfile: ./chocolatey.Dockerfile
+    volumes:
+      - ./:C:/opt/chef/
+
   chocolatey-package:
     build:
-      context: ./
-      dockerfile: ./build/docker/chocolatey-package.Dockerfile
+      context: ./build/docker/
+      dockerfile: ./chocolatey-package.Dockerfile
       args:
         directory: core
         policy: init

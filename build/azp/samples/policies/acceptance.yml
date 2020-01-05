@@ -34,6 +34,7 @@ stages:
               displayName: Docker Init
 
             - script: |
+                docker-compose build chocolatey
                 docker-compose build chef-client-windows
               displayName: Docker Restore
 

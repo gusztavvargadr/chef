@@ -8,4 +8,4 @@
 **/.chef-workstation
 **/.kitchen
 
-**/.nuget
+**/.chocolatey
