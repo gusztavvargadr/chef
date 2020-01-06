@@ -1,8 +1,8 @@
 FROM chef/chefworkstation:0.12.20
 
-ENV CHEF_LICENSE accept-silent
-
 WORKDIR /opt/docker/
+
+ENV CHEF_LICENSE accept-silent
 
 ENTRYPOINT [ "chef" ]
 CMD [ "--help" ]
