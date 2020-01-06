@@ -14,7 +14,7 @@ ADD ./build/docker/chocolatey-package.nuspec ./src/sample-policy.nuspec
 ADD ./build/docker/chocolatey-package.chocolateyinstall.ps1 ./src/tools/chocolateyinstall.ps1
 ADD ./build/docker/chocolatey-package.chocolateyuninstall.ps1 ./src/tools/chocolateyuninstall.ps1
 
-ENV CHOCOLATEY_PACKAGE_DIR C:/opt/docker/.chocolatey/packages/sample-policy-${directory}-${policy}/
+ENV CHOCOLATEY_PACKAGE_DIR C:/opt/docker/.chocolatey/packages/
 
 ADD ./build/docker/chocolatey-package.entrypoint.ps1 ./entrypoint.ps1
 

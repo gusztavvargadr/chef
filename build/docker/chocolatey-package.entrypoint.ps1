@@ -1,11 +1,9 @@
 $ErrorActionPreference = 'Stop';
 
+mkdir -Force $env:CHOCOLATEY_SRC_DIR/tools/policy
+cp -Recurse -Force $env:CHEF_EXPORT_DIR/* $env:CHOCOLATEY_SRC_DIR/tools/policy
+
 mkdir -Force $env:CHOCOLATEY_PACKAGE_DIR
-rm -Recurse -Force $env:CHOCOLATEY_PACKAGE_DIR/*
-
-mkdir -Force $env:CHOCOLATEY_PACKAGE_DIR/tools/policy
-cp -Recurse -Force $env:CHEF_EXPORT_DIR/* $env:CHOCOLATEY_PACKAGE_DIR/tools/policy
-cp -Recurse -Force $env:CHOCOLATEY_SRC_DIR/* $env:CHOCOLATEY_PACKAGE_DIR
-
-cd $env:CHOCOLATEY_PACKAGE_DIR
-choco pack
+pushd $env:CHOCOLATEY_SRC_DIR
+choco pack --output-directory $env:CHOCOLATEY_PACKAGE_DIR
+popd

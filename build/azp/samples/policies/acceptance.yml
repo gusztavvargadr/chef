@@ -77,7 +77,7 @@ stages:
               displayName: Docker Restore
 
             - script: |
-                docker-compose run --entrypoint choco chef-client-windows install sample-policy --confirm -dv -s ./.chocolatey/packages/sample-policy-${{ option.directory }}-${{ option.policy }}
+                docker-compose run --entrypoint choco chef-client-windows install sample-policy --confirm -dv -s ./.chocolatey/packages/
               displayName: Docker Test
 
             - script: |
