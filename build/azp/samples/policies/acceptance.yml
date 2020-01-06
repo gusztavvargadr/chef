@@ -9,8 +9,8 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-        - job: test_${{ option.directory }}_${{ option.policy }}
-          displayName: Test ${{ option.directory }} ${{ option.policy }}
+        - job: test_${{ option.directory }}_${{ option.policy }}_chef
+          displayName: Test ${{ option.directory }} ${{ option.policy }} Chef
 
           pool:
             vmImage: windows-2019
@@ -39,14 +39,46 @@ stages:
               displayName: Docker Restore
 
             - script: |
-                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} chocolatey-package
-              displayName: Docker Build
+                docker-compose run --workdir C:/opt/docker/.chef/policies/${{ option.directory }}/${{ option.policy }}/ chef-client-windows -z
+              displayName: Docker Test
 
             - script: |
-                mkdir .chocolatey
-                docker-compose run chocolatey-package
-                docker-compose run --entrypoint choco chef-client-windows install sample-policy --confirm -s ./.chocolatey/packages/sample-policy-${{ option.directory }}-${{ option.policy }}
-              displayName: Docker Package
+                docker-compose down --rmi all
+              displayName: Docker Clean
+              condition: always()
+
+        - job: test_${{ option.directory }}_${{ option.policy }}_chocolatey
+          displayName: Test ${{ option.directory }} ${{ option.policy }} Chocolatey
+
+          pool:
+            vmImage: windows-2019
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                artifact: build-${{ option.directory }}-${{ option.policy }}-chocolatey
+                path: $(Build.SourcesDirectory)/.chocolatey/
+              displayName: Artifacts Chocolatey Download
+
+            - script: |
+                docker version
+                docker-compose version
+              displayName: Docker Init
+
+            - script: |
+                docker-compose build chocolatey
+                docker-compose build chef-client-windows
+              displayName: Docker Restore
+
+            - script: |
+                docker-compose run --entrypoint choco chef-client-windows install sample-policy --confirm -dv -s ./.chocolatey/packages/sample-policy-${{ option.directory }}-${{ option.policy }}
+              displayName: Docker Test
 
             - script: |
                 docker-compose down --rmi all

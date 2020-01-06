@@ -9,8 +9,8 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-        - job: build_${{ option.directory }}_${{ option.policy }}
-          displayName: Build ${{ option.directory }} ${{ option.policy }}
+        - job: build_${{ option.directory }}_${{ option.policy }}_chef
+          displayName: Build ${{ option.directory }} ${{ option.policy }} Chef
 
           pool:
             vmImage: ubuntu-16.04
@@ -47,4 +47,52 @@ stages:
             - publish: $(Build.SourcesDirectory)/.chef/
               artifact: build-${{ option.directory }}-${{ option.policy }}-chef
               displayName: Artifacts Chef Publish
+              condition: always()
+
+        - job: build_${{ option.directory }}_${{ option.policy }}_chocolatey
+          displayName: Build ${{ option.directory }} ${{ option.policy }}_chocolatey
+          dependsOn: build_${{ option.directory }}_${{ option.policy }}_chef
+
+          pool:
+            vmImage: windows-2019
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                artifact: build-${{ option.directory }}-${{ option.policy }}-chef
+                path: $(Build.SourcesDirectory)/.chef/
+              displayName: Artifacts Chef Download
+
+            - script: |
+                docker version
+                docker-compose version
+              displayName: Docker Init
+
+            - script: |
+                docker-compose build chocolatey
+              displayName: Docker Restore
+
+            - script: |
+                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} chocolatey-package
+              displayName: Docker Build
+
+            - script: |
+                mkdir .chocolatey
+                docker-compose run chocolatey-package
+              displayName: Docker Package
+
+            - script: |
+                docker-compose down --rmi all
+              displayName: Docker Clean
+              condition: always()
+
+            - publish: $(Build.SourcesDirectory)/.chocolatey/
+              artifact: build-${{ option.directory }}-${{ option.policy }}-chocolatey
+              displayName: Artifacts Chocolatey Publish
               condition: always()
