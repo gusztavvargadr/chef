@@ -13,7 +13,7 @@ action :install do
   reboot = new_resource.options['reboot']
 
   script_name = "Install Chocolatey package '#{new_resource.name}'"
-  script_code = "choco install #{new_resource.name} --confirm"
+  script_code = "choco install #{new_resource.name} --confirm --no-progress"
   script_code = "#{script_code} --version #{version}" unless version.to_s.empty?
   install.each do |install_name, install_value|
     script_code = "#{script_code} --#{install_name}"

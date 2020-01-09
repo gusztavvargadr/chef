@@ -50,7 +50,7 @@ stages:
               condition: always()
 
         - job: build_${{ option.directory }}_${{ option.policy }}_chocolatey
-          displayName: Build ${{ option.directory }} ${{ option.policy }}_chocolatey
+          displayName: Build ${{ option.directory }} ${{ option.policy }} Chocolatey
           dependsOn: build_${{ option.directory }}_${{ option.policy }}_chef
 
           pool:
