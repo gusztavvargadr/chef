@@ -1,6 +1,6 @@
 FROM chef/chefworkstation:0.12.20
 
-WORKDIR /opt/docker/
+WORKDIR /opt/chef/
 
 ENV CHEF_LICENSE accept-silent
 

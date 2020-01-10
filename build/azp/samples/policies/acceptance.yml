@@ -39,7 +39,7 @@ stages:
               displayName: Docker Restore
 
             - script: |
-                docker-compose run --workdir C:/opt/docker/.chef/policies/${{ option.directory }}/${{ option.policy }}/ chef-client-windows -z
+                docker-compose run --workdir C:/opt/chef/.chef/policies/${{ option.directory }}/${{ option.policy }}/ chef-client-windows -z
               displayName: Docker Test
 
             - script: |
