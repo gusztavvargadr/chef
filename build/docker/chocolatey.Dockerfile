@@ -1,9 +1,11 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM gusztavvargadr/chocolatey:0.10.15-windows
 
-WORKDIR C:/opt/chocolatey/
+# FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
-RUN powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'));
-RUN choco config set cacheLocation C:\tmp\choco
+# WORKDIR C:/opt/chocolatey/
 
-ENTRYPOINT [ "choco" ]
-CMD [ "--help" ]
+# RUN powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'));
+# RUN choco config set cacheLocation C:\tmp\choco
+
+# ENTRYPOINT [ "choco" ]
+# CMD [ "--help" ]

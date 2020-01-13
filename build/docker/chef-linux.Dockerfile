@@ -1,8 +1,10 @@
-FROM chef/chefworkstation:0.12.20
+FROM gusztavvargadr/chef-workstation:0.12.20-linux
 
-WORKDIR /opt/chef/
+# FROM chef/chefworkstation:0.12.20
 
-ENV CHEF_LICENSE accept-silent
+# WORKDIR /opt/chef/
 
-ENTRYPOINT [ "chef" ]
-CMD [ "--help" ]
+# ENV CHEF_LICENSE accept-silent
+
+# ENTRYPOINT [ "chef" ]
+# CMD [ "--help" ]

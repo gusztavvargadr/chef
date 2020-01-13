@@ -1,14 +1,16 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+FROM gusztavvargadr/chef-client:15.5.17-windows
 
-WORKDIR C:/opt/chocolatey/
+# FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
-RUN powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'));
-RUN choco config set cacheLocation C:\tmp\choco
+# WORKDIR C:/opt/chocolatey/
 
-WORKDIR C:/opt/chef/
+# RUN powershell -Command iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'));
+# RUN choco config set cacheLocation C:\tmp\choco
 
-RUN choco install chef-client --confirm --no-progress
-ENV CHEF_LICENSE accept-silent
+# WORKDIR C:/opt/chef/
 
-ENTRYPOINT [ "chef-client.bat" ]
-CMD [ "--help" ]
+# RUN choco install chef-client --confirm --no-progress
+# ENV CHEF_LICENSE accept-silent
+
+# ENTRYPOINT [ "chef-client.bat" ]
+# CMD [ "--help" ]
