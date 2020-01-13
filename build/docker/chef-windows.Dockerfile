@@ -7,8 +7,10 @@ RUN choco config set cacheLocation C:\tmp\choco
 
 WORKDIR C:/opt/chef/
 
-RUN choco install chef-client --confirm --no-progress
+RUN choco install chef-workstation --confirm --no-progress
 ENV CHEF_LICENSE accept-silent
 
-ENTRYPOINT [ "chef-client.bat" ]
+RUN choco install git --confirm --no-progress --package-parameters '"/GitAndUnixToolsOnPath /NoShellIntegration"'
+
+ENTRYPOINT [ "chef-cli.bat" ]
 CMD [ "--help" ]

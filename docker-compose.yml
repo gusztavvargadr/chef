@@ -1,23 +1,12 @@
 version: '3'
 
 services:
-  chef:
+  chef-linux:
     build:
       context: ./build/docker/
-      dockerfile: ./chef.Dockerfile
+      dockerfile: ./chef-linux.Dockerfile
     volumes:
       - ./:/opt/chef/
-      - ./.chef-workstation/:/root/.chef-workstation/
-
-  chef-policy:
-    build:
-      context: ./
-      dockerfile: ./build/docker/chef-policy.Dockerfile
-      args:
-        directory: core
-        policy: init
-    volumes:
-      - ./.chef/:/opt/chef/.chef/
 
   chef-client-linux:
     build:
@@ -33,16 +22,12 @@ services:
     volumes:
       - ./:C:/opt/chocolatey/
 
-  chocolatey-package:
+  chef-windows:
     build:
-      context: ./
-      dockerfile: ./build/docker/chocolatey-package.Dockerfile
-      args:
-        directory: core
-        policy: init
+      context: ./build/docker/
+      dockerfile: ./chef-windows.Dockerfile
     volumes:
-      - ./.chef/:C:/opt/chocolatey/.chef/
-      - ./.chocolatey/:C:/opt/chocolatey/.chocolatey/
+      - ./:C:/opt/chef/
 
   chef-client-windows:
     build:
@@ -50,4 +35,3 @@ services:
       dockerfile: ./chef-client-windows.Dockerfile
     volumes:
       - ./:C:/opt/chef/
-

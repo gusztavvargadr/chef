@@ -28,16 +28,12 @@ stages:
               displayName: Docker Init
 
             - script: |
-                docker-compose build chef
+                docker-compose build chef-linux
               displayName: Docker Restore
 
             - script: |
-                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} chef-policy
+                docker-compose run --entrypoint ./build/docker/chef.policy.export.sh chef-linux ${{ option.directory }} ${{ option.policy }}
               displayName: Docker Build
-
-            - script: |
-                docker-compose run chef-policy
-              displayName: Docker Package
 
             - script: |
                 docker-compose down --rmi all
@@ -79,13 +75,8 @@ stages:
               displayName: Docker Restore
 
             - script: |
-                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} chocolatey-package
+                docker-compose run --entrypoint "powershell -File ./build/docker/chocolatey.package.pack.ps1" chocolatey ${{ option.directory }} ${{ option.policy }}
               displayName: Docker Build
-
-            - script: |
-                mkdir .chocolatey
-                docker-compose run chocolatey-package
-              displayName: Docker Package
 
             - script: |
                 docker-compose down --rmi all
