@@ -32,7 +32,7 @@ stages:
               displayName: Docker Restore
 
             - script: |
-                docker-compose run --entrypoint ./build/docker/chef.policy.export.sh chef-linux ${{ option.directory }} ${{ option.policy }}
+                docker-compose run --entrypoint "sh ./build/docker/chef.policy.export.sh" chef-linux ${{ option.directory }} ${{ option.policy }}
               displayName: Docker Build
 
             - script: |
