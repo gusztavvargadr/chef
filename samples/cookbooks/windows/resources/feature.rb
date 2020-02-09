@@ -7,7 +7,8 @@ action :install do
   feature_list = powershell_out("Get-WindowsOptionalFeature -Online | Where { $_.FeatureName -match \"#{new_resource.name}\" } | Where { $_.State -ne \"Enabled\" }").stdout
   return if feature_list.strip.empty?
 
-  reboot = new_resource.options['reboot']
+  ignore_reboot = ((node['gusztavvargadr_windows'] || {})['ignore_reboot']) || false
+  reboot = new_resource.options['reboot'] && !ignore_reboot
 
   script_name = "Install feature '#{new_resource.name}'"
 

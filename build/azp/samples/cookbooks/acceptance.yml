@@ -13,10 +13,7 @@ stages:
           displayName: Test ${{ option.cookbook }} ${{ join('-', option.suite) }}
 
           pool:
-            name: Default
-            demands:
-              - AZP_AGENT_CHEF
-              - AZP_AGENT_VAGRANT
+            vmImage: ubuntu-16.04
 
           workspace:
             clean: all
@@ -25,11 +22,24 @@ stages:
             - checkout: self
               submodules: recursive
 
-            - script: |
-                chef --version
-                vagrant version
-                vagrant plugin list
-              displayName: Init
+          # pool:
+          #   name: Default
+          #   demands:
+          #     - AZP_AGENT_CHEF
+          #     - AZP_AGENT_VAGRANT
+
+          # workspace:
+          #   clean: all
+
+          # steps:
+          #   - checkout: self
+          #     submodules: recursive
+
+          #   - script: |
+          #       chef --version
+          #       vagrant version
+          #       vagrant plugin list
+          #     displayName: Init
 
             # - script: |
             #     cd samples/cookbooks/${{ option.cookbook }}_test
@@ -56,8 +66,8 @@ stages:
             #     kitchen verify ${{ join('-', option.suite) }}
             #   displayName: Test - 2 - Verify
 
-            - script: |
-                cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen destroy ${{ join('-', option.suite) }} || kitchen destroy ${{ join('-', option.suite) }}
-              displayName: Clean
-              condition: always()
+            # - script: |
+            #     cd samples/cookbooks/${{ option.cookbook }}_test
+            #     kitchen destroy ${{ join('-', option.suite) }} || kitchen destroy ${{ join('-', option.suite) }}
+            #   displayName: Clean
+            #   condition: always()
