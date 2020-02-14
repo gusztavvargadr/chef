@@ -1,35 +1,37 @@
 version: '3'
 
 services:
-  chef:
+  chef-linux:
     build:
-      context: ./build/docker
-      dockerfile: ./chef.Dockerfile
+      context: ./build/docker/
+      dockerfile: ./chef-linux.Dockerfile
     volumes:
-      - .:/opt/gusztavvargadr/chef
-      - .chef-workstation:/root/.chef-workstation
+      - ./:/opt/chef/
 
-  chef-client:
+  chef-client-linux:
     build:
-      context: ./build/docker
-      dockerfile: ./chef-client.Dockerfile
+      context: ./build/docker/
+      dockerfile: ./chef-client-linux.Dockerfile
     volumes:
-      - .:/opt/gusztavvargadr/chef
-      - .chef-workstation:/root/.chef-workstation
+      - ./:/opt/chef/
+        
+  chocolatey:
+    build:
+      context: ./build/docker/
+      dockerfile: ./chocolatey.Dockerfile
+    volumes:
+      - ./:C:/opt/chocolatey/
+
+  chef-windows:
+    build:
+      context: ./build/docker/
+      dockerfile: ./chef-windows.Dockerfile
+    volumes:
+      - ./:C:/opt/chef/
 
   chef-client-windows:
     build:
-      context: ./build/docker
+      context: ./build/docker/
       dockerfile: ./chef-client-windows.Dockerfile
     volumes:
-      - .:C:/opt/gusztavvargadr/chef
-
-  policy:
-    build:
-      context: .
-      dockerfile: ./build/docker/policy.Dockerfile
-      args:
-        directory: core
-        policy: init
-    volumes:
-      - ./.chef:/opt/gusztavvargadr/chef/.chef
+      - ./:C:/opt/chef/

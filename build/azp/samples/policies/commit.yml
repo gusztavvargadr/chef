@@ -9,8 +9,8 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-        - job: build_${{ option.directory }}_${{ option.policy }}
-          displayName: Build ${{ option.directory }} ${{ option.policy }}
+        - job: build_${{ option.directory }}_${{ option.policy }}_chef
+          displayName: Build ${{ option.directory }} ${{ option.policy }} Chef
 
           pool:
             vmImage: ubuntu-16.04
@@ -25,25 +25,65 @@ stages:
             - script: |
                 docker version
                 docker-compose version
-              displayName: Init
+              displayName: Docker Init
 
             - script: |
-                docker-compose build chef
-              displayName: Restore
+                docker-compose build chef-linux
+              displayName: Docker Restore
 
             - script: |
-                docker-compose build --build-arg directory=${{ option.directory }} --build-arg policy=${{ option.policy }} policy
-              displayName: Build
+                docker-compose run --entrypoint "sh ./build/docker/chef.policy.export.sh" chef-linux ${{ option.directory }} ${{ option.policy }}
+              displayName: Docker Build
 
             - script: |
-                docker-compose run policy
-              displayName: Package
+                docker-compose down --rmi all
+              displayName: Docker Clean
+              condition: always()
 
-            - publish: .chef
-              artifact: policy_${{ option.directory }}_${{ option.policy }}
-              displayName: Publish
+            - publish: $(Build.SourcesDirectory)/.chef/
+              artifact: build-${{ option.directory }}-${{ option.policy }}-chef
+              displayName: Artifacts Chef Publish
+              condition: always()
+
+        - job: build_${{ option.directory }}_${{ option.policy }}_chocolatey
+          displayName: Build ${{ option.directory }} ${{ option.policy }} Chocolatey
+          dependsOn: build_${{ option.directory }}_${{ option.policy }}_chef
+
+          pool:
+            vmImage: windows-2019
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                artifact: build-${{ option.directory }}-${{ option.policy }}-chef
+                path: $(Build.SourcesDirectory)/.chef/
+              displayName: Artifacts Chef Download
 
             - script: |
-                docker-compose down
-              displayName: Clean
+                docker version
+                docker-compose version
+              displayName: Docker Init
+
+            - script: |
+                docker-compose build chocolatey
+              displayName: Docker Restore
+
+            - script: |
+                docker-compose run --entrypoint "powershell -File ./build/docker/chocolatey.package.pack.ps1" chocolatey ${{ option.directory }} ${{ option.policy }}
+              displayName: Docker Build
+
+            - script: |
+                docker-compose down --rmi all
+              displayName: Docker Clean
+              condition: always()
+
+            - publish: $(Build.SourcesDirectory)/.chocolatey/
+              artifact: build-${{ option.directory }}-${{ option.policy }}-chocolatey
+              displayName: Artifacts Chocolatey Publish
               condition: always()

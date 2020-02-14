@@ -1,6 +1,7 @@
 parameters:
   options: []
-    # - machine: machine-name
+    # - directory: directory-name
+    #   policy: policy-name
 
 stages:
   - stage: acceptance
@@ -8,14 +9,11 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-        - job: test_${{ option.machine }}
-          displayName: Test ${{ option.machine }}
+        - job: test_${{ option.directory }}_${{ option.policy }}_chef
+          displayName: Test ${{ option.directory }} ${{ option.policy }} Chef
 
           pool:
-            name: Default
-            demands:
-              - AZP_AGENT_CHEF
-              - AZP_AGENT_VAGRANT
+            vmImage: windows-2019
 
           workspace:
             clean: all
@@ -24,19 +22,66 @@ stages:
             - checkout: self
               submodules: recursive
 
-            - script: |
-                chef --version
-                vagrant version
-                vagrant plugin list
-              displayName: Init
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                artifact: build-${{ option.directory }}-${{ option.policy }}-chef
+                path: $(Build.SourcesDirectory)/.chef/
+              displayName: Artifacts Chef Download
 
             - script: |
-                cd samples/policies
-                vagrant up ${{ option.machine }} || vagrant up ${{ option.machine }}
-              displayName: Test
+                docker version
+                docker-compose version
+              displayName: Docker Init
 
             - script: |
-                cd samples/policies
-                vagrant destroy --force ${{ option.machine }} || vagrant destroy --force ${{ option.machine }}
-              displayName: Clean
+                docker-compose build chocolatey
+                docker-compose build chef-client-windows
+              displayName: Docker Restore
+
+            - script: |
+                docker-compose run --workdir C:/opt/chef/.chef/policies/${{ option.directory }}/${{ option.policy }}/ chef-client-windows -z
+              displayName: Docker Test
+
+            - script: |
+                docker-compose down --rmi all
+              displayName: Docker Clean
+              condition: always()
+
+        - job: test_${{ option.directory }}_${{ option.policy }}_chocolatey
+          displayName: Test ${{ option.directory }} ${{ option.policy }} Chocolatey
+          dependsOn: test_${{ option.directory }}_${{ option.policy }}_chef
+
+          pool:
+            vmImage: windows-2019
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                artifact: build-${{ option.directory }}-${{ option.policy }}-chocolatey
+                path: $(Build.SourcesDirectory)/.chocolatey/
+              displayName: Artifacts Chocolatey Download
+
+            - script: |
+                docker version
+                docker-compose version
+              displayName: Docker Init
+
+            - script: |
+                docker-compose build chocolatey
+                docker-compose build chef-client-windows
+              displayName: Docker Restore
+
+            - script: |
+                docker-compose run --entrypoint choco chef-client-windows install chef-policy --confirm --source ./.chocolatey/packages/
+              displayName: Docker Test
+
+            - script: |
+                docker-compose down --rmi all
+              displayName: Docker Clean
               condition: always()

@@ -1,4 +1,4 @@
-FROM gusztavvargadr/chef-client:15.5.17-windows
+FROM gusztavvargadr/chef-workstation:0.12.20-windows
 
 # FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
@@ -9,8 +9,10 @@ FROM gusztavvargadr/chef-client:15.5.17-windows
 
 # WORKDIR C:/opt/chef/
 
-# RUN choco install chef-client --confirm --no-progress
+# RUN choco install chef-workstation --confirm --no-progress
 # ENV CHEF_LICENSE accept-silent
 
-# ENTRYPOINT [ "chef-client.bat" ]
+# RUN choco install git --confirm --no-progress --package-parameters '"/GitAndUnixToolsOnPath /NoShellIntegration"'
+
+# ENTRYPOINT [ "chef-cli.bat" ]
 # CMD [ "--help" ]

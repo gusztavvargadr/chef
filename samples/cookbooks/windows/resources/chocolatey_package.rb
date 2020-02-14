@@ -10,10 +10,11 @@ action :install do
   version = new_resource.options['version']
   install = new_resource.options['install'].nil? ? {} : new_resource.options['install']
   elevated = new_resource.options['elevated']
-  reboot = new_resource.options['reboot']
+  ignore_reboot = ((node['gusztavvargadr_windows'] || {})['ignore_reboot']) || false
+  reboot = new_resource.options['reboot'] && !ignore_reboot
 
   script_name = "Install Chocolatey package '#{new_resource.name}'"
-  script_code = "choco install #{new_resource.name} --confirm"
+  script_code = "choco install #{new_resource.name} --confirm --no-progress"
   script_code = "#{script_code} --version #{version}" unless version.to_s.empty?
   install.each do |install_name, install_value|
     script_code = "#{script_code} --#{install_name}"
