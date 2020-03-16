@@ -1,7 +1,5 @@
 name 'gusztavvargadr_docker'
 description 'Installs/Configures Docker'
-long_description 'Installs/Configures Docker'
-
 license 'Unlicense'
 maintainer 'Gusztáv Varga'
 maintainer_email 'mail@gusztavvargadr.me'

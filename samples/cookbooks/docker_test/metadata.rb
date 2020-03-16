@@ -1,7 +1,5 @@
 name 'gusztavvargadr_docker_test'
 description 'Tests Docker'
-long_description 'Tests Docker'
-
 license 'Unlicense'
 maintainer 'Gusztáv Varga'
 maintainer_email 'mail@gusztavvargadr.me'

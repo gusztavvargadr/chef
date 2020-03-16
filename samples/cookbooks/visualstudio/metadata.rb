@@ -1,7 +1,5 @@
 name 'gusztavvargadr_visualstudio'
 description 'Installs/Configures Visual Studio'
-long_description 'Installs/Configures Visual Studio'
-
 license 'Unlicense'
 maintainer 'Gusztáv Varga'
 maintainer_email 'mail@gusztavvargadr.me'
