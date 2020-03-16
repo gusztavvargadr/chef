@@ -11,6 +11,7 @@ default['gusztavvargadr_docker']['engine_community'] = {
   'powershell_packages' => {},
   'chocolatey_packages' => {
     'docker-desktop' => {
+      'version' => '2.2.0.4',
       'reboot' => 'true',
     },
   },
