@@ -1,7 +1,5 @@
 name 'gusztavvargadr_mssql'
 description 'Installs/Configures MSSQL'
-long_description 'Installs/Configures MSSQL'
-
 license 'Unlicense'
 maintainer 'Gusztáv Varga'
 maintainer_email 'mail@gusztavvargadr.me'

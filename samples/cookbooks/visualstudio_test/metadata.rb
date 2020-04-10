@@ -1,7 +1,5 @@
 name 'gusztavvargadr_visualstudio_test'
 description 'Tests Visual Studio'
-long_description 'Tests Visual Studio'
-
 license 'Unlicense'
 maintainer 'Gusztáv Varga'
 maintainer_email 'mail@gusztavvargadr.me'

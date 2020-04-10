@@ -1,7 +1,5 @@
 name 'gusztavvargadr_iis_test'
 description 'Tests IIS'
-long_description 'Tests IIS'
-
 license 'Unlicense'
 maintainer 'Gusztáv Varga'
 maintainer_email 'mail@gusztavvargadr.me'
