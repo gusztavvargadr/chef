@@ -1,0 +1,32 @@
+driver:
+  name: docker
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      socket: tcp://localhost:2375
+      dockerfile: ./Dockerfile
+      run_options: --isolation=process
+
+transport:
+  name: docker
+  socket: tcp://localhost:2375
+
+suites:
+  - name: environment-variables
+    run_list:
+      - recipe[gusztavvargadr_windows_test::environment_variables]
+    attributes:
+      gusztavvargadr_windows:
+        environment_variables:
+          TEST_USER:
+            value: Test User
+          TEST_MACHINE:
+            value: Test Machine
+            type: Machine
