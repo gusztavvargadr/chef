@@ -13,7 +13,7 @@ stages:
           displayName: Test ${{ option.cookbook }} ${{ join('-', option.suite) }}
 
           pool:
-            vmImage: ubuntu-16.04
+            vmImage: windows-2019
 
           workspace:
             clean: all
@@ -22,29 +22,28 @@ stages:
             - checkout: self
               submodules: recursive
 
-          # pool:
-          #   name: Default
-          #   demands:
-          #     - AZP_AGENT_CHEF
-          #     - AZP_AGENT_VAGRANT
+            - script: |
+                choco --version
+                docker version
 
-          # workspace:
-          #   clean: all
+                choco install chef-workstation --version 0.17.5 --confirm --no-progress
+                $env:CHEF_LICENSE='accept-silent'
 
-          # steps:
-          #   - checkout: self
-          #     submodules: recursive
+                chef --version
+              displayName: Init
 
-          #   - script: |
-          #       chef --version
-          #       vagrant version
-          #       vagrant plugin list
-          #     displayName: Init
+            - script: |
+                docker-compose pull chef-client-windows-ltsc2019
+                docker-compose run chef-client-windows-ltsc2019
 
-            # - script: |
-            #     cd samples/cookbooks/${{ option.cookbook }}_test
-            #     kitchen create ${{ join('-', option.suite) }} || kitchen create ${{ join('-', option.suite) }}
-            #   displayName: Restore
+                choco list -li
+                gci env:
+
+                chef --version
+              env:
+                KITCHEN_YAML: .kitchen.docker.yml
+                KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
+              displayName: Restore
 
             # - script: |
             #     cd samples/cookbooks/${{ option.cookbook }}_test
@@ -66,8 +65,8 @@ stages:
             #     kitchen verify ${{ join('-', option.suite) }}
             #   displayName: Test - 2 - Verify
 
-            # - script: |
-            #     cd samples/cookbooks/${{ option.cookbook }}_test
-            #     kitchen destroy ${{ join('-', option.suite) }} || kitchen destroy ${{ join('-', option.suite) }}
-            #   displayName: Clean
-            #   condition: always()
+            - script: |
+                cd samples/cookbooks/${{ option.cookbook }}_test
+                kitchen destroy ${{ join('-', option.suite) }}
+              displayName: Clean
+              condition: always()
