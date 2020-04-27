@@ -27,7 +27,7 @@ stages:
               displayName: Init
 
             - script: |
-                docker-compose pull chef-workstation-linux
+                docker-compose pull --quiet chef-workstation-linux
               displayName: Restore
 
             - script: |

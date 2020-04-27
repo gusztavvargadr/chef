@@ -71,7 +71,7 @@ stages:
               displayName: Docker Init
 
             - script: |
-                docker-compose pull chocolatey-cli-windows-ltsc2019
+                docker-compose pull --quiet chocolatey-cli-windows-ltsc2019
               displayName: Docker Restore
 
             - script: |

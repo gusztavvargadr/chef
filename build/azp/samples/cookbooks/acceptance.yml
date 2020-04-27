@@ -33,7 +33,7 @@ stages:
               displayName: Init
 
             - script: |
-                docker-compose pull chef-client-windows-ltsc2019
+                docker-compose pull --quiet chef-client-windows-ltsc2019
                 docker-compose run chef-client-windows-ltsc2019
 
                 choco list -li
