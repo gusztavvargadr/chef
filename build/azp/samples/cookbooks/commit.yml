@@ -27,11 +27,11 @@ stages:
               displayName: Init
 
             - script: |
-                docker-compose build chef-linux
+                docker-compose pull chef-client-linux
               displayName: Restore
 
             - script: |
-                docker-compose run chef-linux exec rspec samples/cookbooks/${{ option.cookbook }}_test
+                docker-compose run chef-client-linux exec rspec samples/cookbooks/${{ option.cookbook }}_test
               displayName: Test
 
             - script: |

@@ -34,12 +34,12 @@ stages:
               displayName: Docker Init
 
             - script: |
-                docker-compose build chocolatey
-                docker-compose build chef-client-windows
+                docker-compose pull chocolatey-cli-windows-ltsc2019
+                docker-compose pull chef-client-windows-ltsc2019
               displayName: Docker Restore
 
             - script: |
-                docker-compose run --workdir C:/opt/chef/.chef/policies/${{ option.directory }}/${{ option.policy }}/ chef-client-windows -z
+                docker-compose run --workdir C:/opt/chef/.chef/policies/${{ option.directory }}/${{ option.policy }}/ chef-client-windows-ltsc2019 -z
               displayName: Docker Test
 
             - script: |
@@ -73,12 +73,12 @@ stages:
               displayName: Docker Init
 
             - script: |
-                docker-compose build chocolatey
-                docker-compose build chef-client-windows
+                docker-compose pull chocolatey-cli-windows-ltsc2019
+                docker-compose pull chef-client-windows-ltsc2019
               displayName: Docker Restore
 
             - script: |
-                docker-compose run --entrypoint choco chef-client-windows install chef-policy --confirm --source ./.chocolatey/packages/
+                docker-compose run --entrypoint choco chef-client-windows-ltsc2019 install chef-policy --confirm --source ./.chocolatey/packages/
               displayName: Docker Test
 
             - script: |

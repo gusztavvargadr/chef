@@ -1,37 +1,68 @@
 version: '3'
 
 services:
-  chef-linux:
+  chef-client-linux:
+    image: gusztavvargadr/chef-client:linux
     build:
       context: ./build/docker/
-      dockerfile: ./chef-linux.Dockerfile
+      dockerfile: ./chef-client.linux.Dockerfile
     volumes:
       - ./:/opt/chef/
 
-  chef-client-linux:
+  chef-workstation-linux:
+    image: gusztavvargadr/chef-workstation:linux
     build:
       context: ./build/docker/
-      dockerfile: ./chef-client-linux.Dockerfile
+      dockerfile: ./chef-workstation.linux.Dockerfile
     volumes:
       - ./:/opt/chef/
-        
-  chocolatey:
+
+  chocolatey-cli-windows-ltsc2019:
+    image: gusztavvargadr/chocolatey-cli:windows-ltsc2019
     build:
       context: ./build/docker/
-      dockerfile: ./chocolatey.Dockerfile
+      dockerfile: ./chocolatey-cli.windows.Dockerfile
+      args:
+        TAG: 'ltsc2019'
     volumes:
       - ./:C:/opt/chocolatey/
 
-  chef-windows:
+  chef-client-windows-ltsc2019:
+    image: gusztavvargadr/chef-client:windows-ltsc2019
     build:
       context: ./build/docker/
-      dockerfile: ./chef-windows.Dockerfile
+      dockerfile: ./chef-client.windows.Dockerfile
+      args:
+        TAG: 'ltsc2019'
     volumes:
       - ./:C:/opt/chef/
 
-  chef-client-windows:
+  chef-workstation-windows-ltsc2019:
+    image: gusztavvargadr/chef-workstation:windows-ltsc2019
     build:
       context: ./build/docker/
-      dockerfile: ./chef-client-windows.Dockerfile
+      dockerfile: ./chef-workstation.windows.Dockerfile
+      args:
+        TAG: 'ltsc2019'
+    volumes:
+      - ./:C:/opt/chef/
+
+  chocolatey-cli-windows-1903:
+    image: gusztavvargadr/chocolatey-cli:windows-1903
+    build:
+      context: ./build/docker/
+      dockerfile: ./chocolatey-cli.windows.Dockerfile
+      args:
+        TAG: '1903'
+    volumes:
+      - ./:C:/opt/chocolatey/
+
+  chef-client-windows-1903:
+    image: gusztavvargadr/chef-client:windows-1903
+    build:
+      context: ./build/docker/
+      dockerfile: ./chef-client.windows.Dockerfile
+      args:
+        TAG: '1903'
     volumes:
       - ./:C:/opt/chef/

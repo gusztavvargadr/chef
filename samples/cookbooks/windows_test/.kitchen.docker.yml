@@ -17,8 +17,7 @@ verifier:
 platforms:
   - name: windows
     driver:
-      dockerfile: ./windows.Dockerfile
-      build_options: --build-arg TAG=<%= ENV['KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG'] %>
+      image: gusztavvargadr/chef-client:windows-<%= ENV['KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG'] %>
       run_options: --isolation process
 
 suites:

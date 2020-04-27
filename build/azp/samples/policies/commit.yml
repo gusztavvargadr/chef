@@ -28,11 +28,11 @@ stages:
               displayName: Docker Init
 
             - script: |
-                docker-compose build chef-linux
+                docker-compose pull chef-workstation-linux
               displayName: Docker Restore
 
             - script: |
-                docker-compose run --entrypoint "sh ./build/docker/chef.policy.export.sh" chef-linux ${{ option.directory }} ${{ option.policy }}
+                docker-compose run --entrypoint "sh ./build/docker/chef.policy.export.sh" chef-workstation-linux ${{ option.directory }} ${{ option.policy }}
               displayName: Docker Build
 
             - script: |
@@ -71,11 +71,11 @@ stages:
               displayName: Docker Init
 
             - script: |
-                docker-compose build chocolatey
+                docker-compose pull chocolatey-cli-windows-ltsc2019
               displayName: Docker Restore
 
             - script: |
-                docker-compose run --entrypoint "powershell -File ./build/docker/chocolatey.package.pack.ps1" chocolatey ${{ option.directory }} ${{ option.policy }}
+                docker-compose run --entrypoint "powershell -File ./build/docker/chocolatey.package.pack.ps1" chocolatey-cli-windows-ltsc2019 ${{ option.directory }} ${{ option.policy }}
               displayName: Docker Build
 
             - script: |
