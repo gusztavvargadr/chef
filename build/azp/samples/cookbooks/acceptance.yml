@@ -27,22 +27,18 @@ stages:
                 docker-compose version
                 docker container ls -a
                 docker image ls -a
-
-                choco --version
-
-                choco install chef-workstation --version 0.17.5 --confirm --no-progress
-                refreshenv
-              displayName: Init
+              displayName: Init Docker
 
             - script: |
-                docker-compose pull chocolatey-cli-windows-ltsc2019
-                docker-compose pull chef-client-windows-ltsc2019
-                docker-compose run chef-client-windows-ltsc2019
+                choco install chef-workstation --version 0.17.5 --confirm --no-progress
+                refreshenv
+              displayName: Init Chef Install
 
-                chef --version
+            - script: |
+                 chef --version
               env:
                 CHEF_LICENSE: accept-silent
-              displayName: Restore
+              displayName: Init Chef License
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
