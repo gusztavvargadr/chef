@@ -23,45 +23,39 @@ stages:
               submodules: recursive
 
             - script: |
-                choco --version
                 docker version
+                docker-compose version
+                docker container ls -a
+                docker image ls -a
+
+                choco --version
 
                 choco install chef-workstation --version 0.17.5 --confirm --no-progress
                 $env:CHEF_LICENSE='accept-silent'
-
-                # chef --version
               displayName: Init
 
             - script: |
                 docker-compose pull --quiet chef-client-windows-ltsc2019
                 docker-compose run chef-client-windows-ltsc2019
 
+                chef --version
+              displayName: Restore
+
+            - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                kitchen list ${{ join('-', option.suite) }}
+                kitchen create ${{ join('-', option.suite) }}
               env:
                 KITCHEN_YAML: .kitchen.docker.yml
                 KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
-              displayName: Restore
+              displayName: Create
 
-            # - script: |
-            #     cd samples/cookbooks/${{ option.cookbook }}_test
-            #     kitchen converge ${{ join('-', option.suite) }}
-            #   displayName: Test - 1 - Converge
-
-            # - script: |
-            #     cd samples/cookbooks/${{ option.cookbook }}_test
-            #     kitchen verify ${{ join('-', option.suite) }}
-            #   displayName: Test - 1 - Verify
-
-            # - script: |
-            #     cd samples/cookbooks/${{ option.cookbook }}_test
-            #     kitchen converge ${{ join('-', option.suite) }}
-            #   displayName: Test - 2 - Converge
-
-            # - script: |
-            #     cd samples/cookbooks/${{ option.cookbook }}_test
-            #     kitchen verify ${{ join('-', option.suite) }}
-            #   displayName: Test - 2 - Verify
+            - script: |
+                cd samples/cookbooks/${{ option.cookbook }}_test
+                kitchen test ${{ join('-', option.suite) }}
+              env:
+                KITCHEN_YAML: .kitchen.docker.yml
+                KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
+              displayName: Test
 
             - script: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
