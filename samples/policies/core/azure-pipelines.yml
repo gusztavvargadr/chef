@@ -8,8 +8,8 @@ stages:
           policy: init
         # - directory: core
         #   policy: prepare
-        - directory: core
-          policy: install
+        # - directory: core
+        #   policy: install
         # - directory: core
         #   policy: configure
 
@@ -20,7 +20,7 @@ stages:
           policy: init
         # - directory: core
         #   policy: prepare
-        - directory: core
-          policy: install
+        # - directory: core
+        #   policy: install
         # - directory: core
         #   policy: configure

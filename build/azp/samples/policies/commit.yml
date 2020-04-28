@@ -25,24 +25,26 @@ stages:
             - script: |
                 docker version
                 docker-compose version
-              displayName: Docker Init
+                docker container ls -a
+                docker image ls -a
+              displayName: Initialize Docker
 
             - script: |
-                docker-compose pull chef-workstation-linux
-              displayName: Docker Restore
+                docker-compose pull --quiet chef-workstation-linux
+              displayName: Restore Docker
 
             - script: |
                 docker-compose run --entrypoint "sh ./build/docker/chef.policy.export.sh" chef-workstation-linux ${{ option.directory }} ${{ option.policy }}
-              displayName: Docker Build
+              displayName: Run Docker
 
             - script: |
                 docker-compose down --rmi all
-              displayName: Docker Clean
+              displayName: Clean Docker
               condition: always()
 
             - publish: $(Build.SourcesDirectory)/.chef/
               artifact: build-${{ option.directory }}-${{ option.policy }}-chef
-              displayName: Artifacts Chef Publish
+              displayName: Publish Chef Artifacts
               condition: always()
 
         - job: build_${{ option.directory }}_${{ option.policy }}_chocolatey
@@ -68,22 +70,24 @@ stages:
             - script: |
                 docker version
                 docker-compose version
-              displayName: Docker Init
+                docker container ls -a
+                docker image ls -a
+              displayName: Initialize Docker
 
             - script: |
                 docker-compose pull --quiet chocolatey-cli-windows-ltsc2019
-              displayName: Docker Restore
+              displayName: Restore Docker
 
             - script: |
                 docker-compose run --entrypoint "powershell -File ./build/docker/chocolatey.package.pack.ps1" chocolatey-cli-windows-ltsc2019 ${{ option.directory }} ${{ option.policy }}
-              displayName: Docker Build
+              displayName: Run Docker
 
             - script: |
                 docker-compose down --rmi all
-              displayName: Docker Clean
+              displayName: Clean Docker
               condition: always()
 
             - publish: $(Build.SourcesDirectory)/.chocolatey/
               artifact: build-${{ option.directory }}-${{ option.policy }}-chocolatey
-              displayName: Artifacts Chocolatey Publish
+              displayName: Publish Chocolatey Artifacts
               condition: always()

@@ -26,17 +26,17 @@ stages:
                 docker-compose version
                 docker container ls -a
                 docker image ls -a
-              displayName: Init
+              displayName: Initialize Docker
 
             - script: |
                 docker-compose pull --quiet chef-workstation-linux
-              displayName: Restore
+              displayName: Restore Docker
 
             - script: |
                 docker-compose run chef-workstation-linux exec rspec samples/cookbooks/${{ option.cookbook }}_test
-              displayName: Test
+              displayName: Run Docker
 
             - script: |
                 docker-compose down --rmi all
-              displayName: Clean
+              displayName: Clean Docker
               condition: always()

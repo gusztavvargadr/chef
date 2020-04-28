@@ -66,3 +66,13 @@ services:
         TAG: '1903'
     volumes:
       - ./:C:/opt/chef/
+
+  chef-workstation-windows-1903:
+    image: gusztavvargadr/chef-workstation:windows-1903
+    build:
+      context: ./build/docker/
+      dockerfile: ./chef-workstation.windows.Dockerfile
+      args:
+        TAG: '1903'
+    volumes:
+      - ./:C:/opt/chef/
