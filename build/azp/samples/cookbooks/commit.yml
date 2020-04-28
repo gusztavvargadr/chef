@@ -24,6 +24,8 @@ stages:
             - script: |
                 docker version
                 docker-compose version
+                docker container ls -a
+                docker image ls -a
               displayName: Init
 
             - script: |

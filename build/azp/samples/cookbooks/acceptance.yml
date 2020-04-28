@@ -28,17 +28,19 @@ stages:
                 docker container ls -a
                 docker image ls -a
 
-                choco --version
-
-                choco install chef-workstation --version 0.17.5 --confirm --no-progress
-                $env:CHEF_LICENSE='accept-silent'
-              displayName: Init
-
-            - script: |
                 docker-compose pull --quiet chef-client-windows-ltsc2019
                 docker-compose run chef-client-windows-ltsc2019
 
+                choco --version
+
+                choco install chef-workstation --version 0.17.5 --confirm --no-progress
+                refreshenv
+              displayName: Init
+
+            - script: |
                 chef --version
+              env:
+                CHEF_LICENSE: accept-silent
               displayName: Restore
 
             - script: |
