@@ -31,16 +31,6 @@ stages:
 
             - powershell: |
                 choco install chef-workstation --version 0.17.5 --confirm --no-progress
-                refreshenv
-
-                choco list -li
-                gci env:
-              env:
-                CHEF_LICENSE: accept-silent
-              displayName: Init Chef
-
-            - powershell: |
-                ls -Recurse C:\opscode\
                 C:\opscode\chef-workstation\bin\chef-cli.bat --version
               env:
                 CHEF_LICENSE: accept-silent
