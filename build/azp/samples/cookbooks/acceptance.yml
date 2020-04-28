@@ -35,7 +35,7 @@ stages:
               displayName: Init Chef Install
 
             - script: |
-                 chef --version
+                 chef-cli.bat --version
               env:
                 CHEF_LICENSE: accept-silent
               displayName: Init Chef License
