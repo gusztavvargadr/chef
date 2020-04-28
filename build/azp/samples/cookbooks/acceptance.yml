@@ -22,25 +22,22 @@ stages:
             - checkout: self
               submodules: recursive
 
-            - script: |
+            - powershell: |
                 docker version
                 docker-compose version
                 docker container ls -a
                 docker image ls -a
               displayName: Init Docker
 
-            - script: |
+            - powershell: |
                 choco install chef-workstation --version 0.17.5 --confirm --no-progress
                 refreshenv
-              displayName: Init Chef Install
-
-            - script: |
-                 C:\opscode\chef-workstation\chef-cli.bat --version
+                chef --version
               env:
                 CHEF_LICENSE: accept-silent
-              displayName: Init Chef License
+              displayName: Init Chef
 
-            - script: |
+            - powershell: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
                 C:\opscode\chef-workstation\kitchen.bat create ${{ join('-', option.suite) }}
               env:
@@ -48,7 +45,7 @@ stages:
                 KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
               displayName: Create Kitchen
 
-            - script: |
+            - powershell: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
                 C:\opscode\chef-workstation\kitchen.bat test ${{ join('-', option.suite) }}
               env:
@@ -56,7 +53,7 @@ stages:
                 KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
               displayName: Test Kitchen
 
-            - script: |
+            - powershell: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
                 C:\opscode\chef-workstation\kitchen.bat destroy ${{ join('-', option.suite) }}
               displayName: Clean Kitchen
