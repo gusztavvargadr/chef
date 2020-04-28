@@ -32,14 +32,23 @@ stages:
             - powershell: |
                 choco install chef-workstation --version 0.17.5 --confirm --no-progress
                 refreshenv
-                chef --version
+
+                choco list -li
+                gci env:
+              env:
+                CHEF_LICENSE: accept-silent
+              displayName: Init Chef
+
+            - powershell: |
+                ls -Recurse C:\opscode\
+                C:\opscode\chef-workstation\bin\chef-cli.bat --version
               env:
                 CHEF_LICENSE: accept-silent
               displayName: Init Chef
 
             - powershell: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                C:\opscode\chef-workstation\kitchen.bat create ${{ join('-', option.suite) }}
+                C:\opscode\chef-workstation\bin\kitchen.bat create ${{ join('-', option.suite) }}
               env:
                 KITCHEN_YAML: .kitchen.docker.yml
                 KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
@@ -47,7 +56,7 @@ stages:
 
             - powershell: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                C:\opscode\chef-workstation\kitchen.bat test ${{ join('-', option.suite) }}
+                C:\opscode\chef-workstation\bin\kitchen.bat test ${{ join('-', option.suite) }}
               env:
                 KITCHEN_YAML: .kitchen.docker.yml
                 KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
@@ -55,6 +64,6 @@ stages:
 
             - powershell: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
-                C:\opscode\chef-workstation\kitchen.bat destroy ${{ join('-', option.suite) }}
+                C:\opscode\chef-workstation\bin\kitchen.bat destroy ${{ join('-', option.suite) }}
               displayName: Clean Kitchen
               condition: always()
