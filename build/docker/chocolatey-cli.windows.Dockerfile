@@ -8,5 +8,5 @@ RUN powershell -File .\chocolatey-cli.ps1
 
 RUN choco config set cacheLocation C:\tmp\choco
 
-ENTRYPOINT [ "choco" ]
-CMD [ "--help" ]
+# ENTRYPOINT [ "choco" ]
+# CMD [ "--help" ]

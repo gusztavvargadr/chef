@@ -1,0 +1,9 @@
+trigger: none
+pr: none
+
+stages:
+  - template: ./docker.commit.yml
+    parameters:
+      configurations:
+        - name: chocolatey_cli_2019
+          service: chocolatey-cli-2019

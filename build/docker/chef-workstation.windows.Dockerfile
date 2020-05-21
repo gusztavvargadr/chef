@@ -8,5 +8,5 @@ RUN powershell -File .\chef-workstation.ps1
 
 ENV CHEF_LICENSE accept-silent
 
-ENTRYPOINT [ "chef-cli.bat" ]
-CMD [ "--help" ]
+# ENTRYPOINT [ "chef-cli.bat" ]
+# CMD [ "--help" ]

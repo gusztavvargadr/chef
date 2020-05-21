@@ -1,0 +1,43 @@
+parameters:
+  configurations: []
+    # - name: name
+    #   service: service
+
+stages:
+  - stage: commit
+    displayName: Commit
+
+    jobs:
+      - ${{ each configuration in parameters.configurations }}:
+        - job: build_${{ configuration.name }}
+          displayName: Build ${{ configuration.service }}
+
+          pool:
+            vmImage: windows-2019
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - script: |
+                docker version
+                docker-compose version
+                docker container ls -a
+                docker image ls -a
+              displayName: Initialize Docker
+
+            - script: |
+                docker-compose build ${{ configuration.service }}
+              displayName: Build
+
+            - script: |
+                docker-compose run ${{ configuration.service }}
+              displayName: Test
+
+            - script: |
+                docker-compose down --rmi all
+              displayName: Clean
+              condition: always()
