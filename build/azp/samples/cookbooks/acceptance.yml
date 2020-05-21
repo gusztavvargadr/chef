@@ -28,7 +28,7 @@ stages:
                 docker container ls -a
                 docker image ls -a
 
-                type C:\ProgramData\Docker\config\daemon.json
+                dir C:\ProgramData\Docker\config /s
               displayName: Initialize Docker
 
             # - script: |
