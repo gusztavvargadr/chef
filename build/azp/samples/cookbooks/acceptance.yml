@@ -27,14 +27,16 @@ stages:
                 docker-compose version
                 docker container ls -a
                 docker image ls -a
-              displayName: Init Docker
+              displayName: Initialize Docker
 
             - powershell: |
                 choco install chef-workstation --version 0.17.5 --confirm --no-progress
                 C:\opscode\chef-workstation\bin\chef-cli.bat --version
+                C:\opscode\chef-workstation\bin\chef-cli.bat gem build ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
+                C:\opscode\chef-workstation\bin\chef-cli.bat gem install ./lib/test-kitchen/kitchen-docker/kitchen-docker-2.10.0.gem
               env:
                 CHEF_LICENSE: accept-silent
-              displayName: Init Chef
+              displayName: Initialize Chef
 
             - powershell: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
@@ -55,5 +57,8 @@ stages:
             - powershell: |
                 cd samples/cookbooks/${{ option.cookbook }}_test
                 C:\opscode\chef-workstation\bin\kitchen.bat destroy ${{ join('-', option.suite) }}
+              env:
+                KITCHEN_YAML: .kitchen.docker.yml
+                KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
               displayName: Clean Kitchen
               condition: always()
