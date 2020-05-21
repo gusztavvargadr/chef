@@ -32,7 +32,7 @@ stages:
             - powershell: |
                 choco install chef-workstation --version 0.17.5 --confirm --no-progress
                 C:\opscode\chef-workstation\bin\chef-cli.bat --version
-                C:\opscode\chef-workstation\bin\chef-cli.bat gem build ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
+                C:\opscode\chef-workstation\bin\chef-cli.bat gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
                 C:\opscode\chef-workstation\bin\chef-cli.bat gem install ./lib/test-kitchen/kitchen-docker/kitchen-docker-2.10.0.gem
               env:
                 CHEF_LICENSE: accept-silent
