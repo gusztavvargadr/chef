@@ -5,5 +5,7 @@ stages:
   - template: ./docker.commit.yml
     parameters:
       configurations:
-        - name: chocolatey_cli_2019
-          service: chocolatey-cli-2019
+        - name: chocolatey_cli_windows_1903
+          service: chocolatey-cli-windows-1903
+        - name: chocolatey_cli_windows_ltsc2019
+          service: chocolatey-cli-windows-ltsc2019
