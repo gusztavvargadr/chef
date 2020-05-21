@@ -34,7 +34,7 @@ stages:
                 C:\opscode\chef-workstation\bin\chef-cli.bat --version
 
                 gci env:
-                refreshenv
+                Update-SessionEnvironment
                 gci env:
 
                 C:\opscode\chef-workstation\bin\chef-cli.bat gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
