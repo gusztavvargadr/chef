@@ -30,13 +30,13 @@ stages:
 
             - script: |
                 docker-compose pull --quiet chef-workstation-linux
-              displayName: Restore Docker
+              displayName: Restore
 
             - script: |
                 docker-compose run chef-workstation-linux exec rspec samples/cookbooks/${{ option.cookbook }}_test
-              displayName: Run Docker
+              displayName: Test
 
             - script: |
                 docker-compose down --rmi all
-              displayName: Clean Docker
+              displayName: Clean
               condition: always()

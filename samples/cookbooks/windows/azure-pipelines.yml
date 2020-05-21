@@ -11,15 +11,15 @@ stages:
       options:
         - cookbook: windows
           suite: chocolatey
-        # - cookbook: windows
-        #   suite: environment
-        # - cookbook: windows
-        #   suite: features
-        # - cookbook: windows
-        #   suite: files
-        # - cookbook: windows
-        #   suite: native
-        # - cookbook: windows
-        #   suite: node
-        # - cookbook: windows
-        #   suite: updates
+        - cookbook: windows
+          suite: environment
+        - cookbook: windows
+          suite: features
+        - cookbook: windows
+          suite: files
+        - cookbook: windows
+          suite: native
+        - cookbook: windows
+          suite: node
+        - cookbook: windows
+          suite: updates
