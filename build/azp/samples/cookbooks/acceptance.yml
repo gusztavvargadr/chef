@@ -49,6 +49,7 @@ stages:
               displayName: Create Kitchen
 
             - script: |
+                call refreshenv.cmd
                 cd samples/cookbooks/${{ option.cookbook }}_test
                 kitchen test ${{ join('-', option.suite) }}
               env:
