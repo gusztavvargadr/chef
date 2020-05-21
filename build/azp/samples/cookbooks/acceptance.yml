@@ -33,6 +33,10 @@ stages:
                 choco install chef-workstation --version 0.17.5 --confirm --no-progress
                 C:\opscode\chef-workstation\bin\chef-cli.bat --version
 
+                gci env:
+                refreshenv
+                gci env:
+
                 C:\opscode\chef-workstation\bin\chef-cli.bat gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
                 C:\opscode\chef-workstation\bin\chef-cli.bat gem install --force ./lib/test-kitchen/kitchen-docker/kitchen-docker-2.10.0.gem
               env:
