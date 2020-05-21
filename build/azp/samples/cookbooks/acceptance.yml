@@ -47,6 +47,8 @@ stages:
                 refreshenv
                 gci env:
                 chef --version
+              env:
+                CHEF_LICENSE: accept-silent
               displayName: Initialize Kitchen
 
             - powershell: |
