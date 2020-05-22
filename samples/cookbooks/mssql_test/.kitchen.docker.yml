@@ -1,8 +1,15 @@
 driver:
-  name: vagrant
+  name: docker
+  wait_for_transport: false
+
+transport:
+  name: docker
+  socket: tcp://localhost:2375
 
 provisioner:
   name: chef_zero
+  # product_name: chef
+  # install_strategy: skip
 
 verifier:
   name: inspec
@@ -10,8 +17,8 @@ verifier:
 platforms:
   - name: windows
     driver:
-      vagrantfiles:
-        - ../vagrant.windows-server.rb
+      image: gusztavvargadr/chef-client:windows-<%= ENV['KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG'] %>
+      run_options: --isolation process
 
 suites:
   - name: 2017-developer

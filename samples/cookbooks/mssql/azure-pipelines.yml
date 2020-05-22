@@ -1,14 +1,17 @@
+trigger: none
 pr: none
 
 stages:
   - template: ../../../build/azp/samples/cookbooks/commit.yml
     parameters:
       options:
-        - cookbook: docker
+        - cookbook: mssql
 
   - template: ../../../build/azp/samples/cookbooks/acceptance.yml
     parameters:
       options:
+        - cookbook: mssql
+          suite: [ '2017', 'developer' ]
         - cookbook: mssql
           suite: [ '2019', 'developer' ]
         - cookbook: mssql

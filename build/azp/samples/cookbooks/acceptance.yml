@@ -35,10 +35,7 @@ stages:
               displayName: Initialize Docker CLI
 
             - script: |
-                dir C:\ProgramData\Docker\config /s
                 echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
-                dir C:\ProgramData\Docker\config /s
-
                 net stop docker
                 net start docker
               displayName: Initialize Docker Engine
