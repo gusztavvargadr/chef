@@ -32,11 +32,11 @@ stages:
             - ${{ each service in configuration.services }}:
               - script: |
                   docker-compose build ${{ service }}
-                displayName: Build
+                displayName: Build ${{ service }}
 
               - script: |
                   docker-compose run ${{ service }}
-                displayName: Test
+                displayName: Test ${{ service }}
 
             - script: |
                 docker-compose down --rmi all
