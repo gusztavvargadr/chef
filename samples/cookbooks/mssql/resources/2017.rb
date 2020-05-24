@@ -47,12 +47,15 @@ action :install do
     action :run
   end
 
-  # powershell_script 'Enable Firewall' do
-  #   code <<-EOH
-  #    netsh advfirewall firewall add rule name="SQL Server" dir=in localport=1433 protocol=TCP action=allow
-  #   EOH
-  #   action :run
-  # end
+  service_list = powershell_out('Get-Service | Where { $_.Name -eq "mpssvc" } | Where { $_.Status -eq "Running" }').stdout
+  return if service_list.strip.empty?
+
+  powershell_script 'Enable Firewall' do
+    code <<-EOH
+     netsh advfirewall firewall add rule name="SQL Server" dir=in localport=1433 protocol=TCP action=allow
+    EOH
+    action :run
+  end
 end
 
 action :patch do

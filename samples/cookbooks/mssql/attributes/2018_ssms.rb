@@ -7,7 +7,7 @@ default['gusztavvargadr_mssql']['2018_ssms'] = {
         '/quiet',
         '/norestart',
       ],
-      'executable' => 'C:/Program Files (x86)/Microsoft SQL Server/150/Tools/Binn/ManagementStudio/Ssms.exe',
+      'executable' => 'C:/Program Files (x86)/Microsoft SQL Server Management Studio 18/Common7/IDE/Ssms.exe',
       'elevated' => true,
     },
   },
