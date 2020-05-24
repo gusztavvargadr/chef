@@ -29,7 +29,7 @@ stages:
                 docker image ls -a
               displayName: Initialize Docker
 
-            - ${{ each service in confoguration.services }}:
+            - ${{ each service in configuration.services }}:
               - script: |
                   docker-compose build ${{ service }}
                 displayName: Build
