@@ -10,7 +10,7 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - job: build_${{ configuration.name }}
-          displayName: Build ${{ configuration.service }}
+          displayName: Build ${{ configuration.displayName }}
 
           pool:
             vmImage: windows-2019
@@ -29,13 +29,14 @@ stages:
                 docker image ls -a
               displayName: Initialize Docker
 
-            - script: |
-                docker-compose build ${{ configuration.service }}
-              displayName: Build
+            - ${{ each service in confoguration.services }}:
+              - script: |
+                  docker-compose build ${{ service }}
+                displayName: Build
 
-            - script: |
-                docker-compose run ${{ configuration.service }}
-              displayName: Test
+              - script: |
+                  docker-compose run ${{ service }}
+                displayName: Test
 
             - script: |
                 docker-compose down --rmi all
