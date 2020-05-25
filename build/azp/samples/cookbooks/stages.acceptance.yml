@@ -1,0 +1,76 @@
+parameters:
+  configurations: []
+    # - cookbook: cookbook
+    #   driver: driver
+    #   platform: platform
+    #   suites: [ 'suite1', 'suite2' ]
+
+stages:
+  - stage: acceptance
+    displayName: Acceptance
+
+    jobs:
+      - ${{ each configuration in parameters.configurations }}:
+        - ${{ each suite in configuration.suites }}:
+          - job: test_${{ configuration.cookbook }}_${{ join('_', suite.name) }}
+            displayName: Test ${{ option.cookbook }} ${{ join('-', suite.name) }}
+
+            ${{ if eq(configuration.driver, 'vagrant') }}:
+              pool:
+                name: Default
+                demands:
+                  - AZP_AGENT_CHEF -equals workstation
+                  - AZP_AGENT_VAGRANT
+            ${{ if eq(configuration.driver, 'docker') }}:
+              pool:
+                vmImage: windows-2019
+
+            workspace:
+              clean: all
+
+            steps:
+              - checkout: self
+                submodules: recursive
+
+              - script: |
+                  docker version
+                  docker-compose version
+                  docker container ls -a
+                  docker image ls -a
+                displayName: Initialize Docker CLI
+
+              - ${{ if eq(configuration.driver, 'docker') }}:
+                - script: |
+                    echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
+                    net stop docker
+                    net start docker
+                  displayName: Initialize Docker Engine
+
+                - script: |
+                    choco install chef-workstation --version 0.17.5 --confirm --no-progress
+                    call refreshenv.cmd
+                    chef --version
+                    chef gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
+                    chef gem install --force ./lib/test-kitchen/kitchen-docker/kitchen-docker-2.10.0.gem
+                  env:
+                    CHEF_LICENSE: accept-silent
+                  displayName: Initialize Chef
+
+              - script: |
+                  call refreshenv.cmd
+                  cd samples/cookbooks/${{ option.cookbook }}_test
+                  kitchen test ${{ join('-', option.suite) }}
+                env:
+                  KITCHEN_YAML: .kitchen.${{ configuration.driver }}.yml
+                  KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
+                displayName: Test
+
+              - script: |
+                  call refreshenv.cmd
+                  cd samples/cookbooks/${{ option.cookbook }}_test
+                  kitchen destroy ${{ join('-', option.suite) }}
+                env:
+                  KITCHEN_YAML: .kitchen.${{ configuration.driver }}.yml
+                  KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
+                displayName: Clean
+                condition: always()

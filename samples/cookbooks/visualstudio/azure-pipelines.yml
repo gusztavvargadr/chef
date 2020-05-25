@@ -1,13 +1,13 @@
+trigger: none
 pr: none
 
 stages:
-  - template: ../../../build/azp/samples/cookbooks/commit.yml
+  - template: ../../../build/azp/samples/cookbooks/stages.yml
     parameters:
-      options:
-        - cookbook: visualstudio
-
-  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
-    parameters:
-      options:
-        - cookbook: visualstudio
-          suite: [ '2019', 'community' ]
+      configurations:
+        - cookbook: iis
+          driver: docker
+          platform: windows
+          suites:
+            - name: [ '2017', 'community' ]
+            - name: [ '2019', 'community' ]

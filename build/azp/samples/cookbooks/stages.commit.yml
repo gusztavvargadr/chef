@@ -1,15 +1,18 @@
 parameters:
-  options: []
-    # - cookbook: cookbook-name
+  configurations: []
+    # - cookbook: cookbook
+    #   driver: driver
+    #   platform: platform
+    #   suites: [ 'suite1', 'suite2' ]
 
 stages:
   - stage: commit
     displayName: Commit
 
     jobs:
-      - ${{ each option in parameters.options }}:
-        - job: build_${{ option.cookbook }}
-          displayName: Build ${{ option.cookbook }}
+      - ${{ each configuration in parameters.configurations }}:
+        - job: build_${{ configuration.cookbook }}
+          displayName: Build ${{ configuration.cookbook }}
 
           pool:
             vmImage: ubuntu-16.04
@@ -33,7 +36,7 @@ stages:
               displayName: Restore
 
             - script: |
-                docker-compose run chef-workstation-linux exec rspec samples/cookbooks/${{ option.cookbook }}_test
+                docker-compose run chef-workstation-linux exec rspec samples/cookbooks/${{ configuration.cookbook }}_test
               displayName: Test
 
             - script: |
