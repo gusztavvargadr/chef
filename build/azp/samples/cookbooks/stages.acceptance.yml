@@ -21,6 +21,7 @@ stages:
                 demands:
                   - AZP_AGENT_CHEF -equals workstation
                   - AZP_AGENT_VAGRANT
+
             ${{ if eq(configuration.driver, 'docker') }}:
               pool:
                 vmImage: windows-2019
@@ -32,14 +33,21 @@ stages:
               - checkout: self
                 submodules: recursive
 
-              - script: |
-                  docker version
-                  docker-compose version
-                  docker container ls -a
-                  docker image ls -a
-                displayName: Initialize Docker CLI
+              - ${{ if eq(configuration.driver, 'vagrant') }}:
+                - script: |
+                    vagrant --version
+                    vagrant box list
+                    vagrant global-status --prune
+                  displayName: Initialize Vagrant
 
               - ${{ if eq(configuration.driver, 'docker') }}:
+                - script: |
+                    docker version
+                    docker-compose version
+                    docker container ls -a
+                    docker image ls -a
+                  displayName: Initialize Docker CLI
+
                 - script: |
                     echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
                     net stop docker
