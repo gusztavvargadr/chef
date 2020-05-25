@@ -6,7 +6,7 @@ stages:
     parameters:
       configurations:
         - cookbook: visualstudio
-          driver: docker
+          driver: vagrant
           platform: windows
           suites:
             - name: [ '2017', 'community' ]
