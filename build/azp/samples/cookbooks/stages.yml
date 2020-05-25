@@ -6,10 +6,10 @@ parameters:
     #   suites: [ 'suite1', 'suite2' ]
 
 stages:
-  - template: ../../../build/azp/samples/cookbooks/stages.commit.yml
+  - template: ./stages.commit.yml
     parameters:
       configurations: ${{ parameters.configurations }}
 
-  - template: ../../../build/azp/samples/cookbooks/stages.acceptance.yml
+  - template: ./stages.acceptance.yml
     parameters:
       configurations: ${{ parameters.configurations }}
