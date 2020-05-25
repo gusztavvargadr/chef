@@ -2,13 +2,11 @@ trigger: none
 pr: none
 
 stages:
-  - template: ../../../build/azp/samples/cookbooks/commit.yml
+  - template: ../../../build/azp/samples/cookbooks/stages.yml
     parameters:
-      options:
+      configurations:
         - cookbook: vagrant
-
-  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
-    parameters:
-      options:
-        - cookbook: vagrant
-          suite: cli
+          driver: docker
+          platform: windows
+          suites:
+            - name: cli
