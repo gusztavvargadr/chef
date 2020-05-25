@@ -58,8 +58,8 @@ stages:
 
               - script: |
                   call refreshenv.cmd
-                  cd samples/cookbooks/${{ option.cookbook }}_test
-                  kitchen test ${{ join('-', option.suite) }}
+                  cd samples/cookbooks/${{ configuration.cookbook }}_test
+                  kitchen test ${{ join('-', suite.name) }}
                 env:
                   KITCHEN_YAML: .kitchen.${{ configuration.driver }}.yml
                   KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
@@ -67,8 +67,8 @@ stages:
 
               - script: |
                   call refreshenv.cmd
-                  cd samples/cookbooks/${{ option.cookbook }}_test
-                  kitchen destroy ${{ join('-', option.suite) }}
+                  cd samples/cookbooks/${{ configuration.cookbook }}_test
+                  kitchen destroy ${{ join('-', suite.name) }}
                 env:
                   KITCHEN_YAML: .kitchen.${{ configuration.driver }}.yml
                   KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
