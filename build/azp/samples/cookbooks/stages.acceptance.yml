@@ -13,7 +13,7 @@ stages:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each suite in configuration.suites }}:
           - job: test_${{ configuration.cookbook }}_${{ join('_', suite.name) }}
-            displayName: Test ${{ option.cookbook }} ${{ join('-', suite.name) }}
+            displayName: Test ${{ configuration.cookbook }} ${{ join('-', suite.name) }}
 
             ${{ if eq(configuration.driver, 'vagrant') }}:
               pool:
