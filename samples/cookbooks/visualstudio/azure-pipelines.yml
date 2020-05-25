@@ -5,7 +5,7 @@ stages:
   - template: ../../../build/azp/samples/cookbooks/stages.yml
     parameters:
       configurations:
-        - cookbook: iis
+        - cookbook: visualstudio
           driver: docker
           platform: windows
           suites:
