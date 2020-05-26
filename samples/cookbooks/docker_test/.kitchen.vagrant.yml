@@ -10,11 +10,14 @@ verifier:
 platforms:
   - name: windows
     driver:
+      box: gusztavvargadr/windows-server
       vagrantfiles:
-        - ../vagrant.windows-server.rb
+        - ../vagrant.rb
 
 suites:
   - name: engine-community
+    driver:
+      box: gusztavvargadr/windows-10
     run_list:
       - recipe[gusztavvargadr_docker_test::engine_community]
 
@@ -26,9 +29,8 @@ suites:
     run_list:
       - recipe[gusztavvargadr_docker_test::images]
     attributes:
+      gusztavvargadr_windows:
+        ignore_reboot: true
       gusztavvargadr_docker:
         images:
           hello-world:
-    driver:
-      vagrantfiles:
-        - ../vagrant.docker-windows.rb

@@ -1,10 +1,10 @@
 default['gusztavvargadr_docker']['engine_enterprise'] = {
   'features' => {
     'Containers' => {
-      'reboot' => 'true',
+      'reboot' => true,
     },
     'Hyper-V' => {
-      'reboot' => 'true',
+      'reboot' => true,
     },
   },
   'powershell_modules' => {
@@ -15,9 +15,10 @@ default['gusztavvargadr_docker']['engine_enterprise'] = {
       'provider' => 'DockerMsftProvider',
     },
   },
+  'native_packages' => {},
   'chocolatey_packages' => {
     'docker-compose' => {
-      'version' => '1.25.4',
+      'version' => '1.25.5',
     },
     'docker-machine' => {
       'version' => '0.16.2',

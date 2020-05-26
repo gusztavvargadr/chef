@@ -1,3 +1,1 @@
-gusztavvargadr_docker_engine 'enterprise' do
-  action [:prepare, :install]
-end
+include_recipe 'gusztavvargadr_docker::engine_enterprise'
