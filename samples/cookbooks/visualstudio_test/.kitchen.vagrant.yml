@@ -10,6 +10,7 @@ verifier:
 platforms:
   - name: windows
     driver:
+      box: gusztavvargadr/windows-server
       vagrantfiles:
         - ../vagrant.rb
 

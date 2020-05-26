@@ -1,4 +1,14 @@
-trigger: none
+trigger:
+  branches:
+    include:
+      - '*'
+  tags:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/iis
+      - samples/cookbooks/iis_test
 pr: none
 
 stages:

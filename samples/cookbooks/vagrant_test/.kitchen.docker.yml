@@ -24,3 +24,6 @@ suites:
   - name: cli
     run_list:
       - recipe[gusztavvargadr_vagrant_test::cli]
+    attributes:
+      gusztavvargadr_windows:
+        ignore_reboot: true

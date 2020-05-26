@@ -1,4 +1,14 @@
-trigger: none
+trigger:
+  branches:
+    include:
+      - '*'
+  tags:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/vagrant
+      - samples/cookbooks/vagrant_test
 pr: none
 
 stages:

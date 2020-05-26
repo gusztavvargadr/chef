@@ -29,7 +29,7 @@ VagrantDeployment.defaults_include(
   'service' => 'cookbooks',
   'component' => 'kitchen',
   'machines' => {
-    'default' => VagrantWindowsServerMachine.defaults,
+    'default' => {},
   }
 )
 
