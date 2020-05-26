@@ -1,4 +1,14 @@
-trigger: none
+trigger:
+  branches:
+    include:
+      - '*'
+  tags:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/visualstudio
+      - samples/cookbooks/visualstudio_test
 pr: none
 
 stages:
@@ -10,4 +20,6 @@ stages:
           platform: windows
           suites:
             - name: [ '2017', 'community' ]
+            - name: [ '2017', 'professional' ]
             - name: [ '2019', 'community' ]
+            - name: [ '2019', 'professional' ]
