@@ -6,11 +6,11 @@ require "#{directory}/../../lib/gusztavvargadr/vagrant/samples/vagrant"
 VagrantMachine.defaults_include(
   'providers' => {
     'virtualbox' => {
-      'memory' => 2048,
+      'memory' => 4096,
       'cpus' => 2,
     },
     'hyperv' => {
-      'memory' => 2048,
+      'memory' => 4096,
       'cpus' => 2,
     },
     'azure' => {
@@ -27,4 +27,10 @@ VagrantMachine.defaults_include(
 VagrantDeployment.defaults_include(
   'stack' => 'chef-samples',
   'service' => 'cookbooks',
+  'component' => 'kitchen',
+  'machines' => {
+    'default' => VagrantWindowsServerMachine.defaults,
+  }
 )
+
+VagrantDeployment.configure(directory)

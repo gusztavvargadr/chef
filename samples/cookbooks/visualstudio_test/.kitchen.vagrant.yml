@@ -11,7 +11,7 @@ platforms:
   - name: windows
     driver:
       vagrantfiles:
-        - ../vagrant.windows-server.rb
+        - ../vagrant.rb
 
 suites:
   - name: 2017-community
