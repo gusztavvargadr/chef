@@ -56,7 +56,7 @@ stages:
                   displayName: Initialize Docker Engine
 
                 - script: |
-                    choco install chef-workstation --version 0.17.5 --confirm --no-progress
+                    choco install chef-workstation --version 0.18.3 --confirm --no-progress
                     call refreshenv.cmd
                     chef --version
                     chef gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec

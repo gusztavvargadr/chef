@@ -12,7 +12,7 @@ default['gusztavvargadr_docker']['engine_community'] = {
   'native_packages' => {},
   'chocolatey_packages' => {
     'docker-desktop' => {
-      'version' => '2.3.0.2',
+      'version' => '2.3.0.3',
       'reboot' => true,
     },
     'docker-machine' => {
