@@ -1,13 +1,22 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  tags:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/iis
+      - samples/cookbooks/iis_test
 pr: none
 
 stages:
-  - template: ../../../build/azp/samples/cookbooks/commit.yml
+  - template: ../../../build/azp/samples/cookbooks/stages.yml
     parameters:
-      options:
+      configurations:
         - cookbook: iis
-
-  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
-    parameters:
-      options:
-        - cookbook: iis
-          suite: server
+          driver: docker
+          platform: windows
+          suites:
+            - name: server

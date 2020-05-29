@@ -1,3 +1,1 @@
-gusztavvargadr_vagrant_cli '' do
-  action :install
-end
+include_recipe 'gusztavvargadr_vagrant::cli'

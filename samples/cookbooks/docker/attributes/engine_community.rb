@@ -1,18 +1,22 @@
 default['gusztavvargadr_docker']['engine_community'] = {
   'features' => {
     'Containers' => {
-      'reboot' => 'true',
+      'reboot' => true,
     },
     'Hyper-V' => {
-      'reboot' => 'true',
+      'reboot' => true,
     },
   },
   'powershell_modules' => {},
   'powershell_packages' => {},
+  'native_packages' => {},
   'chocolatey_packages' => {
     'docker-desktop' => {
-      'version' => '2.2.0.4',
-      'reboot' => 'true',
+      'version' => '2.3.0.2',
+      'reboot' => true,
+    },
+    'docker-machine' => {
+      'version' => '0.16.2',
     },
   },
 }

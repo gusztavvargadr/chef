@@ -1,14 +1,14 @@
 property :edition, String, name_property: true
 
 action :install do
-  directory_path = "#{Chef::Config[:file_cache_path]}/gusztavvargadr_mssql/2019_#{new_resource.edition}"
+  directory_path = "C:/tmp/chef/gusztavvargadr_mssql/2019_#{new_resource.edition}"
 
   directory directory_path do
     recursive true
     action :create
   end
 
-  configuration_file_name = 'configuration.ini'
+  configuration_file_name = 'install.ini'
   configuration_file_path = "#{directory_path}/#{configuration_file_name}"
   configuration_file_source = '2019.ini'
   cookbook_file configuration_file_path do
@@ -17,32 +17,38 @@ action :install do
     action :create
   end
 
-  installer_iso_name = 'installer.iso'
-  installer_iso_path = "#{directory_path}/#{installer_iso_name}"
-  installer_iso_source = node['gusztavvargadr_mssql']["2019_#{new_resource.edition}"]['installer_iso_url']
-  remote_file installer_iso_path do
-    source installer_iso_source
+  download_file_name = 'install.iso'
+  download_file_path = "#{directory_path}/#{download_file_name}"
+  download_file_source = node['gusztavvargadr_mssql']["2019_#{new_resource.edition}"]['install_file_url']
+  remote_file download_file_path do
+    source download_file_source
     action :create
   end
 
-  extracted_directory_path = 'I:'
-  gusztavvargadr_windows_iso installer_iso_path do
-    iso_drive_letter 'I'
-    action :mount
+  extract_directory_path = "#{directory_path}/install"
+  directory extract_directory_path do
+    recursive true
+    action [:delete, :create]
   end
 
-  extracted_installer_file_name = 'SETUP.EXE'
-  extracted_installer_file_path = "#{extracted_directory_path}/#{extracted_installer_file_name}"
-  gusztavvargadr_windows_powershell_script_elevated "Install SQL Server 2019 #{new_resource.edition}" do
+  powershell_script "Extract SQL Server 2019 #{new_resource.edition} Install" do
     code <<-EOH
-      Start-Process "#{extracted_installer_file_path.tr('/', '\\')}" "/CONFIGURATIONFILE=#{configuration_file_path.tr('/', '\\')} /IACCEPTSQLSERVERLICENSETERMS" -Wait
+      7z x #{download_file_path.tr('/', '\\')}
     EOH
+    cwd extract_directory_path
     action :run
   end
 
-  gusztavvargadr_windows_iso installer_iso_path do
-    action :dismount
+  gusztavvargadr_windows_powershell_script_elevated "Execute SQL Server 2019 #{new_resource.edition} Install" do
+    code <<-EOH
+      Start-Process "setup.exe" "/CONFIGURATIONFILE=#{configuration_file_path.tr('/', '\\')} /IACCEPTSQLSERVERLICENSETERMS" -Wait
+    EOH
+    cwd extract_directory_path
+    action :run
   end
+
+  service_list = powershell_out('Get-Service | Where { $_.Name -eq "mpssvc" } | Where { $_.Status -eq "Running" }').stdout
+  return if service_list.strip.empty?
 
   powershell_script 'Enable Firewall' do
     code <<-EOH
@@ -53,33 +59,40 @@ action :install do
 end
 
 action :patch do
-  directory_path = "#{Chef::Config[:file_cache_path]}/gusztavvargadr_mssql/2019_#{new_resource.edition}"
+  directory_path = "C:/tmp/chef/gusztavvargadr_mssql/2019_#{new_resource.edition}"
 
   directory directory_path do
     recursive true
     action :create
   end
 
-  patch_file_path = "#{directory_path}/patch.exe"
-  patch_file_source = node['gusztavvargadr_mssql']["2019_#{new_resource.edition}"]['patch_file_url']
-  remote_file patch_file_path do
-    source patch_file_source
+  download_file_name = 'patch.exe'
+  download_file_path = "#{directory_path}/#{download_file_name}"
+  download_file_source = node['gusztavvargadr_mssql']["2019_#{new_resource.edition}"]['patch_file_url']
+  remote_file download_file_path do
+    source download_file_source
     action :create
   end
 
-  extracted_directory_path = "#{directory_path}/patch"
-  gusztavvargadr_windows_powershell_script_elevated "Extract SQL Server 2019 #{new_resource.edition} Patch" do
+  extract_directory_path = "#{directory_path}/patch"
+  directory extract_directory_path do
+    recursive true
+    action [:delete, :create]
+  end
+
+  powershell_script "Extract SQL Server 2019 #{new_resource.edition} Patch" do
     code <<-EOH
-      Start-Process "#{patch_file_path.tr('/', '\\')}" "/q /x:#{extracted_directory_path.tr('/', '\\')}" -Wait
+      Start-Process "#{download_file_path.tr('/', '\\')}" "/x:./ /q" -Wait
     EOH
+    cwd extract_directory_path
     action :run
   end
 
-  extracted_file_path = "#{extracted_directory_path}/SETUP.EXE"
-  gusztavvargadr_windows_powershell_script_elevated "Install SQL Server 2019 #{new_resource.edition} Patch" do
+  gusztavvargadr_windows_powershell_script_elevated "Execute SQL Server 2019 #{new_resource.edition} Patch" do
     code <<-EOH
-      Start-Process "#{extracted_file_path.tr('/', '\\')}" "/ACTION=PATCH /ALLINSTANCES /IACCEPTSQLSERVERLICENSETERMS /QUIET" -Wait
+      Start-Process "setup.exe" "/ACTION=PATCH /ALLINSTANCES /IACCEPTSQLSERVERLICENSETERMS /QUIET" -Wait
     EOH
+    cwd extract_directory_path
     action :run
   end
 end

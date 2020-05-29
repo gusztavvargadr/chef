@@ -38,6 +38,11 @@ action :install do
     end
   end
 
+  gusztavvargadr_windows_native_packages '' do
+    options options['native_packages']
+    action :install
+  end
+
   gusztavvargadr_windows_chocolatey_packages '' do
     options options['chocolatey_packages']
     action :install

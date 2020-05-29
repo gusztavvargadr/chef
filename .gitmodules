@@ -1,3 +1,6 @@
 [submodule "lib/gusztavvargadr/vagrant"]
 	path = lib/gusztavvargadr/vagrant
 	url = https://github.com/gusztavvargadr/vagrant.git
+[submodule "lib/test-kitchen/kitchen-docker"]
+	path = lib/test-kitchen/kitchen-docker
+	url = https://github.com/test-kitchen/kitchen-docker.git

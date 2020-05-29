@@ -6,4 +6,3 @@ maintainer_email 'mail@gusztavvargadr.me'
 
 version '0.0.0'
 depends 'gusztavvargadr_mssql'
-depends 'gusztavvargadr_windows'

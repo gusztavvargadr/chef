@@ -1,3 +1,3 @@
-gusztavvargadr_windows_chocolatey_packages '' do
-  options node['gusztavvargadr_vagrant']['cli']['chocolatey_packages']
+gusztavvargadr_vagrant_cli '' do
+  action :install
 end

@@ -26,30 +26,31 @@ stages:
               inputs:
                 artifact: build-${{ option.directory }}-${{ option.policy }}-chef
                 path: $(Build.SourcesDirectory)/.chef/
-              displayName: Artifacts Chef Download
+              displayName: Download Chef Artifacts
 
             - script: |
                 docker version
                 docker-compose version
-              displayName: Docker Init
+                docker container ls -a
+                docker image ls -a
+              displayName: Initialize Docker
 
             - script: |
-                docker-compose build chocolatey
-                docker-compose build chef-client-windows
-              displayName: Docker Restore
+                docker-compose pull --quiet chocolatey-cli-windows-ltsc2019
+                docker-compose pull --quiet chef-client-windows-ltsc2019
+              displayName: Restore Docker
 
             - script: |
-                docker-compose run --workdir C:/opt/chef/.chef/policies/${{ option.directory }}/${{ option.policy }}/ chef-client-windows -z
-              displayName: Docker Test
+                docker-compose run --workdir C:/opt/chef/.chef/policies/${{ option.directory }}/${{ option.policy }}/ chef-client-windows-ltsc2019 -z
+              displayName: Run Docker
 
             - script: |
                 docker-compose down --rmi all
-              displayName: Docker Clean
+              displayName: Clean Docker
               condition: always()
 
         - job: test_${{ option.directory }}_${{ option.policy }}_chocolatey
           displayName: Test ${{ option.directory }} ${{ option.policy }} Chocolatey
-          dependsOn: test_${{ option.directory }}_${{ option.policy }}_chef
 
           pool:
             vmImage: windows-2019
@@ -65,23 +66,25 @@ stages:
               inputs:
                 artifact: build-${{ option.directory }}-${{ option.policy }}-chocolatey
                 path: $(Build.SourcesDirectory)/.chocolatey/
-              displayName: Artifacts Chocolatey Download
+              displayName: Download Chocolatey Artifacts
 
             - script: |
                 docker version
                 docker-compose version
-              displayName: Docker Init
+                docker container ls -a
+                docker image ls -a
+              displayName: Initialize Docker
 
             - script: |
-                docker-compose build chocolatey
-                docker-compose build chef-client-windows
-              displayName: Docker Restore
+                docker-compose pull --quiet chocolatey-cli-windows-ltsc2019
+                docker-compose pull --quiet chef-client-windows-ltsc2019
+              displayName: Restore Docker
 
             - script: |
-                docker-compose run --entrypoint choco chef-client-windows install chef-policy --confirm --source ./.chocolatey/packages/
-              displayName: Docker Test
+                docker-compose run --entrypoint choco chef-client-windows-ltsc2019 install chef-policy --confirm --source ./.chocolatey/packages/
+              displayName: Run Docker
 
             - script: |
                 docker-compose down --rmi all
-              displayName: Docker Clean
+              displayName: Clean Docker
               condition: always()

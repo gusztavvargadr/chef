@@ -1,15 +1,24 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  tags:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/docker
+      - samples/cookbooks/docker_test
 pr: none
 
 stages:
-  - template: ../../../build/azp/samples/cookbooks/commit.yml
+  - template: ../../../build/azp/samples/cookbooks/stages.yml
     parameters:
-      options:
+      configurations:
         - cookbook: docker
-
-  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
-    parameters:
-      options:
-        - cookbook: docker
-          suite: enterprise
-        - cookbook: docker
-          suite: images
+          driver: vagrant
+          platform: windows
+          suites:
+            - name: community
+            - name: enterprise
+            - name: images

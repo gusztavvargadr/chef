@@ -18,6 +18,8 @@ end
 action :configure do
   powershell_script 'Configure Updates' do
     code <<-EOH
+      [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
       Install-PackageProvider -Name Nuget -Force
       Install-Module PSWindowsUpdate -Force -Confirm:$false
 

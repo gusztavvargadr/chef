@@ -1,15 +1,25 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  tags:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/mssql
+      - samples/cookbooks/mssql_test
 pr: none
 
 stages:
-  - template: ../../../build/azp/samples/cookbooks/commit.yml
+  - template: ../../../build/azp/samples/cookbooks/stages.yml
     parameters:
-      options:
-        - cookbook: docker
-
-  - template: ../../../build/azp/samples/cookbooks/acceptance.yml
-    parameters:
-      options:
+      configurations:
         - cookbook: mssql
-          suite: [ '2019', 'developer' ]
-        - cookbook: mssql
-          suite: [ '2018', 'ssms' ]
+          driver: docker
+          platform: windows
+          suites:
+            - name: [ '2017', 'developer' ]
+            - name: [ '2019', 'developer' ]
+            - name: [ '2017', 'ssms' ]
+            - name: [ '2018', 'ssms' ]
