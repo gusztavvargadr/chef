@@ -26,9 +26,9 @@ stages:
 
             - script: |
                 docker version
-                docker-compose version
                 docker container ls -a
                 docker image ls -a
+                docker-compose version
               displayName: Initialize Docker
 
             - script: |

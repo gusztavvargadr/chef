@@ -35,7 +35,8 @@ stages:
 
               - ${{ if eq(configuration.driver, 'vagrant') }}:
                 - script: |
-                    vagrant --version
+                    vagrant version
+                    vagrant plugin list
                     vagrant box list
                     vagrant global-status --prune
                   displayName: Initialize Vagrant
