@@ -12,7 +12,7 @@ action :install do
   return if !executable.nil? && ::File.exist?(executable)
 
   download_directory_path = "#{Chef::Config[:file_cache_path]}/gusztavvargadr_windows"
-  download_file_path = "#{download_directory_path}/#{new_resource.name.tr(' ', '-')}.exe"
+  download_file_path = "#{download_directory_path}/#{::File.basename(source)}"
 
   gusztavvargadr_windows_file download_file_path do
     options('source' => source)
