@@ -25,7 +25,10 @@ stages:
 
                 ${{ if eq(configuration.driver, 'docker') }}:
                   pool:
-                    vmImage: windows-2019
+                    name: Default
+                    demands:
+                      - AZP_AGENT_CHEF_WORKSTATION
+                      - AZP_AGENT_DOCKER_WINDOWS
 
                 workspace:
                   clean: all
@@ -50,38 +53,32 @@ stages:
                           docker image ls -a
                         displayName: Initialize Docker CLI
 
-                      - script: |
-                          echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
-                          net stop docker
-                          net start docker
-                        displayName: Initialize Docker Engine
-
-                      - script: |
-                          powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.6.62"
-                          choco install chef-workstation --version 0.18.3 --confirm --no-progress
-                          call refreshenv.cmd
-                          chef --version
-                          chef gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
-                          chef gem install --force ./lib/test-kitchen/kitchen-docker/kitchen-docker-2.10.0.gem
-                        env:
-                          CHEF_LICENSE: accept-silent
-                        displayName: Initialize Chef
+                      # - script: |
+                      #     echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
+                      #     net stop docker
+                      #     net start docker
+                      #   displayName: Initialize Docker Engine
+                      # - script: |
+                      #     powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.6.62"
+                      #     call refreshenv.cmd
+                      #     chef --version
+                      #     chef gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
+                      #     chef gem install --force ./lib/test-kitchen/kitchen-docker/kitchen-docker-2.10.0.gem
+                      #   env:
+                      #     CHEF_LICENSE: accept-silent
+                      #   displayName: Initialize Chef
 
                   - script: |
-                      call refreshenv.cmd
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
                       kitchen test ${{ join('-', suite.name) }}
                     env:
                       KITCHEN_YAML: .kitchen.${{ configuration.driver }}.yml
-                      KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
                     displayName: Test
 
                   - script: |
-                      call refreshenv.cmd
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
                       kitchen destroy ${{ join('-', suite.name) }}
                     env:
                       KITCHEN_YAML: .kitchen.${{ configuration.driver }}.yml
-                      KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG: ltsc2019
                     displayName: Clean
                     condition: always()

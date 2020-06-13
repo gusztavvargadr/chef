@@ -17,7 +17,7 @@ verifier:
 platforms:
   - name: windows
     driver:
-      image: gusztavvargadr/chef-client:windows-<%= ENV['KITCHEN_PLATFORM_WINDOWS_DOCKER_TAG'] %>
+      image: gusztavvargadr/chef-client:windows
       run_options: --isolation process
 
 suites:
