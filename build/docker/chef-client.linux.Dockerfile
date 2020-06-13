@@ -1,4 +1,4 @@
-FROM chef/chefworkstation:0.18.3
+FROM chef/chefworkstation:20.6.62
 
 WORKDIR /opt/chef/
 ENV CHEF_LICENSE accept-silent

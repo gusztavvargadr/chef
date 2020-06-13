@@ -57,6 +57,7 @@ stages:
                         displayName: Initialize Docker Engine
 
                       - script: |
+                          powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.6.62"
                           choco install chef-workstation --version 0.18.3 --confirm --no-progress
                           call refreshenv.cmd
                           chef --version

@@ -1,2 +1,5 @@
 Write-Host "Install Chef Workstation"
-choco install chef-workstation --version 0.18.3 --confirm --no-progress
+. { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.6.62
+
+Write-Host "Clean up"
+rm -Recurse -Force $env:TEMP\*
