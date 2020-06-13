@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 
 services:
   chef-client-linux:
@@ -21,73 +21,31 @@ services:
     entrypoint: chef
     command: --help
 
-  chocolatey-cli-windows-ltsc2019:
-    image: gusztavvargadr/chocolatey-cli:windows-ltsc2019
+  chocolatey-cli-windows:
+    image: gusztavvargadr/chocolatey-cli:windows
     build:
       context: ./build/docker/
       dockerfile: ./chocolatey-cli.windows.Dockerfile
-      args:
-        TAG: 'ltsc2019'
     volumes:
       - ./:C:/opt/chocolatey/
     entrypoint: choco
     command: --help
 
-  chef-client-windows-ltsc2019:
-    image: gusztavvargadr/chef-client:windows-ltsc2019
+  chef-client-windows:
+    image: gusztavvargadr/chef-client:windows
     build:
       context: ./build/docker/
       dockerfile: ./chef-client.windows.Dockerfile
-      args:
-        TAG: 'ltsc2019'
     volumes:
       - ./:C:/opt/chef/
     entrypoint: chef-client.bat
     command: --help
 
-  chef-workstation-windows-ltsc2019:
-    image: gusztavvargadr/chef-workstation:windows-ltsc2019
+  chef-workstation-windows:
+    image: gusztavvargadr/chef-workstation:windows
     build:
       context: ./build/docker/
       dockerfile: ./chef-workstation.windows.Dockerfile
-      args:
-        TAG: 'ltsc2019'
-    volumes:
-      - ./:C:/opt/chef/
-    entrypoint: chef-cli.bat
-    command: --help
-
-  chocolatey-cli-windows-1903:
-    image: gusztavvargadr/chocolatey-cli:windows-1903
-    build:
-      context: ./build/docker/
-      dockerfile: ./chocolatey-cli.windows.Dockerfile
-      args:
-        TAG: '1903'
-    volumes:
-      - ./:C:/opt/chocolatey/
-    entrypoint: choco
-    command: --help
-
-  chef-client-windows-1903:
-    image: gusztavvargadr/chef-client:windows-1903
-    build:
-      context: ./build/docker/
-      dockerfile: ./chef-client.windows.Dockerfile
-      args:
-        TAG: '1903'
-    volumes:
-      - ./:C:/opt/chef/
-    entrypoint: chef-client.bat
-    command: --help
-
-  chef-workstation-windows-1903:
-    image: gusztavvargadr/chef-workstation:windows-1903
-    build:
-      context: ./build/docker/
-      dockerfile: ./chef-workstation.windows.Dockerfile
-      args:
-        TAG: '1903'
     volumes:
       - ./:C:/opt/chef/
     entrypoint: chef-cli.bat

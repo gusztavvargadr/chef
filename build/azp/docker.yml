@@ -5,9 +5,12 @@ stages:
   - template: ./docker.commit.yml
     parameters:
       configurations:
-        - name: windows_ltsc2019
-          displayName: windows-ltsc2019
+        - name: linux
           services:
-            - chocolatey-cli-windows-ltsc2019
-            - chef-client-windows-ltsc2019
-            - chef-workstation-windows-ltsc2019
+            - chef-client-linux
+            - chef-workstation-linux
+        - name: windows
+          services:
+            - chocolatey-cli-windows
+            - chef-client-windows
+            - chef-workstation-windows

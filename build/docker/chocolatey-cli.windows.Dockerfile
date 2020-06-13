@@ -1,5 +1,4 @@
-ARG TAG
-FROM mcr.microsoft.com/windows/servercore:${TAG}
+FROM mcr.microsoft.com/windows/servercore:1903
 
 WORKDIR C:/opt/chocolatey/
 

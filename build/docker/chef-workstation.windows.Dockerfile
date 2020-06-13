@@ -1,5 +1,4 @@
-ARG TAG
-FROM gusztavvargadr/chocolatey-cli:windows-${TAG}
+FROM gusztavvargadr/chocolatey-cli:windows
 
 WORKDIR C:/opt/chef/
 ENV CHEF_LICENSE accept-silent
