@@ -1,5 +1,6 @@
 parameters:
-  configurations: []
+  configurations:
+    []
     # - cookbook: cookbook
     #   driver: driver
     #   platform: platform
@@ -11,35 +12,35 @@ stages:
 
     jobs:
       - ${{ each configuration in parameters.configurations }}:
-        - job: build_${{ configuration.cookbook }}
-          displayName: Build ${{ configuration.cookbook }}
+          - job: build_${{ configuration.cookbook }}
+            displayName: Build ${{ configuration.cookbook }}
 
-          pool:
-            vmImage: ubuntu-16.04
+            pool:
+              vmImage: ubuntu-16.04
 
-          workspace:
-            clean: all
+            workspace:
+              clean: all
 
-          steps:
-            - checkout: self
-              submodules: recursive
+            steps:
+              - checkout: self
+                submodules: recursive
 
-            - script: |
-                docker version
-                docker container ls -a
-                docker image ls -a
-                docker-compose version
-              displayName: Initialize Docker
+              - script: |
+                  docker version
+                  docker container ls -a
+                  docker image ls -a
+                  docker-compose version
+                displayName: Initialize Docker
 
-            - script: |
-                docker-compose pull --quiet chef-workstation-linux
-              displayName: Restore
+              - script: |
+                  docker-compose pull --quiet chef-workstation-linux
+                displayName: Restore
 
-            - script: |
-                docker-compose run chef-workstation-linux exec rspec samples/cookbooks/${{ configuration.cookbook }}_test
-              displayName: Test
+              - script: |
+                  docker-compose run chef-workstation-linux exec rspec samples/cookbooks/${{ configuration.cookbook }}_test
+                displayName: Test
 
-            - script: |
-                docker-compose down --rmi all
-              displayName: Clean
-              condition: always()
+              - script: |
+                  docker-compose down --rmi all
+                displayName: Clean
+                condition: always()
