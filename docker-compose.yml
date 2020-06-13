@@ -26,6 +26,7 @@ services:
     build:
       context: ./build/docker/
       dockerfile: ./chocolatey-cli.windows.Dockerfile
+    isolation: process
     volumes:
       - ./:C:/opt/chocolatey/
     entrypoint: choco
@@ -36,6 +37,7 @@ services:
     build:
       context: ./build/docker/
       dockerfile: ./chef-client.windows.Dockerfile
+    isolation: process
     volumes:
       - ./:C:/opt/chef/
     entrypoint: chef-client.bat
@@ -46,6 +48,7 @@ services:
     build:
       context: ./build/docker/
       dockerfile: ./chef-workstation.windows.Dockerfile
+    isolation: process
     volumes:
       - ./:C:/opt/chef/
     entrypoint: chef-cli.bat
