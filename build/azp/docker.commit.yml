@@ -13,10 +13,18 @@ stages:
           - job: build_${{ configuration.name }}
             displayName: Build ${{ configuration.name }}
 
-            pool:
-              name: Default
-              demands:
-                - AZP_AGENT_DOCKER_${{ configuration.name }}
+            ${{ if eq(configuration.name, 'linux') }}:
+              pool:
+                vmImage: ubuntu-16.04
+
+            ${{ if eq(configuration.name, 'windows') }}:
+              pool:
+                vmImage: windows-2019
+
+            # pool:
+            #   name: Default
+            #   demands:
+            #     - AZP_AGENT_DOCKER_${{ configuration.name }}
 
             workspace:
               clean: all

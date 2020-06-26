@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/windows/servercore:1909
+FROM mcr.microsoft.com/windows/servercore:ltsc2019
 
 WORKDIR C:/opt/chocolatey/
 
