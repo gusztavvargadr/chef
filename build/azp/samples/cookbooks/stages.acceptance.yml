@@ -25,10 +25,11 @@ stages:
 
                 ${{ if eq(configuration.driver, 'docker') }}:
                   pool:
-                    name: Default
-                    demands:
-                      - AZP_AGENT_CHEF_WORKSTATION
-                      - AZP_AGENT_DOCKER_WINDOWS
+                    vmImage: windows2019
+                    # name: Default
+                    # demands:
+                    #   - AZP_AGENT_CHEF_WORKSTATION
+                    #   - AZP_AGENT_DOCKER_WINDOWS
 
                 workspace:
                   clean: all
@@ -51,22 +52,22 @@ stages:
                           docker-compose version
                           docker container ls -a
                           docker image ls -a
-                        displayName: Initialize Docker CLI
+                        displayName: Initialize Docker
 
-                      # - script: |
-                      #     echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
-                      #     net stop docker
-                      #     net start docker
-                      #   displayName: Initialize Docker Engine
-                      # - script: |
-                      #     powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.6.62"
-                      #     call refreshenv.cmd
-                      #     chef --version
-                      #     chef gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
-                      #     chef gem install --force ./lib/test-kitchen/kitchen-docker/kitchen-docker-2.10.0.gem
-                      #   env:
-                      #     CHEF_LICENSE: accept-silent
-                      #   displayName: Initialize Chef
+                      - script: |
+                          echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
+                          net stop docker
+                          net start docker
+                        displayName: Configure Docker
+
+                      - script: |
+                          powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.6.62"
+                          chef --version
+                          chef gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
+                          chef gem install --force ./lib/test-kitchen/kitchen-docker/kitchen-docker-2.10.0.gem
+                        env:
+                          CHEF_LICENSE: accept-silent
+                        displayName: Initialize Chef
 
                   - script: |
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
