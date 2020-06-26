@@ -1,7 +1,7 @@
 default['gusztavvargadr_mssql']['2018_ssms'] = {
   'native_packages' => {
-    'SSMS 18.5' => {
-      'source' => 'https://download.microsoft.com/download/f/e/b/feb0e6be-21ce-4f98-abee-d74065e32d0a/SSMS-Setup-ENU.exe',
+    'SSMS 18.5.1' => {
+      'source' => 'https://download.microsoft.com/download/d/1/c/d1c74788-0c6b-4d23-896e-67cf849d31ed/SSMS-Setup-ENU.exe',
       'install' => [
         '/install',
         '/quiet',
