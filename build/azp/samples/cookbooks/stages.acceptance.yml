@@ -25,7 +25,7 @@ stages:
 
                 ${{ if eq(configuration.driver, 'docker') }}:
                   pool:
-                    vmImage: windows2019
+                    vmImage: windows-2019
                     # name: Default
                     # demands:
                     #   - AZP_AGENT_CHEF_WORKSTATION
