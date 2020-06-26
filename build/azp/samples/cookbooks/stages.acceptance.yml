@@ -62,17 +62,16 @@ stages:
 
                       - script: |
                           powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.6.62"
-                        displayName: Initialize Chef
-
-                      - script: |
+                          call refreshenv.cmd
                           chef --version
                           chef gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
                           chef gem install --force ./lib/test-kitchen/kitchen-docker/kitchen-docker-2.10.0.gem
                         env:
                           CHEF_LICENSE: accept-silent
-                        displayName: Configure Chef
+                        displayName: Initialize Chef
 
                   - script: |
+                      call refreshenv.cmd
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
                       kitchen test ${{ join('-', suite.name) }}
                     env:
@@ -80,6 +79,7 @@ stages:
                     displayName: Test
 
                   - script: |
+                      call refreshenv.cmd
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
                       kitchen destroy ${{ join('-', suite.name) }}
                     env:
