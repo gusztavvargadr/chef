@@ -61,7 +61,7 @@ stages:
                         displayName: Configure Docker
 
                       - script: |
-                          powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 0.18.3"
+                          powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.7.81"
                           call refreshenv.cmd
                           chef --version
                           chef gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
