@@ -34,10 +34,11 @@ stages:
                 submodules: recursive
 
               - script: |
-                  docker version
-                  docker-compose version
-                  docker container ls -a
+                  docker --version
+                  docker-compose --version
+
                   docker image ls -a
+                  docker container ls -a
                 displayName: Initialize Docker
 
               - ${{ each service in configuration.services }}:
