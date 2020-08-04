@@ -1,4 +1,22 @@
-FROM chef/chefworkstation:0.18.3
+FROM ubuntu:16.04
 
-WORKDIR /opt/chef/
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update
+
+RUN apt-get -y install locales
+RUN locale-gen en_US.UTF-8
+RUN update-locale LANG=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+RUN apt-get -y install curl
+RUN apt-get -y install p7zip-full
+
+WORKDIR /opt/docker/chef/
 ENV CHEF_LICENSE accept-silent
+
+RUN apt-get -y install git
+
+RUN curl -Ls https://omnitruck.chef.io/install.sh | bash -s -- -P chef-workstation -v 20.7.96

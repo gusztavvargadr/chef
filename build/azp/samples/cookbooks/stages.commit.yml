@@ -26,10 +26,11 @@ stages:
                 submodules: recursive
 
               - script: |
-                  docker version
-                  docker container ls -a
+                  docker --version
+                  docker-compose --version
+
                   docker image ls -a
-                  docker-compose version
+                  docker container ls -a
                 displayName: Initialize Docker
 
               - script: |

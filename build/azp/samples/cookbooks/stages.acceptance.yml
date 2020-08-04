@@ -40,18 +40,20 @@ stages:
 
                   - ${{ if eq(configuration.driver, 'vagrant') }}:
                       - script: |
-                          vagrant version
+                          vagrant --version
                           vagrant plugin list
+
                           vagrant box list
-                          vagrant global-status --prune
+                          vagrant global-status
                         displayName: Initialize Vagrant
 
                   - ${{ if eq(configuration.driver, 'docker') }}:
                       - script: |
-                          docker version
-                          docker-compose version
-                          docker container ls -a
+                          docker --version
+                          docker-compose --version
+
                           docker image ls -a
+                          docker container ls -a
                         displayName: Initialize Docker
 
                       - script: |
@@ -61,11 +63,13 @@ stages:
                         displayName: Configure Docker
 
                       - script: |
-                          powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 0.18.3"
+                          powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.7.96"
                           call refreshenv.cmd
                           chef --version
-                          chef gem build --force ./lib/test-kitchen/kitchen-docker/kitchen-docker.gemspec
-                          chef gem install --force ./lib/test-kitchen/kitchen-docker/kitchen-docker-2.10.0.gem
+
+                          cd lib/test-kitchen/kitchen-docker
+                          chef gem build --force kitchen-docker.gemspec
+                          chef gem install --force --local kitchen-docker-2.10.0.gem
                         env:
                           CHEF_LICENSE: accept-silent
                         displayName: Initialize Chef
