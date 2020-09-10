@@ -20,8 +20,5 @@ default['gusztavvargadr_docker']['engine_enterprise'] = {
     'docker-compose' => {
       'version' => '1.26.2',
     },
-    'docker-machine' => {
-      'version' => '0.16.2',
-    },
   },
 }
