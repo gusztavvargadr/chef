@@ -63,7 +63,7 @@ stages:
                         displayName: Configure Docker
 
                       - script: |
-                          powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.8.111"
+                          powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.9.136"
                           call refreshenv.cmd
                           chef --version
 
