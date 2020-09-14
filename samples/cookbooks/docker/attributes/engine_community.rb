@@ -30,8 +30,5 @@ default['gusztavvargadr_docker']['engine_community'] = {
       'version' => '2.3.0.4',
       'reboot' => true,
     },
-    'docker-machine' => {
-      'version' => '0.16.2',
-    },
   },
 }
