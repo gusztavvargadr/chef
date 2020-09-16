@@ -27,7 +27,7 @@ default['gusztavvargadr_docker']['engine_community'] = {
   },
   'chocolatey_packages' => {
     'docker-desktop' => {
-      'version' => '2.3.0.4',
+      'version' => '2.3.0.5',
       'reboot' => true,
     },
   },
