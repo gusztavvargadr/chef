@@ -3,6 +3,7 @@ driver:
 
 provisioner:
   name: chef_zero
+  wait_for_retry: 300
 
 verifier:
   name: inspec
