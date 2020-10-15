@@ -6,15 +6,12 @@ require "#{directory}/../../lib/gusztavvargadr/vagrant/samples/vagrant"
 VagrantMachine.defaults_include(
   'providers' => {
     'virtualbox' => {
-      'memory' => 4096,
-      'cpus' => 2,
+      'memory' => 8192,
+      'cpus' => 4,
     },
     'hyperv' => {
-      'memory' => 4096,
-      'cpus' => 2,
-    },
-    'azure' => {
-      'size' => 'Standard_B2s',
+      'memory' => 8192,
+      'cpus' => 4,
     },
   },
   'synced_folders' => {
