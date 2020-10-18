@@ -18,7 +18,7 @@ default['gusztavvargadr_docker']['engine_enterprise'] = {
   'native_packages' => {},
   'chocolatey_packages' => {
     'docker-compose' => {
-      'version' => '1.27.2',
+      'version' => '1.27.4',
     },
   },
 }
