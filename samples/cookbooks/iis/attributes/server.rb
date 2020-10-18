@@ -11,16 +11,16 @@ default['gusztavvargadr_iis']['server'] = {
         '/norestart',
       ],
     },
-    '.NET Core 2.1.22 Hosting Bundle' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/2fe0ef0c-a6b6-4cda-b6b8-874068bb131f/709d1c7817fa19524089dda74933ddce/dotnet-hosting-2.1.22-win.exe',
+    '.NET Core 2.1.23 Hosting Bundle' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/3e3c37fb-4d77-4558-a78c-17434e1cc804/60116643f610fb43f858af4e0dc1b223/dotnet-hosting-2.1.23-win.exe',
       'install' => [
         '/install',
         '/quiet',
         '/norestart',
       ],
     },
-    '.NET Core 3.1.8 Hosting Bundle' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/854cbd11-4b96-4a44-9664-b95991c0c4f7/8ec4944a5bd770faba2f769e647b1e6e/dotnet-hosting-3.1.8-win.exe',
+    '.NET Core 3.1.9 Hosting Bundle' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/beca42b0-54a8-4364-86b8-a3d88003fbb7/592e0eec1e5e53f78d9647f7112cc743/dotnet-hosting-3.1.9-win.exe',
       'install' => [
         '/install',
         '/quiet',
