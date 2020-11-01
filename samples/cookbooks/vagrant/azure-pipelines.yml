@@ -17,11 +17,6 @@ stages:
       configurations:
         - cookbook: vagrant
           driver: vagrant
-          platform: windows
           suites:
-            - name: app
-        - cookbook: vagrant
-          driver: vagrant
-          platform: ubuntu
-          suites:
-            - name: app
+            - name: app-windows
+            - name: app-ubuntu

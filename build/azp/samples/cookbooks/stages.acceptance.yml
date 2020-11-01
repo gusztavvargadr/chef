@@ -3,7 +3,6 @@ parameters:
     []
     # - cookbook: cookbook
     #   driver: driver
-    #   platform: platform
     #   suites: [ 'suite1', 'suite2' ]
 
 stages:
