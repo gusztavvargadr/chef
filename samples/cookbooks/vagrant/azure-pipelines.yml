@@ -18,5 +18,5 @@ stages:
         - cookbook: vagrant
           driver: vagrant
           suites:
-            - name: app-windows
-            - name: app-ubuntu
+            - "app-windows"
+            - "app-ubuntu"

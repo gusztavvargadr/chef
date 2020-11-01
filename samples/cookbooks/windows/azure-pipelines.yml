@@ -1,10 +1,10 @@
 trigger:
   branches:
     include:
-      - '*'
+      - "*"
   tags:
     include:
-      - '*'
+      - "*"
   paths:
     include:
       - samples/cookbooks/windows
@@ -17,11 +17,10 @@ stages:
       configurations:
         - cookbook: windows
           driver: docker
-          platform: windows
           suites:
-            - name: chocolatey
-            - name: environment
-            - name: features
-            - name: files
-            - name: native
-            - name: updates
+            - "chocolatey"
+            - "environment"
+            - "features"
+            - "files"
+            - "native"
+            - "updates"

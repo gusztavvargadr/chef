@@ -1,10 +1,10 @@
 trigger:
   branches:
     include:
-      - '*'
+      - "*"
   tags:
     include:
-      - '*'
+      - "*"
   paths:
     include:
       - samples/cookbooks/visualstudio
@@ -17,9 +17,8 @@ stages:
       configurations:
         - cookbook: visualstudio
           driver: vagrant
-          platform: windows
           suites:
-            - name: [ '2017', 'community' ]
-            - name: [ '2017', 'professional' ]
-            - name: [ '2019', 'community' ]
-            - name: [ '2019', 'professional' ]
+            - "2017-community"
+            - "2017-professional"
+            - "2019-community"
+            - "2019-professional"

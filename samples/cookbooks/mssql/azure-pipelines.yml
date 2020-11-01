@@ -1,10 +1,10 @@
 trigger:
   branches:
     include:
-      - '*'
+      - "*"
   tags:
     include:
-      - '*'
+      - "*"
   paths:
     include:
       - samples/cookbooks/mssql
@@ -17,9 +17,8 @@ stages:
       configurations:
         - cookbook: mssql
           driver: docker
-          platform: windows
           suites:
-            - name: [ '2017', 'developer' ]
-            - name: [ '2019', 'developer' ]
-            - name: [ '2017', 'ssms' ]
-            - name: [ '2018', 'ssms' ]
+            - "2017-developer"
+            - "2019-developer"
+            - "2017-ssms"
+            - "2018-ssms"

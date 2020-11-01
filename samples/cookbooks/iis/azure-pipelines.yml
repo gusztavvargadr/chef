@@ -1,10 +1,10 @@
 trigger:
   branches:
     include:
-      - '*'
+      - "*"
   tags:
     include:
-      - '*'
+      - "*"
   paths:
     include:
       - samples/cookbooks/iis
@@ -17,6 +17,5 @@ stages:
       configurations:
         - cookbook: iis
           driver: docker
-          platform: windows
           suites:
-            - name: server
+            - "server"

@@ -12,8 +12,8 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
           - ${{ each suite in configuration.suites }}:
-              - job: test_${{ configuration.cookbook }}_${{ join('_', suite.name) }}
-                displayName: Test ${{ configuration.cookbook }} ${{ join('-', suite.name) }}
+              - job: test_${{ configuration.cookbook }}_${{ replace(suite, '-', '_') }}
+                displayName: Test ${{ configuration.cookbook }} ${{ suite }}
 
                 ${{ if eq(configuration.driver, 'vagrant') }}:
                   pool:
@@ -76,7 +76,7 @@ stages:
                   - script: |
                       call refreshenv.cmd
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
-                      kitchen test ${{ join('-', suite.name) }}
+                      kitchen test ${{ suite }}
                     env:
                       KITCHEN_YAML: .kitchen.${{ configuration.driver }}.yml
                     displayName: Test
@@ -84,7 +84,7 @@ stages:
                   - script: |
                       call refreshenv.cmd
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
-                      kitchen destroy ${{ join('-', suite.name) }}
+                      kitchen destroy ${{ suite }}
                     env:
                       KITCHEN_YAML: .kitchen.${{ configuration.driver }}.yml
                     displayName: Clean
