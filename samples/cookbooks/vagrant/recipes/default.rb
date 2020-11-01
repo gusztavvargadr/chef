@@ -1,1 +1,1 @@
-include_recipe 'gusztavvargadr_vagrant:app'
+include_recipe 'gusztavvargadr_vagrant::app'
