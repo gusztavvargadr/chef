@@ -1,5 +1,3 @@
-property :name, String, name_property: true
-
 default_action :pull
 
 action :pull do

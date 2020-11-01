@@ -22,13 +22,13 @@ default['gusztavvargadr_docker']['engine_community'] = {
         '/quiet',
         '/norestart',
       ],
+      'executable' => 'C:/Windows/System32/lxss/tools/kernel',
       'elevated' => true,
     },
   },
   'chocolatey_packages' => {
     'docker-desktop' => {
       'version' => '2.4.0.0',
-      'reboot' => true,
     },
   },
 }

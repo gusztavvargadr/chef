@@ -18,19 +18,17 @@ suites:
   - name: engine-community
     driver:
       box: gusztavvargadr/windows-10
-    run_list:
-      - recipe[gusztavvargadr_docker_test::engine_community]
+    provisioner:
+      named_run_list: engine_community
 
   - name: engine-enterprise
-    run_list:
-      - recipe[gusztavvargadr_docker_test::engine_enterprise]
+    provisioner:
+      named_run_list: engine_enterprise
 
   - name: images
-    run_list:
-      - recipe[gusztavvargadr_docker_test::images]
+    provisioner:
+      named_run_list: images
     attributes:
-      gusztavvargadr_windows:
-        ignore_reboot: true
       gusztavvargadr_docker:
         images:
           hello-world:

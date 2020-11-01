@@ -10,7 +10,7 @@ action :prepare do
     action :install
   end
 
-  options['powershell_modules'].each do |module_name, module_options|
+  options['powershell_modules'].each do |module_name, _module_options|
     module_list = powershell_out("Get-Module -ListAvailable | Where { $_.Name -eq \"#{module_name}\" }").stdout
     next unless module_list.strip.empty?
 
@@ -21,10 +21,6 @@ action :prepare do
       action :run
     end
   end
-end
-
-action :install do
-  options = node['gusztavvargadr_docker']["engine_#{new_resource.edition}"]
 
   options['powershell_packages'].each do |package_name, package_options|
     package_list = powershell_out("Get-Package -ProviderName #{package_options['provider']} | Where { $_.Name -eq \"#{package_name}\" }").stdout
@@ -37,6 +33,10 @@ action :install do
       action :run
     end
   end
+end
+
+action :install do
+  options = node['gusztavvargadr_docker']["engine_#{new_resource.edition}"]
 
   gusztavvargadr_windows_native_packages '' do
     options options['native_packages']
