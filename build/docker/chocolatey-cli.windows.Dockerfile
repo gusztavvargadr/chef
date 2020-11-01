@@ -1,4 +1,6 @@
-FROM mcr.microsoft.com/windows/servercore:ltsc2019
+ARG WINDOWS_VERSION=ltsc2019
+
+FROM mcr.microsoft.com/windows/servercore:${WINDOWS_VERSION}
 
 WORKDIR C:/opt/chocolatey/
 

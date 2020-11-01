@@ -47,7 +47,7 @@ stages:
                     displayName: Build ${{ service }}
 
                   - script: |
-                      docker-compose run ${{ service }}
+                      docker-compose run ${{ service }} --version
                     displayName: Test ${{ service }}
 
               - task: Docker@2
