@@ -1,10 +1,10 @@
 trigger:
   branches:
     include:
-      - '*'
+      - "*"
   tags:
     include:
-      - '*'
+      - "*"
   paths:
     include:
       - samples/cookbooks/vagrant
@@ -16,7 +16,12 @@ stages:
     parameters:
       configurations:
         - cookbook: vagrant
-          driver: docker
+          driver: vagrant
           platform: windows
           suites:
-            - name: cli
+            - name: app
+        - cookbook: vagrant
+          driver: vagrant
+          platform: ubuntu
+          suites:
+            - name: app
