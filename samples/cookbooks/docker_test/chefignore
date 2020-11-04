@@ -1,4 +1,5 @@
 .kitchen*
+spec*
 test*
-Berksfile
-Berksfile.lock
+Policyfile
+Policyfile.lock
