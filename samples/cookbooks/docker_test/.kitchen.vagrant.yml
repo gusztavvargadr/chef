@@ -8,22 +8,33 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows
+  - name: windows-server
     driver:
-      box: gusztavvargadr/windows-server
       vagrantfiles:
-        - ../vagrant.rb
+        - ../vagrant.windows-server.rb
+
+  - name: windows-10
+    driver:
+      vagrantfiles:
+        - ../vagrant.windows-server.rb
+
+  - name: ubuntu
+    driver:
+      vagrantfiles:
+        - ../vagrant.ubuntu-server.rb
 
 suites:
   - name: engine-community
-    driver:
-      box: gusztavvargadr/windows-10
     provisioner:
       named_run_list: engine_community
+    includes:
+      - windows-10
 
   - name: engine-enterprise
     provisioner:
       named_run_list: engine_enterprise
+    includes:
+      - windows-server
 
   - name: images
     provisioner:
@@ -32,3 +43,5 @@ suites:
       gusztavvargadr_docker:
         images:
           hello-world:
+    includes:
+      - windows-server

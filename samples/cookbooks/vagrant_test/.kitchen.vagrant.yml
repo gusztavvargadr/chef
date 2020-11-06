@@ -10,14 +10,13 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: gusztavvargadr/windows-server
       vagrantfiles:
-        - ../vagrant.rb
+        - ../vagrant.windows-server.rb
+
   - name: ubuntu
     driver:
-      box: gusztavvargadr/ubuntu-server
       vagrantfiles:
-        - ../vagrant.rb
+        - ../vagrant.ubuntu-server.rb
 
 suites:
   - name: app

@@ -24,10 +24,5 @@ VagrantMachine.defaults_include(
 VagrantDeployment.defaults_include(
   'stack' => 'chef-samples',
   'service' => 'cookbooks',
-  'component' => 'kitchen',
-  'machines' => {
-    'default' => {},
-  }
+  'component' => 'kitchen'
 )
-
-VagrantDeployment.configure(directory)
