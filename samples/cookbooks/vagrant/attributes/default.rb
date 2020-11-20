@@ -1,5 +1,5 @@
 default['gusztavvargadr_vagrant'] = {
   'app' => {
-    'version' => '2.2.10',
+    'version' => '2.2.13',
   },
 }
