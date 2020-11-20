@@ -19,4 +19,4 @@ ENV CHEF_LICENSE accept-silent
 
 RUN apt-get -y install git
 
-RUN curl -Ls https://omnitruck.chef.io/install.sh | bash -s -- -P chef-workstation -v 20.9.158
+RUN curl -Ls https://omnitruck.chef.io/install.sh | bash -s -- -P chef-workstation -v 20.11.180
