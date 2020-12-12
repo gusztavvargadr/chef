@@ -18,6 +18,6 @@ stages:
         - cookbook: docker
           driver: vagrant
           suites:
-            - engine-community
-            - engine-enterprise
-            - images
+            # - name: community
+            # - name: enterprise
+            - name: images

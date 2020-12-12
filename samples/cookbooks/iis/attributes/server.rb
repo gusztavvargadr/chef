@@ -27,8 +27,8 @@ default['gusztavvargadr_iis']['server'] = {
         '/norestart',
       ],
     },
-    '.NET Core 5.0.0 Hosting Bundle' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/08d642f7-8ade-4de3-9eae-b77fd05e5f01/503da91e7ea62d8be06488b014643c12/dotnet-hosting-5.0.0-win.exe',
+    '.NET Core 5.0.1 Hosting Bundle' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/b6271a4b-db02-4245-bf99-974ea96b7ca3/29389344a55c6792bd4e717a254168a2/dotnet-hosting-5.0.1-win.exe',
       'install' => [
         '/install',
         '/quiet',
