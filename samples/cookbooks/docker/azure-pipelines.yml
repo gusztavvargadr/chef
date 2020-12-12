@@ -1,10 +1,10 @@
 trigger:
   branches:
     include:
-      - '*'
+      - "*"
   tags:
     include:
-      - '*'
+      - "*"
   paths:
     include:
       - samples/cookbooks/docker
@@ -20,5 +20,5 @@ stages:
           platform: windows
           suites:
             - name: community
-            - name: enterprise
+            # - name: enterprise
             - name: images
