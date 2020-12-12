@@ -19,6 +19,6 @@ stages:
           driver: vagrant
           platform: windows
           suites:
-            - name: community
+            # - name: community
             # - name: enterprise
             - name: images
