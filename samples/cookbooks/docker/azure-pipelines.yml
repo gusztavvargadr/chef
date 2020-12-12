@@ -1,10 +1,10 @@
 trigger:
   branches:
     include:
-      - '*'
+      - "*"
   tags:
     include:
-      - '*'
+      - "*"
   paths:
     include:
       - samples/cookbooks/docker
@@ -19,6 +19,6 @@ stages:
           driver: vagrant
           platform: windows
           suites:
-            - name: community
-            - name: enterprise
+            # - name: community
+            # - name: enterprise
             - name: images
