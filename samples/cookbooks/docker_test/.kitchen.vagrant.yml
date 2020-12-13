@@ -18,6 +18,11 @@ platforms:
       vagrantfiles:
         - ../vagrant.windows-server.rb
 
+  - name: docker-windows
+    driver:
+      vagrantfiles:
+        - ../vagrant.docker-windows.rb
+
   - name: ubuntu
     driver:
       vagrantfiles:
@@ -44,4 +49,4 @@ suites:
         images:
           hello-world:
     includes:
-      - windows-server
+      - docker-windows
