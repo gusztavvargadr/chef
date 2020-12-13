@@ -16,7 +16,7 @@ platforms:
   - name: windows-10
     driver:
       vagrantfiles:
-        - ../vagrant.windows-server.rb
+        - ../vagrant.windows-10.rb
 
   - name: docker-windows
     driver:
