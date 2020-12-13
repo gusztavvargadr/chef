@@ -27,11 +27,11 @@ suites:
       - recipe[gusztavvargadr_docker_test::engine_enterprise]
 
   - name: images
+    driver:
+      box: gusztavvargadr/docker-windows
     run_list:
       - recipe[gusztavvargadr_docker_test::images]
     attributes:
-      gusztavvargadr_windows:
-        ignore_reboot: true
       gusztavvargadr_docker:
         images:
           hello-world:
