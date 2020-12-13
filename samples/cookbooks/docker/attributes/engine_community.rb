@@ -28,8 +28,9 @@ default['gusztavvargadr_docker']['engine_community'] = {
       'source' => 'https://desktop.docker.com/win/stable/50684/Docker%20Desktop%20Installer.exe',
       'install' => [
         'install',
-        'quiet',
+        '--quiet',
       ],
+      'executable' => 'C:/Program Files/Docker/Docker/Docker Desktop.exe',
     },
   },
   'chocolatey_packages' => {
