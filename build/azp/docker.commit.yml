@@ -19,7 +19,7 @@ stages:
 
             ${{ if eq(configuration.name, 'windows') }}:
               pool:
-                vmImage: windows-2019
+                name: windows
 
             # pool:
             #   name: Default
