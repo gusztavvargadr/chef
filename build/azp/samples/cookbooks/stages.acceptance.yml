@@ -17,18 +17,18 @@ stages:
 
                 ${{ if eq(configuration.driver, 'vagrant') }}:
                   pool:
-                    name: Default
-                    demands:
-                      - AZP_AGENT_CHEF_WORKSTATION
-                      - AZP_AGENT_VAGRANT
+                    name: windows
+                  # pool:
+                  #   name: Default
+                  #   demands:
+                  #     - AZP_AGENT_CHEF_WORKSTATION
+                  #     - AZP_AGENT_VAGRANT
 
                 ${{ if eq(configuration.driver, 'docker') }}:
                   pool:
-                    vmImage: windows-2019
-                    # name: Default
-                    # demands:
-                    #   - AZP_AGENT_CHEF_WORKSTATION
-                    #   - AZP_AGENT_DOCKER_WINDOWS
+                    name: windows
+                  # pool:
+                  #   vmImage: windows-2019
 
                 workspace:
                   clean: all
@@ -55,23 +55,21 @@ stages:
                           docker container ls -a
                         displayName: Initialize Docker
 
-                      - script: |
-                          echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
-                          net stop docker
-                          net start docker
-                        displayName: Configure Docker
-
-                      - script: |
-                          powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.12.187"
-                          call refreshenv.cmd
-                          chef --version
-
-                          cd lib/test-kitchen/kitchen-docker
-                          chef gem build --force kitchen-docker.gemspec
-                          chef gem install --force --local kitchen-docker-2.10.0.gem
-                        env:
-                          CHEF_LICENSE: accept-silent
-                        displayName: Initialize Chef
+                      # - script: |
+                      #     echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
+                      #     net stop docker
+                      #     net start docker
+                      #   displayName: Configure Docker
+                      # - script: |
+                      #     powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.12.187"
+                      #     call refreshenv.cmd
+                      #     chef --version
+                      #     cd lib/test-kitchen/kitchen-docker
+                      #     chef gem build --force kitchen-docker.gemspec
+                      #     chef gem install --force --local kitchen-docker-2.10.0.gem
+                      #   env:
+                      #     CHEF_LICENSE: accept-silent
+                      #   displayName: Initialize Chef
 
                   - script: |
                       call refreshenv.cmd
