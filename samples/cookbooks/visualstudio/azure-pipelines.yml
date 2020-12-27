@@ -18,7 +18,8 @@ stages:
         - cookbook: visualstudio
           driver: vagrant
           suites:
-            - "2017-community"
-            - "2017-professional"
-            - "2019-community"
-            - "2019-professional"
+            - 2017-community
+            - 2017-professional
+            - 2019-community
+            - 2019-professional
+

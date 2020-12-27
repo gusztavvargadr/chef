@@ -1,5 +1,9 @@
 driver:
   name: vagrant
+  vm_hostname: false
+  customize:
+    cpus: 2
+    memory: 2048
 
 provisioner:
   name: chef_zero
@@ -10,23 +14,23 @@ verifier:
 platforms:
   - name: windows-server
     driver:
-      vagrantfiles:
-        - ../vagrant.windows-server.rb
+      box: gusztavvargadr/windows-server
 
   - name: windows-10
     driver:
-      vagrantfiles:
-        - ../vagrant.windows-10.rb
+      box: gusztavvargadr/windows-10
+
+  - name: ubuntu-server
+    driver:
+      box: gusztavvargadr/ubuntu-server
 
   - name: docker-windows
     driver:
-      vagrantfiles:
-        - ../vagrant.docker-windows.rb
+      box: gusztavvargadr/docker-windows
 
-  - name: ubuntu
+  - name: docker-linux
     driver:
-      vagrantfiles:
-        - ../vagrant.ubuntu-server.rb
+      box: gusztavvargadr/docker-linux
 
 suites:
   - name: engine-community

@@ -11,16 +11,16 @@ run_list(
 )
 
 named_run_list(
-  :engine_community,
+  'engine_community',
   'recipe[gusztavvargadr_docker_test::engine_community]'
 )
 
 named_run_list(
-  :engine_enterprise,
+  'engine_enterprise',
   'recipe[gusztavvargadr_docker_test::engine_enterprise]'
 )
 
 named_run_list(
-  :images,
+  'images',
   'recipe[gusztavvargadr_docker_test::images]'
 )

@@ -11,6 +11,6 @@ run_list(
 )
 
 named_run_list(
-  :app,
+  'app',
   'recipe[gusztavvargadr_vagrant_test::app]'
 )

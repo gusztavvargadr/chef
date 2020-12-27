@@ -1,4 +1,5 @@
-.kitchen*
+chefignore
+*kitchen*
+spec*
 test*
-Berksfile
-Berksfile.lock
+Policyfile*

@@ -1,4 +1,5 @@
+chefignore
 *kitchen*
 spec*
 test*
-Policyfile.lock.json
+Policyfile*

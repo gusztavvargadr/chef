@@ -1,11 +1,7 @@
 **/.vagrant
 **/Vagrantfile.override.yml
 
-**/.chef
-**/*.lock.json
-**/Berksfile.lock
-
-**/.chef-workstation
 **/.kitchen
+**/Policyfile.lock.json
 
 **/.chocolatey

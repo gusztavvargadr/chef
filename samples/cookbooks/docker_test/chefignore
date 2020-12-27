@@ -1,5 +1,5 @@
-.kitchen*
+chefignore
+*kitchen*
 spec*
 test*
-Policyfile
-Policyfile.lock
+Policyfile*

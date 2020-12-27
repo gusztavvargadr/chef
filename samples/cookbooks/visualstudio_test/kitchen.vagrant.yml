@@ -1,0 +1,34 @@
+driver:
+  name: vagrant
+  vm_hostname: false
+  customize:
+    cpus: 2
+    memory: 2048
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      box: gusztavvargadr/windows-server
+
+suites:
+  - name: 2017-community
+    provisioner:
+      named_run_list: 2017_community
+
+  - name: 2017-professional
+    provisioner:
+      named_run_list: 2017_professional
+
+  - name: 2019-community
+    provisioner:
+      named_run_list: 2019_community
+
+  - name: 2019-professional
+    provisioner:
+      named_run_list: 2019_professional
