@@ -33,7 +33,7 @@ stages:
                 displayName: Initialize Docker
 
               - script: |
-                  docker-compose pull chef-workstation-linux
+                  docker-compose pull --quiet chef-workstation-linux
 
                   docker-compose run chef-workstation-linux exec cookstyle samples/cookbooks/${{ configuration.cookbook }}
                   docker-compose run chef-workstation-linux exec cookstyle samples/cookbooks/${{ configuration.cookbook }}_test

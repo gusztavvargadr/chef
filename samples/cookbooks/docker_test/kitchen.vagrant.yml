@@ -20,15 +20,15 @@ platforms:
     driver:
       box: gusztavvargadr/windows-10
 
+  - name: windows-docker
+    driver:
+      box: gusztavvargadr/docker-windows
+
   - name: ubuntu-server
     driver:
       box: gusztavvargadr/ubuntu-server
 
-  - name: docker-windows
-    driver:
-      box: gusztavvargadr/docker-windows
-
-  - name: docker-linux
+  - name: ubuntu-docker
     driver:
       box: gusztavvargadr/docker-linux
 
@@ -53,4 +53,4 @@ suites:
         images:
           hello-world:
     includes:
-      - docker-windows
+      - windows-docker
