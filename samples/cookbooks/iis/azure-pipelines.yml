@@ -18,4 +18,4 @@ stages:
         - cookbook: iis
           driver: docker
           suites:
-            - "server"
+            - server

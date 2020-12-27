@@ -18,9 +18,9 @@ stages:
         - cookbook: windows
           driver: docker
           suites:
-            - "chocolatey"
-            - "environment"
-            - "features"
-            - "files"
-            - "native"
-            - "updates"
+            - chocolatey
+            - environment
+            - features
+            - files
+            - native
+            - updates

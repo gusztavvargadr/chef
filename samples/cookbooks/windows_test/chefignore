@@ -1,4 +1,4 @@
-.kitchen*
+*kitchen*
+spec*
 test*
-Berksfile
-Berksfile.lock
+Policyfile.lock.json

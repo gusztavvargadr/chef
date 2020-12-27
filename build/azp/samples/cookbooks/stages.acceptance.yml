@@ -43,7 +43,7 @@ stages:
 
                   - ${{ if eq(configuration.driver, 'docker') }}:
                       - script: |
-                          set DOCKER_HOST=%AZP_AGENT_DOCKER_WINDOWS%
+                          set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
 
                           docker --version
                           docker-compose --version
@@ -53,20 +53,16 @@ stages:
                         displayName: Initialize Docker
 
                   - script: |
-                      set DOCKER_HOST=%AZP_AGENT_DOCKER_WINDOWS%
-
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
                       kitchen test ${{ suite }}
                     env:
-                      KITCHEN_YAML: .kitchen.${{ configuration.driver }}.yml
+                      KITCHEN_YAML: kitchen.${{ configuration.driver }}.yml
                     displayName: Test
 
                   - script: |
-                      set DOCKER_HOST=%AZP_AGENT_DOCKER_WINDOWS%
-
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
                       kitchen destroy ${{ suite }}
                     env:
-                      KITCHEN_YAML: .kitchen.${{ configuration.driver }}.yml
+                      KITCHEN_YAML: kitchen.${{ configuration.driver }}.yml
                     displayName: Clean
                     condition: always()
