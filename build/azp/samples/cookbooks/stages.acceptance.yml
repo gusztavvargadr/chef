@@ -69,6 +69,8 @@ stages:
                       #   displayName: Initialize Chef
 
                   - script: |
+                      set DOCKER_HOST=%AZP_AGENT_DOCKER_WINDOWS%
+
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
                       kitchen test ${{ suite }}
                     env:
@@ -76,6 +78,8 @@ stages:
                     displayName: Test
 
                   - script: |
+                      set DOCKER_HOST=%AZP_AGENT_DOCKER_WINDOWS%
+
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
                       kitchen destroy ${{ suite }}
                     env:
