@@ -52,22 +52,6 @@ stages:
                           docker container ls -a
                         displayName: Initialize Docker
 
-                      # - script: |
-                      #     echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
-                      #     net stop docker
-                      #     net start docker
-                      #   displayName: Configure Docker
-                      # - script: |
-                      #     powershell -Command ". { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 20.12.187"
-                      #     call refreshenv.cmd
-                      #     chef --version
-                      #     cd lib/test-kitchen/kitchen-docker
-                      #     chef gem build --force kitchen-docker.gemspec
-                      #     chef gem install --force --local kitchen-docker-2.10.0.gem
-                      #   env:
-                      #     CHEF_LICENSE: accept-silent
-                      #   displayName: Initialize Chef
-
                   - script: |
                       set DOCKER_HOST=%AZP_AGENT_DOCKER_WINDOWS%
 

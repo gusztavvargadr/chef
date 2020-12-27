@@ -4,12 +4,9 @@ driver:
 
 transport:
   name: docker
-  socket: tcp://localhost:2375
 
 provisioner:
   name: chef_zero
-  # product_name: chef
-  # install_strategy: skip
 
 verifier:
   name: inspec
