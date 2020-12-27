@@ -4,7 +4,7 @@ driver:
 
 transport:
   name: docker
-  socket: tcp://localhost:2375
+  # socket: tcp://localhost:2375
 
 provisioner:
   name: chef_zero

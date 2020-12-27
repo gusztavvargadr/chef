@@ -17,18 +17,13 @@ stages:
 
                 ${{ if eq(configuration.driver, 'vagrant') }}:
                   pool:
-                    name: windows
-                  # pool:
-                  #   name: Default
-                  #   demands:
-                  #     - AZP_AGENT_CHEF_WORKSTATION
-                  #     - AZP_AGENT_VAGRANT
+                    name: Default
 
                 ${{ if eq(configuration.driver, 'docker') }}:
                   pool:
-                    name: windows
-                  # pool:
-                  #   vmImage: windows-2019
+                    name: Default
+                    demands:
+                      - AZP_AGENT_DOCKER_WINDOWS
 
                 workspace:
                   clean: all
@@ -48,6 +43,8 @@ stages:
 
                   - ${{ if eq(configuration.driver, 'docker') }}:
                       - script: |
+                          set DOCKER_HOST=%AZP_AGENT_DOCKER_WINDOWS%
+
                           docker --version
                           docker-compose --version
 
@@ -72,7 +69,6 @@ stages:
                       #   displayName: Initialize Chef
 
                   - script: |
-                      call refreshenv.cmd
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
                       kitchen test ${{ suite }}
                     env:
@@ -80,7 +76,6 @@ stages:
                     displayName: Test
 
                   - script: |
-                      call refreshenv.cmd
                       cd samples/cookbooks/${{ configuration.cookbook }}_test
                       kitchen destroy ${{ suite }}
                     env:

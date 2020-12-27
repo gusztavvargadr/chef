@@ -19,9 +19,9 @@ stages:
 
             ${{ if eq(configuration.name, 'windows') }}:
               pool:
-                name: windows
-              # pool:
-              #   vmImage: windows-2019
+                name: Default
+                demands:
+                  - AZP_AGENT_DOCKER_WINDOWS
 
             workspace:
               clean: all
