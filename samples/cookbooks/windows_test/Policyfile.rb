@@ -31,7 +31,7 @@ named_run_list(
 )
 
 named_run_list(
-  'native_packageds',
+  'native_packages',
   'recipe[gusztavvargadr_windows_test::native_packages]'
 )
 
