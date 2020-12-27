@@ -1,4 +1,4 @@
-provides :gusztavvargadr_vagrant_plugin
+provides :gusztavvargadr_vagrant_plugin, platform: 'windows'
 
 property :version, String, required: true
 
