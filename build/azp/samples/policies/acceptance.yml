@@ -1,8 +1,7 @@
 parameters:
   options:
     []
-    # - directory: directory-name
-    #   policy: policy-name
+    # - name: name
 
 stages:
   - stage: acceptance
@@ -10,11 +9,13 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-          - job: test_${{ option.directory }}_${{ option.policy }}_chef
-            displayName: Test ${{ option.directory }} ${{ option.policy }} Chef
+          - job: test_${{ option.name }}_chef
+            displayName: Test ${{ option.name }} Chef
 
             pool:
-              vmImage: windows-2019
+              name: Default
+              demands:
+                - AZP_AGENT_DOCKER_WINDOWS
 
             workspace:
               clean: all
@@ -25,28 +26,30 @@ stages:
 
               - task: DownloadPipelineArtifact@2
                 inputs:
-                  artifact: build-${{ option.directory }}-${{ option.policy }}-chef
+                  artifact: build-${{ option.name }}-chef
                   path: $(Build.SourcesDirectory)/.chef/
-                displayName: Download Chef Artifacts
+                displayName: Download Artifacts
 
               - script: |
-                  docker version
-                  docker-compose version
+                  set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
+
+                  docker --version
+                  docker-compose --version
+
                   docker container ls -a
                   docker image ls -a
                 displayName: Initialize Docker
 
               - script: |
-                  docker-compose run --workdir C:/opt/chef/.chef/policies/${{ option.directory }}/${{ option.policy }}/ chef-client-windows-ltsc2019 -z
-                displayName: Run Docker
+                  set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
 
-              - script: |
-                  docker-compose down --rmi all
-                displayName: Clean Docker
-                condition: always()
+                  docker-compose pull --quiet chef-client-windows
 
-          - job: test_${{ option.directory }}_${{ option.policy }}_chocolatey
-            displayName: Test ${{ option.directory }} ${{ option.policy }} Chocolatey
+                  docker-compose run --rm --workdir C:/opt/chef/.chef/policies/${{ option.name }}/ chef-client-windows -z
+                displayName: Test
+
+          - job: test_${{ option.name }}_chocolatey
+            displayName: Test ${{ option.name }} Chocolatey
 
             pool:
               vmImage: windows-2019
@@ -60,26 +63,24 @@ stages:
 
               - task: DownloadPipelineArtifact@2
                 inputs:
-                  artifact: build-${{ option.directory }}-${{ option.policy }}-chocolatey
+                  artifact: build-${{ option.name }}-chocolatey
                   path: $(Build.SourcesDirectory)/.chocolatey/
-                displayName: Download Chocolatey Artifacts
+                displayName: Download Artifacts
 
               - script: |
-                  docker version
-                  docker-compose version
+                  set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
+
+                  docker --version
+                  docker-compose --version
+
                   docker container ls -a
                   docker image ls -a
                 displayName: Initialize Docker
 
               - script: |
+                  set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
+
                   docker-compose pull --quiet chef-client-windows
-                displayName: Restore
 
-              - script: |
-                  docker-compose run --entrypoint choco chef-client-windows install chef-policy --confirm --source ./.chocolatey/packages/
-                displayName: Run Docker
-
-              - script: |
-                  docker-compose down --rmi all
-                displayName: Clean Docker
-                condition: always()
+                  docker-compose run --rm --entrypoint choco chef-client-windows install chef-policy --confirm --source ./.chocolatey/packages/
+                displayName: Test

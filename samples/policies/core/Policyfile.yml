@@ -1,9 +1,9 @@
 gusztavvargadr_windows:
   chocolatey_packages:
-    # firefox:
+    googlechrome:
+    firefox:
     conemu:
     far:
     treesizefree:
     vscode:
     beyondcompare:
-    # keepass:

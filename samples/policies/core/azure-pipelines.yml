@@ -4,23 +4,9 @@ stages:
   - template: ../../../build/azp/samples/policies/commit.yml
     parameters:
       options:
-        - directory: core
-          policy: init
-        # - directory: core
-        #   policy: prepare
-        # - directory: core
-        #   policy: install
-        # - directory: core
-        #   policy: configure
+        - name: core
 
   - template: ../../../build/azp/samples/policies/acceptance.yml
     parameters:
       options:
-        - directory: core
-          policy: init
-        # - directory: core
-        #   policy: prepare
-        # - directory: core
-        #   policy: install
-        # - directory: core
-        #   policy: configure
+        - name: core

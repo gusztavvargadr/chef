@@ -1,8 +1,7 @@
 parameters:
   options:
     []
-    # - directory: directory-name
-    #   policy: policy-name
+    # - name: name
 
 stages:
   - stage: commit
@@ -10,8 +9,8 @@ stages:
 
     jobs:
       - ${{ each option in parameters.options }}:
-          - job: build_${{ option.directory }}_${{ option.policy }}_chef
-            displayName: Build ${{ option.directory }} ${{ option.policy }} Chef
+          - job: build_${{ option.name }}_chef
+            displayName: Build ${{ option.name }} Chef
 
             pool:
               vmImage: ubuntu-16.04
@@ -24,36 +23,32 @@ stages:
                 submodules: recursive
 
               - script: |
-                  docker version
-                  docker-compose version
+                  docker --version
+                  docker-compose --version
+
                   docker container ls -a
                   docker image ls -a
                 displayName: Initialize Docker
 
               - script: |
                   docker-compose pull --quiet chef-workstation-linux
-                displayName: Restore
 
-              - script: |
-                  docker-compose run --entrypoint "sh ./build/docker/chef.policy.export.sh" chef-workstation-linux ${{ option.directory }} ${{ option.policy }}
-                displayName: Run Docker
-
-              - script: |
-                  docker-compose down --rmi all
-                displayName: Clean Docker
-                condition: always()
+                  docker-compose run --rm --entrypoint "sh ./build/docker/chef.policy.export.sh" chef-workstation-linux ${{ option.name }}
+                displayName: Build
 
               - publish: $(Build.SourcesDirectory)/.chef/
-                artifact: build-${{ option.directory }}-${{ option.policy }}-chef
-                displayName: Publish Chef Artifacts
+                artifact: build-${{ option.name }}-chef
+                displayName: Publish Artifacts
                 condition: always()
 
-          - job: build_${{ option.directory }}_${{ option.policy }}_chocolatey
-            displayName: Build ${{ option.directory }} ${{ option.policy }} Chocolatey
-            dependsOn: build_${{ option.directory }}_${{ option.policy }}_chef
+          - job: build_${{ option.name }}_chocolatey
+            displayName: Build ${{ option.name }} Chocolatey
+            dependsOn: build_${{ option.name }}_chef
 
             pool:
-              vmImage: windows-2019
+              name: Default
+              demands:
+                - AZP_AGENT_DOCKER_WINDOWS
 
             workspace:
               clean: all
@@ -64,31 +59,29 @@ stages:
 
               - task: DownloadPipelineArtifact@2
                 inputs:
-                  artifact: build-${{ option.directory }}-${{ option.policy }}-chef
+                  artifact: build-${{ option.name }}-chef
                   path: $(Build.SourcesDirectory)/.chef/
-                displayName: Artifacts Chef Download
+                displayName: Download Artifacts
 
               - script: |
-                  docker version
-                  docker-compose version
+                  set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
+
+                  docker --version
+                  docker-compose --version
+
                   docker container ls -a
                   docker image ls -a
                 displayName: Initialize Docker
 
               - script: |
+                  set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
+
                   docker-compose pull --quiet chocolatey-cli-windows
-                displayName: Restore
 
-              - script: |
-                  docker-compose run --entrypoint "powershell -File ./build/docker/chocolatey.package.pack.ps1" chocolatey-cli-windows ${{ option.directory }} ${{ option.policy }}
-                displayName: Run Docker
-
-              - script: |
-                  docker-compose down --rmi all
-                displayName: Clean Docker
-                condition: always()
+                  docker-compose run --rm --entrypoint "powershell -File ./build/docker/chocolatey.package.pack.ps1" chocolatey-cli-windows ${{ option.name }}
+                displayName: Build
 
               - publish: $(Build.SourcesDirectory)/.chocolatey/
-                artifact: build-${{ option.directory }}-${{ option.policy }}-chocolatey
-                displayName: Publish Chocolatey Artifacts
+                artifact: build-${{ option.name }}-chocolatey
+                displayName: Publish Artifacts
                 condition: always()
