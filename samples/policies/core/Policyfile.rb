@@ -1,6 +1,6 @@
 directory = File.dirname(__FILE__)
 
-require "#{directory}/../../../../src/Policyfile"
+require "#{directory}/../../../src/Policyfile"
 
 name 'gusztavvargadr_core'
 
