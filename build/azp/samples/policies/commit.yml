@@ -13,39 +13,6 @@ stages:
             displayName: Build ${{ option.name }} Chef
 
             pool:
-              vmImage: ubuntu-16.04
-
-            workspace:
-              clean: all
-
-            steps:
-              - checkout: self
-                submodules: recursive
-
-              - script: |
-                  docker --version
-                  docker-compose --version
-
-                  docker container ls -a
-                  docker image ls -a
-                displayName: Initialize Docker
-
-              - script: |
-                  docker-compose pull --quiet chef-workstation-linux
-
-                  docker-compose run --rm --entrypoint "sh ./build/docker/chef.policy.export.sh" chef-workstation-linux ${{ option.name }}
-                displayName: Build
-
-              - publish: $(Build.SourcesDirectory)/.chef/
-                artifact: build-${{ option.name }}-chef
-                displayName: Publish Artifacts
-                condition: always()
-
-          - job: build_${{ option.name }}_chocolatey
-            displayName: Build ${{ option.name }} Chocolatey
-            dependsOn: build_${{ option.name }}_chef
-
-            pool:
               name: Default
               demands:
                 - AZP_AGENT_DOCKER_WINDOWS
@@ -57,12 +24,6 @@ stages:
               - checkout: self
                 submodules: recursive
 
-              - task: DownloadPipelineArtifact@2
-                inputs:
-                  artifact: build-${{ option.name }}-chef
-                  path: $(Build.SourcesDirectory)/.chef/
-                displayName: Download Artifacts
-
               - script: |
                   set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
 
@@ -76,12 +37,50 @@ stages:
               - script: |
                   set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
 
-                  docker-compose pull --quiet chocolatey-cli-windows
-
-                  docker-compose run --rm --entrypoint "powershell -File ./build/docker/chocolatey.package.pack.ps1" chocolatey-cli-windows ${{ option.name }}
+                  docker-compose run chef-policy-build --name chef-policy-build ${{ option.name }}
+                  docker cp chef-policy-build:/opt/chef/.chef/ ./.chef/
                 displayName: Build
 
-              - publish: $(Build.SourcesDirectory)/.chocolatey/
-                artifact: build-${{ option.name }}-chocolatey
+              - publish: $(Build.SourcesDirectory)/.chef/
+                artifact: build-${{ option.name }}-chef
                 displayName: Publish Artifacts
+
+              - script: |
+                  set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
+
+                  docker-compose down --rmi local --volumes
+                displayName: Clean
                 condition: always()
+          # - job: build_${{ option.name }}_chocolatey
+          #   displayName: Build ${{ option.name }} Chocolatey
+          #   dependsOn: build_${{ option.name }}_chef
+          #   pool:
+          #     name: Default
+          #     demands:
+          #       - AZP_AGENT_DOCKER_WINDOWS
+          #   workspace:
+          #     clean: all
+          #   steps:
+          #     - checkout: self
+          #       submodules: recursive
+          #     - task: DownloadPipelineArtifact@2
+          #       inputs:
+          #         artifact: build-${{ option.name }}-chef
+          #         path: $(Build.SourcesDirectory)/.chef/
+          #       displayName: Download Artifacts
+          #     - script: |
+          #         set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
+          #         docker --version
+          #         docker-compose --version
+          #         docker container ls -a
+          #         docker image ls -a
+          #       displayName: Initialize Docker
+          #     - script: |
+          #         set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
+          #         docker-compose pull --quiet chocolatey-cli-windows
+          #         docker-compose run --rm --entrypoint "powershell -File ./build/docker/chocolatey.package.pack.ps1" chocolatey-cli-windows ${{ option.name }}
+          #       displayName: Build
+          #     - publish: $(Build.SourcesDirectory)/.chocolatey/
+          #       artifact: build-${{ option.name }}-chocolatey
+          #       displayName: Publish Artifacts
+          #       condition: always()

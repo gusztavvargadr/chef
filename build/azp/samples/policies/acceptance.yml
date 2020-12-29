@@ -43,44 +43,38 @@ stages:
               - script: |
                   set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
 
-                  docker-compose pull --quiet chef-client-windows
-
-                  docker-compose run --rm --workdir C:/opt/chef/.chef/policies/${{ option.name }}/ chef-client-windows -z
+                  docker-compose run chef-policy-test ${{ option.name }}
                 displayName: Test
-
-          - job: test_${{ option.name }}_chocolatey
-            displayName: Test ${{ option.name }} Chocolatey
-
-            pool:
-              vmImage: windows-2019
-
-            workspace:
-              clean: all
-
-            steps:
-              - checkout: self
-                submodules: recursive
-
-              - task: DownloadPipelineArtifact@2
-                inputs:
-                  artifact: build-${{ option.name }}-chocolatey
-                  path: $(Build.SourcesDirectory)/.chocolatey/
-                displayName: Download Artifacts
 
               - script: |
                   set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
 
-                  docker --version
-                  docker-compose --version
-
-                  docker container ls -a
-                  docker image ls -a
-                displayName: Initialize Docker
-
-              - script: |
-                  set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
-
-                  docker-compose pull --quiet chef-client-windows
-
-                  docker-compose run --rm --entrypoint choco chef-client-windows install chef-policy --confirm --source ./.chocolatey/packages/
-                displayName: Test
+                  docker-compose down --rmi local --volumes
+                displayName: Clean
+                condition: always()
+          # - job: test_${{ option.name }}_chocolatey
+          #   displayName: Test ${{ option.name }} Chocolatey
+          #   pool:
+          #     vmImage: windows-2019
+          #   workspace:
+          #     clean: all
+          #   steps:
+          #     - checkout: self
+          #       submodules: recursive
+          #     - task: DownloadPipelineArtifact@2
+          #       inputs:
+          #         artifact: build-${{ option.name }}-chocolatey
+          #         path: $(Build.SourcesDirectory)/.chocolatey/
+          #       displayName: Download Artifacts
+          #     - script: |
+          #         set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
+          #         docker --version
+          #         docker-compose --version
+          #         docker container ls -a
+          #         docker image ls -a
+          #       displayName: Initialize Docker
+          #     - script: |
+          #         set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
+          #         docker-compose pull --quiet chef-client-windows
+          #         docker-compose run --rm --entrypoint choco chef-client-windows install chef-policy --confirm --source ./.chocolatey/packages/
+          #       displayName: Test
