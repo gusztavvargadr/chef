@@ -1,3 +1,13 @@
+trigger:
+  branches:
+    include:
+      - "*"
+  tags:
+    include:
+      - "*"
+  paths:
+    include:
+      - samples/policies/core
 pr: none
 
 stages:

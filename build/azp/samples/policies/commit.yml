@@ -37,7 +37,7 @@ stages:
               - script: |
                   set DOCKER_CONTEXT=%AZP_AGENT_DOCKER_WINDOWS%
 
-                  docker-compose run chef-policy-build --name chef-policy-build ${{ option.name }}
+                  docker-compose run --name chef-policy-build chef-policy-build ${{ option.name }}
                   docker cp chef-policy-build:/opt/chef/.chef/ ./.chef/
                 displayName: Build
 
