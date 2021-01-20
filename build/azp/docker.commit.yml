@@ -19,11 +19,10 @@ stages:
 
             ${{ if eq(configuration.name, 'windows') }}:
               pool:
-                vmImage: windows-2019
-              # pool:
-              #   name: Default
-              #   demands:
-              #     - AZP_AGENT_DOCKER_WINDOWS
+                name: Default
+                demands:
+                  - AZP_AGENT_WINDOWS
+                  - AZP_AGENT_DOCKER
 
             workspace:
               clean: all
@@ -46,7 +45,7 @@ stages:
                     displayName: Build ${{ service }}
 
                   - script: |
-                      docker-compose run ${{ service }} --version
+                      docker-compose run ${{ service }}
                     displayName: Test ${{ service }}
 
               - task: Docker@2
@@ -68,6 +67,6 @@ stages:
                   containerRegistry: dockerhub-gusztavvargadr
 
               - script: |
-                  docker-compose down --rmi all
+                  docker-compose down --rmi all --volumes
                 displayName: Clean
                 condition: always()

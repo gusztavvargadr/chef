@@ -4,5 +4,4 @@
 **/.kitchen
 **/Policyfile.lock.json
 
-**/.chef
-**/.chocolatey
+artifacts

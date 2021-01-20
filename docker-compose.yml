@@ -1,62 +1,54 @@
-version: "2.1"
+version: "3"
 
 services:
   chef-client-linux:
     image: gusztavvargadr/chef-client:linux
     build:
-      context: ./build/docker/
-      dockerfile: ./chef-client.linux.Dockerfile
+      context: ./
+      dockerfile: ./build/docker/linux/chef-client.Dockerfile
     volumes:
-      - ./:/opt/docker/chef/
-    entrypoint: chef-client
-    command: --help
+      - ./:/opt/docker/work/
 
   chef-workstation-linux:
     image: gusztavvargadr/chef-workstation:linux
     build:
-      context: ./build/docker/
-      dockerfile: ./chef-workstation.linux.Dockerfile
+      context: ./
+      dockerfile: ./build/docker/linux/chef-workstation.Dockerfile
     volumes:
-      - ./:/opt/docker/chef/
-    entrypoint: chef
-    command: --help
+      - ./:/opt/docker/work/
 
-  chocolatey-cli-windows:
-    image: gusztavvargadr/chocolatey-cli:windows
-    build:
-      context: ./build/docker/
-      dockerfile: ./chocolatey-cli.windows.Dockerfile
+  chef-policy-build-linux:
+    image: gusztavvargadr/chef-workstation:linux
     volumes:
-      - ./:C:/opt/chocolatey/
-    entrypoint: choco
-    command: --help
+      - ./:/opt/docker/work/
+
+  chef-policy-run-linux:
+    image: gusztavvargadr/chef-client:linux
+    volumes:
+      - ./:/opt/docker/work/
 
   chef-client-windows:
     image: gusztavvargadr/chef-client:windows
     build:
-      context: ./build/docker/
-      dockerfile: ./chef-client.windows.Dockerfile
+      context: ./
+      dockerfile: ./build/docker/windows/chef-client.Dockerfile
     volumes:
-      - ./:C:/opt/chef/
-    entrypoint: chef-client.bat
-    command: --help
+      - ./:C:/opt/docker/work/
 
   chef-workstation-windows:
     image: gusztavvargadr/chef-workstation:windows
     build:
-      context: ./build/docker/
-      dockerfile: ./chef-workstation.windows.Dockerfile
+      context: ./
+      dockerfile: ./build/docker/windows/chef-workstation.Dockerfile
     volumes:
-      - ./:C:/opt/chef/
-    entrypoint: chef-cli.bat
-    command: --help
+      - ./:C:/opt/docker/work/
 
-  chef-policy-build:
-    build:
-      context: ./
-      dockerfile: ./build/docker/chef-policy-build.Dockerfile
+  chef-policy-build-windows:
+    image: gusztavvargadr/chef-workstation:windows
+    volumes:
+      - ./:C:/opt/docker/work/
 
-  chef-policy-test:
-    build:
-      context: ./
-      dockerfile: ./build/docker/chef-policy-test.Dockerfile
+  chef-policy-run-windows:
+    image: gusztavvargadr/chef-client:windows
+    volumes:
+      - ./:C:/opt/docker/work/

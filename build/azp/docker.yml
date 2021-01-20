@@ -11,6 +11,5 @@ stages:
             - chef-workstation-linux
         - name: windows
           services:
-            - chocolatey-cli-windows
             - chef-client-windows
             - chef-workstation-windows
