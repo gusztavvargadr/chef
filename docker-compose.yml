@@ -32,6 +32,7 @@ services:
     build:
       context: ./
       dockerfile: ./build/docker/windows/chef-client.Dockerfile
+      isolation: process
     volumes:
       - ./:C:/opt/docker/work/
 
@@ -40,6 +41,7 @@ services:
     build:
       context: ./
       dockerfile: ./build/docker/windows/chef-workstation.Dockerfile
+      isolation: process
     volumes:
       - ./:C:/opt/docker/work/
 

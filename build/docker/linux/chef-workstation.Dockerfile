@@ -2,6 +2,7 @@ FROM ubuntu:20.04
 
 WORKDIR /opt/docker/
 ADD ./build/chef/linux/ ./build/
+RUN chmod +x ./build/*.sh
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN ./build/chef-core.sh
