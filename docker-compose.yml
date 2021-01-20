@@ -33,6 +33,7 @@ services:
       context: ./
       dockerfile: ./build/docker/windows/chef-client.Dockerfile
       isolation: process
+    isolation: process
     volumes:
       - ./:C:/opt/docker/work/
 
@@ -42,15 +43,18 @@ services:
       context: ./
       dockerfile: ./build/docker/windows/chef-workstation.Dockerfile
       isolation: process
+    isolation: process
     volumes:
       - ./:C:/opt/docker/work/
 
   chef-policy-build-windows:
     image: gusztavvargadr/chef-workstation:windows
+    isolation: process
     volumes:
       - ./:C:/opt/docker/work/
 
   chef-policy-run-windows:
     image: gusztavvargadr/chef-client:windows
+    isolation: process
     volumes:
       - ./:C:/opt/docker/work/
