@@ -1,7 +1,6 @@
 gusztavvargadr_windows:
   chocolatey_packages:
     googlechrome:
-    # firefox:
     conemu:
     far:
     treesizefree:

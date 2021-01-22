@@ -21,11 +21,15 @@ services:
     image: gusztavvargadr/chef-workstation:linux
     volumes:
       - ./:/opt/docker/work/
+    entrypoint: ./build/chef/linux/chef-policy-build.sh
+    command: hello-world
 
   chef-policy-run-linux:
     image: gusztavvargadr/chef-client:linux
     volumes:
       - ./:/opt/docker/work/
+    entrypoint: ./build/chef/linux/chef-policy-run.sh
+    command: hello-world
 
   chef-client-windows:
     image: gusztavvargadr/chef-client:windows
@@ -52,9 +56,13 @@ services:
     isolation: process
     volumes:
       - ./:C:/opt/docker/work/
+    entrypoint: powershell -File ./build/chef/windows/chef-policy-build.ps1
+    command: hello-world
 
   chef-policy-run-windows:
     image: gusztavvargadr/chef-client:windows
     isolation: process
     volumes:
       - ./:C:/opt/docker/work/
+    entrypoint: powershell -File ./build/chef/windows/chef-policy-run.ps1
+    command: hello-world

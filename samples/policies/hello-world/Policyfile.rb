@@ -1,8 +1,8 @@
 directory = File.dirname(__FILE__)
 
-require "#{directory}/../../../../src/Policyfile"
+require "#{directory}/../../../src/Policyfile"
 
-name 'gusztavvargadr_core_init'
+name 'gusztavvargadr_hello_world'
 
 gusztavvargadr_chef_sources
 

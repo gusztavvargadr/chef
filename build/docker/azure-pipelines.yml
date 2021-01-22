@@ -1,0 +1,16 @@
+trigger: none
+pr: none
+
+stages:
+  - template: ./azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: windows
+          services:
+            - chef-client
+            - chef-workstation
+
+        - name: linux
+          services:
+            - chef-client
+            - chef-workstation

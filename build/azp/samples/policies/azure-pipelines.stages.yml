@@ -1,0 +1,53 @@
+parameters:
+  configurations: []
+  # - name: string
+  #   policies: [ string ]
+
+stages:
+  - stage: commit
+    displayName: Commit
+
+    jobs:
+      - ${{ each configuration in parameters.configurations }}:
+        - ${{ each policy in configuration.policies }}:
+          - job: build_${{ configuration.name }}_${{ replace(policy, '-', '_' }}
+            displayName: Build ${{ configuration.name }} 3{{ policy }}
+
+            ${{ if eq(configuration.name, 'windows') }}:
+              pool:
+                name: Default
+                demands:
+                  - AZP_AGENT_WINDOWS
+                  - AZP_AGENT_DOCKER
+
+            ${{ if eq(configuration.name, 'linux') }}:
+              pool:
+                vmImage: ubuntu-16.04
+
+            workspace:
+              clean: all
+
+            steps:
+              - checkout: self
+                submodules: recursive
+
+              - script: |
+                  docker --version
+                  docker-compose --version
+
+                  docker container ls -a
+                  docker image ls -a
+                displayName: Initialize Docker
+
+              - script: |
+                  docker-compose run chef-policy-build-${{ configuration.name }} ${{ policy }}
+                displayName: Build
+
+              - publish: $(Build.SourcesDirectory)/artifacts/
+                artifact: build-${{ configuration.name }}-${{ policy }}
+                displayName: Publish Artifacts
+
+              - script: |
+                  docker-compose down --rmi local --volumes
+                displayName: Clean
+                condition: always()

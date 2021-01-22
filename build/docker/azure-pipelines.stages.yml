@@ -1,0 +1,71 @@
+parameters:
+  configurations: []
+  # - name: string
+  #   services: [ string ]
+
+stages:
+  - stage: commit
+    displayName: Commit
+
+    jobs:
+      - ${{ each configuration in parameters.configurations }}:
+        - job: build_${{ configuration.name }}
+          displayName: Build ${{ configuration.name }}
+
+          ${{ if eq(configuration.name, 'windows') }}:
+            pool:
+              name: Default
+              demands:
+                - AZP_AGENT_WINDOWS
+                - AZP_AGENT_DOCKER
+
+          ${{ if eq(configuration.name, 'linux') }}:
+            pool:
+              vmImage: ubuntu-16.04
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - script: |
+                docker --version
+                docker-compose --version
+
+                docker image ls -a
+                docker container ls -a
+              displayName: Initialize Docker
+
+            - ${{ each service in configuration.services }}:
+              - script: |
+                  docker-compose build ${{ service }}-${{ configuration.name }}
+                displayName: Build ${{ service }}
+
+              - script: |
+                  docker-compose run ${{ service }}-${{ configuration.name }}
+                displayName: Test ${{ service }}
+
+            - task: Docker@2
+              displayName: Login Docker
+              inputs:
+                command: login
+                containerRegistry: dockerhub-gusztavvargadr
+
+            - ${{ each service in configuration.services }}:
+              - script: |
+                  docker-compose push ${{ service }}-${{ configuration.name }}
+                displayName: Publish ${{ service }}
+
+            - task: Docker@2
+              displayName: Logout Docker
+              condition: always()
+              inputs:
+                command: logout
+                containerRegistry: dockerhub-gusztavvargadr
+
+            - script: |
+                docker-compose down --rmi local --volumes
+              displayName: Clean
+              condition: always()
