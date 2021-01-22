@@ -10,7 +10,7 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each policy in configuration.policies }}:
-          - job: build_${{ configuration.name }}_${{ replace(policy, '-', '_' }}
+          - job: build_${{ configuration.name }}_${{ replace(policy, '-', '_') }}
             displayName: Build ${{ configuration.name }} 3{{ policy }}
 
             ${{ if eq(configuration.name, 'windows') }}:
