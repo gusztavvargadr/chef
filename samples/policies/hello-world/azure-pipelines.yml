@@ -11,7 +11,7 @@ trigger:
 pr: none
 
 stages:
-  - template: ../../../build/azp/samples/policies/azure-pipelines.stages.yml
+  - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
         - name: windows
