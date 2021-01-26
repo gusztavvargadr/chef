@@ -5,12 +5,13 @@ stages:
   - template: ./azure-pipelines.stages.yml
     parameters:
       configurations:
-        - name: windows
-          services:
-            - chef-client
-            - chef-workstation
+        - name: chef-client
+          platforms:
+            - windows
+            - linux
 
-        - name: linux
-          services:
-            - chef-client
-            - chef-workstation
+        - name: chef-workstation
+          platforms:
+            - windows
+            - linux
+          dependsOn: chef-client

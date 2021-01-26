@@ -1,7 +1,8 @@
 parameters:
   configurations: []
-  # - name: string
-  #   services: [ string ]
+    # - name: string
+    #   platforms: [ string ]
+    #   depensOn: string
 
 stages:
   - stage: commit
@@ -9,63 +10,70 @@ stages:
 
     jobs:
       - ${{ each configuration in parameters.configurations }}:
-        - job: build_${{ configuration.name }}
-          displayName: Build ${{ configuration.name }}
+        - ${{ each platform in configuration.platforms }}:
+          - job: build_${{ configuration.name }}_${{ platform }}
+            displayName: Build ${{ configuration.name }} on ${{ platform }}
+            ${{ if configuration.depensOn }}:
+              depensOn: build_${{ configuration.depensOn }}_${{ platform }}
 
-          ${{ if eq(configuration.name, 'windows') }}:
-            pool:
-              name: Default
-              demands:
-                - AZP_AGENT_WINDOWS
-                - AZP_AGENT_DOCKER
+            ${{ if eq(platform, 'windows') }}:
+              pool:
+                name: Default
+                demands:
+                  - AZP_AGENT_WINDOWS
+                  - AZP_AGENT_DOCKER
 
-          ${{ if eq(configuration.name, 'linux') }}:
-            pool:
-              vmImage: ubuntu-16.04
+            ${{ if eq(platform, 'linux') }}:
+              pool:
+                vmImage: ubuntu-16.04
 
-          workspace:
-            clean: all
+            workspace:
+              clean: all
 
-          steps:
-            - checkout: self
-              submodules: recursive
-
-            - script: |
-                docker --version
-                docker-compose --version
-
-                docker image ls -a
-                docker container ls -a
-              displayName: Initialize Docker
-
-            - ${{ each service in configuration.services }}:
-              - script: |
-                  docker-compose build ${{ service }}-${{ configuration.name }}
-                displayName: Build ${{ service }}
+            steps:
+              - checkout: self
+                submodules: recursive
 
               - script: |
-                  docker-compose run ${{ service }}-${{ configuration.name }}
-                displayName: Test ${{ service }}
+                  docker --version
+                  docker-compose --version
 
-            - task: Docker@2
-              displayName: Login Docker
-              inputs:
-                command: login
-                containerRegistry: dockerhub-gusztavvargadr
+                  docker image ls -a
+                  docker container ls -a
+                displayName: Initialize Docker
 
-            - ${{ each service in configuration.services }}:
+
+              - ${{ if configuration.depensOn }}:
+                - script: |
+                    docker-compose pull ${{ configuration.dependsOn }}-${{ platform }}
+                  displayName: Restore
+              
               - script: |
-                  docker-compose push ${{ service }}-${{ configuration.name }}
-                displayName: Publish ${{ service }}
+                  docker-compose build ${{ configuration.name }}-${{ platform }}
+                displayName: Build
 
-            - task: Docker@2
-              displayName: Logout Docker
-              condition: always()
-              inputs:
-                command: logout
-                containerRegistry: dockerhub-gusztavvargadr
+              - script: |
+                  docker-compose run ${{ configuration.name }}-${{ platform }}
+                displayName: Test
 
-            - script: |
-                docker-compose down --rmi local --volumes
-              displayName: Clean
-              condition: always()
+              - task: Docker@2
+                displayName: Login Docker
+                inputs:
+                  command: login
+                  containerRegistry: dockerhub-gusztavvargadr
+
+              - script: |
+                  docker-compose push ${{ configuration.name }}-${{ platform }}
+                displayName: Publish
+
+              - task: Docker@2
+                displayName: Logout Docker
+                condition: always()
+                inputs:
+                  command: logout
+                  containerRegistry: dockerhub-gusztavvargadr
+
+              - script: |
+                  docker-compose down --rmi local --volumes
+                displayName: Clean
+                condition: always()
