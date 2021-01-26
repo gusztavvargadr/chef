@@ -11,10 +11,10 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each platform in configuration.platforms }}:
-          - job: build_${{ configuration.name }}_${{ platform }}
+          - job: build_${{ replace(configuration.name, '-', '_') }}_${{ platform }}
             displayName: Build ${{ configuration.name }} on ${{ platform }}
             ${{ if configuration.depensOn }}:
-              depensOn: build_${{ configuration.depensOn }}_${{ platform }}
+              depensOn: build_${{ replace(configuration.depensOn, '-', '_') }}_${{ platform }}
 
             ${{ if eq(platform, 'windows') }}:
               pool:
