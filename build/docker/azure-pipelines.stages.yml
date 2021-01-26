@@ -2,7 +2,7 @@ parameters:
   configurations: []
     # - name: string
     #   platforms: [ string ]
-    #   depensOn: string
+    #   dependsOn: string
 
 stages:
   - stage: commit
@@ -13,8 +13,8 @@ stages:
         - ${{ each platform in configuration.platforms }}:
           - job: build_${{ replace(configuration.name, '-', '_') }}_${{ platform }}
             displayName: Build ${{ configuration.name }} on ${{ platform }}
-            ${{ if configuration.depensOn }}:
-              depensOn: build_${{ replace(configuration.depensOn, '-', '_') }}_${{ platform }}
+            ${{ if configuration.dependsOn }}:
+              dependsOn: build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform }}
 
             ${{ if eq(platform, 'windows') }}:
               pool:
@@ -43,7 +43,7 @@ stages:
                 displayName: Initialize Docker
 
 
-              - ${{ if configuration.depensOn }}:
+              - ${{ if configuration.dependsOn }}:
                 - script: |
                     docker-compose pull ${{ configuration.dependsOn }}-${{ platform }}
                   displayName: Restore
