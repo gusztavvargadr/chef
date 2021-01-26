@@ -6,6 +6,8 @@ services:
     build:
       context: ./
       dockerfile: ./build/docker/linux/chef-core.Dockerfile
+    entrypoint: echo
+    command: chef-core
 
   chef-client-linux:
     image: gusztavvargadr/chef-client:linux
@@ -48,6 +50,8 @@ services:
       dockerfile: ./build/docker/windows/chef-core.Dockerfile
       isolation: process
     isolation: process
+    entrypoint: cmd
+    command: /c echo chef-core
 
   chef-client-windows:
     image: gusztavvargadr/chef-client:windows
