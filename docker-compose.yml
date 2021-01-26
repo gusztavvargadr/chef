@@ -1,6 +1,12 @@
 version: "3"
 
 services:
+  chef-core-linux:
+    image: gusztavvargadr/chef-core:linux
+    build:
+      context: ./
+      dockerfile: ./build/docker/linux/chef-core.Dockerfile
+
   chef-client-linux:
     image: gusztavvargadr/chef-client:linux
     build:
@@ -34,6 +40,14 @@ services:
       - ./:/opt/docker/work/
     entrypoint: ./build/chef/linux/chef-policy-run.sh
     command: hello-world
+
+  chef-core-windows:
+    image: gusztavvargadr/chef-core:windows
+    build:
+      context: ./
+      dockerfile: ./build/docker/windows/chef-core.Dockerfile
+      isolation: process
+    isolation: process
 
   chef-client-windows:
     image: gusztavvargadr/chef-client:windows
