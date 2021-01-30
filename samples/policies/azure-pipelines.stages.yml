@@ -13,14 +13,14 @@ stages:
           - job: build_${{ replace(configuration.name, '-', '_') }}_${{ platform }}
             displayName: Build ${{ configuration.name }} on ${{ platform }}
 
-            ${{ if eq(configuration.name, 'windows') }}:
+            ${{ if eq(platform, 'windows') }}:
               pool:
                 name: Default
                 demands:
                   - AZP_AGENT_WINDOWS
                   - AZP_AGENT_DOCKER
 
-            ${{ if eq(configuration.name, 'linux') }}:
+            ${{ if eq(platform, 'linux') }}:
               pool:
                 vmImage: ubuntu-20.04
 
@@ -39,7 +39,7 @@ stages:
                   docker image ls -a
                 displayName: Initialize Docker
 
-              - ${{ if eq(configuration.name, 'linux') }}:
+              - ${{ if eq(platform, 'linux') }}:
                 - script: |
                     chmod +x ./build/chef/linux/*.sh
                   displayName: Restore
@@ -66,14 +66,14 @@ stages:
           - job: test_${{ replace(configuration.name, '-', '_') }}_${{ platform }}
             displayName: Test ${{ configuration.name }} on ${{ platform }}
 
-            ${{ if eq(configuration.name, 'windows') }}:
+            ${{ if eq(platform, 'windows') }}:
               pool:
                 name: Default
                 demands:
                   - AZP_AGENT_WINDOWS
                   - AZP_AGENT_DOCKER
 
-            ${{ if eq(configuration.name, 'linux') }}:
+            ${{ if eq(platform, 'linux') }}:
               pool:
                 vmImage: ubuntu-20.04
 
@@ -98,7 +98,7 @@ stages:
                   docker image ls -a
                 displayName: Initialize Docker
 
-              - ${{ if eq(configuration.name, 'linux') }}:
+              - ${{ if eq(platform, 'linux') }}:
                 - script: |
                     chmod +x ./build/chef/linux/*.sh
                   displayName: Restore
