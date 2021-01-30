@@ -1,6 +1,8 @@
 gusztavvargadr_windows:
   chocolatey_packages:
-    googlechrome:
+    firefox:
+      install:
+        params: '"/NoMaintenanceService"'
     conemu:
     far:
     treesizefree:
@@ -14,36 +16,36 @@ gusztavvargadr_windows:
 #         params: '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration"'
 #     poshgit:
 #     dotnetcore-sdk:
-    # cake
+# cake
 
-    # vagrant:
-    #   install:
-    #     ignore-package-exit-codes:
-    #   reboot: true
-    # chef-workstation:
-    # docker-desktop:
-    #   reboot: true
+# vagrant:
+#   install:
+#     ignore-package-exit-codes:
+#   reboot: true
+# chef-workstation:
+# docker-desktop:
+#   reboot: true
 
-    # wsl
-    # docker
-    # hyperv
-    # virtualbox
+# wsl
+# docker
+# hyperv
+# virtualbox
 
-    # awscli:
-    #   version: ''
-    # aws-vault:
-    #   version: ''
+# awscli:
+#   version: ''
+# aws-vault:
+#   version: ''
 
-    # azure-cli:
-    #   version: ''
+# azure-cli:
+#   version: ''
 
 # aws profile
 # azure envs
 
 # VAGRANT_PROVIDER_AZURE_LOCATION
 
-    # jetbrainstoolbox:
-    #   version: ''
+# jetbrainstoolbox:
+#   version: ''
 
 # vagrant plugins
 # fog-ovirt
@@ -72,28 +74,20 @@ gusztavvargadr_windows:
 # gusztavvargadr_windows:
 #   chocolatey_packages:
 #     resharper-ultimate-all:
-#       version: 2018.1.4
 #     resharper-clt:
-#       version: 2018.1.4
 #     postman:
-#       version: 6.2.4
 #     fiddler:
-#       version: 5.0.20182.28034
 #     # vs
 
 # gusztavvargadr_windows:
 #   chocolatey_packages:
 #     pgadmin4:
-#       version: 3.1
 #     datagrip:
-#       version: 2018.2.2
 
 # gusztavvargadr_windows:
 #   chocolatey_packages:
 #     packer:
-#       version: '1.2.5'
 #     terraform:
-#       version: '0.11.9'
 
 # packer_cache_dir
 # vagrant_cloud_token

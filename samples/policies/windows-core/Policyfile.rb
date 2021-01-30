@@ -2,7 +2,7 @@ directory = File.dirname(__FILE__)
 
 require "#{directory}/../../../src/Policyfile"
 
-name 'gusztavvargadr_core'
+name 'gusztavvargadr_windows_core'
 
 gusztavvargadr_chef_sources
 

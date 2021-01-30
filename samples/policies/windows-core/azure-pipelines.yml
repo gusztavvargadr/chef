@@ -5,7 +5,6 @@ stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
-        - name: hello-world
+        - name: windows-core
           platforms:
             - windows
-            - linux
