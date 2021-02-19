@@ -12,11 +12,11 @@ verifier:
 
 platforms:
   - name: windows
+    transport:
+      socket: tcp://localhost:2375
     driver:
       image: gusztavvargadr/chef-client:windows
-      socket: "<%= `docker context inspect #{ENV['DOCKER_CONTEXT_WINDOWS'] || 'default'} --format {{.Endpoints.docker.Host}}`.strip %>"
-    transport:
-      socket: "<%= `docker context inspect #{ENV['DOCKER_CONTEXT_WINDOWS'] || 'default'} --format {{.Endpoints.docker.Host}}`.strip %>"
+      run_options: --isolation process
 
 suites:
   - name: chocolatey-packages

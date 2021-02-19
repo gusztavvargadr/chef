@@ -1,0 +1,106 @@
+parameters:
+  configurations: []
+    # - name: string
+    #   driver: string
+    #   suites: [ string ]
+
+stages:
+  - stage: commit
+    displayName: Commit
+
+    jobs:
+      - ${{ each configuration in parameters.configurations }}:
+        - job: build_${{ configuration.name }}
+          displayName: Build ${{ configuration.name }}
+
+          pool:
+            vmImage: ubuntu-20.04
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - script: |
+                docker --version
+                docker-compose --version
+
+                docker image ls -a
+                docker container ls -a
+              displayName: Initialize Docker
+
+            - script: |
+                chmod +x ./build/chef/linux/*.sh
+                docker-compose pull --quiet chef-workstation-linux
+              displayName: Restore
+
+            - script: |
+                docker-compose run chef-cookbook-lint-linux ${{ configuration.name }}
+                docker-compose run chef-cookbook-lint-linux ${{ configuration.name }}_test
+              displayName: Lint
+
+            - script: |
+                docker-compose run chef-cookbook-test-linux ${{ configuration.name }}_test
+              displayName: Test
+
+            - script: |
+                docker-compose down --rmi local --volumes
+              displayName: Clean
+              condition: always()
+
+  - stage: acceptance
+    displayName: Acceptance
+
+    jobs:
+      - ${{ each configuration in parameters.configurations }}:
+        - ${{ each suite in configuration.suites }}:
+          - job: test_${{ configuration.name }}_${{ replace(suite, '-', '_') }}
+            displayName: Test ${{ configuration.name }} on ${{ suite }}
+
+            pool:
+              name: Default
+              demands:
+                - AZP_AGENT_WINDOWS
+                - AZP_AGENT_DOCKER
+
+            workspace:
+              clean: all
+
+            steps:
+              - checkout: self
+                submodules: recursive
+
+              - ${{ if eq(configuration.driver, 'vagrant') }}:
+                - script: |
+                    vagrant --version
+                    vagrant plugin list
+
+                    vagrant box list
+                    vagrant global-status
+                  displayName: Initialize Vagrant
+
+              - ${{ if eq(configuration.driver, 'docker') }}:
+                - script: |
+                    docker --version
+                    docker-compose --version
+
+                    docker image ls -a
+                    docker container ls -a
+                  displayName: Initialize Docker
+
+              - script: |
+                  cd samples/cookbooks/${{ configuration.name }}_test
+                  kitchen test ${{ suite }}
+                displayName: Test
+                env:
+                  KITCHEN_YAML: kitchen.${{ configuration.driver }}.yml
+
+              - script: |
+                  cd samples/cookbooks/${{ configuration.name }}_test
+                  kitchen destroy ${{ suite }}
+                displayName: Clean
+                env:
+                  KITCHEN_YAML: kitchen.${{ configuration.driver }}.yml
+                condition: always()

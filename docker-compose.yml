@@ -43,6 +43,20 @@ services:
     entrypoint: ./build/chef/linux/chef-policy-run.sh
     command: hello-world
 
+  chef-cookbook-lint-linux:
+    image: gusztavvargadr/chef-workstation:linux
+    volumes:
+      - ./:/opt/docker/work/
+    entrypoint: ./build/chef/linux/chef-cookbook-lint.sh
+    command: hello-world
+
+  chef-cookbook-test-linux:
+    image: gusztavvargadr/chef-workstation:linux
+    volumes:
+      - ./:/opt/docker/work/
+    entrypoint: ./build/chef/linux/chef-cookbook-test.sh
+    command: hello-world
+
   chef-core-windows:
     image: gusztavvargadr/chef-core:windows
     build:
