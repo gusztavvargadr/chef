@@ -44,7 +44,7 @@ stages:
 
               - ${{ if configuration.dependsOn }}:
                 - script: |
-                    docker-compose pull ${{ configuration.dependsOn }}-${{ platform }}
+                    docker-compose pull --quiet ${{ configuration.dependsOn }}-${{ platform }}
                   displayName: Restore
               
               - script: |

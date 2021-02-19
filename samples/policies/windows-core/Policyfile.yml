@@ -1,8 +1,6 @@
 gusztavvargadr_windows:
   chocolatey_packages:
-    firefox:
-      install:
-        params: '"/NoMaintenanceService"'
+    microsoft-edge:
     conemu:
     far:
     treesizefree:
