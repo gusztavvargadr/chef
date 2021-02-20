@@ -30,7 +30,7 @@ action :run do
   end
 
   windows_task_name = script_name
-  windows_task_command = "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File ""#{script_file_path}"""
+  windows_task_command = "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"#{script_file_path}\""
 
   if new_resource.user.to_s.empty?
     windows_task windows_task_name do
