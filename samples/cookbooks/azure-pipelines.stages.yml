@@ -58,8 +58,8 @@ stages:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each platform in configuration.platforms }}:
           - ${{ each suite in platform.suites }}:
-            - job: test_${{ configuration.name }}_${{ replace(platform, '-', '_') }}_${{ replace(suite, '-', '_') }}
-              displayName: Test ${{ configuration.name }} on ${{ platform }} for ${{ suite }}
+            - job: test_${{ configuration.name }}_${{ replace(platform.name, '-', '_') }}_${{ replace(suite, '-', '_') }}
+              displayName: Test ${{ configuration.name }} on ${{ platform.name }} for ${{ suite }}
 
               pool:
                 name: Default
@@ -94,14 +94,14 @@ stages:
 
                 - script: |
                     cd samples/cookbooks/${{ configuration.name }}
-                    kitchen test ${{ suite }}-${{ platform }}
+                    kitchen test ${{ suite }}-${{ platform.name }}
                   displayName: Test
                   env:
                     KITCHEN_YAML: kitchen.${{ platform.driver }}.yml
 
                 - script: |
                     cd samples/cookbooks/${{ configuration.name }}
-                    kitchen destroy ${{ suite }}}-${{ platform }}
+                    kitchen destroy ${{ suite }}}-${{ platform.name }}
                   displayName: Clean
                   env:
                     KITCHEN_YAML: kitchen.${{ platform.driver }}.yml
