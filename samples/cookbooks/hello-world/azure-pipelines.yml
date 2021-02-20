@@ -5,7 +5,7 @@ stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
-        - name: hello_world
+        - name: hello-world
           platforms:
             - name: windows
               driver: docker
