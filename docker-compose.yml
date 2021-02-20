@@ -106,3 +106,19 @@ services:
       - ./:C:/opt/docker/work/
     entrypoint: powershell -File ./build/chef/windows/chef-policy-run.ps1
     command: hello-world
+
+  chef-cookbook-lint-windows:
+    image: gusztavvargadr/chef-workstation:windows
+    isolation: process
+    volumes:
+      - ./:C:/opt/docker/work/
+    entrypoint: powershell -File ./build/chef/windows/chef-cookbook-lint.ps1
+    command: hello-world
+
+  chef-cookbook-test-windows:
+    image: gusztavvargadr/chef-workstation:windows
+    isolation: process
+    volumes:
+      - ./:C:/opt/docker/work/
+    entrypoint: powershell -File ./build/chef/windows/chef-cookbook-test.ps1
+    command: hello-world

@@ -15,7 +15,7 @@ action :install do
     },
   }
 
-  gusztavvargadr_windows_chocolatey_packages "Vagrant app #{new_resource.version}" do
+  gusztavvargadr_windows_chocolatey_packages '' do
     options chocolatey_packages_options
     action :install
   end

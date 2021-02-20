@@ -12,15 +12,10 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows
-    driver:
-      box: gusztavvargadr/windows-server
-
   - name: ubuntu
     driver:
       box: gusztavvargadr/ubuntu-server
 
 suites:
-  - name: app
-    provisioner:
-      named_run_list: app
+  - name: default
+    attributes:

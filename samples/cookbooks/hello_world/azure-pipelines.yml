@@ -5,10 +5,10 @@ stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
-        - name: vagrant
+        - name: hello_world
           platforms:
             - name: windows
-              driver: vagrant
+              driver: docker
               suites:
                 - default
             - name: ubuntu
