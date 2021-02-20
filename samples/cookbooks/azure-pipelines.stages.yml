@@ -101,7 +101,7 @@ stages:
 
                 - script: |
                     cd samples/cookbooks/${{ configuration.name }}
-                    kitchen destroy ${{ suite }}}-${{ platform.name }}
+                    kitchen destroy ${{ suite }}-${{ platform.name }}
                   displayName: Clean
                   env:
                     KITCHEN_YAML: kitchen.${{ platform.driver }}.yml
