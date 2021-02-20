@@ -1,4 +1,3 @@
-property :name, String, name_property: true
 property :options, Hash, default: {}
 
 default_action :install

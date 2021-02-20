@@ -1,0 +1,6 @@
+include_recipe 'gusztavvargadr_windows::chocolatey_packages'
+include_recipe 'gusztavvargadr_windows::environment_variables'
+include_recipe 'gusztavvargadr_windows::features'
+include_recipe 'gusztavvargadr_windows::files'
+include_recipe 'gusztavvargadr_windows::native_packages'
+include_recipe 'gusztavvargadr_windows::updates'

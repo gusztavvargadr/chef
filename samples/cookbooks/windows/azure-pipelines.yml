@@ -6,11 +6,8 @@ stages:
     parameters:
       configurations:
         - name: windows
-          driver: docker
-          suites:
-            - chocolatey-packages-windows
-            - environment-variables-windows
-            - features-windows
-            - files-windows
-            - native-packages-windows
-            - updates-windows
+          platforms:
+            - name: windows
+              driver: docker
+              suites:
+                - default

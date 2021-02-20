@@ -19,45 +19,19 @@ platforms:
       run_options: --isolation process
 
 suites:
-  - name: chocolatey-packages
-    provisioner:
-      named_run_list: chocolatey_packages
+  - name: default
     attributes:
       gusztavvargadr_windows:
         chocolatey_packages:
           conemu:
-
-  - name: environment-variables
-    provisioner:
-      named_run_list: environment_variables
-    attributes:
-      gusztavvargadr_windows:
         environment_variables:
           TEST_NAME:
             value: Test Value
-
-  - name: features
-    provisioner:
-      named_run_list: features
-    attributes:
-      gusztavvargadr_windows:
         features:
           TelnetClient:
-
-  - name: files
-    provisioner:
-      named_run_list: files
-    attributes:
-      gusztavvargadr_windows:
         files:
           /tmp/robots.txt:
             source: https://www.google.nl/robots.txt
-
-  - name: native-packages
-    provisioner:
-      named_run_list: native_packages
-    attributes:
-      gusztavvargadr_windows:
         native_packages:
           .NET Core SDK:
             source: https://download.microsoft.com/download/B/9/F/B9F1AF57-C14A-4670-9973-CDF47209B5BF/dotnet-dev-win-x64.1.0.4.exe
@@ -67,7 +41,3 @@ suites:
               - /norestart
             executable: C:/Program Files/dotnet/dotnet.exe
             elevated: true
-
-  - name: updates
-    provisioner:
-      named_run_list: updates
