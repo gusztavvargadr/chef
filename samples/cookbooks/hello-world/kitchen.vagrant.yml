@@ -18,4 +18,3 @@ platforms:
 
 suites:
   - name: default
-    attributes:
