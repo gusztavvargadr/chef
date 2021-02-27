@@ -1,7 +1,7 @@
 default['gusztavvargadr_mssql'] = {
   'server' => {
-    'version' => {},
-    'edition' => {},
+    'version' => '',
+    'edition' => '',
   },
   'management_studio' => {
     'version' => '',
