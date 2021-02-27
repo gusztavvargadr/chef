@@ -1,2 +1,5 @@
 chefignore
 azure-pipelines.yml
+Policyfile*
+*kitchen*
+test*

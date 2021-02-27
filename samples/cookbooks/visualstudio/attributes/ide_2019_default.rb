@@ -1,4 +1,4 @@
-default['gusztavvargadr_visualstudio']['2017_requirements'] = {
+default['gusztavvargadr_visualstudio']['ide']['2019_default'] = {
   'features' => {
     'NetFx3$' => {},
   },

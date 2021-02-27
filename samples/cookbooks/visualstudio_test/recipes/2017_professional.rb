@@ -1,2 +1,0 @@
-include_recipe 'gusztavvargadr_visualstudio::2017_requirements'
-include_recipe 'gusztavvargadr_visualstudio::2017_professional'
