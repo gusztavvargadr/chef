@@ -1,6 +1,8 @@
 property :version, String, default: ''
 property :edition, String, default: ''
 
+default_action :install
+
 action :install do
   return if new_resource.version.to_s.empty?
   return if new_resource.edition.to_s.empty?
