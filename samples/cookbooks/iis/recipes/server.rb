@@ -1,4 +1,5 @@
 gusztavvargadr_iis_server '' do
-  options node['gusztavvargadr_iis']['server']
+  version node['gusztavvargadr_iis']['server']['version']
   action :install
+  not_if { reboot_pending? }
 end

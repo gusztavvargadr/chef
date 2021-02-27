@@ -1,4 +1,4 @@
-default['gusztavvargadr_iis']['server'] = {
+default['gusztavvargadr_iis']['server']['default'] = {
   'features' => {
     'NetFx3$' => {},
     'IIS' => {},

@@ -1,0 +1,26 @@
+driver:
+  name: docker
+
+transport:
+  name: docker
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      image: gusztavvargadr/chef-client:windows
+      run_options: --isolation process
+    transport:
+      socket: tcp://localhost:2375
+
+suites:
+  - name: server-default
+    attributes:
+      gusztavvargadr_iis:
+        server:
+          version: default
