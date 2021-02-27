@@ -7,5 +7,5 @@ name 'gusztavvargadr_hello_world'
 gusztavvargadr_chef_sources
 
 run_list(
-  'recipe[hello_world::default]'
+  'recipe[gusztavvargar_hello_world::default]'
 )

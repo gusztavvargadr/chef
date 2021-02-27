@@ -7,7 +7,7 @@ name 'gusztavvargadr_windows_core'
 gusztavvargadr_chef_sources
 
 run_list(
-  'recipe[gusztavvargadr_windows::chocolatey_packages]'
+  'recipe[gusztavvargadr_windows::default]'
 )
 
 attributes(
