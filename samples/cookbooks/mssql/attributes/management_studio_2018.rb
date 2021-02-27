@@ -1,4 +1,4 @@
-default['gusztavvargadr_mssql']['2018_ssms'] = {
+default['gusztavvargadr_mssql']['management_studio']['2018'] = {
   'native_packages' => {
     'SSMS 18.7.1' => {
       'source' => 'https://download.microsoft.com/download/2/d/1/2d12f6a1-e28f-42d1-9617-ac036857c5be/SSMS-Setup-ENU.exe',

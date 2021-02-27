@@ -1,5 +1,3 @@
-provides :gusztavvargadr_vagrant_plugin
-
 property :options, Hash, default: {}
 
 default_action :install

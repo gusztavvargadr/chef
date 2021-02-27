@@ -11,6 +11,7 @@ stages:
               driver: docker
               suites:
                 - default
+
             - name: ubuntu
               driver: vagrant
               suites:

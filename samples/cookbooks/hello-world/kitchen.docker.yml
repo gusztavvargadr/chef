@@ -12,11 +12,11 @@ verifier:
 
 platforms:
   - name: windows
-    transport:
-      socket: tcp://localhost:2375
     driver:
       image: gusztavvargadr/chef-client:windows
       run_options: --isolation process
+    transport:
+      socket: tcp://localhost:2375
 
 suites:
   - name: default

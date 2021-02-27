@@ -1,10 +1,12 @@
 provides :gusztavvargadr_vagrant_app, platform: 'windows'
 
-property :version, String, required: true
+property :version, String, default: ''
 
 default_action :install
 
 action :install do
+  return if new_resource.version.to_s.empty?
+
   chocolatey_packages_options = {
     'vagrant' => {
       'version' => new_resource.version,

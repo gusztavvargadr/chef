@@ -11,6 +11,7 @@ stages:
               driver: vagrant
               suites:
                 - default
+
             - name: ubuntu
               driver: vagrant
               suites:

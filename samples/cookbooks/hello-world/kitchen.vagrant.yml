@@ -2,8 +2,8 @@ driver:
   name: vagrant
   vm_hostname: false
   customize:
-    cpus: 2
-    memory: 2048
+    cpus: "2"
+    memory: "2048"
 
 provisioner:
   name: chef_zero

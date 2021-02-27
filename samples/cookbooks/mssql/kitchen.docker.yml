@@ -1,0 +1,46 @@
+driver:
+  name: docker
+
+transport:
+  name: docker
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      image: gusztavvargadr/chef-client:windows
+      run_options: --isolation process
+    transport:
+      socket: tcp://localhost:2375
+
+suites:
+  - name: server-2017-developer
+    attributes:
+      gusztavvargadr_mssql:
+        server:
+          version: "2017"
+          edition: developer
+
+  - name: server-2019-developer
+    attributes:
+      gusztavvargadr_mssql:
+        server:
+          version: "2019"
+          edition: developer
+
+  - name: management-studio-2017
+    attributes:
+      gusztavvargadr_mssql:
+        management_studio:
+          version: "2017"
+
+  - name: management-studio-2018
+    attributes:
+      gusztavvargadr_mssql:
+        management_studio:
+          version: "2018"

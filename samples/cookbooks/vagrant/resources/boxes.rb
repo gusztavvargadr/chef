@@ -1,5 +1,3 @@
-provides :gusztavvargadr_vagrant_boxes
-
 property :options, Hash, required: true
 
 default_action :add
