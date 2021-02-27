@@ -29,20 +29,6 @@ services:
     entrypoint: chef
     command: --version
 
-  chef-policy-build-linux:
-    image: gusztavvargadr/chef-workstation:linux
-    volumes:
-      - ./:/opt/docker/work/
-    entrypoint: ./build/chef/linux/chef-policy-build.sh
-    command: hello-world
-
-  chef-policy-run-linux:
-    image: gusztavvargadr/chef-client:linux
-    volumes:
-      - ./:/opt/docker/work/
-    entrypoint: ./build/chef/linux/chef-policy-run.sh
-    command: hello-world
-
   chef-cookbook-lint-linux:
     image: gusztavvargadr/chef-workstation:linux
     volumes:
@@ -55,6 +41,20 @@ services:
     volumes:
       - ./:/opt/docker/work/
     entrypoint: ./build/chef/linux/chef-cookbook-test.sh
+    command: hello-world
+
+  chef-policy-build-linux:
+    image: gusztavvargadr/chef-workstation:linux
+    volumes:
+      - ./:/opt/docker/work/
+    entrypoint: ./build/chef/linux/chef-policy-build.sh
+    command: hello-world
+
+  chef-policy-run-linux:
+    image: gusztavvargadr/chef-client:linux
+    volumes:
+      - ./:/opt/docker/work/
+    entrypoint: ./build/chef/linux/chef-policy-run.sh
     command: hello-world
 
   chef-core-windows:
@@ -91,22 +91,6 @@ services:
     entrypoint: chef-cli.bat
     command: --version
 
-  chef-policy-build-windows:
-    image: gusztavvargadr/chef-workstation:windows
-    isolation: process
-    volumes:
-      - ./:C:/opt/docker/work/
-    entrypoint: powershell -File ./build/chef/windows/chef-policy-build.ps1
-    command: hello-world
-
-  chef-policy-run-windows:
-    image: gusztavvargadr/chef-client:windows
-    isolation: process
-    volumes:
-      - ./:C:/opt/docker/work/
-    entrypoint: powershell -File ./build/chef/windows/chef-policy-run.ps1
-    command: hello-world
-
   chef-cookbook-lint-windows:
     image: gusztavvargadr/chef-workstation:windows
     isolation: process
@@ -121,4 +105,20 @@ services:
     volumes:
       - ./:C:/opt/docker/work/
     entrypoint: powershell -File ./build/chef/windows/chef-cookbook-test.ps1
+    command: hello-world
+
+  chef-policy-build-windows:
+    image: gusztavvargadr/chef-workstation:windows
+    isolation: process
+    volumes:
+      - ./:C:/opt/docker/work/
+    entrypoint: powershell -File ./build/chef/windows/chef-policy-build.ps1
+    command: hello-world
+
+  chef-policy-run-windows:
+    image: gusztavvargadr/chef-client:windows
+    isolation: process
+    volumes:
+      - ./:C:/opt/docker/work/
+    entrypoint: powershell -File ./build/chef/windows/chef-policy-run.ps1
     command: hello-world
