@@ -1,23 +1,24 @@
-trigger:
-  branches:
-    include:
-      - "*"
-  tags:
-    include:
-      - "*"
-  paths:
-    include:
-      - samples/cookbooks/docker
-      - samples/cookbooks/docker_test
+trigger: none
 pr: none
 
 stages:
-  - template: ../../../build/azp/samples/cookbooks/stages.yml
+  - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
-        - cookbook: docker
-          driver: vagrant
-          suites:
-            - community
-            - enterprise
-            - images
+        - name: docker
+          platforms:
+            - name: windows-server
+              driver: vagrant
+              suites:
+                - desktop
+                - enterprise
+
+            - name: windows-10
+              driver: vagrant
+              suites:
+                - desktop
+
+            - name: ubuntu-server
+              driver: vagrant
+              suites:
+                - community

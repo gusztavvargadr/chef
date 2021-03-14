@@ -1,0 +1,58 @@
+driver:
+  name: vagrant
+  vm_hostname: false
+  customize:
+    cpus: 2
+    memory: 4096
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
+
+provisioner:
+  name: chef_zero
+  max_retries: 2
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows-server
+    driver:
+      box: gusztavvargadr/windows-server
+
+  - name: windows-10
+    driver:
+      box: gusztavvargadr/windows-10
+
+  - name: ubuntu-server
+    driver:
+      box: gusztavvargadr/ubuntu-server
+
+suites:
+  - name: community
+    attributes:
+      gusztavvargadr_docker:
+        engine:
+          edition: community
+        images:
+          hello-world:
+    includes:
+      - ubuntu-server
+
+  - name: desktop
+    attributes:
+      gusztavvargadr_docker:
+        engine:
+          edition: community
+    includes:
+      - windows-server
+      - windows-10
+
+  - name: enterprise
+    attributes:
+      gusztavvargadr_docker:
+        engine:
+          edition: enterprise
+        images:
+          hello-world:
+    includes:
+      - windows-server
