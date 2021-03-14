@@ -1,0 +1,11 @@
+trigger: none
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: hello-world
+          platforms:
+            - windows
+            - linux

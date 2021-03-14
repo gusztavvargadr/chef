@@ -1,0 +1,6 @@
+AllCops:
+  Exclude:
+    - ./lib/**/*
+
+Layout/EndOfLine:
+  Enabled: false

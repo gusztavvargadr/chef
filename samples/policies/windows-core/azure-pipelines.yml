@@ -1,0 +1,10 @@
+trigger: none
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: windows-core
+          platforms:
+            - windows

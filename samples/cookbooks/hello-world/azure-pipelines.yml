@@ -1,0 +1,18 @@
+trigger: none
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: hello-world
+          platforms:
+            - name: windows
+              driver: docker
+              suites:
+                - default
+
+            - name: ubuntu
+              driver: vagrant
+              suites:
+                - default

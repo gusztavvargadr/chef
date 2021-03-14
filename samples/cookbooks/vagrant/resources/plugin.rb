@@ -1,14 +1,13 @@
-property :name, String, name_property: true
-property :version, String, required: true
+property :options, Hash, default: {}
 
 default_action :install
 
 action :install do
-  powershell_script "Install Vagrant plugin #{new_resource.name} version #{new_resource.version}" do
-    code <<-EOH
-      vagrant plugin install #{new_resource.name} --plugin-version #{new_resource.version}
-    EOH
-    not_if "(vagrant plugin list | Out-String) -match '#{new_resource.name}'"
+  plugin_list = shell_out('vagrant plugin list').stdout
+  return if plugin_list.downcase.include?(new_resource.name.downcase)
+
+  execute "Install Vagrant plugin '#{new_resource.name}'" do
+    command "vagrant plugin install #{new_resource.name}"
     action :run
   end
 end

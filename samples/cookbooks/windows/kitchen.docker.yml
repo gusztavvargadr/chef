@@ -1,0 +1,69 @@
+driver:
+  name: docker
+
+transport:
+  name: docker
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      image: gusztavvargadr/chef-client:windows
+      run_options: --isolation process
+    transport:
+      socket: tcp://localhost:2375
+
+suites:
+  - name: chocolatey-packages
+    attributes:
+      gusztavvargadr_windows:
+        chocolatey_packages:
+          conemu:
+
+  - name: environment-variables
+    attributes:
+      gusztavvargadr_windows:
+        environment_variables:
+          TEST_NAME:
+            value: Test Value
+
+  - name: features
+    attributes:
+      gusztavvargadr_windows:
+        features:
+          TelnetClient:
+
+  - name: files
+    attributes:
+      gusztavvargadr_windows:
+        files:
+          /tmp/robots.txt:
+            source: https://www.google.com/robots.txt
+
+  - name: native-packages
+    attributes:
+      gusztavvargadr_windows:
+        native_packages:
+          .NET Core SDK:
+            source: https://download.microsoft.com/download/B/9/F/B9F1AF57-C14A-4670-9973-CDF47209B5BF/dotnet-dev-win-x64.1.0.4.exe
+            install:
+              - /install
+              - /quiet
+              - /norestart
+            executable: C:/Program Files/dotnet/dotnet.exe
+            elevated: true
+
+  - name: updates
+    attributes:
+      gusztavvargadr_windows:
+        updates:
+          actions:
+            - enable
+            - start
+            - configure
+            - install

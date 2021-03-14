@@ -1,0 +1,46 @@
+driver:
+  name: vagrant
+  vm_hostname: false
+  customize:
+    cpus: 2
+    memory: 4096
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      box: gusztavvargadr/windows-server
+
+suites:
+  - name: ide-2017-community
+    attributes:
+      gusztavvargadr_visualstudio:
+        ide:
+          version: "2017"
+          edition: community
+
+  - name: ide-2017-professional
+    attributes:
+      gusztavvargadr_visualstudio:
+        ide:
+          version: "2017"
+          edition: professional
+
+  - name: ide-2019-community
+    attributes:
+      gusztavvargadr_visualstudio:
+        ide:
+          version: "2019"
+          edition: community
+
+  - name: ide-2019-professional
+    attributes:
+      gusztavvargadr_visualstudio:
+        ide:
+          version: "2019"
+          edition: professional

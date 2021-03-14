@@ -1,0 +1,91 @@
+gusztavvargadr_windows:
+  chocolatey_packages:
+    microsoft-edge:
+    conemu:
+    far:
+    treesizefree:
+    vscode:
+    beyondcompare:
+
+# gusztavvargadr_windows:
+#   chocolatey_packages:
+#     git:
+#       install:
+#         params: '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration"'
+#     poshgit:
+#     dotnetcore-sdk:
+# cake
+
+# vagrant:
+#   install:
+#     ignore-package-exit-codes:
+#   reboot: true
+# chef-workstation:
+# docker-desktop:
+#   reboot: true
+
+# wsl
+# docker
+# hyperv
+# virtualbox
+
+# awscli:
+#   version: ''
+# aws-vault:
+#   version: ''
+
+# azure-cli:
+#   version: ''
+
+# aws profile
+# azure envs
+
+# VAGRANT_PROVIDER_AZURE_LOCATION
+
+# jetbrainstoolbox:
+#   version: ''
+
+# vagrant plugins
+# fog-ovirt
+# aws
+# azure
+
+# vbox choco
+# VAGRANT_PREFERRED_PROVIDERS
+
+# windows_feature 'Microsoft-Hyper-V-All'
+# VAGRANT_PREFERRED_PROVIDERS
+# VAGRANT_PROVIDER_HYPERV_START StartIfRunning
+# VAGRANT_PROVIDER_HYPERV_STOP Save
+# VAGRANT_PROVIDER_HYPERV_VIRTUALIZATION true
+# VAGRANT_PROVIDER_HYPERV_NETWORK_BRIDGE Default Switch
+# VAGRANT_SYNCED_FOLDER_SMB_USERNAME vagrant
+# VAGRANT_SYNCED_FOLDER_SMB_PASSWORD password
+
+# dummy boxes
+
+# gusztavvargadr_windows:
+#   environment_variables:
+#     AWS_PROFILE:
+#       value: <%= ENV['AWS_PROFILE'] %>
+
+# gusztavvargadr_windows:
+#   chocolatey_packages:
+#     resharper-ultimate-all:
+#     resharper-clt:
+#     postman:
+#     fiddler:
+#     # vs
+
+# gusztavvargadr_windows:
+#   chocolatey_packages:
+#     pgadmin4:
+#     datagrip:
+
+# gusztavvargadr_windows:
+#   chocolatey_packages:
+#     packer:
+#     terraform:
+
+# packer_cache_dir
+# vagrant_cloud_token

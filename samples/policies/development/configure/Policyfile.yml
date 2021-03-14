@@ -1,3 +1,0 @@
-gusztavvargadr_docker:
-  images:
-    mcr.microsoft.com/dotnet/core/sdk:

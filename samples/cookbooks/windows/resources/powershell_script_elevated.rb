@@ -3,7 +3,7 @@ property :user, String, default: ''
 property :password, String, default: ''
 property :cwd, String, default: 'C:\\'
 property :code, String, required: true
-property :wait_poll, Integer, default: 30
+property :wait_poll, Integer, default: 5
 property :timeout, Integer, default: 3600
 
 default_action :run
@@ -30,7 +30,7 @@ action :run do
   end
 
   windows_task_name = script_name
-  windows_task_command = "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File ""#{script_file_path}"""
+  windows_task_command = "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"#{script_file_path}\""
 
   if new_resource.user.to_s.empty?
     windows_task windows_task_name do

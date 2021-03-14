@@ -1,27 +1,18 @@
-trigger:
-  branches:
-    include:
-      - '*'
-  tags:
-    include:
-      - '*'
-  paths:
-    include:
-      - samples/cookbooks/windows
-      - samples/cookbooks/windows_test
+trigger: none
 pr: none
 
 stages:
-  - template: ../../../build/azp/samples/cookbooks/stages.yml
+  - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
-        - cookbook: windows
-          driver: docker
-          platform: windows
-          suites:
-            - name: chocolatey
-            - name: environment
-            - name: features
-            - name: files
-            - name: native
-            - name: updates
+        - name: windows
+          platforms:
+            - name: windows
+              driver: docker
+              suites:
+                - chocolatey-packages
+                - environment-variables
+                - features
+                - files
+                - native-packages
+                - updates

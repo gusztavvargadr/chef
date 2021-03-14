@@ -1,3 +1,3 @@
 gusztavvargadr_windows_updates '' do
-  action [:enable, :start, :configure, :install]
+  action node['gusztavvargadr_windows']['updates']['actions']
 end

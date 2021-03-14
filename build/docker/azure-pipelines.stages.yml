@@ -1,0 +1,78 @@
+parameters:
+  configurations: []
+    # - name: string
+    #   platforms: [ string ]
+    #   dependsOn: string
+
+stages:
+  - stage: commit
+    displayName: Commit
+
+    jobs:
+      - ${{ each configuration in parameters.configurations }}:
+        - ${{ each platform in configuration.platforms }}:
+          - job: build_${{ replace(configuration.name, '-', '_') }}_${{ platform }}
+            displayName: Build ${{ configuration.name }} on ${{ platform }}
+            ${{ if configuration.dependsOn }}:
+              dependsOn: build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform }}
+
+            ${{ if eq(platform, 'windows') }}:
+              pool:
+                name: Default
+                demands:
+                  - AZP_AGENT_WINDOWS
+                  - AZP_AGENT_DOCKER
+
+            ${{ if eq(platform, 'linux') }}:
+              pool:
+                vmImage: ubuntu-20.04
+
+            workspace:
+              clean: all
+
+            steps:
+              - checkout: self
+                submodules: recursive
+
+              - script: |
+                  docker --version
+                  docker-compose --version
+
+                  docker image ls -a
+                  docker container ls -a
+                displayName: Initialize Docker
+
+              - ${{ if configuration.dependsOn }}:
+                - script: |
+                    docker-compose pull --quiet ${{ configuration.dependsOn }}-${{ platform }}
+                  displayName: Restore
+              
+              - script: |
+                  docker-compose build ${{ configuration.name }}-${{ platform }}
+                displayName: Build
+
+              - script: |
+                  docker-compose run ${{ configuration.name }}-${{ platform }}
+                displayName: Test
+
+              - task: Docker@2
+                displayName: Login Docker
+                inputs:
+                  command: login
+                  containerRegistry: dockerhub-gusztavvargadr
+
+              - script: |
+                  docker-compose push ${{ configuration.name }}-${{ platform }}
+                displayName: Publish
+
+              - task: Docker@2
+                displayName: Logout Docker
+                inputs:
+                  command: logout
+                  containerRegistry: dockerhub-gusztavvargadr
+                condition: always()
+
+              - script: |
+                  docker-compose down --rmi local --volumes
+                displayName: Clean
+                condition: always()

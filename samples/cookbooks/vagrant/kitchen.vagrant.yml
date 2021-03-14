@@ -1,0 +1,33 @@
+driver:
+  name: vagrant
+  vm_hostname: false
+  customize:
+    cpus: 2
+    memory: 4096
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      box: gusztavvargadr/windows-server
+
+  - name: ubuntu
+    driver:
+      box: gusztavvargadr/ubuntu-server
+
+suites:
+  - name: default
+    attributes:
+      gusztavvargadr_vagrant:
+        app:
+          version: "2.2.14"
+        plugins:
+          vagrant-sshfs:
+        boxes:
+          gusztavvargadr/ubuntu-server:
+            provider: virtualbox
