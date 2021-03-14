@@ -1,4 +1,4 @@
-property :options, Hash, required: true
+property :options, Hash, default: {}
 
 default_action :create
 
