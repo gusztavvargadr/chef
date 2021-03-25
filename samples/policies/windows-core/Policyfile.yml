@@ -1,6 +1,6 @@
 gusztavvargadr_windows:
   chocolatey_packages:
-    microsoft-edge:
+    googlechrome:
     conemu:
     far:
     treesizefree:
