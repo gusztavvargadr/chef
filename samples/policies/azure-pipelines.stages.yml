@@ -15,10 +15,7 @@ stages:
 
             ${{ if eq(platform, 'windows') }}:
               pool:
-                name: Default
-                demands:
-                  - AZP_AGENT_WINDOWS
-                  - AZP_AGENT_DOCKER
+                name: core-windows
 
             ${{ if eq(platform, 'linux') }}:
               pool:
@@ -68,10 +65,7 @@ stages:
 
             ${{ if eq(platform, 'windows') }}:
               pool:
-                name: Default
-                demands:
-                  - AZP_AGENT_WINDOWS
-                  - AZP_AGENT_DOCKER
+                name: core-windows
 
             ${{ if eq(platform, 'linux') }}:
               pool:
