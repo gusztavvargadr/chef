@@ -15,7 +15,7 @@ stages:
 
             ${{ if eq(platform, 'windows') }}:
               pool:
-                name: core-windows
+                vmImage: windows-2019
 
             ${{ if eq(platform, 'linux') }}:
               pool:
@@ -42,6 +42,10 @@ stages:
                   displayName: Restore
 
               - script: |
+                  docker-compose pull --quiet chef-workstation-${{ platform }}
+                displayName: Restore
+
+              - script: |
                   docker-compose run chef-policy-build-${{ platform }} ${{ configuration.name }}
                 displayName: Build
 
@@ -65,7 +69,7 @@ stages:
 
             ${{ if eq(platform, 'windows') }}:
               pool:
-                name: core-windows
+                vmImage: windows-2019
 
             ${{ if eq(platform, 'linux') }}:
               pool:
@@ -96,6 +100,10 @@ stages:
                 - script: |
                     chmod +x ./build/chef/linux/*.sh
                   displayName: Restore
+
+              - script: |
+                  docker-compose pull --quiet chef-client-${{ platform }}
+                displayName: Restore
 
               - script: |
                   docker-compose run chef-policy-run-${{ platform }} ${{ configuration.name }}
