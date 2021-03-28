@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 
 apt-get -y update
 
@@ -7,4 +8,3 @@ locale-gen en_US.UTF-8
 update-locale LANG=en_US.UTF-8
 
 apt-get -y install curl
-apt-get -y install p7zip-full

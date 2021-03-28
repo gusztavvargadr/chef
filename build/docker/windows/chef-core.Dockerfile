@@ -1,6 +1,9 @@
-FROM mcr.microsoft.com/windows/servercore:20H2
+FROM mcr.microsoft.com/windows/servercore:1809
 
-WORKDIR C:/opt/docker/
-ADD ./build/chef/windows/ ./build/
+WORKDIR C:/opt/docker/build/
+ADD ./build/chef/windows/chef-core.install.ps1 ./
+RUN powershell -File ./chef-core.install.ps1
+ENV CHEF_LICENSE=accept-silent
+RUN del /s /q *.*
 
-RUN powershell -File ./build/chef-core.ps1
+WORKDIR C:/opt/docker/work/
