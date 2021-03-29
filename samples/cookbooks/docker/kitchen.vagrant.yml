@@ -18,10 +18,14 @@ platforms:
   - name: windows-server
     driver:
       box: gusztavvargadr/windows-server
+    transport:
+      elevated: true
 
   - name: windows-10
     driver:
       box: gusztavvargadr/windows-10
+    transport:
+      elevated: true
 
   - name: ubuntu-server
     driver:

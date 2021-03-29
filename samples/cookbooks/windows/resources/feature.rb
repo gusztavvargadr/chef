@@ -18,7 +18,7 @@ action :install do
     end
   end
 
-  gusztavvargadr_windows_powershell_script_elevated script_name do
+  powershell_script script_name do
     code <<-EOH
       Get-WindowsOptionalFeature -Online | Where { $_.FeatureName -match "#{new_resource.name}" } | Where { $_.State -ne "Enabled" } | ForEach { Enable-WindowsOptionalFeature -Online -FeatureName $_.FeatureName -All -NoRestart }
     EOH

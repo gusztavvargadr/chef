@@ -14,7 +14,7 @@ action :install do
 end
 
 action :cleanup do
-  gusztavvargadr_windows_powershell_script_elevated 'Clean up features' do
+  powershell_script 'Clean up features' do
     code <<-EOH
       Get-WindowsOptionalFeature -Online | Where { $_.State -ne "Enabled" } | ForEach { Disable-WindowsOptionalFeature -Online -FeatureName $_.FeatureName -NoRestart -Remove }
     EOH
