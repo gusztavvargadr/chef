@@ -15,4 +15,5 @@ stages:
                 - features
                 - files
                 - native-packages
-                - updates
+                - updates-up
+                - updates-down

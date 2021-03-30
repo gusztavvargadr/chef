@@ -17,6 +17,7 @@ platforms:
       run_options: --isolation process
     transport:
       socket: tcp://localhost:2375
+      elevated: true
 
 suites:
   - name: chocolatey-packages
@@ -57,7 +58,7 @@ suites:
               - /norestart
             executable: C:/Program Files/dotnet/dotnet.exe
 
-  - name: updates
+  - name: updates-up
     attributes:
       gusztavvargadr_windows:
         updates:
@@ -66,6 +67,12 @@ suites:
             - start
             - configure
             - install
+
+  - name: updates-down
+    attributes:
+      gusztavvargadr_windows:
+        updates:
+          actions:
             - cleanup
             - stop
             - disable
