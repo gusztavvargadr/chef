@@ -8,7 +8,7 @@ choco install docker-compose --confirm --no-progress
 
 pushd ./lib/test-kitchen/kitchen-docker
 C:\opscode\chef-workstation\bin\chef-cli gem build --force ./kitchen-docker.gemspec
-C:\opscode\chef-workstation\bin\chef-cli install --force --local ./kitchen-docker-2.10.0.gem
+C:\opscode\chef-workstation\bin\chef-cli gem install --force --local ./kitchen-docker-2.10.0.gem
 popd
 
 rm -Recurse -Force $env:LOCALAPPDATA\Temp\*
