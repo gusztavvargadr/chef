@@ -100,11 +100,11 @@ stages:
                       docker-compose pull --quiet chef-workstation-${{ platform.name }}
                     displayName: Restore
 
-                  - script: |
-                      cd ./lib/test-kitchen/kitchen-docker/
-                      chef gem build --force ./kitchen-docker.gemspec
-                      chef gem install --force --local ./kitchen-docker-2.10.0.gem
-                    displayName: Restore
+                  # - script: |
+                  #     cd ./lib/test-kitchen/kitchen-docker/
+                  #     chef gem build --force ./kitchen-docker.gemspec
+                  #     chef gem install --force --local ./kitchen-docker-2.10.0.gem
+                  #   displayName: Restore
 
                 - script: |
                     cd samples/cookbooks/${{ configuration.name }}
