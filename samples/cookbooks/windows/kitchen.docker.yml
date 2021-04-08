@@ -58,24 +58,15 @@ suites:
               - /norestart
             executable: C:/Program Files/dotnet/dotnet.exe
 
-  - name: updates-up
+  - name: updates
     attributes:
       gusztavvargadr_windows:
         updates:
           actions:
-            - enable
-            - start
-            - configure
-            - install
-
-  - name: updates-down
-    attributes:
-      gusztavvargadr_windows:
-        updates:
-          actions:
+            - stop
+            - disable
             - enable
             - start
             - configure
             - cleanup
-            - stop
-            - disable
+            - install

@@ -17,6 +17,7 @@ platforms:
       run_options: --isolation process
     transport:
       socket: tcp://localhost:2375
+      elevated: true
 
 suites:
   - name: server-2017-developer

@@ -18,7 +18,6 @@ default['gusztavvargadr_visualstudio']['ide']['2017_professional'] = {
         '--norestart',
       ],
       'executable' => 'C:/Program Files (x86)/Microsoft Visual Studio/2017/Professional/Common7/IDE/devenv.exe',
-      'elevated' => true,
     },
   },
 }

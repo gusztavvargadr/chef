@@ -45,7 +45,7 @@ action :install do
     action :run
   end
 
-  gusztavvargadr_windows_powershell_script_elevated "Execute SQL Server #{new_resource.version} #{new_resource.edition} Install" do
+  powershell_script "Execute SQL Server #{new_resource.version} #{new_resource.edition} Install" do
     code <<-EOH
       Start-Process "setup.exe" "/CONFIGURATIONFILE=#{configuration_file_path.tr('/', '\\')} /IACCEPTSQLSERVERLICENSETERMS" -Wait
     EOH
@@ -97,7 +97,7 @@ action :patch do
     action :run
   end
 
-  gusztavvargadr_windows_powershell_script_elevated "Execute SQL Server #{new_resource.version} #{new_resource.edition} Patch" do
+  powershell_script "Execute SQL Server #{new_resource.version} #{new_resource.edition} Patch" do
     code <<-EOH
       Start-Process "setup.exe" "/ACTION=PATCH /ALLINSTANCES /IACCEPTSQLSERVERLICENSETERMS /QUIET" -Wait
     EOH
