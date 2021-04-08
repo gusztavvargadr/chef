@@ -10,10 +10,10 @@ stages:
             - name: windows
               driver: docker
               suites:
+                - updates-down
+                - updates-up
                 - chocolatey-packages
                 - environment-variables
                 - features
                 - files
                 - native-packages
-                - updates-up
-                - updates-down

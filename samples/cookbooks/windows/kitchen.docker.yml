@@ -73,6 +73,9 @@ suites:
       gusztavvargadr_windows:
         updates:
           actions:
+            - enable
+            - start
+            - configure
             - cleanup
             - stop
             - disable
