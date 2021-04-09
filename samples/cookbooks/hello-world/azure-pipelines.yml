@@ -7,7 +7,7 @@ stages:
       configurations:
         - name: hello-world
           platforms:
-            - name: windows-docker
+            - name: windows
               driver: docker
               suites:
                 - default

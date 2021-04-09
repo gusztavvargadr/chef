@@ -11,7 +11,7 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows-docker
+  - name: windows
     driver:
       image: gusztavvargadr/chef-client:windows
       run_options: --isolation process
