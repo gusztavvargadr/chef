@@ -7,6 +7,10 @@ action :install do
   return if new_resource.version.to_s.empty?
   return if new_resource.edition.to_s.empty?
 
+  gusztavvargadr_windows_chocolatey_packages '' do
+    options node['gusztavvargadr_mssql']['server'][new_resource.version]['chocolatey_packages']
+  end
+
   directory_path = "#{Chef::Config['file_cache_path']}/gusztavvargadr_mssql/server_#{new_resource.version}_#{new_resource.edition}"
 
   directory directory_path do
