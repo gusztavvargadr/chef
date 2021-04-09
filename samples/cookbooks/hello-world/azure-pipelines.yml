@@ -7,12 +7,17 @@ stages:
       configurations:
         - name: hello-world
           platforms:
-            - name: windows
+            - name: windows-docker
               driver: docker
               suites:
                 - default
 
-            - name: ubuntu
+            - name: windows-vagrant
+              driver: vagrant
+              suites:
+                - default
+
+            - name: ubuntu-vagrant
               driver: vagrant
               suites:
                 - default
