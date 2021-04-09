@@ -10,7 +10,7 @@ stages:
             - name: windows
               driver: docker
               suites:
-                - management-studio-2017
-                - management-studio-2018
                 - server-2017-developer
                 - server-2019-developer
+                - management-studio-2017
+                - management-studio-2018

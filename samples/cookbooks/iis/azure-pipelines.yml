@@ -8,6 +8,6 @@ stages:
         - name: iis
           platforms:
             - name: windows
-              driver: docker
+              driver: vagrant
               suites:
                 - server-default
