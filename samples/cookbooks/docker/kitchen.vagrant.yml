@@ -9,7 +9,7 @@ driver:
 
 provisioner:
   name: chef_zero
-  max_retries: 2
+  max_retries: 3
 
 verifier:
   name: inspec
