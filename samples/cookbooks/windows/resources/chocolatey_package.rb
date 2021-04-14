@@ -23,6 +23,7 @@ action :install do
     reboot 'Install' do
       action :nothing
       reason script_name
+      delay_mins 1
     end
   end
 

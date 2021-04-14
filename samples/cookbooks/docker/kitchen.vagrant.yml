@@ -10,6 +10,7 @@ driver:
 provisioner:
   name: chef_zero
   max_retries: 3
+  wait_for_retry: 90
 
 verifier:
   name: inspec
