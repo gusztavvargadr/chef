@@ -7,8 +7,10 @@ action :install do
   return if new_resource.version.to_s.empty?
   return if new_resource.edition.to_s.empty?
 
+  options = node['gusztavvargadr_mssql']['server']["#{new_resource.version}_#{new_resource.edition}"]
+
   gusztavvargadr_windows_chocolatey_packages '' do
-    options node['gusztavvargadr_mssql']['server'][new_resource.version]['chocolatey_packages']
+    options options['chocolatey_packages']
   end
 
   directory_path = "#{Chef::Config['file_cache_path']}/gusztavvargadr_mssql/server_#{new_resource.version}_#{new_resource.edition}"
@@ -29,7 +31,7 @@ action :install do
 
   download_file_name = 'install.iso'
   download_file_path = "#{directory_path}/#{download_file_name}"
-  download_file_source = node['gusztavvargadr_mssql']['server']["#{new_resource.version}_#{new_resource.edition}"]['install_file_url']
+  download_file_source = options['install_file_url']
   remote_file download_file_path do
     source download_file_source
     action :create
@@ -72,6 +74,12 @@ action :patch do
   return if new_resource.version.to_s.empty?
   return if new_resource.edition.to_s.empty?
 
+  options = node['gusztavvargadr_mssql']['server']["#{new_resource.version}_#{new_resource.edition}"]
+
+  gusztavvargadr_windows_chocolatey_packages '' do
+    options options['chocolatey_packages']
+  end
+
   directory_path = "#{Chef::Config['file_cache_path']}/gusztavvargadr_mssql/server_#{new_resource.version}_#{new_resource.edition}"
 
   directory directory_path do
@@ -81,7 +89,7 @@ action :patch do
 
   download_file_name = 'patch.exe'
   download_file_path = "#{directory_path}/#{download_file_name}"
-  download_file_source = node['gusztavvargadr_mssql']['server']["#{new_resource.version}_#{new_resource.edition}"]['patch_file_url']
+  download_file_source = options['patch_file_url']
   remote_file download_file_path do
     source download_file_source
     action :create
