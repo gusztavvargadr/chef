@@ -1,10 +1,8 @@
-. { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 21.2.292
+. { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 21.6.467
 
 $ErrorActionPreference = "Stop"
 
 choco install git --package-parameters '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration /SChannel"' --confirm --no-progress
-choco install docker-cli --confirm --no-progress
-choco install docker-compose --confirm --no-progress
 
 pushd ./lib/test-kitchen/kitchen-docker
 C:\opscode\chef-workstation\bin\chef-cli gem build --force ./kitchen-docker.gemspec
