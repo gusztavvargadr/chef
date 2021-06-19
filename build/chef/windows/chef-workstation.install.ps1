@@ -1,6 +1,9 @@
-. { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 21.6.467
+. { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version 21.6.497
 
 $ErrorActionPreference = "Stop"
+
+# git remove?
+# docker-cli add?
 
 choco install git --package-parameters '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration /SChannel"' --confirm --no-progress
 

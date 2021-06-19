@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-curl -Ls https://omnitruck.chef.io/install.sh | bash -s -- -P chef-workstation -v 21.6.467
+curl -Ls https://omnitruck.chef.io/install.sh | bash -s -- -P chef-workstation -v 21.6.497
 
 apt-get -y install git
 
