@@ -2,9 +2,6 @@
 
 $ErrorActionPreference = "Stop"
 
-# git remove?
-# docker-cli add?
-
 choco install git --package-parameters '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration /SChannel"' --confirm --no-progress
 
 pushd ./lib/test-kitchen/kitchen-docker
