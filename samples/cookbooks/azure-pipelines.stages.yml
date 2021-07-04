@@ -69,7 +69,7 @@ stages:
 
               ${{ if eq(platform.driver, 'docker') }}:
                 pool:
-                  name: core-windows
+                  vmImage: windows-2019
 
               workspace:
                 clean: all
@@ -94,6 +94,9 @@ stages:
 
                       docker image ls -a
                       docker container ls -a
+
+                      ./build/chef/windows/chef-core.install.ps1
+                      ./build/chef/windows/chef-workstation.install.ps1
                     displayName: Initialize Docker
 
                   - script: |

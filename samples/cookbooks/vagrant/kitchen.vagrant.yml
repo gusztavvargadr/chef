@@ -4,6 +4,8 @@ driver:
   customize:
     cpus: 2
     memory: 4096
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
 
 provisioner:
   name: chef_zero
@@ -29,7 +31,7 @@ suites:
     attributes:
       gusztavvargadr_vagrant:
         app:
-          version: "2.2.14"
+          version: "2.2.16"
         plugins:
           vagrant-sshfs:
         boxes:
