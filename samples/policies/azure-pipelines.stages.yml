@@ -31,12 +31,12 @@ stages:
               - task: Cache@2
                 inputs:
                   key: '"docker" | "gusztavvargadr/chef-workstation:${{ platform }}"'
-                  path: $(Pipeline.Workspace)/.cache/docker
+                  path: $(Pipeline.Workspace)/.cache
                   cacheHitVar: DOCKER_CACHE_HIT
                 displayName: Cache Docker images
 
               - script: |
-                  docker load -i $(Pipeline.Workspace)/.cache/docker/gusztavvargadr-chef-workstation-${{ platform }}.tar
+                  docker load -i $(Pipeline.Workspace)/.cache/docker-gusztavvargadr-chef-workstation-${{ platform }}.tar
                 displayName: Restore Docker image
                 condition: and(not(canceled()), eq(variables.DOCKER_CACHE_HIT, 'true'))
 
@@ -66,8 +66,8 @@ stages:
                 artifact: build-${{ configuration.name }}-${{ platform }}
 
               - script: |
-                  mkdir -p $(Pipeline.Workspace)/.cache/docker
-                  docker save -o $(Pipeline.Workspace)/.cache/docker/gusztavvargadr-chef-workstation-${{ platform }}.tar gusztavvargadr/chef-workstation:${{ platform }}
+                  mkdir $(Pipeline.Workspace)/.cache
+                  docker save -o $(Pipeline.Workspace)/.cache/docker-gusztavvargadr-chef-workstation-${{ platform }}.tar gusztavvargadr/chef-workstation:${{ platform }}
                 displayName: Save Docker image
                 condition: and(not(canceled()), or(failed(), ne(variables.DOCKER_CACHE_HIT, 'true')))
 
