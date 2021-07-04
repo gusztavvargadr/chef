@@ -41,6 +41,18 @@ stages:
                     chmod +x ./build/chef/linux/*.sh
                   displayName: Restore
 
+              - task: Cache@2
+                inputs:
+                  key: 'docker | gusztavvargadr/chef-workstation:${{ platform }}'
+                  path: $(Pipeline.Workspace)/.cache/docker
+                  cacheHitVar: DOCKER_CACHE_HIT
+                displayName: Cache Docker images
+
+              - script: |
+                  docker load -i $(Pipeline.Workspace)/.cache/docker/gusztavvargadr-chef-workstation-${{ platform }}.tar
+                displayName: Restore Docker image
+                condition: and(not(canceled()), eq(variables.DOCKER_CACHE_HIT, 'true'))
+
               - script: |
                   docker-compose pull --quiet chef-workstation-${{ platform }}
                 displayName: Restore
@@ -57,6 +69,12 @@ stages:
                   docker-compose down --rmi local --volumes
                 displayName: Clean
                 condition: always()
+
+              - script: |
+                  mkdir -p $(Pipeline.Workspace)/docker
+                  docker save -o $(Pipeline.Workspace)/.cache/docker/gusztavvargadr-chef-workstation-${{ platform }}.tar gusztavvargadr/chef-workstation:${{ platform }}
+                displayName: Save Docker image
+                condition: and(not(canceled()), or(failed(), ne(variables.DOCKER_CACHE_HIT, 'true')))
 
   - stage: acceptance
     displayName: Acceptance
