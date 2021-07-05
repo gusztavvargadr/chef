@@ -69,7 +69,9 @@ stages:
 
               ${{ if eq(platform.driver, 'docker') }}:
                 pool:
-                  vmImage: windows-2019
+                  name: Default
+                  demands:
+                    - AZP_AGENT_DOCKER
 
               workspace:
                 clean: all
