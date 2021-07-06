@@ -4,6 +4,8 @@ driver:
   customize:
     cpus: 2
     memory: 4096
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
 
 provisioner:
   name: chef_zero
