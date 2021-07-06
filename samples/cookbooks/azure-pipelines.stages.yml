@@ -61,17 +61,8 @@ stages:
             - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(platform.name, '-', '_') }}_${{ replace(suite, '-', '_') }}
               displayName: Test ${{ configuration.name }} on ${{ platform.name }} for ${{ suite }}
 
-              ${{ if eq(platform.driver, 'vagrant') }}:
-                pool:
-                  name: Default
-                  demands:
-                    - AZP_AGENT_VAGRANT
-
-              ${{ if eq(platform.driver, 'docker') }}:
-                pool:
-                  name: Default
-                  demands:
-                    - AZP_AGENT_DOCKER
+              pool:
+                name: core-windows
 
               workspace:
                 clean: all

@@ -7,5 +7,5 @@ apt-get -y install git
 
 cd ./lib/test-kitchen/kitchen-docker/
 chef gem build --force ./kitchen-docker.gemspec
-chef gem install --force --local ./kitchen-docker-2.10.0.gem
+chef gem install --force --local --no-user-install ./kitchen-docker-2.10.0.gem
 cd ../../../

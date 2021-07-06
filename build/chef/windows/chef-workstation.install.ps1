@@ -6,7 +6,7 @@ choco install git --package-parameters '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoS
 
 pushd ./lib/test-kitchen/kitchen-docker
 C:\opscode\chef-workstation\bin\chef-cli gem build --force ./kitchen-docker.gemspec
-C:\opscode\chef-workstation\bin\chef-cli gem install --force --local ./kitchen-docker-2.10.0.gem
+C:\opscode\chef-workstation\bin\chef-cli gem install --force --local --no-user-install ./kitchen-docker-2.10.0.gem
 popd
 
 rm -Recurse -Force $env:LOCALAPPDATA\Temp\*
