@@ -20,7 +20,7 @@
     <description>Sample Policy {directory} {name}</description>
     <releaseNotes>https://github.com/gusztavvargadr/chef/releases/</releaseNotes>
     <dependencies>
-      <dependency id="chef-client" version="16.10.7" />
+      <dependency id="chef-client" version="17.2.29" />
     </dependencies>
   </metadata>
   <files>
