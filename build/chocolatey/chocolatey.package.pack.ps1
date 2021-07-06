@@ -1,4 +1,4 @@
-$ErrorActionPreference = 'Stop';
+$ErrorActionPreference = 'Stop'
 
 if (Test-Path -Path ./.chocolatey/packages/chef-policy/) {
   rm -Recurse -Force ./.chocolatey/packages/chef-policy/
@@ -14,3 +14,5 @@ cp -Force ./build/docker/chocolatey.package.tools.chocolateyuninstall.ps1 ./.cho
 cp -Recurse -Force ./.chef/policies/$($args[0])/* ./.chocolatey/packages/chef-policy/tools/policy
 
 choco pack ./.chocolatey/packages/chef-policy/chef-policy.nuspec --output-directory ./.chocolatey/packages/
+
+exit $LASTEXITCODE

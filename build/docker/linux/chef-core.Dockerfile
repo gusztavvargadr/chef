@@ -1,11 +1,15 @@
 FROM ubuntu:20.04
 
-WORKDIR /opt/docker/
-ADD ./build/chef/linux/ ./build/
-RUN chmod +x ./build/*.sh
+WORKDIR /opt/docker/build/
 
-ENV DEBIAN_FRONTEND=noninteractive
-RUN ./build/chef-core.sh
+ADD ./build/chef/linux/chef-core.install.sh ./
+RUN chmod +x ./chef-core.install.sh
+
+RUN ./chef-core.install.sh
+
+ENV CHEF_LICENSE=accept-silent
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
+
+WORKDIR /opt/docker/work/

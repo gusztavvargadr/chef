@@ -1,6 +1,3 @@
-**/.vagrant
-**/Vagrantfile.override.yml
-
 **/.kitchen
 **/Policyfile.lock.json
 

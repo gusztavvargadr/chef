@@ -4,6 +4,8 @@ driver:
   customize:
     cpus: 2
     memory: 4096
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
 
 provisioner:
   name: chef_zero
@@ -12,7 +14,13 @@ verifier:
   name: inspec
 
 platforms:
-  - name: ubuntu
+  - name: windows-vagrant
+    driver:
+      box: gusztavvargadr/windows-server
+    transport:
+      elevated: true
+
+  - name: ubuntu-vagrant
     driver:
       box: gusztavvargadr/ubuntu-server
 

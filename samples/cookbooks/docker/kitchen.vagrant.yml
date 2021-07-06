@@ -9,7 +9,8 @@ driver:
 
 provisioner:
   name: chef_zero
-  max_retries: 2
+  max_retries: 3
+  wait_for_retry: 90
 
 verifier:
   name: inspec
@@ -18,10 +19,14 @@ platforms:
   - name: windows-server
     driver:
       box: gusztavvargadr/windows-server
+    transport:
+      elevated: true
 
   - name: windows-10
     driver:
       box: gusztavvargadr/windows-10
+    transport:
+      elevated: true
 
   - name: ubuntu-server
     driver:

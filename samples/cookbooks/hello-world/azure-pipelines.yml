@@ -12,7 +12,12 @@ stages:
               suites:
                 - default
 
-            - name: ubuntu
+            - name: windows-vagrant
+              driver: vagrant
+              suites:
+                - default
+
+            - name: ubuntu-vagrant
               driver: vagrant
               suites:
                 - default

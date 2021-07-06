@@ -8,7 +8,6 @@ action :install do
 
   version = new_resource.options['version']
   install = new_resource.options['install'].nil? ? {} : new_resource.options['install']
-  elevated = new_resource.options['elevated']
   ignore_reboot = node['gusztavvargadr_windows']['ignore_reboot']
   reboot = new_resource.options['reboot'] && !ignore_reboot
 
@@ -24,20 +23,13 @@ action :install do
     reboot 'Install' do
       action :nothing
       reason script_name
+      delay_mins 1
     end
   end
 
-  if elevated
-    gusztavvargadr_windows_powershell_script_elevated script_name do
-      code script_code
-      action :run
-      notifies :request_reboot, 'reboot[Install]' if reboot
-    end
-  else
-    powershell_script script_name do
-      code script_code
-      action :run
-      notifies :request_reboot, 'reboot[Install]' if reboot
-    end
+  powershell_script script_name do
+    code script_code
+    action :run
+    notifies :request_reboot, 'reboot[Install]' if reboot
   end
 end

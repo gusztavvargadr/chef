@@ -15,4 +15,5 @@ stages:
                 - features
                 - files
                 - native-packages
-                - updates
+                - updates-install
+                - updates-cleanup

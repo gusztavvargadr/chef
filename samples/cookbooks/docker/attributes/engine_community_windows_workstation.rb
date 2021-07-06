@@ -23,7 +23,6 @@ default['gusztavvargadr_docker']['engine']['community']['windows_workstation'] =
         '/norestart',
       ],
       'executable' => 'C:/Windows/System32/lxss/tools/kernel',
-      'elevated' => true,
       'reboot' => true,
     },
     'Docker Desktop' => {

@@ -4,9 +4,13 @@ driver:
   customize:
     cpus: 2
     memory: 4096
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
 
 provisioner:
   name: chef_zero
+  max_retries: 3
+  wait_for_retry: 90
 
 verifier:
   name: inspec
@@ -15,6 +19,8 @@ platforms:
   - name: windows
     driver:
       box: gusztavvargadr/windows-server
+    transport:
+      elevated: true
 
   - name: ubuntu
     driver:
@@ -25,7 +31,7 @@ suites:
     attributes:
       gusztavvargadr_vagrant:
         app:
-          version: "2.2.14"
+          version: "2.2.16"
         plugins:
           vagrant-sshfs:
         boxes:

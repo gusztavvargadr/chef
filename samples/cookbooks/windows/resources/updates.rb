@@ -30,7 +30,7 @@ end
 
 action :install do
   if new_resource.msu_source.to_s.empty?
-    gusztavvargadr_windows_powershell_script_elevated 'Install Updates' do
+    powershell_script 'Install Updates' do
       code <<-EOH
         Install-WindowsUpdate -AcceptAll -IgnoreReboot
       EOH
@@ -50,7 +50,7 @@ action :install do
       action :create
     end
 
-    gusztavvargadr_windows_powershell_script_elevated 'Install Updates' do
+    powershell_script 'Install Updates' do
       code <<-EOH
         Start-Process "wusa.exe" "#{msu_file_path} /quiet /norestart" -Wait
       EOH
@@ -60,7 +60,7 @@ action :install do
 end
 
 action :cleanup do
-  gusztavvargadr_windows_powershell_script_elevated 'Clean up Updates' do
+  powershell_script 'Clean up Updates' do
     code <<-EOH
       DISM.exe /Online /Cleanup-Image /AnalyzeComponentStore
       DISM.exe /Online /Cleanup-Image /StartComponentCleanup /ResetBase

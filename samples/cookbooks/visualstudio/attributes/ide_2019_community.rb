@@ -18,7 +18,6 @@ default['gusztavvargadr_visualstudio']['ide']['2019_community'] = {
         '--norestart',
       ],
       'executable' => 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/devenv.exe',
-      'elevated' => true,
     },
   },
 }

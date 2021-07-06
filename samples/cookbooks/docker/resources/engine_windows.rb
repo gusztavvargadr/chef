@@ -57,8 +57,3 @@ action :install do
     action :install
   end
 end
-
-# DockerClie -SwitchLinuxEngine -SwitchWindowsEngine
-#     echo { "hosts": ["tcp://0.0.0.0:2375", "npipe://"] } > C:\ProgramData\Docker\config\daemon.json
-#     net stop docker
-#     net start docker
