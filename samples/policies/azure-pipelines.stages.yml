@@ -59,7 +59,7 @@ stages:
 
             ${{ if eq(platform, 'windows') }}:
               pool:
-                vmImage: windows-2019
+                name: core-windows
 
             ${{ if eq(platform, 'linux') }}:
               pool:
