@@ -1,7 +1,7 @@
 default['gusztavvargadr_visualstudio']['ide']['2019_community'] = {
   'native_packages' => {
     'Visual Studio 2019 Community' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/152e306c-897a-4b67-ac3c-52d15f436c27/14d6d4360aa6a82d1c6df098f0a2aa90/vs_community.exe',
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/9dc321fd-8a9b-47ef-98a9-af0515e08d6f/533c91be0b61f481cb93758a3c6af09cef719cedbaa6e9916232918649fd4a35/vs_Community.exe',
       'install' => [
         '--installPath ""C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community""',
         '--add Microsoft.VisualStudio.Workload.CoreEditor',

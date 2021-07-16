@@ -65,12 +65,14 @@ stages:
                 pool:
                   name: Default
                   demands:
+                    - AZP_AGENT_CHEF
                     - AZP_AGENT_VAGRANT
 
               ${{ if eq(platform.driver, 'docker') }}:
                 pool:
                   name: Default
                   demands:
+                    - AZP_AGENT_CHEF
                     - AZP_AGENT_DOCKER
 
               workspace:
