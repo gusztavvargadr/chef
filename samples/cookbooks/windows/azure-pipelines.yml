@@ -15,5 +15,8 @@ stages:
                 - features
                 - files
                 - native-packages
-                - updates-install
-                - updates-cleanup
+
+            - name: windows-vagrant
+              driver: vagrant
+              suites:
+                - updates
