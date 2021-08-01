@@ -1,9 +1,8 @@
 gusztavvargadr_windows:
   chocolatey_packages:
-    googlechrome:
-    # firefox:
-    #   install:
-    #     params: '"/NoAutoUpdate"'
+    firefox:
+      install:
+        params: '"/NoAutoUpdate"'
     conemu:
     far:
     treesizefree:
