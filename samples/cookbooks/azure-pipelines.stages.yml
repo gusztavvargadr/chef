@@ -16,7 +16,10 @@ stages:
           displayName: Build ${{ configuration.name }}
 
           pool:
-            vmImage: ubuntu-20.04
+            name: Default
+            demands:
+              - AZP_AGENT_LINUX
+              - AZP_AGENT_DOCKER
 
           workspace:
             clean: all
@@ -72,6 +75,7 @@ stages:
                 pool:
                   name: Default
                   demands:
+                    - AZP_AGENT_WINDOWS
                     - AZP_AGENT_CHEF
                     - AZP_AGENT_DOCKER
 
