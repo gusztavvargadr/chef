@@ -19,4 +19,5 @@ stages:
             - name: windows-vagrant
               driver: vagrant
               suites:
-                - updates
+                - updates-install
+                - updates-cleanup

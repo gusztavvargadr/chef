@@ -18,7 +18,7 @@ platforms:
       elevated: true
 
 suites:
-  - name: updates
+  - name: updates-install
     attributes:
       gusztavvargadr_windows:
         updates:
@@ -27,6 +27,17 @@ suites:
             - start
             - configure
             - install
+            - stop
+            - disable
+
+  - name: updates-cleanup
+    attributes:
+      gusztavvargadr_windows:
+        updates:
+          actions:
+            - enable
+            - start
+            - configure
             - cleanup
             - stop
             - disable
