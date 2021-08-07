@@ -1,9 +1,12 @@
-FROM ubuntu:20.04
+ARG LINUX_VARIANT
+ARG LINUX_VERSION
+
+FROM ${LINUX_VARIANT}:${LINUX_VERSION}
 
 WORKDIR /opt/docker/build/
 
-ADD ./build/chef/linux/chef-core.install.sh ./
-RUN chmod +x ./chef-core.install.sh
+ADD ./build/chef/linux/chef-core.*.sh ./
+RUN chmod +x ./chef-core.*.sh
 
 RUN ./chef-core.install.sh
 

@@ -2,30 +2,41 @@ version: "3"
 
 services:
   chef-core-linux:
-    image: gusztavvargadr/chef-core:linux
+    image: gusztavvargadr/chef-core:linux-${LINUX_VARIANT}-${LINUX_VERSION}
     build:
       context: ./
       dockerfile: ./build/docker/linux/chef-core.Dockerfile
+      args:
+        - LINUX_VARIANT
+        - LINUX_VERSION
     volumes:
       - ./:/opt/docker/work/
     entrypoint: echo
     command: chef-core
 
   chef-client-linux:
-    image: gusztavvargadr/chef-client:linux
+    image: gusztavvargadr/chef-client:linux-${LINUX_VARIANT}-${LINUX_VERSION}
     build:
       context: ./
       dockerfile: ./build/docker/linux/chef-client.Dockerfile
+      args:
+        - LINUX_VARIANT
+        - LINUX_VERSION
+        - CHEF_CLIENT_VERSION
     volumes:
       - ./:/opt/docker/work/
     entrypoint: chef-client
     command: --version
 
   chef-workstation-linux:
-    image: gusztavvargadr/chef-workstation:linux
+    image: gusztavvargadr/chef-workstation:linux-${LINUX_VARIANT}-${LINUX_VERSION}
     build:
       context: ./
       dockerfile: ./build/docker/linux/chef-workstation.Dockerfile
+      args:
+        - LINUX_VARIANT
+        - LINUX_VERSION
+        - CHEF_WORKSTATION_VERSION
     volumes:
       - ./:/opt/docker/work/
     entrypoint: chef
@@ -60,30 +71,41 @@ services:
     command: hello-world
 
   chef-core-windows:
-    image: gusztavvargadr/chef-core:windows
+    image: gusztavvargadr/chef-core:windows-${WINDOWS_VARIANT}-${WINDOWS_VERSION}
     build:
       context: ./
       dockerfile: ./build/docker/windows/chef-core.Dockerfile
+      args:
+        - WINDOWS_VARIANT
+        - WINDOWS_VERSION
     volumes:
       - ./:C:/opt/docker/work/
     entrypoint: cmd
     command: /c echo chef-core
 
   chef-client-windows:
-    image: gusztavvargadr/chef-client:windows
+    image: gusztavvargadr/chef-client:windows-${WINDOWS_VARIANT}-${WINDOWS_VERSION}
     build:
       context: ./
       dockerfile: ./build/docker/windows/chef-client.Dockerfile
+      args:
+        - WINDOWS_VARIANT
+        - WINDOWS_VERSION
+        - CHEF_CLIENT_VERSION
     volumes:
       - ./:C:/opt/docker/work/
     entrypoint: chef-client.bat
     command: --version
 
   chef-workstation-windows:
-    image: gusztavvargadr/chef-workstation:windows
+    image: gusztavvargadr/chef-workstation:windows-${WINDOWS_VARIANT}-${WINDOWS_VERSION}
     build:
       context: ./
       dockerfile: ./build/docker/windows/chef-workstation.Dockerfile
+      args:
+        - WINDOWS_VARIANT
+        - WINDOWS_VERSION
+        - CHEF_WORKSTATION_VERSION
     volumes:
       - ./:C:/opt/docker/work/
     entrypoint: chef-cli.bat

@@ -11,19 +11,19 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each platform in configuration.platforms }}:
-          - job: build_${{ replace(configuration.name, '-', '_') }}_${{ platform }}
-            displayName: Build ${{ configuration.name }} on ${{ platform }}
+          - job: build_${{ replace(configuration.name, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ platform.version }}
+            displayName: Build ${{ configuration.name }} on ${{ platform.name }} ${{ platform.variant }} ${{ platform.version }}
             ${{ if configuration.dependsOn }}:
-              dependsOn: build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform }}
+              dependsOn: build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ platform.version }}
 
-            ${{ if eq(platform, 'windows') }}:
+            ${{ if eq(platform.name, 'windows') }}:
               pool:
                 name: Default
                 demands:
                   - AZP_AGENT_WINDOWS
                   - AZP_AGENT_DOCKER
 
-            ${{ if eq(platform, 'linux') }}:
+            ${{ if eq(platform.name, 'linux') }}:
               pool:
                 name: Default
                 demands:
@@ -47,15 +47,15 @@ stages:
 
               - ${{ if configuration.dependsOn }}:
                 - script: |
-                    docker-compose pull --quiet ${{ configuration.dependsOn }}-${{ platform }}
+                    docker-compose pull --quiet ${{ configuration.dependsOn }}-${{ platform.name }}
                   displayName: Restore
-              
+
               - script: |
-                  docker-compose build ${{ configuration.name }}-${{ platform }}
+                  docker-compose build ${{ configuration.name }}-${{ platform.name }}
                 displayName: Build
 
               - script: |
-                  docker-compose run ${{ configuration.name }}-${{ platform }}
+                  docker-compose run ${{ configuration.name }}-${{ platform.name }}
                 displayName: Test
 
               - task: Docker@2
@@ -65,7 +65,7 @@ stages:
                   containerRegistry: dockerhub-gusztavvargadr
 
               - script: |
-                  docker-compose push ${{ configuration.name }}-${{ platform }}
+                  docker-compose push ${{ configuration.name }}-${{ platform.name }}
                 displayName: Publish
 
               - task: Docker@2
