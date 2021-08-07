@@ -37,7 +37,6 @@ stages:
               displayName: Initialize Docker
 
             - script: |
-                chmod +x ./build/chef/linux/*.sh
                 docker-compose pull --quiet chef-workstation-linux
               displayName: Restore
 
