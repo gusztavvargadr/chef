@@ -11,10 +11,10 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each platform in configuration.platforms }}:
-          - job: build_${{ replace(configuration.name, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ platform.version }}
+          - job: build_${{ replace(configuration.name, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
             displayName: Build ${{ configuration.name }} on ${{ platform.name }} ${{ platform.variant }} ${{ platform.version }}
             ${{ if configuration.dependsOn }}:
-              dependsOn: build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ platform.version }}
+              dependsOn: build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
 
             ${{ if eq(platform.name, 'windows') }}:
               pool:
