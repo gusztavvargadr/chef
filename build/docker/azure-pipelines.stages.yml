@@ -104,17 +104,17 @@ stages:
                 docker container ls -a
               displayName: Initialize Docker
 
-            - ${{ each platform in configuration.platforms }}:
-              - script: |
-                  docker manifest create --amend gusztavvargadr/${{ configuration.name }}:latest gusztavvargadr/${{ configuration.name }}:${{ platform.name }}-${{ platform.variant }}-${{ platform.version }}
-                  docker manifest inspect gusztavvargadr/${{ configuration.name }}:latest
-                displayName: Build
-
             - task: Docker@2
               displayName: Login Docker
               inputs:
                 command: login
                 containerRegistry: dockerhub-gusztavvargadr
+
+            - ${{ each platform in configuration.platforms }}:
+              - script: |
+                  docker manifest create --amend gusztavvargadr/${{ configuration.name }}:latest gusztavvargadr/${{ configuration.name }}:${{ platform.name }}-${{ platform.variant }}-${{ platform.version }}
+                  docker manifest inspect gusztavvargadr/${{ configuration.name }}:latest
+                displayName: Build
 
             - script: |
                 docker manifest inspect gusztavvargadr/${{ configuration.name }}:latest
