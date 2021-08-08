@@ -15,24 +15,24 @@ stages:
               variant: ubuntu
               version: "20.04"
 
-        - name: chef-client
-          platforms:
-            - name: windows
-              variant: servercore
-              version: "1809"
+        # - name: chef-client
+        #   platforms:
+        #     - name: windows
+        #       variant: servercore
+        #       version: "1809"
 
-            - name: linux
-              variant: ubuntu
-              version: "20.04"
-          dependsOn: chef-core
+        #     - name: linux
+        #       variant: ubuntu
+        #       version: "20.04"
+        #   dependsOn: chef-core
 
-        - name: chef-workstation
-          platforms:
-            - name: windows
-              variant: servercore
-              version: "1809"
+        # - name: chef-workstation
+        #   platforms:
+        #     - name: windows
+        #       variant: servercore
+        #       version: "1809"
 
-            - name: linux
-              variant: ubuntu
-              version: "20.04"
-          dependsOn: chef-core
+        #     - name: linux
+        #       variant: ubuntu
+        #       version: "20.04"
+        #   dependsOn: chef-core
