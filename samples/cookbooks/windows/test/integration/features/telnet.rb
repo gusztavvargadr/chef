@@ -1,5 +1,3 @@
-executable_path = "#{ENV['windir']}/System32/telnet.exe"
-
-describe file(executable_path) do
+describe command('telnet') do
   it { should exist }
 end
