@@ -1,7 +1,10 @@
 parameters:
   configurations: []
     # - name: string
-    #   platforms: [ string ]
+    #   platforms:
+    #     - name: string
+    #       variant: string
+    #       version: string
     #   dependsOn: string
 
 stages:
@@ -45,17 +48,12 @@ stages:
                   docker container ls -a
                 displayName: Initialize Docker
 
-              - ${{ if configuration.dependsOn }}:
-                - script: |
-                    docker-compose pull --quiet ${{ configuration.dependsOn }}-${{ platform.name }}
-                  displayName: Restore
-
               - script: |
-                  docker-compose build ${{ configuration.name }}-${{ platform.name }}
+                  docker-compose --env-file ./.env-${platform.name}-${platform.variant}-${platform.version} build ${{ configuration.name }}
                 displayName: Build
 
               - script: |
-                  docker-compose run ${{ configuration.name }}-${{ platform.name }}
+                  docker-compose run --env-file ./.env-${platform.name}-${platform.variant}-${platform.version} ${{ configuration.name }}
                 displayName: Test
 
               - task: Docker@2
@@ -65,7 +63,7 @@ stages:
                   containerRegistry: dockerhub-gusztavvargadr
 
               - script: |
-                  docker-compose push ${{ configuration.name }}-${{ platform.name }}
+                  docker-compose push --env-file ./.env-${platform.name}-${platform.variant}-${platform.version} ${{ configuration.name }}
                 displayName: Publish
 
               - task: Docker@2
@@ -76,6 +74,59 @@ stages:
                 condition: always()
 
               - script: |
-                  docker-compose down --rmi local --volumes
+                  docker-compose --env-file ./.env-${platform.name}-${platform.variant}-${platform.version} down --rmi local --volumes
                 displayName: Clean
                 condition: always()
+
+        - job: build_${{ replace(configuration.name, '-', '_') }}_manifest
+          displayName: Build ${{ configuration.name }} manifest
+          dependsOn:
+            - ${{ each platform in configuration.platforms }}:
+              - build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
+
+          pool:
+            name: Default
+            demands:
+              - AZP_AGENT_DOCKER
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - script: |
+                docker --version
+                docker-compose --version
+
+                docker image ls -a
+                docker container ls -a
+              displayName: Initialize Docker
+
+            - ${{ each platform in configuration.platforms }}:
+              - script: |
+                  docker manifest create --amend gusztavvargadr/${{ configuration.name }}:latest gusztavvargadr/${{ configuration.name }}:env-${platform.name}-${platform.variant}-${platform.version}
+                displayName: Build
+
+            - task: Docker@2
+              displayName: Login Docker
+              inputs:
+                command: login
+                containerRegistry: dockerhub-gusztavvargadr
+
+            - script: |
+                docker manifest push gusztavvargadr/${{ configuration.name }}:latest
+              displayName: Publish
+
+            - task: Docker@2
+              displayName: Logout Docker
+              inputs:
+                command: logout
+                containerRegistry: dockerhub-gusztavvargadr
+              condition: always()
+
+            - script: |
+                docker manifest rm gusztavvargadr/${{ configuration.name }}:latest
+              displayName: Clean
+              condition: always()
