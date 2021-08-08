@@ -15,7 +15,7 @@ stages:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each platform in configuration.platforms }}:
           - job: build_${{ replace(configuration.name, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
-            displayName: Build ${{ configuration.name }} on ${{ platform.name }} ${{ platform.variant }} ${{ platform.version }}
+            displayName: Build ${{ configuration.name }} on ${{ platform.name }}-${{ platform.variant }}-${{ platform.version }}
             ${{ if configuration.dependsOn }}:
               dependsOn: build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
 
@@ -53,7 +53,7 @@ stages:
                 displayName: Build
 
               - script: |
-                  docker-compose run --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} ${{ configuration.name }}
+                  docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} run ${{ configuration.name }}
                 displayName: Test
 
               - task: Docker@2
@@ -63,7 +63,7 @@ stages:
                   containerRegistry: dockerhub-gusztavvargadr
 
               - script: |
-                  docker-compose push --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} ${{ configuration.name }}
+                  docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} push ${{ configuration.name }}
                 displayName: Publish
 
               - task: Docker@2
