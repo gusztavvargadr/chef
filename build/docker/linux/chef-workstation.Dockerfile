@@ -1,7 +1,7 @@
-ARG LINUX_VARIANT
-ARG LINUX_VERSION
+ARG PLATFORM_VARIANT
+ARG PLATFORM_VERSION
 
-FROM gusztavvargadr/chef-core:linux-${LINUX_VARIANT}-${LINUX_VERSION}
+FROM gusztavvargadr/chef-core:linux-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
 
 ARG CHEF_WORKSTATION_VERSION
 
@@ -14,3 +14,6 @@ ADD ./lib/ ./lib/
 RUN ./chef-workstation.install.sh $CHEF_WORKSTATION_VERSION
 
 WORKDIR /opt/docker/work/
+
+ENTRYPOINT [ "chef" ]
+CMD [ "--version" ]

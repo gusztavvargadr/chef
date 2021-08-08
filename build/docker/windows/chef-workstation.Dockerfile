@@ -1,7 +1,7 @@
-ARG WINDOWS_VARIANT
-ARG WINDOWS_VERSION
+ARG PLATFORM_VARIANT
+ARG PLATFORM_VERSION
 
-FROM gusztavvargadr/chef-core:windows-${WINDOWS_VARIANT}-${WINDOWS_VERSION}
+FROM gusztavvargadr/chef-core:windows-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
 
 ARG CHEF_WORKSTATION_VERSION
 
@@ -13,3 +13,6 @@ ADD ./lib/ ./lib/
 RUN powershell -File ./chef-workstation.install.ps1 %CHEF_WORKSTATION_VERSION%
 
 WORKDIR C:/opt/docker/work/
+
+ENTRYPOINT [ "chef-cli.bat" ]
+CMD [ "--version" ]

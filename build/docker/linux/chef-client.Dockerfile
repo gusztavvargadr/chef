@@ -1,7 +1,7 @@
-ARG LINUX_VARIANT
-ARG LINUX_VERSION
+ARG PLATFORM_VARIANT
+ARG PLATFORM_VERSION
 
-FROM gusztavvargadr/chef-core:linux-${LINUX_VARIANT}-${LINUX_VERSION}
+FROM gusztavvargadr/chef-core:linux-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
 
 ARG CHEF_CLIENT_VERSION
 
@@ -13,3 +13,6 @@ RUN chmod +x ./chef-client.*.sh
 RUN ./chef-client.install.sh $CHEF_CLIENT_VERSION
 
 WORKDIR /opt/docker/work/
+
+ENTRYPOINT [ "chef-client" ]
+CMD [ "--version" ]

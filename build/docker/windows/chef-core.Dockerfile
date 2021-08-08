@@ -1,7 +1,7 @@
-ARG WINDOWS_VARIANT
-ARG WINDOWS_VERSION
+ARG PLATFORM_VARIANT
+ARG PLATFORM_VERSION
 
-FROM mcr.microsoft.com/windows/${WINDOWS_VARIANT}:${WINDOWS_VERSION}
+FROM mcr.microsoft.com/windows/${PLATFORM_VARIANT}:${PLATFORM_VERSION}
 
 WORKDIR C:/opt/docker/build/
 
@@ -12,3 +12,6 @@ RUN powershell -File ./chef-core.install.ps1
 ENV CHEF_LICENSE=accept-silent
 
 WORKDIR C:/opt/docker/work/
+
+ENTRYPOINT [ "cmd" ]
+CMD [ "/c", "ver" ]
