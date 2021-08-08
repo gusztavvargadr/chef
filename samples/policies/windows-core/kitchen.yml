@@ -4,9 +4,6 @@ driver:
   vagrantfiles:
     - ./kitchen.Vagrantfile
 
-provisioner:
-  name: chef_zero
-
 verifier:
   name: inspec
 

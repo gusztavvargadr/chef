@@ -59,19 +59,11 @@ stages:
           - job: test_${{ replace(configuration.name, '-', '_') }}_${{ platform }}
             displayName: Test ${{ configuration.name }} on ${{ platform }}
 
-            ${{ if eq(platform, 'windows') }}:
-              pool:
-                name: Default
-                demands:
-                  - AZP_AGENT_WINDOWS
-                  - AZP_AGENT_DOCKER
-
-            ${{ if eq(platform, 'linux') }}:
-              pool:
-                name: Default
-                demands:
-                  - AZP_AGENT_LINUX
-                  - AZP_AGENT_DOCKER
+            pool:
+              name: Default
+              demands:
+                - AZP_AGENT_CHEF
+                - AZP_AGENT_VAGRANT
 
             workspace:
               clean: all
@@ -87,22 +79,20 @@ stages:
                   path: $(Build.SourcesDirectory)/artifacts/
 
               - script: |
-                  docker --version
-                  docker-compose --version
+                  vagrant --version
+                  vagrant plugin list
 
-                  docker container ls -a
-                  docker image ls -a
-                displayName: Initialize Docker
-
-              - script: |
-                  docker-compose pull --quiet chef-client-${{ platform }}
-                displayName: Restore
+                  vagrant box list
+                  vagrant global-status
+                displayName: Initialize Vagrant
 
               - script: |
-                  docker-compose run chef-policy-run-${{ platform }} ${{ configuration.name }}
+                  cd samples/policies/${{ configuration.name }}
+                  kitchen test default-${{ platform.name }}
                 displayName: Test
 
               - script: |
-                  docker-compose down --rmi local --volumes
+                  cd samples/policies/${{ configuration.name }}
+                  kitchen destroy default-${{ platform.name }}
                 displayName: Clean
                 condition: always()
