@@ -4,11 +4,6 @@ driver:
   vagrantfiles:
     - ./kitchen.Vagrantfile
 
-provisioner:
-  name: chef_zero
-  max_retries: 3
-  wait_for_retry: 90
-
 verifier:
   name: inspec
 
@@ -18,8 +13,11 @@ platforms:
       box: gusztavvargadr/windows-server
     transport:
       elevated: true
+    provisioner:
+      max_retries: 1
+      wait_for_retry: 60
 
-  - name: ubuntu
+  - name: linux
     driver:
       box: gusztavvargadr/ubuntu-server
 
@@ -28,7 +26,7 @@ suites:
     attributes:
       gusztavvargadr_vagrant:
         app:
-          version: "2.2.16"
+          version: "2.2.17"
         plugins:
           vagrant-sshfs:
         boxes:
