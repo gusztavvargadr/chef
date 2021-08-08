@@ -82,7 +82,7 @@ stages:
           displayName: Build ${{ configuration.name }} manifest
           dependsOn:
             - ${{ each platform in configuration.platforms }}:
-              - build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
+              - build_${{ replace(configuration.name, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
 
           pool:
             name: Default
