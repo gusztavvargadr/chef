@@ -4,20 +4,17 @@ driver:
   vagrantfiles:
     - ./kitchen.Vagrantfile
 
-provisioner:
-  name: chef_zero
-
 verifier:
   name: inspec
 
 platforms:
-  - name: windows-vagrant
+  - name: windows
     driver:
       box: gusztavvargadr/windows-server
     transport:
       elevated: true
 
-  - name: ubuntu-vagrant
+  - name: linux
     driver:
       box: gusztavvargadr/ubuntu-server
 

@@ -88,11 +88,11 @@ stages:
 
               - script: |
                   cd samples/policies/${{ configuration.name }}
-                  kitchen test default-${{ platform.name }}
+                  kitchen test default-${{ platform }}
                 displayName: Test
 
               - script: |
                   cd samples/policies/${{ configuration.name }}
-                  kitchen destroy default-${{ platform.name }}
+                  kitchen destroy default-${{ platform }}
                 displayName: Clean
                 condition: always()

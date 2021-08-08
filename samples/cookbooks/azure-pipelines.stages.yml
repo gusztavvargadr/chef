@@ -3,7 +3,6 @@ parameters:
     # - name: string
     #   platforms:
     #     - name: string
-    #       driver: string
     #       suites: [ string ]
 
 stages:
@@ -63,20 +62,11 @@ stages:
             - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(platform.name, '-', '_') }}_${{ replace(suite, '-', '_') }}
               displayName: Test ${{ configuration.name }} on ${{ platform.name }} for ${{ suite }}
 
-              ${{ if eq(platform.driver, 'vagrant') }}:
-                pool:
-                  name: Default
-                  demands:
-                    - AZP_AGENT_CHEF
-                    - AZP_AGENT_VAGRANT
-
-              ${{ if eq(platform.driver, 'docker') }}:
-                pool:
-                  name: Default
-                  demands:
-                    - AZP_AGENT_WINDOWS
-                    - AZP_AGENT_CHEF
-                    - AZP_AGENT_DOCKER
+              pool:
+                name: Default
+                demands:
+                  - AZP_AGENT_CHEF
+                  - AZP_AGENT_VAGRANT
 
               workspace:
                 clean: all
@@ -85,35 +75,21 @@ stages:
                 - checkout: self
                   submodules: recursive
 
-                - ${{ if eq(platform.driver, 'vagrant') }}:
-                  - script: |
-                      vagrant --version
-                      vagrant plugin list
+                - script: |
+                    vagrant --version
+                    vagrant plugin list
 
-                      vagrant box list
-                      vagrant global-status
-                    displayName: Initialize Vagrant
-
-                - ${{ if eq(platform.driver, 'docker') }}:
-                  - script: |
-                      docker --version
-                      docker-compose --version
-
-                      docker image ls -a
-                      docker container ls -a
-                    displayName: Initialize Docker
+                    vagrant box list
+                    vagrant global-status
+                  displayName: Initialize Vagrant
 
                 - script: |
                     cd samples/cookbooks/${{ configuration.name }}
                     kitchen test ${{ suite }}-${{ platform.name }}
                   displayName: Test
-                  env:
-                    KITCHEN_YAML: kitchen.${{ platform.driver }}.yml
 
                 - script: |
                     cd samples/cookbooks/${{ configuration.name }}
                     kitchen destroy ${{ suite }}-${{ platform.name }}
                   displayName: Clean
-                  env:
-                    KITCHEN_YAML: kitchen.${{ platform.driver }}.yml
                   condition: always()
