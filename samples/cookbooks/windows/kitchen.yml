@@ -1,11 +1,8 @@
 driver:
-  name: docker
-
-transport:
-  name: docker
-
-provisioner:
-  name: chef_zero
+  name: vagrant
+  vm_hostname: false
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
 
 verifier:
   name: inspec
@@ -13,10 +10,8 @@ verifier:
 platforms:
   - name: windows
     driver:
-      image: gusztavvargadr/chef-client:windows
-      run_options: --isolation process
+      box: gusztavvargadr/windows-server
     transport:
-      socket: tcp://localhost:2375
       elevated: true
 
 suites:
@@ -57,3 +52,27 @@ suites:
               - /quiet
               - /norestart
             executable: C:/Program Files/dotnet/dotnet.exe
+
+  - name: updates-install
+    attributes:
+      gusztavvargadr_windows:
+        updates:
+          actions:
+            - enable
+            - start
+            - configure
+            - install
+            - stop
+            - disable
+
+  - name: updates-cleanup
+    attributes:
+      gusztavvargadr_windows:
+        updates:
+          actions:
+            - enable
+            - start
+            - configure
+            - cleanup
+            - stop
+            - disable

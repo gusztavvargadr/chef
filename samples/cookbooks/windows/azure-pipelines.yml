@@ -8,16 +8,11 @@ stages:
         - name: windows
           platforms:
             - name: windows
-              driver: docker
               suites:
                 - chocolatey-packages
                 - environment-variables
                 - features
                 - files
                 - native-packages
-
-            - name: windows-vagrant
-              driver: vagrant
-              suites:
                 - updates-install
                 - updates-cleanup
