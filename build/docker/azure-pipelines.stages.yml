@@ -49,11 +49,11 @@ stages:
                 displayName: Initialize Docker
 
               - script: |
-                  docker-compose --env-file ./.env-${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} build ${{ configuration.name }}
+                  docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} build ${{ configuration.name }}
                 displayName: Build
 
               - script: |
-                  docker-compose run --env-file ./.env-${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} ${{ configuration.name }}
+                  docker-compose run --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} ${{ configuration.name }}
                 displayName: Test
 
               - task: Docker@2
@@ -63,7 +63,7 @@ stages:
                   containerRegistry: dockerhub-gusztavvargadr
 
               - script: |
-                  docker-compose push --env-file ./.env-${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} ${{ configuration.name }}
+                  docker-compose push --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} ${{ configuration.name }}
                 displayName: Publish
 
               - task: Docker@2
@@ -74,7 +74,7 @@ stages:
                 condition: always()
 
               - script: |
-                  docker-compose --env-file ./.env-${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} down --rmi local --volumes
+                  docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} down --rmi local --volumes
                 displayName: Clean
                 condition: always()
 
