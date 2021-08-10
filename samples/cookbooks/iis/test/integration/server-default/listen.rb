@@ -1,5 +1,3 @@
-listen_port = 80
-
-describe port(listen_port) do
+describe port(80) do
   it { should be_listening }
 end
