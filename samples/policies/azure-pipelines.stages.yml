@@ -30,8 +30,8 @@ stages:
               displayName: Initialize Chef
 
             - script: |
-                chef install ./samples/policies/$1/${{ configuration.name }}.rb
-                chef export ./samples/policies/$1/${{ configuration.name }}.rb ./artifacts/policies/${{ configuration.name }}/ --force
+                chef install ./samples/policies/${{ configuration.name }}/Policyfile.rb
+                chef export ./samples/policies/${{ configuration.name }}/Policyfile.rb ./artifacts/policies/${{ configuration.name }}/ --force
               displayName: Build
 
             - publish: $(Build.SourcesDirectory)/artifacts/
