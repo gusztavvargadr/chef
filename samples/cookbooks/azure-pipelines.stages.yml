@@ -27,7 +27,6 @@ stages:
               submodules: recursive
 
             - script: |
-                chef-client --version
                 chef --version
               displayName: Initialize Chef
 
@@ -63,7 +62,6 @@ stages:
                   submodules: recursive
 
                 - script: |
-                    chef-client --version
                     chef --version
                   displayName: Initialize Chef
 
