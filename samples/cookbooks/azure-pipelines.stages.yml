@@ -17,6 +17,7 @@ stages:
           pool:
             name: Default
             demands:
+              - AZP_AGENT_LINUX
               - AZP_AGENT_DOCKER
 
           workspace:
@@ -35,15 +36,15 @@ stages:
               displayName: Initialize Docker
 
             - script: |
-                docker-compose run chef-cookbook-lint ${{ configuration.name }}
+                docker-compose --env-file ./.env.linux-ubuntu-20.04 run chef-cookbook-lint ${{ configuration.name }}
               displayName: Lint
 
             - script: |
-                docker-compose run chef-cookbook-test ${{ configuration.name }}
+                docker-compose --env-file ./.env.linux-ubuntu-20.04 run chef-cookbook-test ${{ configuration.name }}
               displayName: Test
 
             - script: |
-                docker-compose down --rmi local --volumes
+                docker-compose --env-file ./.env.linux-ubuntu-20.04 down --rmi local --volumes
               displayName: Clean
               condition: always()
 
