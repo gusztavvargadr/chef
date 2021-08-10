@@ -30,57 +30,39 @@ services:
         - PLATFORM_VERSION
         - CHEF_WORKSTATION_VERSION
 
-  chef-cookbook-lint-linux:
-    image: gusztavvargadr/chef-workstation:linux-${LINUX_VARIANT}-${LINUX_VERSION}
-    volumes:
-      - ./:/opt/docker/work/
-    entrypoint: /opt/docker/build/chef-workstation.cookbook-lint.sh
-    command: hello-world
+  chef-cookbook-lint:
+    build:
+      context: ./
+      dockerfile: ./build/docker/${PLATFORM_NAME}/chef-cookbook-lint.Dockerfile
 
-  chef-cookbook-lint-windows:
-    image: gusztavvargadr/chef-workstation:windows-${WINDOWS_VARIANT}-${WINDOWS_VERSION}
-    volumes:
-      - ./:C:/opt/docker/work/
-    entrypoint: powershell -File /opt/docker/build/chef-workstation.cookbook-lint.ps1
-    command: hello-world
-
-  chef-cookbook-test-linux:
-    image: gusztavvargadr/chef-workstation:linux-${LINUX_VARIANT}-${LINUX_VERSION}
-    volumes:
-      - ./:/opt/docker/work/
-    entrypoint: /opt/docker/build/chef-workstation.cookbook-test.sh
-    command: hello-world
+  chef-cookbook-test:
+    build:
+      context: ./
+      dockerfile: ./build/docker/${PLATFORM_NAME}/chef-cookbook-test.Dockerfile
 
   chef-policy-build-linux:
-    image: gusztavvargadr/chef-workstation:linux-${LINUX_VARIANT}-${LINUX_VERSION}
+    image: gusztavvargadr/chef-workstation:latet
     volumes:
       - ./:/opt/docker/work/
     entrypoint: /opt/docker/build/chef-workstation.policy-build.sh
     command: hello-world
 
   chef-policy-run-linux:
-    image: gusztavvargadr/chef-client:linux-${LINUX_VARIANT}-${LINUX_VERSION}
+    image: gusztavvargadr/chef-client:latest
     volumes:
       - ./:/opt/docker/work/
     entrypoint: /opt/docker/build/chef-client.policy-run.sh
     command: hello-world
 
-  chef-cookbook-test-windows:
-    image: gusztavvargadr/chef-workstation:windows-${WINDOWS_VARIANT}-${WINDOWS_VERSION}
-    volumes:
-      - ./:C:/opt/docker/work/
-    entrypoint: powershell -File /opt/docker/build/chef-workstation.cookbook-test.ps1
-    command: hello-world
-
   chef-policy-build-windows:
-    image: gusztavvargadr/chef-workstation:windows-${WINDOWS_VARIANT}-${WINDOWS_VERSION}
+    image: gusztavvargadr/chef-workstation:latest
     volumes:
       - ./:C:/opt/docker/work/
     entrypoint: powershell -File /opt/docker/build/chef-workstation.policy-build.ps1
     command: hello-world
 
   chef-policy-run-windows:
-    image: gusztavvargadr/chef-client:windows-${WINDOWS_VARIANT}-${WINDOWS_VERSION}
+    image: gusztavvargadr/chef-client:latest
     volumes:
       - ./:C:/opt/docker/work/
     entrypoint: powershell -File /opt/docker/build/chef-client.policy-run.ps1
