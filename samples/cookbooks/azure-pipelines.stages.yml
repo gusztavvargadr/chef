@@ -17,8 +17,7 @@ stages:
           pool:
             name: Default
             demands:
-              - AZP_AGENT_LINUX
-              - AZP_AGENT_DOCKER
+              - AZP_AGENT_CHEF
 
           workspace:
             clean: all
@@ -28,25 +27,17 @@ stages:
               submodules: recursive
 
             - script: |
-                docker --version
-                docker-compose --version
-
-                docker image ls -a
-                docker container ls -a
-              displayName: Initialize Docker
+                chef-client --version
+                chef --version
+              displayName: Initialize Chef
 
             - script: |
-                docker-compose --env-file ./.env.linux-ubuntu-20.04 run chef-cookbook-lint ${{ configuration.name }}
+                chef exec cookstyle ./samples/cookbooks/${{ configuration.name }}
               displayName: Lint
 
             - script: |
-                docker-compose --env-file ./.env.linux-ubuntu-20.04 run chef-cookbook-test ${{ configuration.name }}
+                chef exec rspec ./samples/cookbooks/${{ configuration.name }}
               displayName: Test
-
-            - script: |
-                docker-compose --env-file ./.env.linux-ubuntu-20.04 down --rmi local --volumes
-              displayName: Clean
-              condition: always()
 
   - stage: acceptance
     displayName: Acceptance
@@ -70,6 +61,11 @@ stages:
               steps:
                 - checkout: self
                   submodules: recursive
+
+                - script: |
+                    chef-client --version
+                    chef --version
+                  displayName: Initialize Chef
 
                 - script: |
                     vagrant --version

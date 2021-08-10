@@ -15,8 +15,7 @@ stages:
           pool:
             name: Default
             demands:
-              - AZP_AGENT_WINDOWS
-              - AZP_AGENT_DOCKER
+              - AZP_AGENT_CHEF
 
           workspace:
             clean: all
@@ -26,19 +25,13 @@ stages:
               submodules: recursive
 
             - script: |
-                docker --version
-                docker-compose --version
-
-                docker container ls -a
-                docker image ls -a
-              displayName: Initialize Docker
+                chef-client --version
+                chef --version
+              displayName: Initialize Chef
 
             - script: |
-                docker-compose pull --quiet chef-workstation-windows
-              displayName: Restore
-
-            - script: |
-                docker-compose run chef-policy-build-windows ${{ configuration.name }}
+                chef install ./samples/policies/$1/${{ configuration.name }}.rb
+                chef export ./samples/policies/$1/${{ configuration.name }}.rb ./artifacts/policies/${{ configuration.name }}/ --force
               displayName: Build
 
             - publish: $(Build.SourcesDirectory)/artifacts/
@@ -72,11 +65,10 @@ stages:
               - checkout: self
                 submodules: recursive
 
-              - task: DownloadPipelineArtifact@2
-                displayName: Download Artifacts
-                inputs:
-                  artifact: build-${{ configuration.name }}
-                  path: $(Build.SourcesDirectory)/artifacts/
+              - script: |
+                  chef-client --version
+                  chef --version
+                displayName: Initialize Chef
 
               - script: |
                   vagrant --version
@@ -85,6 +77,12 @@ stages:
                   vagrant box list
                   vagrant global-status
                 displayName: Initialize Vagrant
+
+              - task: DownloadPipelineArtifact@2
+                displayName: Download Artifacts
+                inputs:
+                  artifact: build-${{ configuration.name }}
+                  path: $(Build.SourcesDirectory)/artifacts/
 
               - script: |
                   cd samples/policies/${{ configuration.name }}
