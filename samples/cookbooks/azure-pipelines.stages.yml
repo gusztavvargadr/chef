@@ -17,7 +17,6 @@ stages:
           pool:
             name: Default
             demands:
-              - AZP_AGENT_LINUX
               - AZP_AGENT_DOCKER
 
           workspace:
@@ -36,15 +35,11 @@ stages:
               displayName: Initialize Docker
 
             - script: |
-                docker-compose pull --quiet chef-workstation-linux
-              displayName: Restore
-
-            - script: |
-                docker-compose run chef-cookbook-lint-linux ${{ configuration.name }}
+                docker-compose run chef-cookbook-lint ${{ configuration.name }}
               displayName: Lint
 
             - script: |
-                docker-compose run chef-cookbook-test-linux ${{ configuration.name }}
+                docker-compose run chef-cookbook-test ${{ configuration.name }}
               displayName: Test
 
             - script: |
