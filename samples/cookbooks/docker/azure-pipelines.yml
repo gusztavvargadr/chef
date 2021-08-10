@@ -8,17 +8,14 @@ stages:
         - name: docker
           platforms:
             - name: windows-server
-              driver: vagrant
               suites:
                 - desktop
                 - enterprise
 
             - name: windows-10
-              driver: vagrant
               suites:
                 - desktop
 
             - name: ubuntu-server
-              driver: vagrant
               suites:
                 - community
