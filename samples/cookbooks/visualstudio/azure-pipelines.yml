@@ -8,7 +8,6 @@ stages:
         - name: visualstudio
           platforms:
             - name: windows
-              driver: vagrant
               suites:
                 - ide-2017-community
                 - ide-2017-professional

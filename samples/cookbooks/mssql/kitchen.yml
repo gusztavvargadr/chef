@@ -1,11 +1,8 @@
 driver:
-  name: docker
-
-transport:
-  name: docker
-
-provisioner:
-  name: chef_zero
+  name: vagrant
+  vm_hostname: false
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
 
 verifier:
   name: inspec
@@ -13,10 +10,8 @@ verifier:
 platforms:
   - name: windows
     driver:
-      image: gusztavvargadr/chef-client:windows
-      run_options: --isolation process
+      box: gusztavvargadr/windows-server
     transport:
-      socket: tcp://localhost:2375
       elevated: true
 
 suites:
