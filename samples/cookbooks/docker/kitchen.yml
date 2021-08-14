@@ -1,16 +1,8 @@
 driver:
   name: vagrant
   vm_hostname: false
-  customize:
-    cpus: 2
-    memory: 4096
   vagrantfiles:
     - ./kitchen.Vagrantfile
-
-provisioner:
-  name: chef_zero
-  max_retries: 3
-  wait_for_retry: 90
 
 verifier:
   name: inspec
@@ -21,12 +13,18 @@ platforms:
       box: gusztavvargadr/windows-server
     transport:
       elevated: true
+    provisioner:
+      max_retries: 2
+      wait_for_retry: 60
 
   - name: windows-10
     driver:
       box: gusztavvargadr/windows-10
     transport:
       elevated: true
+    provisioner:
+      max_retries: 2
+      wait_for_retry: 60
 
   - name: ubuntu-server
     driver:

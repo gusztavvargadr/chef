@@ -8,11 +8,9 @@ stages:
         - name: vagrant
           platforms:
             - name: windows
-              driver: vagrant
               suites:
                 - default
 
-            - name: ubuntu
-              driver: vagrant
+            - name: linux
               suites:
                 - default

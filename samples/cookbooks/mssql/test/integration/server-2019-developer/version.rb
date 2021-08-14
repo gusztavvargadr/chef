@@ -1,6 +1,3 @@
-version_script_code = 'sqlcmd -Q "SELECT @@VERSION"'
-version_script_result = 'Microsoft SQL Server 2019'
-
-describe powershell(version_script_code) do
-  its('stdout') { should include version_script_result }
+describe powershell('sqlcmd -Q "SELECT @@VERSION"') do
+  its('stdout') { should include 'Microsoft SQL Server 2019' }
 end

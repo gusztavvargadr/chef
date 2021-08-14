@@ -8,7 +8,6 @@ stages:
         - name: mssql
           platforms:
             - name: windows
-              driver: docker
               suites:
                 - server-2017-developer
                 - server-2019-developer

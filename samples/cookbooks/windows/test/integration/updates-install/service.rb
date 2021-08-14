@@ -1,5 +1,3 @@
-service_name = 'wuauserv'
-
-describe service(service_name) do
+describe service('wuauserv') do
   it { should_not be_running }
 end

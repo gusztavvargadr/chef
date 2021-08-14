@@ -8,7 +8,6 @@ stages:
         - name: windows
           platforms:
             - name: windows
-              driver: docker
               suites:
                 - chocolatey-packages
                 - environment-variables

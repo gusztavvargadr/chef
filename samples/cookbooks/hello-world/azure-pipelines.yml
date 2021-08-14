@@ -8,16 +8,9 @@ stages:
         - name: hello-world
           platforms:
             - name: windows
-              driver: docker
               suites:
                 - default
 
-            - name: windows-vagrant
-              driver: vagrant
-              suites:
-                - default
-
-            - name: ubuntu-vagrant
-              driver: vagrant
+            - name: linux
               suites:
                 - default

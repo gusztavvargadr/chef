@@ -1,11 +1,8 @@
 driver:
-  name: docker
-
-transport:
-  name: docker
-
-provisioner:
-  name: chef_zero
+  name: vagrant
+  vm_hostname: false
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
 
 verifier:
   name: inspec
@@ -13,10 +10,8 @@ verifier:
 platforms:
   - name: windows
     driver:
-      image: gusztavvargadr/chef-client:windows
-      run_options: --isolation process
+      box: gusztavvargadr/windows-server
     transport:
-      socket: tcp://localhost:2375
       elevated: true
 
 suites:
@@ -24,7 +19,8 @@ suites:
     attributes:
       gusztavvargadr_windows:
         chocolatey_packages:
-          conemu:
+          dotnetcore-runtime:
+            version: '3.1.17'
 
   - name: environment-variables
     attributes:
@@ -51,7 +47,7 @@ suites:
       gusztavvargadr_windows:
         native_packages:
           .NET Core SDK:
-            source: https://download.microsoft.com/download/B/9/F/B9F1AF57-C14A-4670-9973-CDF47209B5BF/dotnet-dev-win-x64.1.0.4.exe
+            source: https://download.visualstudio.microsoft.com/download/pr/5bc28007-3bd9-458d-8a63-0918c27eb2fe/0d0d7d6600f7932f0d5b0a7b949be126/dotnet-runtime-3.1.17-win-x64.exe
             install:
               - /install
               - /quiet

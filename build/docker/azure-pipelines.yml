@@ -7,17 +7,32 @@ stages:
       configurations:
         - name: chef-core
           platforms:
-            - windows
-            - linux
+            - name: windows
+              variant: servercore
+              version: "1809"
+
+            - name: linux
+              variant: ubuntu
+              version: "20.04"
 
         - name: chef-client
           platforms:
-            - windows
-            - linux
+            - name: windows
+              variant: servercore
+              version: "1809"
+
+            - name: linux
+              variant: ubuntu
+              version: "20.04"
           dependsOn: chef-core
 
         - name: chef-workstation
           platforms:
-            - windows
-            - linux
+            - name: windows
+              variant: servercore
+              version: "1809"
+
+            - name: linux
+              variant: ubuntu
+              version: "20.04"
           dependsOn: chef-core

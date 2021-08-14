@@ -1,5 +1,3 @@
-executable_path = "#{ENV['ProgramFiles(x86)']}/Microsoft SQL Server/140/Tools/Binn/ManagementStudio/Ssms.exe"
-
-describe file(executable_path) do
+describe file('C:/Program Files (x86)/Microsoft SQL Server/140/Tools/Binn/ManagementStudio/Ssms.exe') do
   it { should exist }
 end
