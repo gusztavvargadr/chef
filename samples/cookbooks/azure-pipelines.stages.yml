@@ -40,6 +40,7 @@ stages:
 
   - stage: acceptance
     displayName: Acceptance
+    condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
     jobs:
       - ${{ each configuration in parameters.configurations }}:
