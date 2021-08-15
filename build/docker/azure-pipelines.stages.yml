@@ -7,12 +7,12 @@ parameters:
     #       version: string
     #   dependsOn: string
 
-variables:
-  isPublishStepEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-
 stages:
   - stage: commit
     displayName: Commit
+
+    variables:
+      isPublishStepEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
     jobs:
       - ${{ each configuration in parameters.configurations }}:
