@@ -4,5 +4,5 @@ default['gusztavvargadr_docker']['engine']['community']['ubuntu'] = {
   },
   'docker-compose' => {
     'version' => '1.29.2',
-  }
+  },
 }
