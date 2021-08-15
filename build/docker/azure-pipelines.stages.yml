@@ -76,7 +76,7 @@ stages:
                 inputs:
                   command: logout
                   containerRegistry: dockerhub-gusztavvargadr
-                condition: always()
+                condition: eq(variables.isPublishStepEnabled, 'true')
 
               - script: |
                   docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} down --rmi local --volumes
@@ -136,4 +136,4 @@ stages:
               inputs:
                 command: logout
                 containerRegistry: dockerhub-gusztavvargadr
-              condition: always()
+              condition: eq(variables.isPublishStepEnabled, 'true')
