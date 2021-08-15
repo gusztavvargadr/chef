@@ -35,7 +35,6 @@ suites:
     attributes:
       gusztavvargadr_docker:
         engine:
-          version: '20.10.7'
           edition: community
         images:
           hello-world:
