@@ -4,13 +4,17 @@ trigger:
       - '*'
   paths:
     include:
-      - build/docker
+      - docker-compose.yml
+      - .dockerignore
       - .env.windows-servercore-1809
       - .env.linux-ubuntu-20.04
+      - build/docker
+      - build/chef
+      - lib
 pr: none
 
 variables:
-  isPublishStepEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 stages:
   - template: ./azure-pipelines.stages.yml

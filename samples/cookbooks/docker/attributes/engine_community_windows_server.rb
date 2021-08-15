@@ -22,7 +22,7 @@ default['gusztavvargadr_docker']['engine']['community']['windows_server'] = {
   },
   'chocolatey_packages' => {
     'docker-compose' => {
-      'version' => '1.29.1',
+      'version' => '1.29.2',
     },
   },
 }

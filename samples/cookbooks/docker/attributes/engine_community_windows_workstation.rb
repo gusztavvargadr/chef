@@ -26,7 +26,7 @@ default['gusztavvargadr_docker']['engine']['community']['windows_workstation'] =
       'reboot' => true,
     },
     'Docker Desktop' => {
-      'source' => 'https://desktop.docker.com/win/stable/amd64/66090/Docker%20Desktop%20Installer.exe',
+      'source' => 'https://desktop.docker.com/win/stable/amd64/67351/Docker%20Desktop%20Installer.exe',
       'install' => [
         'install',
         '--quiet',
@@ -37,7 +37,7 @@ default['gusztavvargadr_docker']['engine']['community']['windows_workstation'] =
   },
   'chocolatey_packages' => {
     'docker-compose' => {
-      'version' => '1.29.1',
+      'version' => '1.29.2',
     },
   },
 }

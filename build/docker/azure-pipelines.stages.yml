@@ -61,19 +61,19 @@ stages:
                 inputs:
                   command: login
                   containerRegistry: dockerhub-gusztavvargadr
-                condition: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
+                condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
               - script: |
                   docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} push ${{ configuration.name }}
                 displayName: Publish
-                condition: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
+                condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
               - task: Docker@2
                 displayName: Logout Docker
                 inputs:
                   command: logout
                   containerRegistry: dockerhub-gusztavvargadr
-                condition: eq(variables.isPublishStepEnabled, 'true')
+                condition: eq(variables.isPublishEnabled, 'true')
 
               - script: |
                   docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} down --rmi local --volumes
@@ -111,7 +111,7 @@ stages:
               inputs:
                 command: login
                 containerRegistry: dockerhub-gusztavvargadr
-              condition: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
+              condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
             - ${{ each platform in configuration.platforms }}:
               - script: |
@@ -121,7 +121,7 @@ stages:
             - script: |
                 docker manifest push gusztavvargadr/${{ configuration.name }}:latest
               displayName: Publish
-              condition: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
+              condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
             - script: |
                 docker manifest rm gusztavvargadr/${{ configuration.name }}:latest
@@ -133,4 +133,4 @@ stages:
               inputs:
                 command: logout
                 containerRegistry: dockerhub-gusztavvargadr
-              condition: eq(variables.isPublishStepEnabled, 'true')
+              condition: eq(variables.isPublishEnabled, 'true')
