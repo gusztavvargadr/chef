@@ -1,4 +1,12 @@
-trigger: none
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - build/docker
+      - .env.windows-servercore-1809
+      - .env.linux-ubuntu-20.04
 pr: none
 
 stages:
