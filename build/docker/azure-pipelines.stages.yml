@@ -68,7 +68,7 @@ stages:
               - script: |
                   docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} push ${{ configuration.name }}
                 displayName: Publish
-                conditions: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
+                condition: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
 
               - task: Docker@2
                 displayName: Logout Docker
@@ -122,7 +122,7 @@ stages:
             - script: |
                 docker manifest push gusztavvargadr/${{ configuration.name }}:latest
               displayName: Publish
-              conditions: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
+              condition: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
 
             - script: |
                 docker manifest rm gusztavvargadr/${{ configuration.name }}:latest
