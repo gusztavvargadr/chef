@@ -61,17 +61,19 @@ stages:
                 inputs:
                   command: login
                   containerRegistry: dockerhub-gusztavvargadr
+                condition: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
 
               - script: |
                   docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} push ${{ configuration.name }}
                 displayName: Publish
+                condition: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
 
               - task: Docker@2
                 displayName: Logout Docker
                 inputs:
                   command: logout
                   containerRegistry: dockerhub-gusztavvargadr
-                condition: always()
+                condition: eq(variables.isPublishStepEnabled, 'true')
 
               - script: |
                   docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} down --rmi local --volumes
@@ -109,6 +111,7 @@ stages:
               inputs:
                 command: login
                 containerRegistry: dockerhub-gusztavvargadr
+              condition: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
 
             - ${{ each platform in configuration.platforms }}:
               - script: |
@@ -118,6 +121,7 @@ stages:
             - script: |
                 docker manifest push gusztavvargadr/${{ configuration.name }}:latest
               displayName: Publish
+              condition: and(succeeded(), eq(variables.isPublishStepEnabled, 'true'))
 
             - script: |
                 docker manifest rm gusztavvargadr/${{ configuration.name }}:latest
@@ -129,4 +133,4 @@ stages:
               inputs:
                 command: logout
                 containerRegistry: dockerhub-gusztavvargadr
-              condition: always()
+              condition: eq(variables.isPublishStepEnabled, 'true')
