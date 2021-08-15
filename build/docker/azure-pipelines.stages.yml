@@ -11,9 +11,6 @@ stages:
   - stage: commit
     displayName: Commit
 
-    variables:
-      isPublishStepEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each platform in configuration.platforms }}:
