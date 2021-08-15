@@ -1,3 +1,5 @@
+unified_mode true
+
 provides :gusztavvargadr_docker_engine, platform: 'windows'
 
 property :version, String, default: ''

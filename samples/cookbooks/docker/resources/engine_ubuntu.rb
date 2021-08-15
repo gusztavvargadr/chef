@@ -1,3 +1,5 @@
+unified_mode true
+
 provides :gusztavvargadr_docker_engine, platform: 'ubuntu'
 
 property :version, String, default: ''
