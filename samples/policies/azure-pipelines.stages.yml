@@ -36,14 +36,11 @@ stages:
             - publish: $(Build.SourcesDirectory)/artifacts/
               displayName: Publish Artifacts
               artifact: build-${{ configuration.name }}
-
-            - script: |
-                docker-compose down --rmi local --volumes
-              displayName: Clean
-              condition: always()
+              condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
   - stage: acceptance
     displayName: Acceptance
+    condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
     jobs:
       - ${{ each configuration in parameters.configurations }}:
