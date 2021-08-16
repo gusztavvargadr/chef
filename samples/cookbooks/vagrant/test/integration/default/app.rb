@@ -1,3 +1,3 @@
 describe command('vagrant --version') do
-  its('stdout') { should include 'Vagrant 2.2.17' }
+  its('stdout') { should include 'Vagrant 2.2.18' }
 end

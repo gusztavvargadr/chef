@@ -1,3 +1,5 @@
+unified_mode true
+
 provides :gusztavvargadr_vagrant_app, platform: 'ubuntu'
 
 property :version, String, default: ''
