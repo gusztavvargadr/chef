@@ -6,7 +6,7 @@ trigger:
     include:
       - .rubocop.yml
       - src
-      - samples/cookbooks/windows
+      - samples/cookbooks/visual-studio
 pr: none
 
 variables:
