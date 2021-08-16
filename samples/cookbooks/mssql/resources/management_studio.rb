@@ -1,3 +1,5 @@
+unified_mode true
+
 property :version, String, default: ''
 
 default_action :install
