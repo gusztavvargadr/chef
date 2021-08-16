@@ -1,5 +1,16 @@
-trigger: none
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - .rubocop.yml
+      - src
+      - samples/cookbooks/visualstudio
 pr: none
+
+variables:
+  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 stages:
   - template: ../azure-pipelines.stages.yml

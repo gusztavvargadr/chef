@@ -1,7 +1,7 @@
 default['gusztavvargadr_visualstudio']['ide']['2017_professional'] = {
   'native_packages' => {
     'Visual Studio 2017 Professional' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/67f7bfaa-2635-43d9-ba82-26564f458881/42c2609d6a8cfd6471a3c83163bc0a657216c23c915f9c5580f3b783d7de086d/vs_Professional.exe',
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/343898a7-7d12-4faa-b5df-958b31e57b3e/2ac965c1f833775331cf8a288267a35b79538a0747b49ec3f72635e873d1d028/vs_Professional.exe',
       'install' => [
         '--installPath ""C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Professional""',
         '--add Microsoft.VisualStudio.Workload.CoreEditor',
