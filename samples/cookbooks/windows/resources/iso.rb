@@ -1,3 +1,5 @@
+unified_mode true
+
 property :iso_path, String, name_property: true
 property :iso_drive_letter, String, required: true
 
