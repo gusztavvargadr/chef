@@ -1,3 +1,5 @@
+unified_mode true
+
 property :options, Hash, required: true
 
 default_action :install

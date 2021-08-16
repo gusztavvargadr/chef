@@ -1,3 +1,5 @@
+unified_mode true
+
 provides :gusztavvargadr_vagrant_app, platform: 'windows'
 
 property :version, String, default: ''
@@ -12,6 +14,7 @@ action :install do
       'version' => new_resource.version,
       'install' => {
         'ignore-package-exit-codes' => '',
+        'ignore-checksums' => '',
       },
       'reboot' => true,
     },

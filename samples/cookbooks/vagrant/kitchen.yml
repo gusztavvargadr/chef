@@ -26,7 +26,7 @@ suites:
     attributes:
       gusztavvargadr_vagrant:
         app:
-          version: "2.2.17"
+          version: "2.2.18"
         plugins:
           vagrant-sshfs:
         boxes:
