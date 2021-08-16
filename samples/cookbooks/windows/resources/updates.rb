@@ -1,3 +1,5 @@
+unified_mode true
+
 property :msu_source, String, name_property: true
 
 default_action :install

@@ -1,4 +1,12 @@
-trigger: none
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - .rubocop.yml
+      - src
+      - samples/cookbooks/windows
 pr: none
 
 stages:

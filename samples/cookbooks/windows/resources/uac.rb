@@ -1,3 +1,5 @@
+unified_mode true
+
 default_action :enable
 
 action :enable do

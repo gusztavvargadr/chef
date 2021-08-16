@@ -1,3 +1,5 @@
+unified_mode true
+
 property :options, Hash, default: {}
 
 default_action :create

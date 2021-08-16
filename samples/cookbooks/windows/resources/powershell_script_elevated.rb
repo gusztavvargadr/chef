@@ -1,3 +1,5 @@
+unified_mode true
+
 property :command, String, name_property: true
 property :user, String, default: ''
 property :password, String, default: ''
