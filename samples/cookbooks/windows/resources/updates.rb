@@ -1,7 +1,5 @@
 unified_mode true
 
-property :msu_source, String, name_property: true
-
 default_action :install
 
 action :enable do
@@ -31,33 +29,11 @@ action :configure do
 end
 
 action :install do
-  if new_resource.msu_source.to_s.empty?
-    powershell_script 'Install Updates' do
-      code <<-EOH
-        Install-WindowsUpdate -AcceptAll -IgnoreReboot
-      EOH
-      timeout 7_200
-      action :run
-    end
-  else
-    directory_path = "#{Chef::Config[:file_cache_path]}/gusztavvargadr_windows/updates"
-    directory directory_path do
-      recursive true
-      action :create
-    end
-
-    msu_file_path = "#{directory_path}/msu.msu"
-    remote_file msu_file_path do
-      source new_resource.msu_source
-      action :create
-    end
-
-    powershell_script 'Install Updates' do
-      code <<-EOH
-        Start-Process "wusa.exe" "#{msu_file_path} /quiet /norestart" -Wait
-      EOH
-      action :run
-    end
+  powershell_script 'Install Updates' do
+    code <<-EOH
+      Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
+    EOH
+    action :run
   end
 end
 
@@ -67,7 +43,6 @@ action :cleanup do
       DISM.exe /Online /Cleanup-Image /AnalyzeComponentStore
       DISM.exe /Online /Cleanup-Image /StartComponentCleanup /ResetBase
     EOH
-    timeout 7_200
     action :run
   end
 end
