@@ -3,7 +3,7 @@ default['gusztavvargadr_docker']['engine']['enterprise']['windows_server'] = {
     'Containers' => {
       'reboot' => true,
     },
-    'Hyper-V' => {
+    'Hyper-V-All' => {
       'reboot' => true,
     },
   },
