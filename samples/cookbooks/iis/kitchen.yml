@@ -8,9 +8,15 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows
+  - name: windows-server-desktop
     driver:
       box: gusztavvargadr/windows-server
+    transport:
+      elevated: true
+
+  - name: windows-server-core
+    driver:
+      box: gusztavvargadr/windows-server-standard-core
     transport:
       elevated: true
 

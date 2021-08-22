@@ -8,9 +8,18 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows-server
+  - name: windows-server-desktop
     driver:
       box: gusztavvargadr/windows-server
+    transport:
+      elevated: true
+    provisioner:
+      max_retries: 2
+      wait_for_retry: 60
+
+  - name: windows-server-core
+    driver:
+      box: gusztavvargadr/windows-server-standard-core
     transport:
       elevated: true
     provisioner:
@@ -47,7 +56,7 @@ suites:
         engine:
           edition: community
     includes:
-      - windows-server
+      - windows-server-desktop
       - windows-10
 
   - name: enterprise
@@ -58,4 +67,5 @@ suites:
         images:
           hello-world:
     includes:
-      - windows-server
+      - windows-server-desktop
+      - windows-server-core
