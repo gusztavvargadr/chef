@@ -1,7 +1,8 @@
 default['gusztavvargadr_iis']['server']['default'] = {
   'features' => {
     'NetFx3$' => {},
-    'IIS' => {},
+    'IIS-WebServer' => {},
+    'IIS-ASPNET' => {},
   },
   'native_packages' => {
     '.NET Framework 4.8 Runtime' => {
