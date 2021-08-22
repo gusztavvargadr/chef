@@ -16,7 +16,7 @@ platforms:
 
   - name: windows-server-core
     driver:
-      box: gusztavvargadr/windows-server
+      box: gusztavvargadr/windows-server-standard-core
     transport:
       elevated: true
 
