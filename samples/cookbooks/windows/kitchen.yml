@@ -19,8 +19,8 @@ suites:
     attributes:
       gusztavvargadr_windows:
         chocolatey_packages:
-          dotnetcore-runtime:
-            version: '3.1.18'
+          dotnetcore-windowshosting:
+            version: '3.1.19'
 
   - name: environment-variables
     attributes:
@@ -46,8 +46,8 @@ suites:
     attributes:
       gusztavvargadr_windows:
         native_packages:
-          .NET Core SDK:
-            source: https://download.visualstudio.microsoft.com/download/pr/a363a491-56ab-4451-a901-e5886dea2fc6/40595416f34ad49d8a83c2bf83f03487/dotnet-hosting-3.1.18-win.exe
+          .NET Core 3.1.19 Hosting Bundle:
+            source: https://download.visualstudio.microsoft.com/download/pr/c154f72b-dcaf-4852-8fbe-20f0f3c779a7/91c7e664a755fb3142740f14c5c96ea7/dotnet-hosting-3.1.19-win.exe
             install:
               - /install
               - /quiet
