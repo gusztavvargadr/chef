@@ -26,7 +26,7 @@ default['gusztavvargadr_docker']['engine']['community']['windows_workstation'] =
       'reboot' => true,
     },
     'Docker Desktop' => {
-      'source' => 'https://desktop.docker.com/win/stable/amd64/68347/Docker%20Desktop%20Installer.exe',
+      'source' => 'https://desktop.docker.com/win/main/amd64/68347/Docker%20Desktop%20Installer.exe',
       'install' => [
         'install',
         '--quiet',
