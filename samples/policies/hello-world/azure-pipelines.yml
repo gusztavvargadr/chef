@@ -19,4 +19,4 @@ stages:
         - name: hello-world
           platforms:
             - windows
-            - linux
+            - ubuntu

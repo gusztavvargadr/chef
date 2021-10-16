@@ -17,7 +17,7 @@ platforms:
       max_retries: 1
       wait_for_retry: 60
 
-  - name: linux
+  - name: ubuntu
     driver:
       box: gusztavvargadr/ubuntu-server
 

@@ -22,6 +22,6 @@ stages:
               suites:
                 - default
 
-            - name: linux
+            - name: ubuntu
               suites:
                 - default
