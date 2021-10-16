@@ -16,7 +16,7 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
   'powershell_modules' => {},
   'powershell_packages' => {},
   'native_packages' => {
-    'WSL Linux kernel' => {
+    'WSL Linux kernel update' => {
       'source' => 'https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi',
       'install' => [
         '/quiet',
@@ -25,8 +25,8 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
       'executable' => 'C:/Windows/System32/lxss/tools/kernel',
       'reboot' => true,
     },
-    'Docker Desktop' => {
-      'source' => 'https://desktop.docker.com/win/main/amd64/68347/Docker%20Desktop%20Installer.exe',
+    'Docker Desktop 4.1.1' => {
+      'source' => 'https://desktop.docker.com/win/main/amd64/69879/Docker%20Desktop%20Installer.exe',
       'install' => [
         'install',
         '--quiet',
