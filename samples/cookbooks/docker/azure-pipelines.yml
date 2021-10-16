@@ -20,7 +20,6 @@ stages:
           platforms:
             - name: windows-server-desktop
               suites:
-                - desktop
                 - enterprise
 
             - name: windows-server-core
@@ -31,6 +30,6 @@ stages:
               suites:
                 - desktop
 
-            - name: ubuntu-server
+            - name: ubuntu
               suites:
                 - community

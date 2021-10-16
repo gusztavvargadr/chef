@@ -16,7 +16,7 @@ platforms:
 
   - name: windows-server-core
     driver:
-      box: gusztavvargadr/windows-server-standard-core
+      box: gusztavvargadr/windows-server-2022-standard-core
     transport:
       elevated: true
 

@@ -1,4 +1,4 @@
-default['gusztavvargadr_docker']['engine']['community']['windows_workstation'] = {
+default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
   'features' => {
     'Containers' => {
       'reboot' => true,

@@ -19,7 +19,7 @@ platforms:
 
   - name: windows-server-core
     driver:
-      box: gusztavvargadr/windows-server-standard-core
+      box: gusztavvargadr/windows-server-2022-standard-core
     transport:
       elevated: true
     provisioner:
@@ -35,7 +35,7 @@ platforms:
       max_retries: 2
       wait_for_retry: 60
 
-  - name: ubuntu-server
+  - name: ubuntu
     driver:
       box: gusztavvargadr/ubuntu-server
 
@@ -48,15 +48,14 @@ suites:
         images:
           hello-world:
     includes:
-      - ubuntu-server
+      - ubuntu
 
   - name: desktop
     attributes:
       gusztavvargadr_docker:
         engine:
-          edition: community
+          edition: desktop
     includes:
-      - windows-server-desktop
       - windows-10
 
   - name: enterprise

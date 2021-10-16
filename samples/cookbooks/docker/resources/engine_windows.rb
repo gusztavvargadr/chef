@@ -10,8 +10,7 @@ default_action :install
 action :prepare do
   return if new_resource.edition.to_s.empty?
 
-  platform_name = windows_server? ? 'windows_server' : 'windows_workstation'
-  options = node['gusztavvargadr_docker']['engine']["#{new_resource.edition}"][platform_name]
+  options = node['gusztavvargadr_docker']['engine']["#{new_resource.edition}"]['windows']
 
   gusztavvargadr_windows_features '' do
     options options['features']
@@ -46,8 +45,7 @@ end
 action :install do
   return if new_resource.edition.to_s.empty?
 
-  platform_name = windows_server? ? 'windows_server' : 'windows_workstation'
-  options = node['gusztavvargadr_docker']['engine']["#{new_resource.edition}"][platform_name]
+  options = node['gusztavvargadr_docker']['engine']["#{new_resource.edition}"]['windows']
 
   gusztavvargadr_windows_native_packages '' do
     options options['native_packages']
