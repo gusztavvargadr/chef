@@ -6,7 +6,7 @@ trigger:
     include:
       - .rubocop.yml
       - src
-      - samples/policies/hello-world
+      - samples/policies/windows-core
 pr: none
 
 variables:
