@@ -25,8 +25,8 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
       'executable' => 'C:/Windows/System32/lxss/tools/kernel',
       'reboot' => true,
     },
-    'Docker Desktop 4.1.1' => {
-      'source' => 'https://desktop.docker.com/win/main/amd64/69879/Docker%20Desktop%20Installer.exe',
+    'Docker Desktop 4.2.0' => {
+      'source' => 'https://desktop.docker.com/win/main/amd64/70708/Docker%20Desktop%20Installer.exe',
       'install' => [
         'install',
         '--quiet',
@@ -36,8 +36,5 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
     },
   },
   'chocolatey_packages' => {
-    'docker-compose' => {
-      'version' => '1.29.2',
-    },
   },
 }
