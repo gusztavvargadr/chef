@@ -35,7 +35,7 @@ action :prepare do
 
     powershell_script "Install PowerShell package '#{package_name}'" do
       code <<-EOH
-        Install-Package #{package_name} -ProviderName #{package_options['provider']} -Force
+        Install-Package #{package_name} -RequiredVersion #{package_options['version']} -ProviderName #{package_options['provider']} -Force
       EOH
       action :run
     end
