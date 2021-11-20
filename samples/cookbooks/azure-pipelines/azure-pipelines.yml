@@ -1,0 +1,27 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - .rubocop.yml
+      - src
+      - samples/cookbooks/azure-pipelines
+pr: none
+
+variables:
+  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: azure-pipelines
+          platforms:
+            - name: windows
+              suites:
+                - default
+
+            - name: ubuntu
+              suites:
+                - default

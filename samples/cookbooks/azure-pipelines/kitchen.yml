@@ -1,0 +1,29 @@
+driver:
+  name: vagrant
+  vm_hostname: false
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      box: gusztavvargadr/windows-server
+    transport:
+      elevated: true
+    provisioner:
+      max_retries: 1
+      wait_for_retry: 60
+
+  - name: ubuntu
+    driver:
+      box: gusztavvargadr/ubuntu-server
+
+suites:
+  - name: default
+    attributes:
+      gusztavvargadr_azure_pipelines:
+        agent:
+          version: '2.195.0'
