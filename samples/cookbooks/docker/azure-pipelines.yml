@@ -26,6 +26,10 @@ stages:
               suites:
                 - enterprise
 
+            - name: windows-11
+              suites:
+                - desktop
+
             - name: windows-10
               suites:
                 - desktop

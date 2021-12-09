@@ -26,6 +26,15 @@ platforms:
       max_retries: 2
       wait_for_retry: 60
 
+  - name: windows-11
+    driver:
+      box: gusztavvargadr/windows-11
+    transport:
+      elevated: true
+    provisioner:
+      max_retries: 2
+      wait_for_retry: 90
+
   - name: windows-10
     driver:
       box: gusztavvargadr/windows-10
@@ -33,7 +42,7 @@ platforms:
       elevated: true
     provisioner:
       max_retries: 2
-      wait_for_retry: 60
+      wait_for_retry: 90
 
   - name: ubuntu
     driver:
@@ -56,6 +65,7 @@ suites:
         engine:
           edition: desktop
     includes:
+      - windows-11
       - windows-10
 
   - name: enterprise
