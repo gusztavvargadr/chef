@@ -8,7 +8,7 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows-server-desktop
+  - name: windows-server
     driver:
       box: gusztavvargadr/windows-server
     transport:
@@ -16,24 +16,6 @@ platforms:
     provisioner:
       max_retries: 2
       wait_for_retry: 60
-
-  - name: windows-server-core
-    driver:
-      box: gusztavvargadr/windows-server-2022-standard-core
-    transport:
-      elevated: true
-    provisioner:
-      max_retries: 2
-      wait_for_retry: 60
-
-  - name: windows-11
-    driver:
-      box: gusztavvargadr/windows-11
-    transport:
-      elevated: true
-    provisioner:
-      max_retries: 2
-      wait_for_retry: 90
 
   - name: windows-10
     driver:
@@ -65,7 +47,6 @@ suites:
         engine:
           edition: desktop
     includes:
-      - windows-11
       - windows-10
 
   - name: enterprise
@@ -76,5 +57,4 @@ suites:
         images:
           hello-world:
     includes:
-      - windows-server-desktop
-      - windows-server-core
+      - windows-server

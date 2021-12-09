@@ -18,17 +18,9 @@ stages:
       configurations:
         - name: docker
           platforms:
-            - name: windows-server-desktop
+            - name: windows-server
               suites:
                 - enterprise
-
-            - name: windows-server-core
-              suites:
-                - enterprise
-
-            - name: windows-11
-              suites:
-                - desktop
 
             - name: windows-10
               suites:

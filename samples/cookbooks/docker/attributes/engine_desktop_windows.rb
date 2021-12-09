@@ -3,7 +3,7 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
     'Containers' => {
       'reboot' => true,
     },
-    'Hyper-V' => {
+    'Hyper-V-All' => {
       'reboot' => true,
     },
     'Microsoft-Windows-Subsystem-Linux' => {
