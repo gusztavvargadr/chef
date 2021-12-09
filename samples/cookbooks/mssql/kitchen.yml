@@ -8,15 +8,9 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows-server-desktop
+  - name: windows-server
     driver:
       box: gusztavvargadr/windows-server
-    transport:
-      elevated: true
-
-  - name: windows-server-core
-    driver:
-      box: gusztavvargadr/windows-server-2022-standard-core
     transport:
       elevated: true
 
@@ -35,18 +29,8 @@ suites:
           version: "2019"
           edition: developer
 
-  - name: management-studio-2017
-    attributes:
-      gusztavvargadr_mssql:
-        management_studio:
-          version: "2017"
-    includes:
-      - windows-server-desktop
-
   - name: management-studio-2018
     attributes:
       gusztavvargadr_mssql:
         management_studio:
           version: "2018"
-    includes:
-      - windows-server-desktop

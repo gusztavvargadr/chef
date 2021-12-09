@@ -18,14 +18,8 @@ stages:
       configurations:
         - name: mssql
           platforms:
-            - name: windows-server-desktop
+            - name: windows-server
               suites:
                 - server-2017-developer
                 - server-2019-developer
-                - management-studio-2017
                 - management-studio-2018
-
-            - name: windows-server-core
-              suites:
-                - server-2017-developer
-                - server-2019-developer
