@@ -3,7 +3,7 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
     'Containers' => {
       'reboot' => true,
     },
-    'Hyper-V' => {
+    'Hyper-V-All' => {
       'reboot' => true,
     },
     'Microsoft-Windows-Subsystem-Linux' => {
@@ -25,8 +25,8 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
       'executable' => 'C:/Windows/System32/lxss/tools/kernel',
       'reboot' => true,
     },
-    'Docker Desktop 4.2.0' => {
-      'source' => 'https://desktop.docker.com/win/main/amd64/70708/Docker%20Desktop%20Installer.exe',
+    'Docker Desktop 4.3.0' => {
+      'source' => 'https://desktop.docker.com/win/main/amd64/71786/Docker%20Desktop%20Installer.exe',
       'install' => [
         'install',
         '--quiet',
