@@ -8,7 +8,7 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows-server
+  - name: windows
     driver:
       box: gusztavvargadr/windows-server
     transport:

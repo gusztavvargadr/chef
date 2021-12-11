@@ -18,6 +18,6 @@ stages:
       configurations:
         - name: iis
           platforms:
-            - name: windows-server
+            - name: windows
               suites:
                 - server-default
