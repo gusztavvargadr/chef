@@ -4,12 +4,7 @@ trigger:
       - '*'
   paths:
     include:
-      - docker-compose.yml
-      - .dockerignore
-      - .env.windows-servercore-1809
-      - .env.linux-ubuntu-20.04
-      - build/docker
-      - build/chef
+      - build
       - lib
 pr: none
 
