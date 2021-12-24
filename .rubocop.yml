@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - ./lib/**/*
+    - ./src/Policyfile.rb
 
 Layout/EndOfLine:
   Enabled: false
