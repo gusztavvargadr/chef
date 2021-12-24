@@ -9,6 +9,22 @@ default_action :install
 action :install do
   return if new_resource.version.to_s.empty?
 
+  agent_download_uri = "https://vstsagentpackage.azureedge.net/agent/#{new_resource.version}/vsts-agent-win-x64-#{new_resource.version}.zip"
+  agent_local_path = "#{Chef::Config['file_cache_path']}/vsts-agent-win-x64-#{new_resource.version}.zip"
+
+  remote_file agent_local_path do
+    source agent_download_uri
+    action :create
+  end
+
+  archive_file agent_local_path do
+    destination "#{Chef::Config['file_cache_path']}/vsts-agent/"
+    action :extract
+  end
+end
+
+## azp user
+
 # #ps1_sysnative
 
 # # PowerShell
@@ -80,21 +96,7 @@ action :install do
 # # Set-DhcpServerv4OptionValue -ScopeId 192.168.238.0 -OptionId 6 -Value 8.8.8.8,8.8.4.4
 
 # [Environment]::SetEnvironmentVariable("VAGRANT_DEFAULT_PROVIDER", "hyperv", "Machine")
-# ## TODO kitchen-hyperv, kitchen-docker
-
-  agent_download_uri = "https://vstsagentpackage.azureedge.net/agent/#{new_resource.version}/vsts-agent-win-x64-#{new_resource.version}.zip"
-  agent_local_path = "#{Chef::Config['file_cache_path']}/vsts-agent-win-x64-#{new_resource.version}.zip"
-
-  remote_file agent_local_path do
-    source agent_download_uri
-    action :create
-  end
-
-  archive_file agent_local_path do
-    destination "#{Chef::Config['file_cache_path']}/vsts-agent/"
-    action :extract
-  end
-end
+# TODO kitchen-hyperv, kitchen-docker
 
 # # AZP Agent
 # # [Environment]::SetEnvironmentVariable("VSTS_AGENT_INPUT_URL", "https://dev.azure.com/gusztavvargadr/", "User")

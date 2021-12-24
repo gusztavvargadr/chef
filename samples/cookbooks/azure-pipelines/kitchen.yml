@@ -10,20 +10,20 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: gusztavvargadr/windows-server
+      box: gusztavvargadr/windows-server-core
     transport:
       elevated: true
     provisioner:
       max_retries: 1
-      wait_for_retry: 60
+      wait_for_retry: 30
 
   - name: ubuntu
     driver:
-      box: gusztavvargadr/ubuntu-server
+      box: gusztavvargadr/ubuntu-desktop
 
 suites:
   - name: default
     attributes:
       gusztavvargadr_azure_pipelines:
         agent:
-          version: '2.195.0'
+          version: "2.195.2"

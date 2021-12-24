@@ -6,8 +6,14 @@ property :version, String, default: ''
 
 default_action :install
 
-action :install do
-  return if new_resource.version.to_s.empty?
+action :prepare do
+  apt_update '' do
+    action :update
+  end
+
+  apt_package 'xubuntu-desktop' do
+    action :upgrade
+  end
 
   apt_package 'apt-transport-https' do
     action :upgrade
@@ -43,17 +49,16 @@ action :install do
     action :upgrade
   end
 
-  chef_workstation_version = '21.11.679'
-  chef_workstation_download_uri = "https://packages.chef.io/files/stable/chef-workstation/#{chef_workstation_version}/ubuntu/#{shell_out('lsb_release -rs').stdout.strip}/chef-workstation_#{chef_workstation_version}-1_amd64.deb"
-  chef_workstation_local_path = "#{Chef::Config['file_cache_path']}/chef-workstation_#{chef_workstation_version}-1_amd64.deb"
-
-  remote_file chef_workstation_local_path do
-    source chef_workstation_download_uri
-    action :create
+  apt_repository 'chef' do
+    arch 'amd64'
+    uri 'https://packages.chef.io/repos/apt/stable'
+    key 'https://packages.chef.io/chef.asc'
+    components ['main']
+    action :add
   end
 
-  dpkg_package 'chef-workstation' do
-    source chef_workstation_local_path
+  apt_package 'chef-workstation' do
+    # version '21.11.679'
     action :upgrade
   end
 
@@ -66,17 +71,17 @@ action :install do
   end
 
   apt_package 'vagrant' do
-    version '2.2.19'
+    # version '2.2.19'
     action :upgrade
   end
 
   apt_package 'packer' do
-    version '1.7.8'
+    # version '1.7.8'
     action :upgrade
   end
 
   gusztavvargadr_docker_engine '' do
-    version '20.10.11'
+    version '20.10.12'
     edition 'community'
     action [ :prepare, :install ]
   end
@@ -92,6 +97,10 @@ action :install do
   apt_package 'virtualbox-6.1' do
     action :upgrade
   end
+end
+
+action :install do
+  return if new_resource.version.to_s.empty?
 
   agent_download_uri = "https://vstsagentpackage.azureedge.net/agent/#{new_resource.version}/vsts-agent-linux-x64-#{new_resource.version}.tar.gz"
   agent_local_path = "#{Chef::Config['file_cache_path']}/vsts-agent-linux-x64-#{new_resource.version}.tar.gz"
@@ -105,24 +114,23 @@ action :install do
     destination "#{Chef::Config['file_cache_path']}/vsts-agent/"
     action :extract
   end
+end
+
+## azp user
 
 # # Workstation
-# choco install -y microsoft-edge
-# choco install -y conemu
-# choco install -y far
-# choco install -y treesizefree
 # choco install -y vscode
-# choco install -y beyondcompare
 
 # # Vagrant
 # ## TODO boxes
 
 # # Packer
+## Env vars
 # ## TODO download ISOs
 
 # ## TODO docker base images
 
-# VBox and extension
+# VBox extension
 
 # [Environment]::SetEnvironmentVariable("VAGRANT_DEFAULT_PROVIDER", "virtualbox", "Machine")
 
@@ -139,5 +147,3 @@ action :install do
 # # [Environment]::SetEnvironmentVariable("AZP_AGENT_HYPERV", "latest", "User")
 
 # ## TODO Configure agents
-
-end
