@@ -10,7 +10,7 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: gusztavvargadr/windows-server
+      box: gusztavvargadr/windows-server-core
     transport:
       elevated: true
 
@@ -20,7 +20,7 @@ suites:
       gusztavvargadr_windows:
         chocolatey_packages:
           dotnetcore-runtime:
-            version: '2.1.30'
+            version: "2.1.30"
 
   - name: environment-variables
     attributes:

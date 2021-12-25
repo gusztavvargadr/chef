@@ -9,19 +9,14 @@ default_action :install
 action :install do
   return if new_resource.version.to_s.empty?
 
-  chocolatey_packages_options = {
-    'vagrant' => {
-      'version' => new_resource.version,
-      'install' => {
-        'ignore-package-exit-codes' => '',
-        'ignore-checksums' => '',
-      },
-      'reboot' => true,
-    },
-  }
+  reboot 'vagrant-app-install' do
+    action :nothing
+  end
 
-  gusztavvargadr_windows_chocolatey_packages '' do
-    options chocolatey_packages_options
+  chocolatey_package 'vagrant' do
+    version new_resource.version unless new_resource.version == 'latest'
+    returns [0, 2, 3010]
     action :install
+    notifies :request_reboot, 'reboot[vagrant-app-install]'
   end
 end

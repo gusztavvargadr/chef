@@ -1,11 +1,7 @@
 default['gusztavvargadr_docker']['engine']['enterprise']['windows'] = {
   'features' => {
-    'Containers' => {
-      'reboot' => true,
-    },
-    'Hyper-V-All' => {
-      'reboot' => true,
-    },
+    'Containers' => {},
+    'Hyper-V-All' => {},
   },
   'powershell_modules' => {
     'DockerMsftProvider' => {},

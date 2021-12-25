@@ -1,17 +1,9 @@
 default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
   'features' => {
-    'Containers' => {
-      'reboot' => true,
-    },
-    'Hyper-V-All' => {
-      'reboot' => true,
-    },
-    'Microsoft-Windows-Subsystem-Linux' => {
-      'reboot' => true,
-    },
-    'VirtualMachinePlatform' => {
-      'reboot' => true,
-    },
+    'Containers' => {},
+    'Hyper-V-All' => {},
+    'Microsoft-Windows-Subsystem-Linux' => {},
+    'VirtualMachinePlatform' => {},
   },
   'powershell_modules' => {},
   'powershell_packages' => {},
@@ -23,7 +15,6 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
         '/norestart',
       ],
       'executable' => 'C:/Windows/System32/lxss/tools/kernel',
-      'reboot' => true,
     },
     'Docker Desktop 4.3.1' => {
       'source' => 'https://desktop.docker.com/win/main/amd64/72247/Docker%20Desktop%20Installer.exe',
@@ -32,7 +23,6 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
         '--quiet',
       ],
       'executable' => 'C:/Program Files/Docker/Docker/Docker Desktop.exe',
-      'reboot' => true,
     },
   },
   'chocolatey_packages' => {

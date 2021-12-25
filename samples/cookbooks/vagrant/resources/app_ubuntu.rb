@@ -9,16 +9,20 @@ default_action :install
 action :install do
   return if new_resource.version.to_s.empty?
 
-  dpkg_download_uri = "https://releases.hashicorp.com/vagrant/#{new_resource.version}/vagrant_#{new_resource.version}_x86_64.deb"
-  dpkg_local_path = "#{Chef::Config['file_cache_path']}/vagrant_#{new_resource.version}_x86_64.deb"
-
-  remote_file dpkg_local_path do
-    source dpkg_download_uri
-    action :create
+  apt_package 'apt-transport-https' do
+    action :install
   end
 
-  dpkg_package dpkg_local_path do
-    source dpkg_local_path
+  apt_repository 'hashicorp' do
+    arch 'amd64'
+    uri 'https://apt.releases.hashicorp.com'
+    key 'https://apt.releases.hashicorp.com/gpg'
+    components ['main']
+    action :add
+  end
+
+  apt_package 'vagrant' do
+    version new_resource.version unless new_resource.version == 'latest'
     action :install
   end
 end
