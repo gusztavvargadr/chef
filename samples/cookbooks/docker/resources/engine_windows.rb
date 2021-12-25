@@ -12,9 +12,14 @@ action :prepare do
 
   options = node['gusztavvargadr_docker']['engine']["#{new_resource.edition}"]['windows']
 
+  reboot 'docker-engine-prepare' do
+    action :nothing
+  end
+
   gusztavvargadr_windows_features '' do
     options options['features']
     action :install
+    notifies :request_reboot, 'reboot[docker-engine-prepare]'
   end
 
   options['powershell_modules'].each do |module_name, _module_options|
@@ -47,9 +52,14 @@ action :install do
 
   options = node['gusztavvargadr_docker']['engine']["#{new_resource.edition}"]['windows']
 
+  reboot 'docker-engine-install' do
+    action :nothing
+  end
+
   gusztavvargadr_windows_native_packages '' do
     options options['native_packages']
     action :install
+    notifies :request_reboot, 'reboot[docker-engine-install]'
   end
 
   gusztavvargadr_windows_chocolatey_packages '' do

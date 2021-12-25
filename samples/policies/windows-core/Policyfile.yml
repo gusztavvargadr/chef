@@ -19,10 +19,8 @@ gusztavvargadr_windows:
 # vagrant:
 #   install:
 #     ignore-package-exit-codes:
-#   reboot: true
 # chef-workstation:
 # docker-desktop:
-#   reboot: true
 
 # wsl
 # docker
