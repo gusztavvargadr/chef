@@ -40,17 +40,9 @@ action :install do
   end
 
   extract_directory_path = "#{directory_path}/install"
-  directory extract_directory_path do
-    recursive true
-    action [:delete, :create]
-  end
-
-  powershell_script "Extract SQL Server #{new_resource.version} #{new_resource.edition} Install" do
-    code <<-EOH
-      7z x #{download_file_path.tr('/', '\\')}
-    EOH
-    cwd extract_directory_path
-    action :run
+  archive_file download_file_path do
+    destination extract_directory_path
+    action :extract
   end
 
   powershell_script "Execute SQL Server #{new_resource.version} #{new_resource.edition} Install" do
