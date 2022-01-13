@@ -16,21 +16,19 @@ action :start do
 end
 
 action :configure do
-  powershell_script 'Install PSWindowsUpdate' do
-    code <<-EOH
-      [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-
-      Install-PackageProvider -Name Nuget -Force
-
-      Install-Module PSWindowsUpdate -Force
-    EOH
-    action :run
-    only_if { powershell_out('(Get-Module -ListAvailable | Where { $_.Name -eq "PSWindowsUpdate" }).Count').stdout.strip == '0' }
-  end
-
   windows_update_settings '' do
     disable_automatic_updates true
     action :set
+  end
+
+  registry_key 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config' do
+    values [{
+      name: 'DODownloadMode',
+      type: :dword,
+      data: 0,
+    }]
+    recursive true
+    action :create
   end
 
   registry_key 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\WindowsStore' do
@@ -43,14 +41,16 @@ action :configure do
     action :create
   end
 
-  registry_key 'HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\DeliveryOptimization\\Config' do
-    values [{
-      name: 'DODownloadMode',
-      type: :dword,
-      data: 0,
-    }]
-    recursive true
-    action :create
+  powershell_script 'Install PSWindowsUpdate' do
+    code <<-EOH
+      [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+      Install-PackageProvider -Name Nuget -Force
+
+      Install-Module PSWindowsUpdate -Force
+    EOH
+    action :run
+    only_if { powershell_out('(Get-Module -ListAvailable | Where { $_.Name -eq "PSWindowsUpdate" }).Count').stdout.strip == '0' }
   end
 end
 
