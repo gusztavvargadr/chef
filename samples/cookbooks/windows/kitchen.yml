@@ -13,6 +13,9 @@ platforms:
       box: gusztavvargadr/windows-server-core
     transport:
       elevated: true
+    provisioner:
+      max_retries: 1
+      wait_for_retry: 60
 
 suites:
   - name: chocolatey-packages
