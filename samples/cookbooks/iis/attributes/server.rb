@@ -20,16 +20,16 @@ default['gusztavvargadr_iis']['server']['default'] = {
         '/norestart',
       ],
     },
-    '.NET 5.0.13 Hosting Bundle' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/08a0bb65-6004-4099-8289-945f1681d946/f77d62d5e200693bec1416d4aefa97f7/dotnet-hosting-5.0.13-win.exe',
+    '.NET 5.0.14 Hosting Bundle' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/5adf4f36-aff5-447f-99db-86eae913d4eb/b71f76ea31156438499da1d419c577ff/dotnet-hosting-5.0.14-win.exe',
       'install' => [
         '/install',
         '/quiet',
         '/norestart',
       ],
     },
-    '.NET 6.0.1 Hosting Bundle' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/b69fc347-c3c8-49bc-b452-dc89a1efdf7b/ebac64c8271dab3b9b1e87c72ef47374/dotnet-hosting-6.0.1-win.exe',
+    '.NET 6.0.2 Hosting Bundle' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/e77fd80d-b12b-4d8c-9dc2-a22007f44cc8/ad05622589430ca580b7309513f139fe/dotnet-hosting-6.0.2-win.exe',
       'install' => [
         '/install',
         '/quiet',
