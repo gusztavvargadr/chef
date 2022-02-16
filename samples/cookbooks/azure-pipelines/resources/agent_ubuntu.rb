@@ -7,10 +7,6 @@ property :version, String, default: ''
 default_action :install
 
 action :prepare do
-  apt_update '' do
-    action :update
-  end
-
   apt_package 'xubuntu-desktop' do
     action :upgrade
   end
@@ -70,9 +66,9 @@ action :prepare do
     action :add
   end
 
-  apt_package 'vagrant' do
-    # version '2.2.19'
-    action :upgrade
+  gusztavvargadr_vagrant_app '' do
+    version 'latest'
+    action :install
   end
 
   apt_package 'packer' do
