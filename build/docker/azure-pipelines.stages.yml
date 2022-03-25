@@ -25,6 +25,7 @@ stages:
                 demands:
                   - AZP_AGENT_WINDOWS
                   - AZP_AGENT_DOCKER
+                  - AZP_AGENT_UPLOAD
 
             ${{ if eq(platform.name, 'linux') }}:
               pool:
@@ -32,6 +33,7 @@ stages:
                 demands:
                   - AZP_AGENT_LINUX
                   - AZP_AGENT_DOCKER
+                  - AZP_AGENT_UPLOAD
 
             workspace:
               clean: all
