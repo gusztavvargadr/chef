@@ -87,11 +87,13 @@ stages:
           dependsOn:
             - ${{ each platform in configuration.platforms }}:
               - build_${{ replace(configuration.name, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
+          condition: eq(variables.isPublishEnabled, 'true')
 
           pool:
             name: Default
             demands:
               - AZP_AGENT_DOCKER
+              - AZP_AGENT_UPLOAD
 
           workspace:
             clean: all
@@ -113,7 +115,6 @@ stages:
               inputs:
                 command: login
                 containerRegistry: dockerhub-gusztavvargadr
-              condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
             - ${{ each platform in configuration.platforms }}:
               - script: |
@@ -123,7 +124,6 @@ stages:
             - script: |
                 docker manifest push gusztavvargadr/${{ configuration.name }}:latest
               displayName: Publish
-              condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
             - script: |
                 docker manifest rm gusztavvargadr/${{ configuration.name }}:latest
@@ -135,4 +135,4 @@ stages:
               inputs:
                 command: logout
                 containerRegistry: dockerhub-gusztavvargadr
-              condition: eq(variables.isPublishEnabled, 'true')
+              condition: always()
