@@ -14,7 +14,7 @@ platforms:
     transport:
       elevated: true
     provisioner:
-      max_retries: 1
+      max_retries: 4
       wait_for_retry: 60
 
 suites:

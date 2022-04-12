@@ -41,6 +41,14 @@ action :configure do
     action :create
   end
 
+  powershell_script 'Disable Reserved Storage State' do
+    code <<-EOH
+      DISM.exe /Online /Set-ReservedStorageState /State:Disabled
+    EOH
+    action :run
+    only_if { powershell_out('DISM.exe /Online /?').stdout.include?('/Set-ReservedStorageState') }
+  end
+
   powershell_script 'Install PSWindowsUpdate' do
     code <<-EOH
       [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
