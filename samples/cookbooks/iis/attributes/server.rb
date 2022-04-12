@@ -12,24 +12,24 @@ default['gusztavvargadr_iis']['server']['default'] = {
         '/norestart',
       ],
     },
-    '.NET Core 3.1.23 Hosting Bundle' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/8c089b35-4e8d-4eda-b1e9-1267d2240818/4f60c233e5c968a236e853576548f6ae/dotnet-hosting-3.1.23-win.exe',
+    '.NET Core 3.1.24 Hosting Bundle' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/fcedc990-c89d-4c23-a5b3-8380433db590/2ccf44671fe78d1a20ddefa9ef977b80/dotnet-hosting-3.1.24-win.exe',
       'install' => [
         '/install',
         '/quiet',
         '/norestart',
       ],
     },
-    '.NET 5.0.15 Hosting Bundle' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/d7d20e41-4bee-4f8a-a32c-278f0ef8ce1a/f5a0c59b42d01b9fc2115615c801866c/dotnet-hosting-5.0.15-win.exe',
+    '.NET 5.0.16 Hosting Bundle' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/0e0baacc-0402-4e05-b8e8-c7a50f6efbe5/760f2852ea15c7717668d29f28c7454c/dotnet-hosting-5.0.16-win.exe',
       'install' => [
         '/install',
         '/quiet',
         '/norestart',
       ],
     },
-    '.NET 6.0.3 Hosting Bundle' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/41d7c644-140a-40b5-9eb7-071544b79c65/885b7fa698a2d1d3a79ad363613f8ff2/dotnet-hosting-6.0.3-win.exe',
+    '.NET 6.0.4 Hosting Bundle' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/0c2039d2-0072-43a8-bb20-766b9a91d001/0e2288a2f07743e63778416b2367bb88/dotnet-hosting-6.0.4-win.exe',
       'install' => [
         '/install',
         '/quiet',
