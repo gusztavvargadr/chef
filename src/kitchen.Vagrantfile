@@ -1,15 +1,11 @@
 Vagrant.configure("2") do |config|
-  config.vm.provider "virtualbox" do |v|
-    v.cpus = 2
-    v.memory = 4096
-    v.linked_clone = true
-    v.customize [ "modifyvm", :id, "--nested-hw-virt", "on" ]
+  config.vm.provider "virtualbox" do |provider_virtualbox|
+    provider_virtualboxcpus = 2
+    provider_virtualbox.memory = 4096
   end
 
-  config.vm.provider "hyperv" do |h|
-    h.cpus = 2
-    h.memory = 4096
-    h.linked_clone = true
-    h.enable_virtualization_extensions = true
+  config.vm.provider "hyperv" do |provider_hyperv|
+    provider_hyperv.cpus = 2
+    provider_hyperv.memory = 4096
   end
 end
