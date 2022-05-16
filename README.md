@@ -1,5 +1,5 @@
 # Chef
 
-This repository contains common [Chef] helper tools and sample cookbooks and policies.
+This repository contains [Chef] helper tools and sample cookbooks.
 
-[Chef]: https://www.chef.sh/
+[Chef]: https://chef.io

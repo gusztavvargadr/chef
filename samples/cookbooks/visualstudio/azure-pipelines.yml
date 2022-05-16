@@ -20,6 +20,5 @@ stages:
             - name: windows
               suites:
                 - ide-2017-community
-                - ide-2017-professional
                 - ide-2019-community
-                - ide-2019-professional
+                - ide-2022-community

@@ -22,13 +22,6 @@ suites:
           version: "2017"
           edition: community
 
-  - name: ide-2017-professional
-    attributes:
-      gusztavvargadr_visualstudio:
-        ide:
-          version: "2017"
-          edition: professional
-
   - name: ide-2019-community
     attributes:
       gusztavvargadr_visualstudio:
@@ -36,9 +29,9 @@ suites:
           version: "2019"
           edition: community
 
-  - name: ide-2019-professional
+  - name: ide-2022-community
     attributes:
       gusztavvargadr_visualstudio:
         ide:
-          version: "2019"
-          edition: professional
+          version: "2022"
+          edition: community

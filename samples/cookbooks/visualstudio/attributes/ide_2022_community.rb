@@ -1,9 +1,9 @@
-default['gusztavvargadr_visualstudio']['ide']['2019_professional'] = {
+default['gusztavvargadr_visualstudio']['ide']['2022_community'] = {
   'native_packages' => {
-    'Visual Studio 2019 Professional' => {
-      'source' => 'https://download.visualstudio.microsoft.com/download/pr/45dfa82b-c1f8-4c27-a5a0-1fa7a864ae21/f7f17df3039d70d22c8b95f396e658c49b6429fa1419cfd1c9db1f3273ac4f6d/vs_Professional.exe',
+    'Visual Studio 2022 Community' => {
+      'source' => 'https://download.visualstudio.microsoft.com/download/pr/dc2793e9-7b80-4f11-9e33-85833e8921a6/3e99b3943dceebd42d08e48c1d86422bce270dac46bb718d4e8e4a61034d52ce/vs_Community.exe',
       'install' => [
-        '--installPath ""C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Professional""',
+        '--installPath ""C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community""',
         '--add Microsoft.VisualStudio.Workload.CoreEditor',
         '--add Microsoft.VisualStudio.Workload.ManagedDesktop',
         '--add Microsoft.VisualStudio.Workload.NetWeb',
@@ -17,7 +17,7 @@ default['gusztavvargadr_visualstudio']['ide']['2019_professional'] = {
         '--quiet',
         '--norestart',
       ],
-      'executable' => 'C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/Common7/IDE/devenv.exe',
+      'executable' => 'C:/Program Files (x86)/Microsoft Visual Studio/2022/Community/Common7/IDE/devenv.exe',
     },
   },
 }
