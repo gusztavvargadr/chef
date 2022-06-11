@@ -10,9 +10,7 @@ action :install do
   app_version = new_resource.options['version']
   return if app_version.to_s.empty?
 
-  apt_update do
-    action :update
-  end
+  apt_update
 
   apt_package 'apt-transport-https' do
     action :install
@@ -25,6 +23,8 @@ action :install do
     components ['main']
     action :add
   end
+
+  apt_update
 
   apt_package 'vagrant' do
     version app_version unless app_version == 'latest'
