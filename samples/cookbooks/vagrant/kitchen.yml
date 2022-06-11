@@ -29,8 +29,6 @@ suites:
       gusztavvargadr_vagrant:
         plugins:
           vagrant-sshfs:
-    includes:
-      - ubuntu
 
   - name: boxes
     attributes:
@@ -38,5 +36,3 @@ suites:
         boxes:
           gusztavvargadr/ubuntu-server:
             provider: virtualbox
-    includes:
-      - ubuntu

@@ -19,6 +19,8 @@ stages:
             - name: windows
               suites:
                 - default
+                - plugins
+                - boxes
 
             - name: ubuntu
               suites:
