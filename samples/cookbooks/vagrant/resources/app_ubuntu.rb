@@ -28,6 +28,6 @@ action :install do
 
   apt_package 'vagrant' do
     version app_version unless app_version == 'latest'
-    action :upgrade
+    action :install
   end
 end

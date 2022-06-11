@@ -1,4 +1,6 @@
+app_options = node['gusztavvargadr_vagrant']['app_profiles'][node['gusztavvargadr_vagrant']['app']]
+
 gusztavvargadr_vagrant_app '' do
-  options node['gusztavvargadr_vagrant']['app_profiles'][node['gusztavvargadr_vagrant']['app']]
+  options app_options
   action :install
 end

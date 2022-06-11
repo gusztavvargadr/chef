@@ -17,7 +17,7 @@ action :install do
   chocolatey_package 'vagrant' do
     version app_version unless app_version == 'latest'
     returns [0, 2, 3010]
-    action :upgrade
+    action :install
     notifies :request_reboot, 'reboot[vagrant-app-install]'
   end
 end
