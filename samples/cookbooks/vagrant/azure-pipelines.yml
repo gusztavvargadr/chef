@@ -24,3 +24,5 @@ stages:
             - name: ubuntu
               suites:
                 - default
+                - plugins
+                - boxes

@@ -1,4 +1,4 @@
 gusztavvargadr_vagrant_app '' do
-  version node['gusztavvargadr_vagrant']['app']['version']
+  options node['gusztavvargadr_vagrant']['app_profiles'][node['gusztavvargadr_vagrant']['app']]
   action :install
 end

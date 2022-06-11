@@ -2,12 +2,17 @@ unified_mode true
 
 provides :gusztavvargadr_vagrant_app, platform: 'ubuntu'
 
-property :version, String, default: ''
+property :options, Hash, default: {}
 
 default_action :install
 
 action :install do
-  return if new_resource.version.to_s.empty?
+  app_version = new_resource.options['version']
+  return if app_version.to_s.empty?
+
+  apt_update do
+    action :update
+  end
 
   apt_package 'apt-transport-https' do
     action :install
@@ -22,7 +27,7 @@ action :install do
   end
 
   apt_package 'vagrant' do
-    version new_resource.version unless new_resource.version == 'latest'
-    action :install
+    version app_version unless app_version == 'latest'
+    action :upgrade
   end
 end
