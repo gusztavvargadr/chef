@@ -4,8 +4,7 @@ trigger:
       - '*'
   paths:
     include:
-      - build
-      - lib
+      - build/docker
 pr: none
 
 variables:

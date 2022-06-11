@@ -4,7 +4,6 @@ trigger:
       - '*'
   paths:
     include:
-      - src
       - samples/cookbooks/visualstudio
 pr: none
 

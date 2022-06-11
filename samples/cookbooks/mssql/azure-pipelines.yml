@@ -4,7 +4,6 @@ trigger:
       - '*'
   paths:
     include:
-      - src
       - samples/cookbooks/mssql
 pr: none
 
