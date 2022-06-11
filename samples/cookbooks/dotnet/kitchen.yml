@@ -1,0 +1,38 @@
+driver:
+  name: vagrant
+  vm_hostname: false
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      box: gusztavvargadr/windows-server-core
+    transport:
+      elevated: true
+
+  - name: ubuntu
+    driver:
+      box: gusztavvargadr/ubuntu-server
+
+suites:
+  - name: default
+
+  - name: runtimes
+    attributes:
+      gusztavvargadr_dotnet:
+        runtimes:
+          - "6.0"
+          - "3.1"
+        sdks: []
+
+  - name: sdks
+    attributes:
+      gusztavvargadr_dotnet:
+        runtimes: []
+        sdks:
+          - "6.0"
+          - "3.1"
