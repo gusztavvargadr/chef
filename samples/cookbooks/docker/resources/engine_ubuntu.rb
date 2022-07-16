@@ -10,6 +10,10 @@ default_action :install
 action :prepare do
   return unless new_resource.edition.to_s == 'community'
 
+  apt_update 'update' do
+    action :update
+  end
+
   %w(apt-transport-https ca-certificates curl gnupg lsb-release).each do |package_name|
     apt_package package_name do
       action :install
