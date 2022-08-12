@@ -16,8 +16,8 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
       ],
       'executable' => 'C:/Windows/System32/lxss/tools/kernel',
     },
-    'Docker Desktop 4.10.1' => {
-      'source' => 'https://desktop.docker.com/win/main/amd64/82475/Docker%20Desktop%20Installer.exe',
+    'Docker Desktop 4.11.1' => {
+      'source' => 'https://desktop.docker.com/win/main/amd64/84025/Docker%20Desktop%20Installer.exe',
       'install' => [
         'install',
         '--quiet',
