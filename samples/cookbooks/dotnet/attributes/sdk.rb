@@ -1,5 +1,5 @@
 default['gusztavvargadr_dotnet']['sdk_options'] = {
-  'latest' => {
+  'current' => {
     'type' => 'dotnet',
     'version' => '6.0',
   },

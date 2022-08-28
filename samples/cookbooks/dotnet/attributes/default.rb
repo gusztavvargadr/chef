@@ -1,6 +1,6 @@
 default['gusztavvargadr_dotnet'] = {
   'runtimes' => [
-    'latest',
+    'current',
   ],
   'sdks' => [],
 }
