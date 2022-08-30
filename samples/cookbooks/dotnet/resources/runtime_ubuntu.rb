@@ -11,8 +11,8 @@ action :install do
   runtime_version = new_resource.options['version']
   return if runtime_type.to_s.empty? || runtime_version.to_s.empty?
 
-  gusztavvargadr_dotnet_packages '' do
-    action :install
+  gusztavvargadr_dotnet_repository '' do
+    action :add
   end
 
   apt_package "dotnet-runtime-#{runtime_version}" do

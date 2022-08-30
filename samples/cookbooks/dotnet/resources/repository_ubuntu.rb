@@ -1,10 +1,10 @@
 unified_mode true
 
-provides :gusztavvargadr_dotnet_packages, platform: 'ubuntu'
+provides :gusztavvargadr_dotnet_repository, platform: 'ubuntu'
 
-default_action :install
+default_action :add
 
-action :install do
+action :add do
   dotnet_packages_download_uri = "https://packages.microsoft.com/config/ubuntu/#{shell_out('lsb_release -rs').stdout.strip}/packages-microsoft-prod.deb"
   dotnet_packages_local_path = "#{Chef::Config['file_cache_path']}/packages-microsoft-prod.deb"
 

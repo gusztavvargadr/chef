@@ -11,7 +11,7 @@ action :install do
   sdk_version = new_resource.options['version']
   return if sdk_type.to_s.empty? || sdk_version.to_s.empty?
 
-  gusztavvargadr_dotnet_packages '' do
+  gusztavvargadr_dotnet_repository '' do
     action :install
   end
 
