@@ -62,8 +62,19 @@ action :install do
     notifies :request_reboot, 'reboot[docker-engine-install]'
   end
 
-  gusztavvargadr_windows_chocolatey_packages '' do
-    options options['chocolatey_packages']
-    action :install
+  compose_source = options['compose_source']
+  unless compose_source.empty?
+    home_directory = powershell_out('$env:USERPROFILE').stdout.strip
+    compose_directory = "#{home_directory}/.docker/cli-plugins/"
+    directory compose_directory do
+      recursive true
+      action :create
+    end
+
+    compose_target = "#{compose_directory}docker-compose.exe"
+    remote_file compose_target do
+      source compose_source
+      action :create
+    end
   end
 end

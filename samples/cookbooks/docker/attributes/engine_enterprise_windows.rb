@@ -13,9 +13,7 @@ default['gusztavvargadr_docker']['engine']['enterprise']['windows'] = {
     },
   },
   'native_packages' => {},
-  'chocolatey_packages' => {
-    'docker-compose' => {
-      'version' => '1.29.2',
-    },
-  },
+  'compose_source' => 'https://github.com/docker/compose/releases/latest/download/docker-compose-windows-x86_64.exe',
 }
+
+#  to ~/.docker/cli-plugins

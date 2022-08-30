@@ -25,6 +25,5 @@ default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
       'executable' => 'C:/Program Files/Docker/Docker/Docker Desktop.exe',
     },
   },
-  'chocolatey_packages' => {
-  },
+  'compose_source' => '',
 }

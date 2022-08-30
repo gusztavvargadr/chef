@@ -14,7 +14,7 @@ action :prepare do
     action :update
   end
 
-  %w(apt-transport-https ca-certificates curl gnupg lsb-release).each do |package_name|
+  %w(ca-certificates curl gnupg lsb-release).each do |package_name|
     apt_package package_name do
       action :install
     end
@@ -27,7 +27,6 @@ action :install do
   options = node['gusztavvargadr_docker']['engine']["#{new_resource.edition}"]['ubuntu']
 
   apt_repository 'docker' do
-    arch 'amd64'
     uri 'https://download.docker.com/linux/ubuntu'
     key 'https://download.docker.com/linux/ubuntu/gpg'
     components ['stable']
@@ -46,17 +45,7 @@ action :install do
     action :create
   end
 
-  docker_compose_version = options['docker-compose']['version']
-  docker_compose_source = "https://github.com/docker/compose/releases/download/#{docker_compose_version}/docker-compose-#{shell_out('uname -s').stdout.strip}-#{shell_out('uname -m').stdout.strip}"
-  remote_file '/usr/local/bin/docker-compose' do
-    source docker_compose_source
-    mode '0755'
-    action :create
-  end
-
-  docker_compose_completion_source = "https://raw.githubusercontent.com/docker/compose/#{docker_compose_version}/contrib/completion/bash/docker-compose"
-  remote_file '/etc/bash_completion.d/docker-compose' do
-    source docker_compose_completion_source
-    action :create
+  apt_package 'docker-compose-plugin' do
+    action :install
   end
 end
