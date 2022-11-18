@@ -7,21 +7,16 @@ trigger:
       - samples/cookbooks/windows
 pr: none
 
-variables:
-  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-
 stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
         - name: windows
-          platforms:
-            - name: windows
-              suites:
-                - chocolatey-packages
-                - environment-variables
-                - features
-                - files
-                - native-packages
-                - updates-install
-                - updates-cleanup
+          instances:
+            - chocolatey-packages-windows
+            - environment-variables-windows
+            - features-windows
+            - files-windows
+            - native-packages-windows
+            - updates-install-windows
+            - updates-cleanup-windows
