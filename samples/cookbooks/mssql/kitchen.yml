@@ -14,27 +14,27 @@ platforms:
     transport:
       elevated: true
 
-  - name: windows-10
+  - name: windows-desktop
     driver:
-      box: gusztavvargadr/windows-10
+      box: gusztavvargadr/windows-server
     transport:
       elevated: true
 
 suites:
-  - name: server-2017-developer
-    attributes:
-      gusztavvargadr_mssql:
-        server:
-          version: "2017"
-          edition: developer
-    includes:
-      - windows-server
-
   - name: server-2019-developer
     attributes:
       gusztavvargadr_mssql:
         server:
           version: "2019"
+          edition: developer
+    includes:
+      - windows-server
+
+  - name: server-2017-developer
+    attributes:
+      gusztavvargadr_mssql:
+        server:
+          version: "2017"
           edition: developer
     includes:
       - windows-server
@@ -45,4 +45,4 @@ suites:
         management_studio:
           version: "2018"
     includes:
-      - windows-10
+      - windows-desktop

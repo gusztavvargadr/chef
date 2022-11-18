@@ -7,20 +7,12 @@ trigger:
       - samples/cookbooks/mssql
 pr: none
 
-variables:
-  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-
 stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
         - name: mssql
-          platforms:
-            - name: windows-server
-              suites:
-                - server-2017-developer
-                - server-2019-developer
-
-            - name: windows-10
-              suites:
-                - management-studio-2018
+          instances:
+            - server-2019-developer-windows-server
+            - server-2017-developer-windows-server
+            - management-studio-2018-windows-desktop
