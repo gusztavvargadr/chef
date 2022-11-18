@@ -15,6 +15,9 @@ stages:
           pool:
             name: Default
 
+          workspace:
+            clean: all
+
           steps:
             - checkout: self
               submodules: recursive
@@ -44,6 +47,9 @@ stages:
               name: Default
               demands:
                 - VSTS_AGENT_CAP_HYPERVISOR
+
+            workspace:
+              clean: all
 
             steps:
               - checkout: self

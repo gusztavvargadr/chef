@@ -7,23 +7,15 @@ trigger:
       - samples/cookbooks/dotnet
 pr: none
 
-variables:
-  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
-
 stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
         - name: dotnet
-          platforms:
-            - name: windows
-              suites:
-                - default
-                - runtimes
-                - sdks
-
-            - name: ubuntu
-              suites:
-                - default
-                - runtimes
-                - sdks
+          instances:
+            - default-windows
+            - default-ubuntu
+            - runtimes-windows
+            - runtimes-ubuntu
+            - sdks-windows
+            - sdks-ubuntu

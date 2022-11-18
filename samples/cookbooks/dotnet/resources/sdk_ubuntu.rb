@@ -12,7 +12,7 @@ action :install do
   return if sdk_type.to_s.empty? || sdk_version.to_s.empty?
 
   gusztavvargadr_dotnet_repository '' do
-    action :install
+    action :add
   end
 
   apt_package "dotnet-sdk-#{sdk_version}" do
