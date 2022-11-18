@@ -1,9 +1,7 @@
 parameters:
   configurations: []
     # - name: string
-    #   platforms:
-    #     - name: string
-    #       suites: [ string ]
+    #   instances: [ string ]
 
 stages:
   - stage: commit
@@ -16,8 +14,6 @@ stages:
 
           pool:
             name: Default
-            demands:
-              - AZP_AGENT_CHEF
 
           workspace:
             clean: all
@@ -40,47 +36,44 @@ stages:
 
   - stage: acceptance
     displayName: Acceptance
-    condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
     jobs:
       - ${{ each configuration in parameters.configurations }}:
-        - ${{ each platform in configuration.platforms }}:
-          - ${{ each suite in platform.suites }}:
-            - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(platform.name, '-', '_') }}_${{ replace(suite, '-', '_') }}
-              displayName: Test ${{ configuration.name }} on ${{ platform.name }} for ${{ suite }}
+        - ${{ each instance in configuration.instances }}:
+          - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(instance, '-', '_') }}
+            displayName: Test ${{ configuration.name }} on ${{ instance }}
 
-              pool:
-                name: Default
-                demands:
-                  - AZP_AGENT_CHEF
-                  - AZP_AGENT_VAGRANT
+            pool:
+              name: Default
+              demands:
+                - VSTS_AGENT_CAP_HYPERVISOR
 
-              workspace:
-                clean: all
+            workspace:
+              clean: all
 
-              steps:
-                - checkout: self
-                  submodules: recursive
+            steps:
+              - checkout: self
+                submodules: recursive
 
-                - script: |
-                    chef --version
-                  displayName: Initialize Chef
+              - script: |
+                  chef --version
+                displayName: Initialize Chef
 
-                - script: |
-                    vagrant --version
-                    vagrant plugin list
+              - script: |
+                  vagrant --version
+                  vagrant plugin list
 
-                    vagrant box list
-                    vagrant global-status
-                  displayName: Initialize Vagrant
+                  vagrant box list
+                  vagrant global-status
+                displayName: Initialize Vagrant
 
-                - script: |
-                    cd samples/cookbooks/${{ configuration.name }}
-                    kitchen test ${{ suite }}-${{ platform.name }}
-                  displayName: Test
+              - script: |
+                  cd ./samples/cookbooks/${{ configuration.name }}
+                  kitchen test ${{ instance }}
+                displayName: Test
 
-                - script: |
-                    cd samples/cookbooks/${{ configuration.name }}
-                    kitchen destroy ${{ suite }}-${{ platform.name }}
-                  displayName: Clean
-                  condition: always()
+              - script: |
+                  cd ./samples/cookbooks/${{ configuration.name }}
+                  kitchen destroy ${{ instance }}
+                displayName: Clean
+                condition: always()
