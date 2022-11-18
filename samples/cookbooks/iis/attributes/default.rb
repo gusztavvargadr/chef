@@ -1,5 +1,5 @@
 default['gusztavvargadr_iis'] = {
   'server' => {
-    'version' => '',
+    'version' => 'default',
   },
 }

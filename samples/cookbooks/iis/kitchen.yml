@@ -15,8 +15,4 @@ platforms:
       elevated: true
 
 suites:
-  - name: server-default
-    attributes:
-      gusztavvargadr_iis:
-        server:
-          version: default
+  - name: default
