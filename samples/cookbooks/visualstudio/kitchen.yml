@@ -15,11 +15,11 @@ platforms:
       elevated: true
 
 suites:
-  - name: ide-2017-community
+  - name: ide-2022-community
     attributes:
       gusztavvargadr_visualstudio:
         ide:
-          version: "2017"
+          version: "2022"
           edition: community
 
   - name: ide-2019-community
@@ -27,11 +27,4 @@ suites:
       gusztavvargadr_visualstudio:
         ide:
           version: "2019"
-          edition: community
-
-  - name: ide-2022-community
-    attributes:
-      gusztavvargadr_visualstudio:
-        ide:
-          version: "2022"
           edition: community
