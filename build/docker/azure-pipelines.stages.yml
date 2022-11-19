@@ -41,7 +41,7 @@ stages:
                 displayName: Build
 
               - script: |
-                  docker compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} --rm run ${{ configuration.name }}
+                  docker compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} run --rm ${{ configuration.name }}
                 displayName: Test
 
               - task: Docker@2
