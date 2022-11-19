@@ -1,7 +1,6 @@
 default['gusztavvargadr_docker'] = {
   'engine' => {
-    'version' => '',
-    'edition' => '',
+    'edition' => 'community',
   },
   'images' => {},
 }

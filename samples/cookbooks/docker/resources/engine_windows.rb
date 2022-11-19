@@ -2,7 +2,6 @@ unified_mode true
 
 provides :gusztavvargadr_docker_engine, platform: 'windows'
 
-property :version, String, default: ''
 property :edition, String, default: ''
 
 default_action :install
@@ -12,38 +11,14 @@ action :prepare do
 
   options = node['gusztavvargadr_docker']['engine']["#{new_resource.edition}"]['windows']
 
-  reboot 'docker-engine-prepare' do
-    action :nothing
-  end
-
   gusztavvargadr_windows_features '' do
     options options['features']
     action :install
-    notifies :request_reboot, 'reboot[docker-engine-prepare]'
   end
 
-  options['powershell_modules'].each do |module_name, _module_options|
-    module_list = powershell_out("Get-Module -ListAvailable | Where { $_.Name -eq \"#{module_name}\" }").stdout
-    next unless module_list.strip.empty?
-
-    powershell_script "Install PowerShell module '#{module_name}'" do
-      code <<-EOH
-        Install-Module #{module_name} -Force
-      EOH
-      action :run
-    end
-  end
-
-  options['powershell_packages'].each do |package_name, package_options|
-    package_list = powershell_out("Get-Package -ProviderName #{package_options['provider']} | Where { $_.Name -eq \"#{package_name}\" }").stdout
-    next unless package_list.strip.empty?
-
-    powershell_script "Install PowerShell package '#{package_name}'" do
-      code <<-EOH
-        Install-Package #{package_name} -RequiredVersion #{package_options['version']} -ProviderName #{package_options['provider']} -Force
-      EOH
-      action :run
-    end
+  reboot 'gusztavvargadr_docker_engine_prepare' do
+    action :request_reboot
+    only_if { reboot_pending? }
   end
 end
 
@@ -52,27 +27,49 @@ action :install do
 
   options = node['gusztavvargadr_docker']['engine']["#{new_resource.edition}"]['windows']
 
-  reboot 'docker-engine-install' do
-    action :nothing
+  powershell_source = options['powershell_source']
+  unless powershell_source.empty?
+    powershell_target = "#{Chef::Config['file_cache_path']}/gusztavvargadr_docker_install.ps1"
+    remote_file powershell_target do
+      source powershell_source
+      action :create
+      notifies :run, 'powershell_script[gusztavvargadr_docker_install]'
+    end
+
+    powershell_script "gusztavvargadr_docker_install" do
+      code powershell_target
+      action :nothing
+      notifies :request_reboot, 'reboot[gusztavvargadr_docker_engine_install]'
+    end
   end
 
   gusztavvargadr_windows_native_packages '' do
     options options['native_packages']
     action :install
-    notifies :request_reboot, 'reboot[docker-engine-install]'
+    notifies :request_reboot, 'reboot[gusztavvargadr_docker_engine_install]'
+  end
+
+  reboot 'gusztavvargadr_docker_engine_install' do
+    action :nothing
   end
 
   compose_source = options['compose_source']
   unless compose_source.empty?
-    home_directory = powershell_out('$env:USERPROFILE').stdout.strip
-    compose_directory = "#{home_directory}/.docker/cli-plugins/"
-    directory compose_directory do
+    plugin_directory = "#{powershell_out('$env:ProgramFiles').stdout.strip}/Docker/cli-plugins"
+    directory plugin_directory do
       recursive true
       action :create
     end
 
-    compose_target = "#{compose_directory}docker-compose.exe"
-    remote_file compose_target do
+    plugin_target = "#{plugin_directory}/docker-compose.exe"
+    remote_file plugin_target do
+      source compose_source
+      action :create
+    end
+
+    executable_directory = "#{powershell_out('$env:SystemRoot').stdout.strip}/System32"
+    executable_target = "#{executable_directory}/docker-compose.exe"
+    remote_file executable_target do
       source compose_source
       action :create
     end
