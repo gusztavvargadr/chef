@@ -31,7 +31,6 @@ stages:
             - publish: $(Build.SourcesDirectory)/artifacts/
               displayName: Publish Artifacts
               artifact: build-${{ configuration.name }}
-              condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
   - stage: acceptance
     displayName: Acceptance
