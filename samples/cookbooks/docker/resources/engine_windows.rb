@@ -36,7 +36,7 @@ action :install do
       notifies :run, 'powershell_script[gusztavvargadr_docker_install]'
     end
 
-    powershell_script "gusztavvargadr_docker_install" do
+    powershell_script 'gusztavvargadr_docker_install' do
       code powershell_target
       action :nothing
       notifies :request_reboot, 'reboot[gusztavvargadr_docker_engine_install]'
