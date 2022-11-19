@@ -1,0 +1,21 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/dotnet
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: dotnet
+          instances:
+            - default-windows
+            - default-ubuntu
+            - runtimes-windows
+            - runtimes-ubuntu
+            - sdks-windows
+            - sdks-ubuntu

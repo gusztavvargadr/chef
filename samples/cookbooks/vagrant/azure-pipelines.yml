@@ -4,23 +4,18 @@ trigger:
       - '*'
   paths:
     include:
-      - src
       - samples/cookbooks/vagrant
 pr: none
-
-variables:
-  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
         - name: vagrant
-          platforms:
-            - name: windows
-              suites:
-                - default
-
-            - name: ubuntu
-              suites:
-                - default
+          instances:
+            - default-windows
+            - default-ubuntu
+            - plugins-windows
+            - plugins-ubuntu
+            - boxes-windows
+            - boxes-ubuntu

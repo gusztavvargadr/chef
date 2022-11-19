@@ -2,12 +2,7 @@
 
 $ErrorActionPreference = "Stop"
 
-choco install git --package-parameters '"/GitAndUnixToolsOnPath /NoAutoCrlf /NoShellIntegration /SChannel"' --confirm --no-progress
-
-pushd ./lib/test-kitchen/kitchen-docker
-C:\opscode\chef-workstation\bin\chef-cli gem build --force ./kitchen-docker.gemspec
-C:\opscode\chef-workstation\bin\chef-cli gem install --force --local --no-user-install ./kitchen-docker-2.11.0.gem
-popd
+choco install git --package-parameters '"/NoShellIntegration /SChannel /NoOpenSSH"' --confirm --no-progress
 
 rm -Recurse -Force $env:LOCALAPPDATA\Temp\*
 

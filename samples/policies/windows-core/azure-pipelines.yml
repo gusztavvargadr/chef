@@ -4,12 +4,8 @@ trigger:
       - '*'
   paths:
     include:
-      - src
       - samples/policies/windows-core
 pr: none
-
-variables:
-  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 stages:
   - template: ../azure-pipelines.stages.yml

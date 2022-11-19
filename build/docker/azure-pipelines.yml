@@ -4,8 +4,7 @@ trigger:
       - '*'
   paths:
     include:
-      - build
-      - lib
+      - build/docker
 pr: none
 
 variables:
@@ -19,30 +18,30 @@ stages:
           platforms:
             - name: windows
               variant: servercore
-              version: "1809"
+              version: 'ltsc2022'
 
             - name: linux
               variant: ubuntu
-              version: "20.04"
+              version: '20.04'
 
         - name: chef-client
           platforms:
             - name: windows
               variant: servercore
-              version: "1809"
+              version: 'ltsc2022'
 
             - name: linux
               variant: ubuntu
-              version: "20.04"
+              version: '20.04'
           dependsOn: chef-core
 
         - name: chef-workstation
           platforms:
             - name: windows
               variant: servercore
-              version: "1809"
+              version: 'ltsc2022'
 
             - name: linux
               variant: ubuntu
-              version: "20.04"
+              version: '20.04'
           dependsOn: chef-core

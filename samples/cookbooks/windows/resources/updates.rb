@@ -41,14 +41,6 @@ action :configure do
     action :create
   end
 
-  powershell_script 'Disable Reserved Storage State' do
-    code <<-EOH
-      DISM.exe /Online /Set-ReservedStorageState /State:Disabled
-    EOH
-    action :run
-    only_if { powershell_out('DISM.exe /Online /?').stdout.include?('/Set-ReservedStorageState') }
-  end
-
   powershell_script 'Install PSWindowsUpdate' do
     code <<-EOH
       [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -60,20 +52,29 @@ action :configure do
     action :run
     only_if { powershell_out('(Get-Module -ListAvailable | Where { $_.Name -eq "PSWindowsUpdate" }).Count').stdout.strip == '0' }
   end
+
+  powershell_script 'Disable Reserved Storage State' do
+    code <<-EOH
+      DISM.exe /Online /Set-ReservedStorageState /State:Disabled
+    EOH
+    action :run
+    only_if { powershell_out('DISM.exe /Online /?').stdout.include?('/Set-ReservedStorageState') }
+    not_if { powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip == '0' }
+  end
 end
 
 action :install do
-  reboot 'windows-update-install' do
-    action :nothing
-  end
-
   powershell_script 'Install Updates' do
     code <<-EOH
       Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
     EOH
     action :run
     not_if { powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip == '0' }
-    notifies :request_reboot, 'reboot[windows-update-install]'
+  end
+
+  reboot 'gusztavvargadr_windows_updates_install' do
+    action :request_reboot
+    only_if { reboot_pending? }
   end
 end
 

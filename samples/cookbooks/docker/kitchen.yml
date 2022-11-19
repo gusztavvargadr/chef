@@ -14,16 +14,16 @@ platforms:
     transport:
       elevated: true
     provisioner:
-      max_retries: 1
+      max_retries: 2
       wait_for_retry: 60
 
-  - name: windows-10
+  - name: windows-desktop
     driver:
-      box: gusztavvargadr/windows-10
+      box: gusztavvargadr/windows-server
     transport:
       elevated: true
     provisioner:
-      max_retries: 3
+      max_retries: 2
       wait_for_retry: 60
 
   - name: ubuntu
@@ -39,6 +39,7 @@ suites:
         images:
           hello-world:
     includes:
+      - windows-server
       - ubuntu
 
   - name: desktop
@@ -47,14 +48,4 @@ suites:
         engine:
           edition: desktop
     includes:
-      - windows-10
-
-  - name: enterprise
-    attributes:
-      gusztavvargadr_docker:
-        engine:
-          edition: enterprise
-        images:
-          hello-world:
-    includes:
-      - windows-server
+      - windows-desktop

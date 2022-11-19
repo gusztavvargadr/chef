@@ -4,21 +4,14 @@ trigger:
       - '*'
   paths:
     include:
-      - src
       - samples/cookbooks/visualstudio
 pr: none
-
-variables:
-  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
 
 stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
         - name: visualstudio
-          platforms:
-            - name: windows
-              suites:
-                - ide-2017-community
-                - ide-2019-community
-                - ide-2022-community
+          instances:
+            - ide-2022-community-windows
+            - ide-2019-community-windows
