@@ -19,24 +19,10 @@ stages:
             ${{ if configuration.dependsOn }}:
               dependsOn: build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
 
-            ${{ if eq(platform.name, 'windows') }}:
-              pool:
-                name: Default
-                demands:
-                  - AZP_AGENT_WINDOWS
-                  - AZP_AGENT_DOCKER
-                  - AZP_AGENT_UPLOAD
-
-            ${{ if eq(platform.name, 'linux') }}:
-              pool:
-                name: Default
-                demands:
-                  - AZP_AGENT_LINUX
-                  - AZP_AGENT_DOCKER
-                  - AZP_AGENT_UPLOAD
-
-            workspace:
-              clean: all
+            pool:
+              name: Default
+              demands:
+                - VSTS_AGENT_CAP_OS -equals ${{ platform.name }}
 
             steps:
               - checkout: self
@@ -91,12 +77,6 @@ stages:
 
           pool:
             name: Default
-            demands:
-              - AZP_AGENT_DOCKER
-              - AZP_AGENT_UPLOAD
-
-          workspace:
-            clean: all
 
           steps:
             - checkout: self
