@@ -30,18 +30,18 @@ stages:
 
               - script: |
                   docker --version
-                  docker-compose --version
+                  docker compose version
 
                   docker image ls -a
                   docker container ls -a
                 displayName: Initialize Docker
 
               - script: |
-                  docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} build ${{ configuration.name }}
+                  docker compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} build ${{ configuration.name }}
                 displayName: Build
 
               - script: |
-                  docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} run ${{ configuration.name }}
+                  docker compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} run ${{ configuration.name }}
                 displayName: Test
 
               - task: Docker@2
@@ -52,7 +52,7 @@ stages:
                 condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
               - script: |
-                  docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} push ${{ configuration.name }}
+                  docker compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} push ${{ configuration.name }}
                 displayName: Publish
                 condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
@@ -64,7 +64,7 @@ stages:
                 condition: eq(variables.isPublishEnabled, 'true')
 
               - script: |
-                  docker-compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} down --rmi local --volumes
+                  docker compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} down --rmi local --volumes
                 displayName: Clean
                 condition: always()
 
@@ -84,7 +84,7 @@ stages:
 
             - script: |
                 docker --version
-                docker-compose --version
+                docker compose version
 
                 docker image ls -a
                 docker container ls -a
