@@ -14,11 +14,6 @@ stages:
 
           pool:
             name: Default
-            demands:
-              - AZP_AGENT_CHEF
-
-          workspace:
-            clean: all
 
           steps:
             - checkout: self
@@ -40,7 +35,6 @@ stages:
 
   - stage: acceptance
     displayName: Acceptance
-    condition: and(succeeded(), eq(variables.isPublishEnabled, 'true'))
 
     jobs:
       - ${{ each configuration in parameters.configurations }}:
@@ -51,11 +45,7 @@ stages:
             pool:
               name: Default
               demands:
-                - AZP_AGENT_CHEF
-                - AZP_AGENT_VAGRANT
-
-            workspace:
-              clean: all
+                - VSTS_AGENT_CAP_HYPERVISOR
 
             steps:
               - checkout: self
