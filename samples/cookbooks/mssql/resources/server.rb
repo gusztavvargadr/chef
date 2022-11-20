@@ -11,10 +11,6 @@ action :install do
 
   options = node['gusztavvargadr_mssql']['server']["#{new_resource.version}_#{new_resource.edition}"]
 
-  gusztavvargadr_windows_chocolatey_packages '' do
-    options options['chocolatey_packages']
-  end
-
   directory_path = "#{Chef::Config['file_cache_path']}/gusztavvargadr_mssql/server_#{new_resource.version}_#{new_resource.edition}"
 
   directory directory_path do
@@ -69,10 +65,6 @@ action :patch do
   return if new_resource.edition.to_s.empty?
 
   options = node['gusztavvargadr_mssql']['server']["#{new_resource.version}_#{new_resource.edition}"]
-
-  gusztavvargadr_windows_chocolatey_packages '' do
-    options options['chocolatey_packages']
-  end
 
   directory_path = "#{Chef::Config['file_cache_path']}/gusztavvargadr_mssql/server_#{new_resource.version}_#{new_resource.edition}"
 
