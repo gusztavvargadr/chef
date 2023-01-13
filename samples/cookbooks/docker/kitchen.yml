@@ -8,16 +8,7 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows-server
-    driver:
-      box: gusztavvargadr/windows-server-core
-    transport:
-      elevated: true
-    provisioner:
-      max_retries: 2
-      wait_for_retry: 60
-
-  - name: windows-desktop
+  - name: windows
     driver:
       box: gusztavvargadr/windows-server
     transport:
@@ -39,7 +30,7 @@ suites:
         images:
           hello-world:
     includes:
-      - windows-server
+      - windows
       - ubuntu
 
   - name: desktop
@@ -48,4 +39,4 @@ suites:
         engine:
           edition: desktop
     includes:
-      - windows-desktop
+      - windows

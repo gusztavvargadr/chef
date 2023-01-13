@@ -1,7 +1,7 @@
 default['gusztavvargadr_docker']['engine']['community']['windows'] = {
   'features' => {
-    'Containers' => {},
-    'Hyper-V-All' => {},
+    'Containers$' => {},
+    'Microsoft-Hyper-V$' => {},
   },
   'powershell_source' => 'https://raw.githubusercontent.com/microsoft/Windows-Containers/Main/helpful_tools/Install-DockerCE/install-docker-ce.ps1',
   'native_packages' => {},
