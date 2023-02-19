@@ -18,5 +18,4 @@ stages:
             - features-windows
             - files-windows
             - native-packages-windows
-            - updates-install-windows
-            - updates-cleanup-windows
+            - updates-windows

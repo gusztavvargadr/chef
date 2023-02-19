@@ -13,9 +13,6 @@ platforms:
       box: gusztavvargadr/windows-server
     transport:
       elevated: true
-    provisioner:
-      max_retries: 2
-      wait_for_retry: 60
 
 suites:
   - name: chocolatey-packages
@@ -57,7 +54,7 @@ suites:
               - /norestart
             executable: C:/Program Files/dotnet/dotnet.exe
 
-  - name: updates-install
+  - name: updates
     attributes:
       gusztavvargadr_windows:
         updates:
@@ -65,18 +62,5 @@ suites:
             - enable
             - start
             - configure
-            - install
-            - stop
-            - disable
-
-  - name: updates-cleanup
-    attributes:
-      gusztavvargadr_windows:
-        updates:
-          actions:
-            - enable
-            - start
-            - configure
-            - cleanup
             - stop
             - disable
