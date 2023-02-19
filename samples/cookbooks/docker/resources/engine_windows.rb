@@ -14,11 +14,11 @@ action :prepare do
   gusztavvargadr_windows_features '' do
     options options['features']
     action :install
+    notifies :request_reboot, 'reboot[gusztavvargadr_docker_engine_prepare]'
   end
 
   reboot 'gusztavvargadr_docker_engine_prepare' do
-    action :request_reboot
-    only_if { reboot_pending? }
+    action :nothing
   end
 end
 
