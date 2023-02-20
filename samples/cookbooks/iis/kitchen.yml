@@ -10,7 +10,7 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: gusztavvargadr/windows-server-core
+      box: gusztavvargadr/windows-server
     transport:
       elevated: true
 

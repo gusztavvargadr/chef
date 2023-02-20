@@ -1,9 +1,9 @@
 default['gusztavvargadr_docker']['engine']['desktop']['windows'] = {
   'features' => {
-    'Containers' => {},
-    'Hyper-V-All' => {},
-    'Microsoft-Windows-Subsystem-Linux' => {},
-    'VirtualMachinePlatform' => {},
+    'Containers$' => {},
+    'Microsoft-Hyper-V$' => {},
+    'Microsoft-Windows-Subsystem-Linux$' => {},
+    'VirtualMachinePlatform$' => {},
   },
   'powershell_source' => '',
   'native_packages' => {

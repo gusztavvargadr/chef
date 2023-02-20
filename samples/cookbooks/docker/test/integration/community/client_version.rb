@@ -1,5 +1,5 @@
 describe command('docker version -f "{{ .Client.Version }}"') do
-  its('stdout') { should include '20.10.' } unless os.windows?
+  its('stdout') { should include '23.' } unless os.windows?
 end
 
 describe command('docker version -f "{{ .Client.Platform.Name }}"') do

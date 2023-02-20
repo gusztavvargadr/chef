@@ -10,12 +10,12 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: gusztavvargadr/windows-server-core
+      box: gusztavvargadr/windows-server
     transport:
       elevated: true
     provisioner:
       max_retries: 1
-      wait_for_retry: 60
+      wait_for_retry: 120
 
   - name: ubuntu
     driver:
