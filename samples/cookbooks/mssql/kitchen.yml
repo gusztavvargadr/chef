@@ -29,8 +29,8 @@ suites:
           version: "2017"
           edition: developer
 
-  - name: management-studio-2018
+  - name: management-studio-2019
     attributes:
       gusztavvargadr_mssql:
         management_studio:
-          version: "2018"
+          version: "2019"
