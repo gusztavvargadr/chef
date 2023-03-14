@@ -5,6 +5,7 @@ parameters:
     #     - name: string
     #       variant: string
     #       version: string
+    #       isolation: string
     #   dependsOn: string
 
 stages:
@@ -32,12 +33,13 @@ stages:
                   docker --version
                   docker compose version
 
+                  docker system df
                   docker image ls -a
                   docker container ls -a
                 displayName: Initialize Docker
 
               - script: |
-                  docker compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} build ${{ configuration.name }}
+                  docker build -f ./build/docker/${{ platform.name }}/${{ configuration.name }}.Dockerfile --isolation ${{ platform.isolation }} -t gusztavvargadr/${{ configuration.name }}:${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} .
                 displayName: Build
 
               - script: |
@@ -86,6 +88,7 @@ stages:
                 docker --version
                 docker compose version
 
+                docker system df
                 docker image ls -a
                 docker container ls -a
               displayName: Initialize Docker
