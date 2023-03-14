@@ -39,7 +39,7 @@ stages:
                 displayName: Initialize Docker
 
               - script: |
-                  docker build -f ./build/docker/${{ platform.name }}/${{ configuration.name }}.Dockerfile --isolation ${{ platform.isolation }} -t gusztavvargadr/${{ configuration.name }}:${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} .
+                  docker build -f ./build/docker/${{ platform.name }}/${{ configuration.name }}.Dockerfile --build-arg PLATFORM_VARIANT=${{ platform.variant }}  --build-arg PLATFORM_VERSION=${{ platform.version }}--isolation ${{ platform.isolation }} -t gusztavvargadr/${{ configuration.name }}:${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} .
                 displayName: Build
 
               - script: |
