@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   chef-core:
@@ -9,6 +9,7 @@ services:
       args:
         - PLATFORM_VARIANT
         - PLATFORM_VERSION
+    isolation: ${PLATFORM_ISOLATION}
 
   chef-client:
     image: gusztavvargadr/chef-client:${PLATFORM_NAME}-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
@@ -18,7 +19,7 @@ services:
       args:
         - PLATFORM_VARIANT
         - PLATFORM_VERSION
-        - CHEF_CLIENT_VERSION
+    isolation: ${PLATFORM_ISOLATION}
 
   chef-workstation:
     image: gusztavvargadr/chef-workstation:${PLATFORM_NAME}-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
@@ -28,7 +29,7 @@ services:
       args:
         - PLATFORM_VARIANT
         - PLATFORM_VERSION
-        - CHEF_WORKSTATION_VERSION
+    isolation: ${PLATFORM_ISOLATION}
 
   chef-cookbook-lint:
     build:
