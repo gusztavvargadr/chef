@@ -13,8 +13,6 @@ stages:
       configurations:
         - name: dotnet
           instances:
-            - default-windows
-            - default-ubuntu
             - runtimes-windows
             - runtimes-ubuntu
             - sdks-windows

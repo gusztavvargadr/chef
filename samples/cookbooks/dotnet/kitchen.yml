@@ -19,20 +19,16 @@ platforms:
       box: gusztavvargadr/ubuntu-server
 
 suites:
-  - name: default
-
   - name: runtimes
     attributes:
       gusztavvargadr_dotnet:
         runtimes:
           - '7.0'
           - '6.0'
-        sdks: []
 
   - name: sdks
     attributes:
       gusztavvargadr_dotnet:
-        runtimes: []
         sdks:
           - '7.0'
           - '6.0'
