@@ -27,7 +27,6 @@ suites:
         runtimes:
           - '7.0'
           - '6.0'
-          - '3.1'
         sdks: []
 
   - name: sdks
@@ -37,4 +36,3 @@ suites:
         sdks:
           - '7.0'
           - '6.0'
-          - '3.1'

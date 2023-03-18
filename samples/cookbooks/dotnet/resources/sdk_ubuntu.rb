@@ -7,9 +7,8 @@ property :options, Hash, default: {}
 default_action :install
 
 action :install do
-  sdk_type = new_resource.options['type']
   sdk_version = new_resource.options['version']
-  return if sdk_type.to_s.empty? || sdk_version.to_s.empty?
+  return if sdk_version.to_s.empty?
 
   gusztavvargadr_dotnet_repository '' do
     action :add

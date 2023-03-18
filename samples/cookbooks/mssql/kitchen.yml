@@ -22,13 +22,6 @@ suites:
           version: "2019"
           edition: developer
 
-  - name: server-2017-developer
-    attributes:
-      gusztavvargadr_mssql:
-        server:
-          version: "2017"
-          edition: developer
-
   - name: management-studio-2019
     attributes:
       gusztavvargadr_mssql:

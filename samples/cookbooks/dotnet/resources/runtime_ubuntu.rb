@@ -7,9 +7,8 @@ property :options, Hash, default: {}
 default_action :install
 
 action :install do
-  runtime_type = new_resource.options['type']
   runtime_version = new_resource.options['version']
-  return if runtime_type.to_s.empty? || runtime_version.to_s.empty?
+  return if runtime_version.to_s.empty?
 
   gusztavvargadr_dotnet_repository '' do
     action :add
