@@ -66,7 +66,10 @@ stages:
                 condition: eq(variables.isPublishEnabled, 'true')
 
               - script: |
-                  docker compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} down --rmi local --volumes
+                  docker compose --env-file ./.env.${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} down --rmi all --volumes
+                  docker container prune -f
+                  docker image prune -f
+                  docker builder prune -af
                 displayName: Clean
                 condition: always()
 
