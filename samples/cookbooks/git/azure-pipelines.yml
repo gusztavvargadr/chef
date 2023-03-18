@@ -1,0 +1,17 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/git
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: git
+          instances:
+            - default-windows
+            - default-ubuntu
