@@ -4,9 +4,9 @@ provides :gusztavvargadr_git_app, platform: 'ubuntu'
 
 property :options, Hash, default: {}
 
-default_action :upgrade
+default_action :install
 
-action :upgrade do
+action :install do
   app_version = new_resource.options['version']
   return if app_version.to_s.empty?
 
@@ -17,6 +17,6 @@ action :upgrade do
 
   apt_package 'git' do
     version app_version unless app_version == 'latest'
-    action :upgrade
+    action :install
   end
 end
