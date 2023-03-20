@@ -19,7 +19,7 @@ platforms:
       box: gusztavvargadr/ubuntu-server
 
 suites:
-  - name: apps
+  - name: default
     attributes:
       gusztavvargadr_hashicorp:
         apps:

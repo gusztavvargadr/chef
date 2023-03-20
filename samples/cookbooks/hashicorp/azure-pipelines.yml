@@ -13,5 +13,5 @@ stages:
       configurations:
         - name: hashicorp
           instances:
-            - apps-windows
-            - apps-ubuntu
+            - default-windows
+            - default-ubuntu

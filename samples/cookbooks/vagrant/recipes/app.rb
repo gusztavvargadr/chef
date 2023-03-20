@@ -1,7 +1,7 @@
 app = node['gusztavvargadr_vagrant']['app']
-app_options = node['gusztavvargadr_vagrant']['app_options'][app]
+app_options = node['gusztavvargadr_hashicorp']['app_options']['vagrant']
 
-gusztavvargadr_vagrant_app '' do
+gusztavvargadr_hashicorp_app '' do
   options app_options
   action :install
 end
