@@ -16,4 +16,9 @@ action :install do
     returns [ 0, 2, 3010 ]
     action :install
   end
+
+  reboot 'gusztavvargadr_hashicorp_app' do
+    action :nothing
+    subscribes :request_reboot, 'chocolatey_package[vagrant]', :immediate
+  end
 end
