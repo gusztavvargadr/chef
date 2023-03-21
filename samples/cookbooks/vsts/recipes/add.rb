@@ -6,5 +6,6 @@ node['gusztavvargadr_vsts']['apps'].each do |app|
   gusztavvargadr_vsts_agent_app '' do
     options app_options
     action :add
+    not_if { reboot_pending? }
   end
 end
