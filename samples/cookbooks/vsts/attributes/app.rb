@@ -4,6 +4,5 @@ default['gusztavvargadr_vsts']['app_options'] = {
     'version' => '2.217.2',
     'arch' => 'x64',
     'user' => 'vsts',
-    'passwowrd' => 'Password42-'
   },
 }
