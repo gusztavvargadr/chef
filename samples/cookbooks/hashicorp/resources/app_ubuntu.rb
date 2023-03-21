@@ -11,10 +11,6 @@ action :install do
   app_version = new_resource.options['version']
   return if app_name.to_s.empty? || app_version.to_s.empty?
 
-  gusztavvargadr_hashicorp_repository '' do
-    action :add
-  end
-
   apt_package app_name do
     action :install
   end
