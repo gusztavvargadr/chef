@@ -1,0 +1,17 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/vsts
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: vsts
+          instances:
+            - default-windows
+            - default-ubuntu
