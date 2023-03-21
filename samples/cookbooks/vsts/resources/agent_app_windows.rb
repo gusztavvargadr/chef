@@ -64,7 +64,7 @@ VSTS_AGENT_CAP_OS=windows
   end
 
   unless new_resource.options['url'].to_s.empty?
-    agent_config_script_path = "config.cmd"
+    agent_config_script_path = 'config.cmd'
     agent_config_script_environment = {
       'VSTS_AGENT_INPUT_URL' => new_resource.options['url'],
       'VSTS_AGENT_INPUT_AUTH' => new_resource.options['auth'] || 'pat',
@@ -91,7 +91,7 @@ action :remove do
 
   agent_user_home = "/Users/#{agent_user}"
 
-  agent_config_script_path = "config.cmd"
+  agent_config_script_path = 'config.cmd'
   agent_config_script_environment = {
     'VSTS_AGENT_INPUT_AUTH' => new_resource.options['auth'] || 'pat',
     'VSTS_AGENT_INPUT_TOKEN' => new_resource.options['token'],
