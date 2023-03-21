@@ -69,7 +69,7 @@ action :add do
       content <<-EOH
   HOME=#{agent_user_home}
   CHEF_LICENSE=accept-silent
-  
+
   VSTS_AGENT_CAP_OS=linux
       EOH
       owner agent_user
