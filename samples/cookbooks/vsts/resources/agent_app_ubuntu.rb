@@ -87,7 +87,7 @@ VSTS_AGENT_CAP_OS=linux
     }
     agent_svc_script_path = './svc.sh'
     agent_runsvc_script_path = './runsvc.sh'
-  
+
     execute 'config' do
       command "#{agent_config_script_path} --unattended --acceptTeeEula"
       cwd agent_user_home
