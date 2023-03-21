@@ -1,0 +1,17 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/policies/vsts-agent
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: vsts-agent
+          platforms:
+            - windows
+            - ubuntu
