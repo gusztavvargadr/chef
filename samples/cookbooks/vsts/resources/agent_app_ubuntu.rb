@@ -56,28 +56,28 @@ action :add do
     notifies :run, 'execute[installdependencies.sh]'
   end
 
-  agent_install_dependencies_script_path = './bin/installdependencies.sh'
+  agent_install_dependencies_script_path = 'bin/installdependencies.sh'
   execute 'installdependencies.sh' do
     command agent_install_dependencies_script_path
     cwd agent_user_home
     action :nothing
   end
 
-  agent_env_file_path = "#{agent_user_home}/.env"
-  file agent_env_file_path do
-    content <<-EOH
-HOME=#{agent_user_home}
-CHEF_LICENSE=accept-silent
-
-VSTS_AGENT_CAP_OS=linux
-    EOH
-    owner agent_user
-    group agent_user
-    action :create
-  end
-
   unless new_resource.options['url'].to_s.empty?
-    agent_config_script_path = './config.sh'
+    agent_env_file_path = "#{agent_user_home}/.env"
+    file agent_env_file_path do
+      content <<-EOH
+  HOME=#{agent_user_home}
+  CHEF_LICENSE=accept-silent
+  
+  VSTS_AGENT_CAP_OS=linux
+      EOH
+      owner agent_user
+      group agent_user
+      action :create
+    end
+
+    agent_config_script_path = 'config.sh'
     agent_config_script_environment = {
       'VSTS_AGENT_INPUT_URL' => new_resource.options['url'],
       'VSTS_AGENT_INPUT_AUTH' => new_resource.options['auth'] || 'pat',
@@ -85,8 +85,8 @@ VSTS_AGENT_CAP_OS=linux
       'VSTS_AGENT_INPUT_POOL' => new_resource.options['pool'] || 'Default',
       'VSTS_AGENT_INPUT_AGENT' => new_resource.options['agent'] || "linux-core-#{::SecureRandom.hex}",
     }
-    agent_svc_script_path = './svc.sh'
-    agent_runsvc_script_path = './runsvc.sh'
+    agent_svc_script_path = 'svc.sh'
+    agent_runsvc_script_path = 'runsvc.sh'
 
     execute 'config' do
       command "#{agent_config_script_path} --unattended --acceptTeeEula"
@@ -118,7 +118,7 @@ action :remove do
   return if agent_user.to_s.empty?
 
   agent_user_home = "/home/#{agent_user}"
-  agent_svc_script_path = './svc.sh'
+  agent_svc_script_path = 'svc.sh'
 
   if ::File.exist?(::File.expand_path(agent_svc_script_path, agent_user_home))
     execute 'stop' do
@@ -133,7 +133,7 @@ action :remove do
       action :run
     end
 
-    agent_config_script_path = './config.sh'
+    agent_config_script_path = 'config.sh'
     agent_config_script_environment = {
       'VSTS_AGENT_INPUT_AUTH' => new_resource.options['auth'] || 'pat',
       'VSTS_AGENT_INPUT_TOKEN' => new_resource.options['token'],

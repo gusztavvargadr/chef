@@ -51,19 +51,20 @@ action :add do
     action :extract
   end
 
-  agent_env_file_path = "#{agent_user_home}/.env"
-  file agent_env_file_path do
-    content <<-EOH
-HOME=#{agent_user_home}
-CHEF_LICENSE=accept-silent
-
-VSTS_AGENT_CAP_OS=windows
-    EOH
-    owner agent_user
-    action :create
-  end
-
   unless new_resource.options['url'].to_s.empty?
+    agent_env_file_path = "#{agent_user_home}/.env"
+    file agent_env_file_path do
+      content <<-EOH
+  HOME=#{agent_user_home}
+  CHEF_LICENSE=accept-silent
+  
+  VSTS_AGENT_CAP_OS=windows
+      EOH
+      owner agent_user
+      action :create
+      notifies :run, 'execute[config]'
+    end
+
     agent_config_script_path = 'config.cmd'
     agent_config_script_environment = {
       'VSTS_AGENT_INPUT_URL' => new_resource.options['url'],
@@ -80,7 +81,7 @@ VSTS_AGENT_CAP_OS=windows
       command "#{agent_config_script_path} --unattended --acceptTeeEula"
       cwd agent_user_home
       environment agent_config_script_environment
-      action :run
+      action :nothing
     end
   end
 end
@@ -92,15 +93,18 @@ action :remove do
   agent_user_home = "/Users/#{agent_user}"
 
   agent_config_script_path = 'config.cmd'
-  agent_config_script_environment = {
-    'VSTS_AGENT_INPUT_AUTH' => new_resource.options['auth'] || 'pat',
-    'VSTS_AGENT_INPUT_TOKEN' => new_resource.options['token'],
-  }
-  execute 'config remove' do
-    command "#{agent_config_script_path} remove"
-    cwd agent_user_home
-    environment agent_config_script_environment
-    action :run
+
+  if ::File.exist?(::File.expand_path(agent_config_script_path, agent_user_home))
+    agent_config_script_environment = {
+      'VSTS_AGENT_INPUT_AUTH' => new_resource.options['auth'] || 'pat',
+      'VSTS_AGENT_INPUT_TOKEN' => new_resource.options['token'],
+    }
+    execute 'config remove' do
+      command "#{agent_config_script_path} remove"
+      cwd agent_user_home
+      environment agent_config_script_environment
+      action :run
+    end
   end
 
   directory agent_user_home do
