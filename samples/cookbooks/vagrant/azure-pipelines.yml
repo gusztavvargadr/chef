@@ -15,7 +15,3 @@ stages:
           instances:
             - default-windows
             - default-ubuntu
-            - plugins-windows
-            - plugins-ubuntu
-            - boxes-windows
-            - boxes-ubuntu

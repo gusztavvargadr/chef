@@ -1,0 +1,30 @@
+gusztavvargadr_dotnet:
+  sdks:
+    - '7.0'
+    - '6.0'
+
+gusztavvargadr_hashicorp:
+  apps:
+    - vagrant
+    - packer
+    - terraform
+    - consul
+    - vault
+    - consul-template
+
+gusztavvargadr_chef:
+  apps:
+    - workstation
+
+gusztavvargadr_docker:
+  engine:
+    edition: community
+  images:
+    hello-world:
+
+gusztavvargadr_vsts:
+  apps:
+    - agent
+  app_options:
+    agent:
+      password: Password42-

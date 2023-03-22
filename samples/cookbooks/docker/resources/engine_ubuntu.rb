@@ -13,10 +13,13 @@ end
 action :install do
   return unless new_resource.edition.to_s == 'community'
 
+  apt_repository_arch = shell_out('dpkg --print-architecture').stdout.strip
+
   apt_repository 'docker' do
     uri 'https://download.docker.com/linux/ubuntu'
     key 'https://download.docker.com/linux/ubuntu/gpg'
     components ['stable']
+    arch apt_repository_arch
     action :add
   end
 

@@ -23,16 +23,10 @@ platforms:
 
 suites:
   - name: default
-
-  - name: plugins
     attributes:
       gusztavvargadr_vagrant:
         plugins:
           vagrant-sshfs:
-
-  - name: boxes
-    attributes:
-      gusztavvargadr_vagrant:
         boxes:
           gusztavvargadr/ubuntu-server:
             provider: virtualbox
