@@ -28,3 +28,6 @@ gusztavvargadr_vsts:
   app_options:
     agent:
       password: Password42-
+      # password: <%= ENV['VSTS_AGENT_INPUT_PASSWORD'] %>
+      # url: <%= ENV['VSTS_AGENT_INPUT_URL'] %>
+      # token: <%= ENV['VSTS_AGENT_INPUT_TOKEN'] %>
