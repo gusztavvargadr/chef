@@ -11,7 +11,6 @@ action :prepare do
   return if agent_user.to_s.empty?
 
   agent_user_home = "/home/#{agent_user}"
-  agent_user_work = "/#{agent_user}"
 
   user agent_user do
     home agent_user_home
@@ -21,12 +20,6 @@ action :prepare do
 
   group agent_user do
     members [ agent_user, shell_out('echo ${SUDO_USER:-${USER}}').stdout.strip ]
-    action :create
-  end
-
-  directory agent_user_work do
-    owner agent_user
-    group agent_user
     action :create
   end
 end
@@ -40,6 +33,12 @@ action :add do
 
   agent_user_home = "/home/#{agent_user}"
   agent_user_work = "/#{agent_user}"
+
+  directory agent_user_work do
+    owner agent_user
+    group agent_user
+    action :create
+  end
 
   agent_archive_name = "vsts-agent-linux-#{agent_arch}-#{agent_version}.tar.gz"
   agent_archive_download_uri = "https://vstsagentpackage.azureedge.net/agent/#{agent_version}/#{agent_archive_name}"
@@ -97,14 +96,14 @@ VSTS_AGENT_CAP_OS=linux
       user agent_user
       environment agent_config_script_environment
       action :run
-      not_if { ::File.exist?(::File.expand_path(agent_svc_script_path, agent_user_home)) }
+      not_if { ::File.exist?(::File.expand_path(agent_svc_script_path, agent_user_work)) }
     end
 
     execute 'install' do
       command "bash #{agent_svc_script_path} install #{agent_user}"
       cwd agent_user_work
       action :run
-      not_if { ::File.exist?(::File.expand_path(agent_runsvc_script_path, agent_user_home)) }
+      not_if { ::File.exist?(::File.expand_path(agent_runsvc_script_path, agent_user_work)) }
       notifies :run, 'execute[start]'
     end
 
@@ -121,9 +120,10 @@ action :remove do
   return if agent_user.to_s.empty?
 
   agent_user_work = "/#{agent_user}"
+
   agent_svc_script_path = 'svc.sh'
 
-  if ::File.exist?(::File.expand_path(agent_svc_script_path, agent_user_home))
+  if ::File.exist?(::File.expand_path(agent_svc_script_path, agent_user_work))
     execute 'stop' do
       command "bash #{agent_svc_script_path} stop"
       cwd agent_user_work

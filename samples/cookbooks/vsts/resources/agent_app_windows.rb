@@ -12,17 +12,11 @@ action :prepare do
   return if agent_user.to_s.empty? || agent_password.to_s.empty?
 
   agent_user_home = "C:/Users/#{agent_user}"
-  agent_user_work = "C:/#{agent_user}"
 
   user agent_user do
     home agent_user_home
     manage_home true
     password agent_password
-    action :create
-  end
-
-  directory agent_user_work do
-    owner agent_user
     action :create
   end
 end
@@ -37,6 +31,11 @@ action :add do
 
   agent_user_home = "C:/Users/#{agent_user}"
   agent_user_work = "C:/#{agent_user}"
+
+  directory agent_user_work do
+    owner agent_user
+    action :create
+  end
 
   agent_archive_name = "vsts-agent-win-#{agent_arch}-#{agent_version}.zip"
   agent_archive_download_uri = "https://vstsagentpackage.azureedge.net/agent/#{agent_version}/#{agent_archive_name}"
