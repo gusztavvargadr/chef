@@ -25,5 +25,6 @@ suites:
   - name: default
 
   - name: virtualbox
+    named_run_list: virtualbox
     includes:
       - ubuntu
