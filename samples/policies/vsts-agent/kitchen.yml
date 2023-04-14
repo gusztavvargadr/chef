@@ -23,3 +23,7 @@ platforms:
 
 suites:
   - name: default
+
+  - name: virtualbox
+    includes:
+      - ubuntu

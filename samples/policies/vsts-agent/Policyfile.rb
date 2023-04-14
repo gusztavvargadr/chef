@@ -17,6 +17,18 @@ run_list(
 )
 
 named_run_list(
+  :virtualbox,
+  'recipe[gusztavvargadr_vsts::prepare]',
+  'recipe[gusztavvargadr_git::default]',
+  'recipe[gusztavvargadr_dotnet::default]',
+  'recipe[gusztavvargadr_hashicorp::default]',
+  'recipe[gusztavvargadr_chef::default]',
+  'recipe[gusztavvargadr_docker::default]',
+  'recipe[gusztavvargadr_virtualbox::default]',
+  'recipe[gusztavvargadr_vsts::add]',
+)
+
+named_run_list(
   :remove,
   'recipe[gusztavvargadr_vsts::remove]',
 )
