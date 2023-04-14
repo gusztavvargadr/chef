@@ -92,7 +92,6 @@ VSTS_AGENT_CAP_OS=linux
       'VSTS_AGENT_INPUT_AGENT' =>  "linux-#{agent_config_agent}-#{::SecureRandom.hex}",
     }
     agent_svc_script_path = 'svc.sh'
-    agent_runsvc_script_path = 'runsvc.sh'
 
     execute 'config' do
       command "bash #{agent_config_script_path} --unattended --acceptTeeEula"

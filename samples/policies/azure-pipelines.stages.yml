@@ -38,7 +38,7 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each platform in configuration.platforms }}:
-          - job: test_${{ replace(configuration.name, '-', '_') }}_${{ platform }}
+          - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(platform, '-', '_' }}
             displayName: Test ${{ configuration.name }} on ${{ platform }}
 
             pool:
