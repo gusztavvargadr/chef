@@ -4,15 +4,14 @@ trigger:
       - '*'
   paths:
     include:
-      - samples/policies/vsts-agent
+      - samples/cookbooks/virtualbox
 pr: none
 
 stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
-        - name: vsts-agent
-          platforms:
+        - name: virtualbox
+          instances:
             - default-windows
             - default-ubuntu
-            - virtualbox-ubuntu

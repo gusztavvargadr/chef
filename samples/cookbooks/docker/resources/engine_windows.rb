@@ -37,7 +37,7 @@ action :install do
     end
 
     powershell_script 'gusztavvargadr_docker_install' do
-      code powershell_target
+      code "#{powershell_target} -NoRestart"
       action :nothing
       notifies :request_reboot, 'reboot[gusztavvargadr_docker_engine_install]'
     end

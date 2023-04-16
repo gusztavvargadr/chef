@@ -21,6 +21,6 @@ platforms:
 suites:
   - name: default
     attributes:
-      gusztavvargadr_vsts:
+      gusztavvargadr_virtualbox:
         apps:
-          - agent
+          - core

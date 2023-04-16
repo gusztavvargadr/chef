@@ -23,3 +23,9 @@ platforms:
 
 suites:
   - name: default
+
+  - name: virtualbox
+    provisioner:
+      policyfile_path: Policyfile.virtualbox.rb
+    includes:
+      - ubuntu
