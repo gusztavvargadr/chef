@@ -55,14 +55,16 @@ action :add do
     owner agent_user
     group agent_user
     overwrite :auto
-    action :extract
+    action :nothing
+    subscribes :extract, "remote_file[#{agent_archive_local_path}]", :immediately
   end
 
   agent_install_dependencies_script_path = 'bin/installdependencies.sh'
   execute 'installdependencies.sh' do
     command "bash #{agent_install_dependencies_script_path}"
     cwd agent_user_work
-    action :run
+    action :nothing
+    subscribes :run, "archive_file[#{agent_archive_local_path}]", :immediately
   end
 
   agent_env_file_path = "#{agent_user_work}/.env"
@@ -83,13 +85,12 @@ VSTS_AGENT_CAP_OS=linux
 
   unless agent_config['token'].to_s.empty?
     agent_config_script_path = 'config.sh'
-    agent_config_agent = agent_config['agent'].to_s.empty? ? node.name : agent_config['agent']
     agent_config_script_environment = {
       'VSTS_AGENT_INPUT_URL' => agent_config['url'],
       'VSTS_AGENT_INPUT_AUTH' => agent_config['auth'],
       'VSTS_AGENT_INPUT_TOKEN' => agent_config['token'],
       'VSTS_AGENT_INPUT_POOL' => agent_config['pool'],
-      'VSTS_AGENT_INPUT_AGENT' =>  "linux-#{agent_config_agent}-#{::SecureRandom.hex}",
+      'VSTS_AGENT_INPUT_AGENT' =>  "linux-#{agent_config['agent']}-#{::SecureRandom.hex}",
     }
     agent_svc_script_path = 'svc.sh'
 
@@ -104,13 +105,15 @@ VSTS_AGENT_CAP_OS=linux
     execute 'install' do
       command "bash #{agent_svc_script_path} install #{agent_user}"
       cwd agent_user_work
-      action :run
+      action :nothing
+      subscribes :run, 'execute[config]', :immediately
     end
 
     execute 'start' do
       command "bash #{agent_svc_script_path} start"
       cwd agent_user_work
-      action :run
+      action :nothing
+      subscribes :run, 'execute[install]', :immediately
     end
   end
 end

@@ -49,7 +49,8 @@ action :add do
     destination agent_user_work
     owner agent_user
     overwrite :auto
-    action :extract
+    action :nothing
+    subscribes :extract, "remote_file[#{agent_archive_local_path}]", :immediately
   end
 
   agent_env_file_path = "#{agent_user_work}/.env"
@@ -69,13 +70,12 @@ VSTS_AGENT_CAP_OS=windows
 
   unless agent_config['token'].to_s.empty?
     agent_config_script_path = 'config.cmd'
-    agent_config_agent = agent_config['agent'].to_s.empty? ? node.name : agent_config['agent']
     agent_config_script_environment = {
       'VSTS_AGENT_INPUT_URL' => agent_config['url'],
       'VSTS_AGENT_INPUT_AUTH' => agent_config['auth'],
       'VSTS_AGENT_INPUT_TOKEN' => agent_config['token'],
       'VSTS_AGENT_INPUT_POOL' => agent_config['pool'],
-      'VSTS_AGENT_INPUT_AGENT' => "windows-#{agent_config_agent}-#{::SecureRandom.hex}",
+      'VSTS_AGENT_INPUT_AGENT' => "windows-#{agent_config['agent']}-#{::SecureRandom.hex}",
       'VSTS_AGENT_INPUT_RUNASSERVICE' => 'True',
       'VSTS_AGENT_INPUT_WINDOWSLOGONACCOUNT' => agent_user,
       'VSTS_AGENT_INPUT_WINDOWSLOGONPASSWORD' => agent_password,

@@ -25,6 +25,7 @@ suites:
   - name: default
 
   - name: virtualbox
-    named_run_list: virtualbox
+    provisioner:
+      policyfile_path: Policyfile.virtualbox.rb
     includes:
       - ubuntu

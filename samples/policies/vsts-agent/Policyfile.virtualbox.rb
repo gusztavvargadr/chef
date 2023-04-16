@@ -2,7 +2,7 @@ directory = File.dirname(__FILE__)
 
 require "#{directory}/../../../src/Policyfile"
 
-name 'gusztavvargadr_vsts_agent'
+name 'gusztavvargadr_vsts_agent_virtualbox'
 
 gusztavvargadr_chef_sources
 
@@ -13,6 +13,7 @@ run_list(
   'recipe[gusztavvargadr_hashicorp::default]',
   'recipe[gusztavvargadr_chef::default]',
   'recipe[gusztavvargadr_docker::default]',
+  'recipe[gusztavvargadr_virtualbox::default]',
   'recipe[gusztavvargadr_vsts::add]',
 )
 
@@ -23,6 +24,6 @@ named_run_list(
 
 attributes(
   [
-    "#{directory}/Policyfile.yml",
+    "#{directory}/Policyfile.virtualbox.yml",
   ]
 )

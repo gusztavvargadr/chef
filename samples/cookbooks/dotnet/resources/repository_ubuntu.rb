@@ -12,16 +12,16 @@ action :add do
   remote_file dotnet_packages_local_path do
     source dotnet_packages_download_uri
     action :create
-    notifies :install, 'dpkg_package[dotnet-packages]'
   end
 
   dpkg_package 'dotnet-packages' do
     source dotnet_packages_local_path
     action :nothing
-    notifies :update, 'apt_update[dotnet-repository]'
+    subscribes :install, "remote_file[#{dotnet_packages_local_path}]", :immediately
   end
 
   apt_update 'dotnet-repository' do
     action :nothing
+    subscribes :update, 'dpkg_package[dotnet-packages]', :immediately
   end
 end

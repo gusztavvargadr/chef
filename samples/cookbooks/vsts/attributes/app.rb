@@ -6,10 +6,10 @@ default['gusztavvargadr_vsts']['app_options'] = {
     'password' => 'Password42-',
     'config' => {
       'url' => '',
-      'auth' => '',
+      'auth' => 'PAT',
       'token' => '',
-      'pool' => '',
-      'agent' => '',
+      'pool' => 'Default',
+      'agent' => 'core',
     },
   },
 }
