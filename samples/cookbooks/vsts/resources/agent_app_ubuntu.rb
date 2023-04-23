@@ -7,16 +7,22 @@ property :options, Hash, default: {}
 default_action :add
 
 action :prepare do
+  apt_update '' do
+    action :update
+  end
+
+  apt_package [ 'jq', 'net-tools', 'build-essential', 'mkisofs' ] do
+    action :install
+  end
+
   agent_user = new_resource.options['user']
-  agent_password = new_resource.options['password']
-  return if agent_user.to_s.empty? || agent_password.to_s.empty?
+  return if agent_user.to_s.empty?
 
   agent_user_home = "/home/#{agent_user}"
 
   user agent_user do
     home agent_user_home
     manage_home true
-    password agent_password
     action :create
   end
 
@@ -67,21 +73,20 @@ action :add do
     subscribes :run, "archive_file[#{agent_archive_local_path}]", :immediately
   end
 
+  agent_config = new_resource.options['config']
+
   agent_env_file_path = "#{agent_user_work}/.env"
+  agent_env_vars = ({
+    "HOME" => agent_user_home,
+    "CHEF_LICENSE" => "accept-silent",
+    "VSTS_AGENT_CAP_OS" => "linux",
+  }).merge(agent_config['env'])
   file agent_env_file_path do
-    content <<-EOH
-HOME=#{agent_user_home}
-
-CHEF_LICENSE=accept-silent
-
-VSTS_AGENT_CAP_OS=linux
-    EOH
+    content (agent_env_vars.map { |key, value| "#{key}=#{value}" }).join($/)
     owner agent_user
     group agent_user
     action :create
   end
-
-  agent_config = new_resource.options['config']
 
   unless agent_config['token'].to_s.empty?
     agent_config_script_path = 'config.sh'

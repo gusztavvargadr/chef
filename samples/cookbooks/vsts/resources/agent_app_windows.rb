@@ -53,20 +53,19 @@ action :add do
     subscribes :extract, "remote_file[#{agent_archive_local_path}]", :immediately
   end
 
+  agent_config = new_resource.options['config']
+
   agent_env_file_path = "#{agent_user_work}/.env"
+  agent_env_vars = ({
+    "HOME" => agent_user_home,
+    "CHEF_LICENSE" => "accept-silent",
+    "VSTS_AGENT_CAP_OS" => "windows",
+  }).merge(agent_config['env'])
   file agent_env_file_path do
-    content <<-EOH
-HOME=#{agent_user_home}
-
-CHEF_LICENSE=accept-silent
-
-VSTS_AGENT_CAP_OS=windows
-    EOH
+    content (agent_env_vars.map { |key, value| "#{key}=#{value}" }).join($/)
     owner agent_user
     action :create
   end
-
-  agent_config = new_resource.options['config']
 
   unless agent_config['token'].to_s.empty?
     agent_config_script_path = 'config.cmd'

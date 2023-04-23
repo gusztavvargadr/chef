@@ -2,7 +2,7 @@ default['gusztavvargadr_vsts']['app_options'] = {
   'agent' => {
     'version' => '2.217.2',
     'arch' => 'x64',
-    'user' => 'vsts',
+    'user' => 'AzDevOps',
     'password' => 'Password42-',
     'config' => {
       'url' => '',
@@ -10,6 +10,7 @@ default['gusztavvargadr_vsts']['app_options'] = {
       'token' => '',
       'pool' => 'Default',
       'agent' => 'core',
+      'env' => {},
     },
   },
 }
