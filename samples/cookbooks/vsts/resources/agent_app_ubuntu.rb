@@ -77,12 +77,12 @@ action :add do
 
   agent_env_file_path = "#{agent_user_work}/.env"
   agent_env_vars = ({
-    "HOME" => agent_user_home,
-    "CHEF_LICENSE" => "accept-silent",
-    "VSTS_AGENT_CAP_OS" => "linux",
+    'HOME' => agent_user_home,
+    'CHEF_LICENSE' => 'accept-silent',
+    'VSTS_AGENT_CAP_OS' => 'linux',
   }).merge(agent_config['env'])
   file agent_env_file_path do
-    content (agent_env_vars.map { |key, value| "#{key}=#{value}" }).join($/)
+    content (agent_env_vars.map { |key, value| "#{key}=#{value}" }).join($RS).concat($RS)
     owner agent_user
     group agent_user
     action :create
