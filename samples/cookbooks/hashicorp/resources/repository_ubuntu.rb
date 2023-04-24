@@ -11,4 +11,8 @@ action :add do
     components ['main']
     action :add
   end
+
+  apt_package 'mkisofs' do
+    action :install
+  end
 end

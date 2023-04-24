@@ -1,4 +1,6 @@
-. { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version $($args[0])
+$CHEF_WORKSTATION_VERSION="23.4.1032"
+
+. { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version $CHEF_WORKSTATION_VERSION
 
 $ErrorActionPreference = "Stop"
 
