@@ -3,14 +3,12 @@ ARG PLATFORM_VERSION
 
 FROM gusztavvargadr/chef-core:linux-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
 
-ARG CHEF_WORKSTATION_VERSION=23.3.1030
-
 WORKDIR /opt/docker/build/
 
 ADD ./build/chef/linux/chef-workstation.*.sh ./
 RUN chmod +x ./chef-workstation.*.sh
 
-RUN ./chef-workstation.install.sh $CHEF_WORKSTATION_VERSION
+RUN ./chef-workstation.install.sh
 
 WORKDIR /opt/docker/work/
 

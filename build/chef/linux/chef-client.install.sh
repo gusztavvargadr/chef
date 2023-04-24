@@ -1,4 +1,6 @@
 #!/bin/sh
 set -e
 
-curl -Ls https://omnitruck.chef.io/install.sh | bash -s -- -P chef -v $1
+CHEF_CLIENT_VERSION="18.2.7"
+
+curl -Ls https://omnitruck.chef.io/install.sh | bash -s -- -P chef -v $CHEF_CLIENT_VERSION
