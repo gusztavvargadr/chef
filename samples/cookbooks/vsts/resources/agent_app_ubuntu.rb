@@ -11,7 +11,7 @@ action :prepare do
     action :update
   end
 
-  apt_package [ 'jq', 'net-tools', 'build-essential', 'mkisofs' ] do
+  apt_package [ 'jq', 'net-tools' ] do
     action :install
   end
 

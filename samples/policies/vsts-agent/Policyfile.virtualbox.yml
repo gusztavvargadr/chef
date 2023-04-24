@@ -33,3 +33,5 @@ gusztavvargadr_vsts:
     agent:
       config:
         agent: virtualbox
+        env:
+          VSTS_AGENT_CAP_HYPERVISOR: virtualbox
