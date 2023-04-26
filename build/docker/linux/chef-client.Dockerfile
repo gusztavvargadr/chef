@@ -3,14 +3,12 @@ ARG PLATFORM_VERSION
 
 FROM gusztavvargadr/chef-core:linux-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
 
-ARG CHEF_CLIENT_VERSION=18.1.0
-
 WORKDIR /opt/docker/build/
 
 ADD ./build/chef/linux/chef-client.*.sh ./
 RUN chmod +x ./chef-client.*.sh
 
-RUN ./chef-client.install.sh $CHEF_CLIENT_VERSION
+RUN ./chef-client.install.sh
 
 WORKDIR /opt/docker/work/
 

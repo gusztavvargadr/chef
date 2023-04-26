@@ -3,13 +3,11 @@ ARG PLATFORM_VERSION
 
 FROM gusztavvargadr/chef-core:windows-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
 
-ARG CHEF_WORKSTATION_VERSION=23.3.1030
-
 WORKDIR C:/opt/docker/build/
 
 ADD ./build/chef/windows/chef-workstation.*.ps1 ./
 
-RUN powershell -File ./chef-workstation.install.ps1 %CHEF_WORKSTATION_VERSION%
+RUN powershell -File ./chef-workstation.install.ps1
 
 WORKDIR C:/opt/docker/work/
 

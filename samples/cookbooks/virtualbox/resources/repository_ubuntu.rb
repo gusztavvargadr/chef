@@ -13,4 +13,8 @@ action :add do
     arch apt_repository_arch
     action :add
   end
+
+  apt_package 'build-essential' do
+    action :install
+  end
 end
