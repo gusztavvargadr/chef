@@ -53,9 +53,6 @@ stages:
                 demands:
                   - VSTS_AGENT_CAP_HYPERVISOR
 
-            pool:
-              name: linux-virtualbox
-
             steps:
               - checkout: self
                 submodules: recursive
