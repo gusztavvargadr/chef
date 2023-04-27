@@ -13,7 +13,7 @@ stages:
           displayName: Build ${{ configuration.name }}
 
           pool:
-            name: virtualbox-linux
+            name: core-linux
 
           steps:
             - checkout: self
@@ -46,10 +46,10 @@ stages:
 
             # ${{ if contains(platform, 'ubuntu') }}:
             #   pool:
-            #     name: linux-virtualbox
+            #     name: virtualbox-linux
             # ${{ elseif contains(platform, 'windows') }}:
             #   pool:
-            #     name: windows-hyperv
+            #     name: hyperv-windows
             # ${{ else }}:
             #   pool:
             #     name: Default
