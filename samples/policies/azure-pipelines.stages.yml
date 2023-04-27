@@ -13,7 +13,7 @@ stages:
           displayName: Build ${{ configuration.name }}
 
           pool:
-            name: Default
+            name: virtualbox-linux
 
           steps:
             - checkout: self
@@ -41,17 +41,20 @@ stages:
           - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(platform, '-', '_') }}
             displayName: Test ${{ configuration.name }} on ${{ platform }}
 
-            ${{ if contains(platform, 'ubuntu') }}:
-              pool:
-                name: linux-virtualbox
-            ${{ elseif contains(platform, 'windows') }}:
-              pool:
-                name: windows-hyperv
-            ${{ else }}:
-              pool:
-                name: Default
-                demands:
-                  - VSTS_AGENT_CAP_HYPERVISOR
+          pool:
+            name: virtualbox-linux
+
+          # ${{ if contains(platform, 'ubuntu') }}:
+          #   pool:
+          #     name: linux-virtualbox
+          # ${{ elseif contains(platform, 'windows') }}:
+          #   pool:
+          #     name: windows-hyperv
+          # ${{ else }}:
+          #   pool:
+          #     name: Default
+          #     demands:
+          #       - VSTS_AGENT_CAP_HYPERVISOR
 
             steps:
               - checkout: self
