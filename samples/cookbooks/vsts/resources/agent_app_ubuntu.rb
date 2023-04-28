@@ -79,7 +79,7 @@ action :add do
   agent_env_vars = ({
     'HOME' => agent_user_home,
     'CHEF_LICENSE' => 'accept-silent',
-    'VSTS_AGENT_CAP_OS' => 'linux',
+    'VSTS_AGENT_CAP_OS' => 'ubuntu',
   }).merge(agent_config['env'])
   file agent_env_file_path do
     content (agent_env_vars.map { |key, value| "#{key}=#{value}" }).join($RS).concat($RS)
@@ -95,7 +95,7 @@ action :add do
       'VSTS_AGENT_INPUT_AUTH' => agent_config['auth'],
       'VSTS_AGENT_INPUT_TOKEN' => agent_config['token'],
       'VSTS_AGENT_INPUT_POOL' => agent_config['pool'],
-      'VSTS_AGENT_INPUT_AGENT' =>  "linux-#{agent_config['agent']}-#{::SecureRandom.hex}",
+      'VSTS_AGENT_INPUT_AGENT' =>  "ubuntu-#{agent_config['agent']}-#{::SecureRandom.hex}",
     }
     agent_svc_script_path = 'svc.sh'
 
