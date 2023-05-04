@@ -41,15 +41,8 @@ stages:
           - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(platform, '-', '_') }}
             displayName: Test ${{ configuration.name }} on ${{ platform }}
 
-            ${{ if contains(platform, 'ubuntu') }}:
-              pool:
-                name: ubuntu-virtualbox
-            ${{ elseif contains(platform, 'windows') }}:
-              pool:
-                name: windows-hyperv
-            ${{ else }}:
-              pool:
-                name: ubuntu-core
+            pool:
+              name: ${{ coalesce(configuration.pool, 'ubuntu-virtualbox') }}
 
             steps:
               - checkout: self
