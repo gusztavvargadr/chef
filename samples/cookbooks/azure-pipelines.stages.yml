@@ -40,15 +40,8 @@ stages:
           - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(instance, '-', '_') }}
             displayName: Test ${{ configuration.name }} on ${{ instance }}
 
-            ${{ if contains(instance, 'ubuntu') }}:
-              pool:
-                name: ubuntu-virtualbox
-            ${{ elseif contains(instance, 'windows') }}:
-              pool:
-                name: windows-hyperv
-            ${{ else }}:
-              pool:
-                name: ubuntu-core
+            pool:
+              name: ${{ coalesce(configuration.pool, 'ubuntu-virtualbox') }}
 
             steps:
               - checkout: self
