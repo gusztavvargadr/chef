@@ -32,6 +32,6 @@ gusztavvargadr_vsts:
   app_options:
     agent:
       config:
-        agent: virtualbox
+        pool: virtualbox
         env:
-          VSTS_AGENT_CAP_HYPERVISOR: virtualbox
+          CHEF_LICENSE: accept-silent

@@ -29,3 +29,9 @@ gusztavvargadr_virtualbox:
 gusztavvargadr_vsts:
   apps:
     - agent
+  app_options:
+    agent:
+      config:
+        pool: core
+        env:
+          CHEF_LICENSE: accept-silent
