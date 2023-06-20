@@ -12,7 +12,7 @@ action :install do
   return if app_name.to_s.empty? || app_version.to_s.empty?
 
   if app_name == 'core'
-    apt_package 'virtualbox-7.0' do
+    apt_package 'virtualbox-6.1' do
       action :install
     end
 

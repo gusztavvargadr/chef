@@ -41,7 +41,7 @@ stages:
             displayName: Test ${{ configuration.name }} on ${{ instance }}
 
             pool:
-              name: ${{ coalesce(configuration.pool, 'ubuntu-virtualbox') }}
+              name: ubuntu-vmware
 
             steps:
               - checkout: self

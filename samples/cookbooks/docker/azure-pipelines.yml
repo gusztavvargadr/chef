@@ -16,4 +16,3 @@ stages:
             - community-windows
             - community-ubuntu
             - desktop-windows
-          pool: windows-hyperv
