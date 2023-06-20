@@ -16,4 +16,3 @@ stages:
             - default-windows
             - default-ubuntu
             - virtualbox-ubuntu
-          pool: windows-hyperv

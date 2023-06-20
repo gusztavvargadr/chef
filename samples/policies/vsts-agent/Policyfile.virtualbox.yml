@@ -35,3 +35,4 @@ gusztavvargadr_vsts:
         pool: virtualbox
         env:
           CHEF_LICENSE: accept-silent
+          VAGRANT_DEFAULT_PROVIDER: virtualbox
