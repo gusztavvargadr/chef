@@ -2,7 +2,7 @@ directory = File.dirname(__FILE__)
 
 require "#{directory}/../../../src/Policyfile"
 
-name 'gusztavvargadr_vsts_agent'
+name 'gusztavvargadr_vsts_agent_windows_core'
 
 gusztavvargadr_chef_sources
 
@@ -23,6 +23,6 @@ named_run_list(
 
 attributes(
   [
-    "#{directory}/Policyfile.yml",
+    "#{directory}/Policyfile.windows-core.yml",
   ]
 )

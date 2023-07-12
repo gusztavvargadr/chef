@@ -12,6 +12,7 @@ action :install do
   return if app_name.to_s.empty? || app_version.to_s.empty?
 
   apt_package app_name do
+    version app_version unless app_version == 'latest'
     action :install
   end
 end

@@ -13,6 +13,5 @@ stages:
       configurations:
         - name: docker
           instances:
-            - community-windows
-            - community-ubuntu
-            - desktop-windows
+            - default-windows
+            - default-ubuntu

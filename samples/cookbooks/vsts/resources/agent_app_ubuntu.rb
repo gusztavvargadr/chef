@@ -7,14 +7,6 @@ property :options, Hash, default: {}
 default_action :add
 
 action :prepare do
-  apt_update '' do
-    action :update
-  end
-
-  apt_package [ 'jq', 'net-tools' ] do
-    action :install
-  end
-
   agent_user = new_resource.options['user']
   return if agent_user.to_s.empty?
 
@@ -74,7 +66,7 @@ action :add do
   end
 
   agent_config = new_resource.options['config']
-  return if agent_config['token'].to_s.empty?
+  return if agent_config['url'].to_s.empty?
 
   agent_env_file_path = "#{agent_user_work}/.env"
   return if ::File.exist?(agent_env_file_path)
@@ -91,18 +83,16 @@ action :add do
 
   agent_config_script_path = 'config.sh'
 
-  agent_config_pool = agent_config['pool']
   agent_config_agent = agent_config['agent']
-  unless agent_config_pool.to_s.empty?
-    agent_config_pool = "ubuntu-#{agent_config_pool}"
-    agent_config_agent = "#{agent_config_pool}-#{::SecureRandom.hex}"
+  unless agent_config_agent.to_s.empty?
+    agent_config_agent = "#{agent_config_agent}-#{::SecureRandom.hex}"
   end
 
   agent_config_script_environment = {
     'VSTS_AGENT_INPUT_URL' => agent_config['url'],
     'VSTS_AGENT_INPUT_AUTH' => agent_config['auth'],
     'VSTS_AGENT_INPUT_TOKEN' => agent_config['token'],
-    'VSTS_AGENT_INPUT_POOL' => agent_config_pool,
+    'VSTS_AGENT_INPUT_POOL' => agent_config['pool'],
     'VSTS_AGENT_INPUT_AGENT' =>  agent_config_agent,
   }
 

@@ -22,10 +22,20 @@ platforms:
       box: gusztavvargadr/ubuntu-server
 
 suites:
-  - name: default
-
-  - name: virtualbox
+  - name: windows-core
     provisioner:
-      policyfile_path: Policyfile.virtualbox.rb
+      policyfile_path: Policyfile.windows-core.rb
+    includes:
+      - windows
+
+  - name: ubuntu-core
+    provisioner:
+      policyfile_path: Policyfile.ubuntu-core.rb
+    includes:
+      - ubuntu
+
+  - name: ubuntu-virtualbox
+    provisioner:
+      policyfile_path: Policyfile.ubuntu-virtualbox.rb
     includes:
       - ubuntu

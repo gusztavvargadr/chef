@@ -2,7 +2,7 @@ directory = File.dirname(__FILE__)
 
 require "#{directory}/../../../src/Policyfile"
 
-name 'gusztavvargadr_vsts_agent_virtualbox'
+name 'gusztavvargadr_vsts_agent_ubuntu_virtualbox'
 
 gusztavvargadr_chef_sources
 
@@ -24,6 +24,6 @@ named_run_list(
 
 attributes(
   [
-    "#{directory}/Policyfile.virtualbox.yml",
+    "#{directory}/Policyfile.ubuntu-virtualbox.yml",
   ]
 )

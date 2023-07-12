@@ -13,6 +13,6 @@ stages:
       configurations:
         - name: vsts-agent
           platforms:
-            - default-windows
-            - default-ubuntu
-            - virtualbox-ubuntu
+            - windows-core-windows
+            - ubuntu-core-ubuntu
+            - ubuntu-virtualbox-ubuntu
