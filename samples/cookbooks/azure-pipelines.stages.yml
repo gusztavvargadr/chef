@@ -13,7 +13,7 @@ stages:
           displayName: Build ${{ configuration.name }}
 
           pool:
-            name: ubuntu-core
+            name: default
 
           steps:
             - checkout: self
@@ -41,7 +41,7 @@ stages:
             displayName: Test ${{ configuration.name }} on ${{ instance }}
 
             pool:
-              name: ubuntu-vmware
+              name: default
 
             steps:
               - checkout: self
