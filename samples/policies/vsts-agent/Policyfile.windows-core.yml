@@ -13,7 +13,7 @@ gusztavvargadr_hashicorp:
     - consul-template
   app_options:
     vagrant:
-      version: '2.3.6'
+      version: '2.3.4'
 
 gusztavvargadr_chef:
   apps:
