@@ -1,5 +1,8 @@
-gusztavvargadr_docker_images '' do
-  options node['gusztavvargadr_docker']['images']
-  action :pull
-  not_if { reboot_pending? }
+images_options = node['gusztavvargadr_docker']['images']
+
+images_options.each do |image_name, _image_options|
+  gusztavvargadr_docker_image image_name do
+    action :pull
+    not_if { reboot_pending? }
+  end
 end

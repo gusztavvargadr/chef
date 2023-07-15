@@ -8,11 +8,6 @@ gusztavvargadr_chef_sources
 
 run_list(
   'recipe[gusztavvargadr_vsts::prepare]',
-  'recipe[gusztavvargadr_git::default]',
-  'recipe[gusztavvargadr_dotnet::default]',
-  'recipe[gusztavvargadr_hashicorp::default]',
-  'recipe[gusztavvargadr_chef::default]',
-  'recipe[gusztavvargadr_docker::default]',
   'recipe[gusztavvargadr_vsts::add]',
 )
 

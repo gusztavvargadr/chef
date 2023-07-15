@@ -10,11 +10,11 @@ verifier:
 platforms:
   - name: windows
     driver:
-      box: gusztavvargadr/windows-server
+      box: gusztavvargadr/windows-server-core
     transport:
       elevated: true
     provisioner:
-      max_retries: 3
+      max_retries: 1
       wait_for_retry: 30
 
   - name: ubuntu
@@ -22,21 +22,8 @@ platforms:
       box: gusztavvargadr/ubuntu-server
 
 suites:
-  - name: community
+  - name: default
     attributes:
       gusztavvargadr_docker:
-        engine:
-          edition: community
         images:
           hello-world:
-    includes:
-      - windows
-      - ubuntu
-
-  - name: desktop
-    attributes:
-      gusztavvargadr_docker:
-        engine:
-          edition: desktop
-    includes:
-      - windows

@@ -11,6 +11,9 @@ gusztavvargadr_hashicorp:
     - consul
     - vault
     - consul-template
+  app_options:
+    vagrant:
+      version: '2.3.6-1'
 
 gusztavvargadr_chef:
   apps:
@@ -19,12 +22,10 @@ gusztavvargadr_chef:
 gusztavvargadr_docker:
   engine:
     edition: community
+    users:
+      vsts:
   images:
     hello-world:
-
-gusztavvargadr_virtualbox:
-  apps:
-    - core
 
 gusztavvargadr_vsts:
   apps:
@@ -32,7 +33,6 @@ gusztavvargadr_vsts:
   app_options:
     agent:
       config:
-        pool: virtualbox
+        agent: ubuntu-core
         env:
           CHEF_LICENSE: accept-silent
-          VAGRANT_DEFAULT_PROVIDER: virtualbox

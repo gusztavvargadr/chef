@@ -33,9 +33,16 @@ action :install do
     action :create
   end
 
+  users = node['gusztavvargadr_docker']['engine']['users'].keys
+  users.append shell_out('echo ${SUDO_USER:-${USER}}').stdout.strip
+
   group 'docker' do
-    members shell_out('echo ${SUDO_USER:-${USER}}').stdout.strip
+    members users
     append true
     action :create
+  end
+
+  service 'docker' do
+    action [ :enable, :start ]
   end
 end

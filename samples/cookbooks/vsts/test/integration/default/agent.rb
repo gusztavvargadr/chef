@@ -1,7 +1,7 @@
-describe user('AzDevOps') do
+describe user('vsts') do
   it { should exist }
 end
 
-describe directory('/AzDevOps') do
+describe directory('/vsts') do
   it { should exist }
 end
