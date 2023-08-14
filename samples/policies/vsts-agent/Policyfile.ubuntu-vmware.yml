@@ -33,6 +33,8 @@ gusztavvargadr_vsts:
   app_options:
     agent:
       config:
-        agent: ubuntu-core
+        agent: ubuntu-vmware
         env:
           CHEF_LICENSE: accept-silent
+          VAGRANT_DEFAULT_PROVIDER: vmware_desktop
+          VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER: vmware

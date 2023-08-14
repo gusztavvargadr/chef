@@ -1,6 +1,6 @@
 default['gusztavvargadr_vsts']['app_options'] = {
   'agent' => {
-    'version' => '2.217.2',
+    'version' => '3.224.1',
     'arch' => 'x64',
     'user' => 'vsts',
     'password' => 'Password42-',

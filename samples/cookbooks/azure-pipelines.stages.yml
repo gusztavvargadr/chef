@@ -42,6 +42,8 @@ stages:
 
             pool:
               name: default
+              demands:
+                - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER
 
             steps:
               - checkout: self
