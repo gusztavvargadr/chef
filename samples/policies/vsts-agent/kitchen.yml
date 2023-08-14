@@ -22,9 +22,17 @@ platforms:
       box: gusztavvargadr/ubuntu-server
 
 suites:
+  - name: default
+
   - name: windows-core
     provisioner:
       policyfile_path: Policyfile.windows-core.rb
+    includes:
+      - windows
+
+  - name: windows-hyperv
+    provisioner:
+      policyfile_path: Policyfile.windows-hyperv.rb
     includes:
       - windows
 
@@ -37,5 +45,11 @@ suites:
   - name: ubuntu-virtualbox
     provisioner:
       policyfile_path: Policyfile.ubuntu-virtualbox.rb
+    includes:
+      - ubuntu
+
+  - name: ubuntu-vmware
+    provisioner:
+      policyfile_path: Policyfile.ubuntu-vmware.rb
     includes:
       - ubuntu

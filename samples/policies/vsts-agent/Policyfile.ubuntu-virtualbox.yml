@@ -13,7 +13,7 @@ gusztavvargadr_hashicorp:
     - consul-template
   app_options:
     vagrant:
-      version: '2.3.6-1'
+      version: '2.3.4'
 
 gusztavvargadr_chef:
   apps:
@@ -41,3 +41,4 @@ gusztavvargadr_vsts:
         env:
           CHEF_LICENSE: accept-silent
           VAGRANT_DEFAULT_PROVIDER: virtualbox
+          VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER: virtualbox

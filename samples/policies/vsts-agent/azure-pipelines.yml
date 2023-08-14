@@ -14,5 +14,7 @@ stages:
         - name: vsts-agent
           platforms:
             - windows-core-windows
+            - windows-hyperv-windows
             - ubuntu-core-ubuntu
             - ubuntu-virtualbox-ubuntu
+            - ubuntu-vmware-ubuntu
