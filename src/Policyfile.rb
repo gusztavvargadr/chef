@@ -2,10 +2,8 @@ require 'yaml'
 require 'erb'
 
 def gusztavvargadr_chef_sources
-  directory = File.dirname(__FILE__)
-
   default_source :supermarket
-  default_source :chef_repo, "#{directory}/../samples/cookbooks"
+  default_source :chef_repo, "#{File.dirname(__FILE__)}/../samples/cookbooks"
 end
 
 def attributes(paths)
