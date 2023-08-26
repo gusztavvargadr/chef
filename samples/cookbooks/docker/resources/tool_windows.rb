@@ -7,9 +7,7 @@ property :options, Hash, default: {}
 default_action :install
 
 action :initialize do
-  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name]['windows']
-  return if options.nil?
-  options = options.merge(new_resource.options)
+  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   gusztavvargadr_windows_features '' do
     options options['features']
@@ -23,12 +21,10 @@ action :initialize do
 end
 
 action :install do
-  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']]
-  return if options.nil?
-  options = options.merge(new_resource.options)
+  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   powershell_source = options['powershell_source']
-  powershell_target = "#{Chef::Config['file_cache_path']}/gusztavvargadr_docker_app_install.ps1"
+  powershell_target = "#{Chef::Config['file_cache_path']}/tool-install.ps1"
   remote_file powershell_target do
     source powershell_source
     action :create
@@ -55,9 +51,7 @@ action :install do
 end
 
 action :configure do
-  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']]
-  return if options.nil?
-  options = options.merge(new_resource.options)
+  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   users = options['users'].keys
   users.append powershell_out('$env:USERNAME').stdout.strip

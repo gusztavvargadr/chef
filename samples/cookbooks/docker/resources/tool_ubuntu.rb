@@ -7,9 +7,7 @@ property :options, Hash, default: {}
 default_action :install
 
 action :initialize do
-  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']]
-  return if options.nil?
-  _options = options.merge(new_resource.options)
+  _ = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   apt_repository_arch = shell_out('dpkg --print-architecture').stdout.strip
 
@@ -23,9 +21,7 @@ action :initialize do
 end
 
 action :install do
-  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']]
-  return if options.nil?
-  _options = options.merge(new_resource.options)
+  _ = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   apt_package [ 'docker-ce', 'docker-compose-plugin' ] do
     action :install
@@ -33,9 +29,7 @@ action :install do
 end
 
 action :configure do
-  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']]
-  return if options.nil?
-  options = options.merge(new_resource.options)
+  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   users = options['users'].keys
   users.append shell_out('echo ${SUDO_USER:-${USER}}').stdout.strip
