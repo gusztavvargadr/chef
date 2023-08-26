@@ -27,7 +27,7 @@ end
 action :configure do
   options = node['gusztavvargadr_hashicorp']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  service_packages = [ 'consul', 'consul-template' ]
+  service_packages = %w(consul consul-template)
   if service_packages.include? options['package']
     service options['package'] do
       action [ :stop, :disable ]
