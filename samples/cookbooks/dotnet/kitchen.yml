@@ -22,13 +22,13 @@ suites:
   - name: runtimes
     attributes:
       gusztavvargadr_dotnet:
-        runtimes:
-          - '7.0'
-          - '6.0'
+        tools:
+          runtime:7.0:
+          runtime:6.0:
 
   - name: sdks
     attributes:
       gusztavvargadr_dotnet:
-        sdks:
-          - '7.0'
-          - '6.0'
+        tools:
+          sdk:7.0:
+          sdk:6.0:
