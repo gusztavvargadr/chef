@@ -7,7 +7,7 @@ property :options, Hash, default: {}
 default_action :install
 
 action :initialize do
-  _ = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
+  _ = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   release_name = node['lsb']['release']
   dotnet_packages_download_uri = "https://packages.microsoft.com/config/ubuntu/#{release_name}/packages-microsoft-prod.deb"
@@ -31,7 +31,7 @@ action :initialize do
 end
 
 action :install do
-  options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
+  options = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   apt_package options['package'] do
     action :install
