@@ -17,7 +17,6 @@ action :initialize do
   end
 end
 
-
 action :install do
   options = node['gusztavvargadr_chef']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
