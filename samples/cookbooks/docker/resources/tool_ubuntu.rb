@@ -1,3 +1,5 @@
+unified_mode true
+
 provides :gusztavvargadr_docker_tool, platform: 'ubuntu'
 
 property :options, Hash, default: {}
@@ -7,7 +9,7 @@ default_action :install
 action :initialize do
   options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']]
   return if options.nil?
-  options = options.merge(new_resource.options)
+  _options = options.merge(new_resource.options)
 
   apt_repository_arch = shell_out('dpkg --print-architecture').stdout.strip
 
@@ -23,7 +25,7 @@ end
 action :install do
   options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']]
   return if options.nil?
-  options = options.merge(new_resource.options)
+  _options = options.merge(new_resource.options)
 
   apt_package [ 'docker-ce', 'docker-compose-plugin' ] do
     action :install

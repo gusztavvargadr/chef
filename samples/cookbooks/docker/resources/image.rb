@@ -1,3 +1,5 @@
+unified_mode true
+
 provides :gusztavvargadr_docker_image
 
 default_action :pull

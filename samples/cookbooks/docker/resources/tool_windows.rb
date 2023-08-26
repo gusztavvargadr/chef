@@ -1,3 +1,5 @@
+unified_mode true
+
 provides :gusztavvargadr_docker_tool, platform: 'windows'
 
 property :options, Hash, default: {}
@@ -67,6 +69,6 @@ action :configure do
   end
 
   service 'docker' do
-    action [ :stop, :start,:enable ]
+    action [ :stop, :start, :enable ]
   end
 end
