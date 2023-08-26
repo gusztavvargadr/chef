@@ -25,5 +25,7 @@ suites:
   - name: default
     attributes:
       gusztavvargadr_docker:
+        tools:
+          engine:community:
         images:
           hello-world:
