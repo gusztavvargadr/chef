@@ -25,10 +25,10 @@ suites:
   - name: default
     attributes:
       gusztavvargadr_hashicorp:
-        apps:
-          - vagrant
-          - packer
-          - terraform
-          - consul
-          - vault
-          - consul-template
+        tools:
+          vagrant:latest:
+          packer:latest:
+          terraform:latest:
+          consul:latest:
+          vault:latest:
+          consul-template:latest:
