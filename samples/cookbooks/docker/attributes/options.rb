@@ -1,4 +1,4 @@
-default['gusztavvargadr_docker']['options']['tools']['engine:community'] = {
+default['gusztavvargadr_docker']['options']['tools']['engine:latest-community'] = {
   'windows' => {
     'features' => {
       'Containers$' => {},
@@ -13,4 +13,5 @@ default['gusztavvargadr_docker']['options']['tools']['engine:community'] = {
   },
 }
 
-default['gusztavvargadr_docker']['options']['tools']['engine'] = default['gusztavvargadr_docker']['options']['tools']['engine:community']
+default['gusztavvargadr_docker']['options']['tools']['engine:latest'] = default['gusztavvargadr_docker']['options']['tools']['engine:latest-community']
+default['gusztavvargadr_docker']['options']['tools']['engine'] = default['gusztavvargadr_docker']['options']['tools']['engine:latest']

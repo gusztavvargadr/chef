@@ -26,6 +26,6 @@ suites:
     attributes:
       gusztavvargadr_docker:
         tools:
-          engine:community:
+          engine:latest-community:
         images:
           hello-world:
