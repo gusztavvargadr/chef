@@ -23,8 +23,14 @@ end
 action :install do
   options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
+  tmp_directory_path = "#{Chef::Config['file_cache_path']}/gusztavvargadr_docker_tool"
+  directory tmp_directory_path do
+    recursive true
+    action :create
+  end
+
   powershell_source = options['powershell_source']
-  powershell_target = "#{Chef::Config['file_cache_path']}/tool-install.ps1"
+  powershell_target = "#{tmp_directory_path}/install.ps1"
   remote_file powershell_target do
     source powershell_source
     action :create
