@@ -1,18 +1,3 @@
-default['gusztavvargadr_hashicorp']['app_options'] = {
-  'consul' => {
-    'name' => 'consul',
-    'version' => 'latest',
-  },
-  'vault' => {
-    'name' => 'vault',
-    'version' => 'latest',
-  },
-  'consul-template' => {
-    'name' => 'consul-template',
-    'version' => 'latest',
-  },
-}
-
 default['gusztavvargadr_hashicorp']['options']['tools']['vagrant:latest'] = {
   'windows' => {
     'package' => 'vagrant',
