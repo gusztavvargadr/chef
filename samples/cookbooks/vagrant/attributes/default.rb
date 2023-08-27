@@ -1,5 +1,5 @@
 default['gusztavvargadr_vagrant'] = {
-  'app' => 'latest',
+  'tools' => {},
   'plugins' => {},
   'boxes' => {},
 }

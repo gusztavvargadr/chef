@@ -7,6 +7,8 @@ property :options, Hash, default: {}
 default_action :install
 
 action :install do
+  _ = new_resource.options
+
   plugin_name = new_resource.name
   return if plugin_name.to_s.empty?
 

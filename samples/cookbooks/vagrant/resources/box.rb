@@ -7,8 +7,10 @@ property :options, Hash, default: {}
 default_action :add
 
 action :add do
+  options = new_resource.options
+
   box_name = new_resource.name
-  box_provider = new_resource.options['provider']
+  box_provider = options['provider']
   return if box_name.to_s.empty? || box_provider.to_s.empty?
 
   box_list = shell_out('vagrant box list').stdout
