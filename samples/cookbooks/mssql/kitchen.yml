@@ -18,12 +18,11 @@ suites:
   - name: server-2019-developer
     attributes:
       gusztavvargadr_mssql:
-        server:
-          version: "2019"
-          edition: developer
+        tools:
+          server:2019-developer:
 
   - name: management-studio-2019
     attributes:
       gusztavvargadr_mssql:
-        management_studio:
-          version: "2019"
+        tools:
+          management_studio:2019:
