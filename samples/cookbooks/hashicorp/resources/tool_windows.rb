@@ -21,7 +21,8 @@ action :install do
   reboot_packages = %w(vagrant)
   if reboot_packages.include? options['package']
     reboot "gusztavvargadr_hashicorp_tool[#{new_resource.name}]" do
-      action :request_reboot
+      action :nothing
+      subscribes :request_reboot, "chocolatey_package[#{options['package']}]", :immediately
     end
   end
 end
