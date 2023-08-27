@@ -25,4 +25,4 @@ suites:
     attributes:
       gusztavvargadr_mssql:
         tools:
-          management_studio:2019:
+          management-studio:2019:
