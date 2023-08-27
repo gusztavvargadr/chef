@@ -18,9 +18,11 @@ action :install do
     action :install
   end
 
-  reboot "gusztavvargadr_hashicorp_tool[#{new_resource.name}]" do
-    action :nothing
-    subscribes :request_reboot, 'chocolatey_package[vagrant]', :immediately
+  reboot_packages = %w(vagrant)
+  if reboot_packages.include? options['package']
+    reboot "gusztavvargadr_hashicorp_tool[#{new_resource.name}]" do
+      action :request_reboot
+    end
   end
 end
 
