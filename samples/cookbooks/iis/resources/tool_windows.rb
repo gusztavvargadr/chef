@@ -14,7 +14,7 @@ action :install do
     action :install
   end
 
-  reboot "gusztavvargadr_iis_app[#{new_resource.name}]" do
+  reboot "gusztavvargadr_iis_tool[#{new_resource.name}]" do
     action :nothing
     subscribes :request_reboot, 'gusztavvargadr_windows_features[]'
   end

@@ -14,7 +14,7 @@ action :initialize do
     action :install
   end
 
-  reboot "gusztavvargadr_docker_app[#{new_resource.name}]" do
+  reboot "gusztavvargadr_docker_tool[#{new_resource.name}]" do
     action :nothing
     subscribes :request_reboot, 'gusztavvargadr_windows_features[]'
   end
