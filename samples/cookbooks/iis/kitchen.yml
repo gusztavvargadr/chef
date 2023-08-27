@@ -13,6 +13,13 @@ platforms:
       box: gusztavvargadr/windows-server
     transport:
       elevated: true
+    provisioner:
+      max_retries: 1
+      wait_for_retry: 30
 
 suites:
   - name: default
+    attributes:
+      gusztavvargadr_iis:
+        tools:
+          server:latest:
