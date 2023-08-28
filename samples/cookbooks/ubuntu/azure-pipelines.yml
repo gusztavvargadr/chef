@@ -1,0 +1,16 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/cookbooks/ubuntu
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: ubuntu
+          instances:
+            - updates-dist-upgrade-ubuntu
