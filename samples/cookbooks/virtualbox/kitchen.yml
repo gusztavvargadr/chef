@@ -19,8 +19,14 @@ platforms:
       box: gusztavvargadr/ubuntu-server
 
 suites:
-  - name: default
+  - name: 7-0
     attributes:
       gusztavvargadr_virtualbox:
-        apps:
-          - core
+        tools:
+          app:7.0:
+
+  - name: 6-1
+    attributes:
+      gusztavvargadr_virtualbox:
+        tools:
+          app:6.1:
