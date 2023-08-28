@@ -14,6 +14,6 @@ stages:
         - name: virtualbox
           instances:
             - 7-0-windows
-            - 7-0-default-ubuntu
+            - 7-0-ubuntu
             - 6-1-windows
-            - 6-1-default-ubuntu
+            - 6-1-ubuntu
