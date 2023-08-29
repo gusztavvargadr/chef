@@ -1,3 +1,1 @@
-directory = File.dirname(__FILE__)
-
-load "#{directory}/../../../src/kitchen.Vagrantfile"
+load "#{File.dirname(__FILE__)}/../../../src/kitchen.Vagrantfile"
