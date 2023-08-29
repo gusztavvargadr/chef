@@ -1,13 +1,15 @@
 unified_mode true
 
-provides :gusztavvargadr_vsts_agent_app, platform: 'ubuntu'
+provides :gusztavvargadr_vsts_tool, platform: 'ubuntu'
 
 property :options, Hash, default: {}
 
-default_action :add
+default_action :install
 
-action :prepare do
-  agent_user = new_resource.options['user']
+action :initialize do
+  options = node['gusztavvargadr_vsts']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
+
+  agent_user = options['user']
   return if agent_user.to_s.empty?
 
   agent_user_home = "/home/#{agent_user}"
@@ -24,10 +26,12 @@ action :prepare do
   end
 end
 
-action :add do
-  agent_version = new_resource.options['version']
-  agent_arch = new_resource.options['arch']
-  agent_user = new_resource.options['user']
+action :install do
+  options = node['gusztavvargadr_vsts']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
+
+  agent_version = options['version']
+  agent_arch = options['arch']
+  agent_user = options['user']
   return if agent_version.to_s.empty? || agent_arch.to_s.empty? || agent_user.to_s.empty?
 
   agent_user_home = "/home/#{agent_user}"
@@ -64,8 +68,18 @@ action :add do
       action :run
     end
   end
+end
 
-  agent_config = new_resource.options['config']
+action :configure do
+  options = node['gusztavvargadr_vsts']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
+
+  agent_user = options['user']
+  return if agent_user.to_s.empty?
+
+  agent_user_home = "/home/#{agent_user}"
+  agent_user_work = "/#{agent_user}"
+
+  agent_config = options['config']
   return if agent_config['url'].to_s.empty?
 
   agent_env_file_path = "#{agent_user_work}/.env"
@@ -122,7 +136,9 @@ action :add do
 end
 
 action :remove do
-  agent_user = new_resource.options['user']
+  options = node['gusztavvargadr_vsts']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
+
+  agent_user = options['user']
   return if agent_user.to_s.empty?
 
   agent_user_work = "/#{agent_user}"
@@ -142,7 +158,7 @@ action :remove do
       action :run
     end
 
-    agent_config = new_resource.options['config']
+    agent_config = options['config']
 
     unless agent_config['token'].to_s.empty?
       agent_config_script_path = 'config.sh'
