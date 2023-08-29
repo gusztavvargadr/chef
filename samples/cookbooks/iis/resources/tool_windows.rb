@@ -21,5 +21,6 @@ action :install do
 
   gusztavvargadr_windows_native_packages '' do
     options options['native_packages']
+    action :install
   end
 end

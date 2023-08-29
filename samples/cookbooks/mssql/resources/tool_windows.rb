@@ -101,6 +101,7 @@ action :install do
   unless native_packages.nil?
     gusztavvargadr_windows_native_packages '' do
       options native_packages
+      action :install
     end
   end
 end
