@@ -13,12 +13,18 @@ end
 action :install do
   options = node['gusztavvargadr_hashicorp']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  chocolatey_package options['package'] do
-    returns [ 0, 2, 3010 ]
+  reboot_packages = %w(vagrant)
+
+  package_name = options['package'].to_s
+  package_version = options['version'].to_s
+  package_returns = reboot_packages.include?(options['package']) ? [ 0, 2, 3010 ] : []
+
+  chocolatey_package package_name do
+    version package_version unless package_version.empty?
+    returns package_returns unless package_returns.empty?
     action :install
   end
 
-  reboot_packages = %w(vagrant)
   if reboot_packages.include? options['package']
     reboot "gusztavvargadr_hashicorp_tool[#{new_resource.name}]" do
       action :nothing

@@ -20,7 +20,11 @@ end
 action :install do
   options = node['gusztavvargadr_hashicorp']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  apt_package options['package'] do
+  package_name = options['package'].to_s
+  package_version = options['version'].to_s
+
+  apt_package package_name do
+    version package_version unless package_version.empty?
     action :install
   end
 end
