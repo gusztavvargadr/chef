@@ -18,13 +18,11 @@ suites:
   - name: ide-2022-community
     attributes:
       gusztavvargadr_visualstudio:
-        ide:
-          version: "2022"
-          edition: community
+        tools:
+          ide:2022-community:
 
   - name: ide-2019-community
     attributes:
       gusztavvargadr_visualstudio:
-        ide:
-          version: "2019"
-          edition: community
+        tools:
+          ide:2019-community:
