@@ -32,7 +32,6 @@ action :install do
   agent_password = options['password']
   return if agent_version.to_s.empty? || agent_arch.to_s.empty? || agent_user.to_s.empty? || agent_password.to_s.empty?
 
-  agent_user_home = "C:/Users/#{agent_user}"
   agent_user_work = "C:/#{agent_user}"
 
   directory agent_user_work do

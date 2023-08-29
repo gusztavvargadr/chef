@@ -34,7 +34,6 @@ action :install do
   agent_user = options['user']
   return if agent_version.to_s.empty? || agent_arch.to_s.empty? || agent_user.to_s.empty?
 
-  agent_user_home = "/home/#{agent_user}"
   agent_user_work = "/#{agent_user}"
 
   directory agent_user_work do
