@@ -15,7 +15,7 @@ end
 action :install do
   bash "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
     code <<-EOH
-      apt-get #{new_resource.name} -y -qq
+      DEBIAN_FRONTEND=noninteractive apt-get #{new_resource.name} -y -qq
     EOH
     not_if { shell_out('apt list --upgradable -qq').stdout.empty? }
   end

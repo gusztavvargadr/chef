@@ -15,6 +15,10 @@ action :initialize do
     components ['main']
     action :add
   end
+
+  apt_package 'build-essential' do
+    action :install
+  end
 end
 
 action :install do
