@@ -14,11 +14,6 @@ action :install do
     action :install
   end
 
-  reboot "gusztavvargadr_iis_tool[#{new_resource.name}]" do
-    action :nothing
-    subscribes :request_reboot, 'gusztavvargadr_windows_features[]'
-  end
-
   gusztavvargadr_windows_native_packages '' do
     options options['native_packages']
     action :install

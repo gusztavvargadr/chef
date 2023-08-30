@@ -28,7 +28,7 @@ action :install do
   if reboot_packages.include? options['package']
     reboot "gusztavvargadr_hashicorp_tool[#{new_resource.name}]" do
       action :nothing
-      subscribes :request_reboot, "chocolatey_package[#{options['package']}]", :immediately
+      subscribes :reboot_now, "chocolatey_package[#{options['package']}]", :immediately
     end
   end
 end

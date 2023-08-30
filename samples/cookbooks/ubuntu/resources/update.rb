@@ -19,6 +19,11 @@ action :install do
     EOH
     not_if { shell_out('apt list --upgradable -qq').stdout.empty? }
   end
+
+  reboot "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
+    action :reboot_now
+    only_if { reboot_pending? }
+  end  
 end
 
 action :cleanup do
