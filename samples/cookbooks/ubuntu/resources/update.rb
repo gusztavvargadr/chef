@@ -23,7 +23,7 @@ action :install do
   reboot "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
     action :reboot_now
     only_if { reboot_pending? }
-  end  
+  end
 end
 
 action :cleanup do
