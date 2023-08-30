@@ -15,6 +15,6 @@ action :install do
 
   chocolatey_package options['package'] do
     options '--params "/NoShellIntegration /SChannel /NoOpenSSH"'
-    action :install
+    action :upgrade
   end
 end

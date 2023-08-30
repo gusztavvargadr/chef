@@ -19,6 +19,6 @@ action :install do
   options = node['gusztavvargadr_git']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   apt_package options['package'] do
-    action :install
+    action :upgrade
   end
 end
