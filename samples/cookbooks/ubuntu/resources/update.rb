@@ -15,7 +15,7 @@ end
 action :install do
   bash "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
     code <<-EOH
-      DEBIAN_FRONTEND=noninteractive apt-get #{new_resource.name} -y -qq
+      DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef #{new_resource.name}
     EOH
     not_if { shell_out('apt list --upgradable -qq').stdout.empty? }
   end
@@ -29,8 +29,8 @@ end
 action :cleanup do
   bash "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
     code <<-EOH
-      apt-get autoremove -y -qq
-      apt-get clean -y -qq
+      apt-get -y -qq autoremove
+      apt-get -y -qq clean
     EOH
   end
 end
