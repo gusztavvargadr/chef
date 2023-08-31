@@ -9,14 +9,17 @@ default_action :install
 action :initialize do
   options = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  gusztavvargadr_windows_features '' do
-    options options['features']
-    action :install
-  end
+  features = options['features']
+  features.each do |feature_name, _|
+    windows_feature_dism feature_name do
+      all true
+      action :install
+    end
 
-  reboot "gusztavvargadr_docker_tool[#{new_resource.name}]" do
-    action :nothing
-    subscribes :reboot_now, 'gusztavvargadr_windows_features[]'
+    reboot "gusztavvargadr_docker_tool[#{new_resource.name}]" do
+      action :nothing
+      subscribes :reboot_now, "windows_feature_dism[#{feature_name}]"
+    end
   end
 end
 
