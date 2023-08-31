@@ -13,6 +13,8 @@ stages:
       configurations:
         - name: vsts-agent
           platforms:
+            - default-windows
+            - default-ubuntu
             - windows-core-windows
             - windows-hyperv-windows
             - ubuntu-core-ubuntu

@@ -1,37 +1,41 @@
+gusztavvargadr_ubuntu:
+  updates:
+    dist-upgrade:
+
+gusztavvargadr_git:
+  tools:
+    app:latest:
+
 gusztavvargadr_dotnet:
-  sdks:
-    - '7.0'
-    - '6.0'
+  tools:
+    sdk:7.0:
+    sdk:6.0:
 
 gusztavvargadr_hashicorp:
-  apps:
-    - vagrant
-    - packer
-    - terraform
-    - consul
-    - vault
-    - consul-template
-  app_options:
+  tools:
     vagrant:
       version: '2.3.4'
+    packer:latest:
+    terraform:latest:
+    consul:latest:
+    vault:latest:
+    consul-template:latest:
 
 gusztavvargadr_chef:
-  apps:
-    - workstation
+  tools:
+    workstation:latest:
 
 gusztavvargadr_docker:
-  engine:
-    edition: community
-    users:
-      vsts:
+  tools:
+    engine:latest-community:
+      users:
+        vsts:
   images:
     hello-world:
 
 gusztavvargadr_vsts:
-  apps:
-    - agent
-  app_options:
-    agent:
+  tools:
+    agent:latest:
       config:
         agent: ubuntu-vmware
         env:
