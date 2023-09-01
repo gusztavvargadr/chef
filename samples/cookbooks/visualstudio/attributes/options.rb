@@ -1,7 +1,7 @@
 default['gusztavvargadr_visualstudio']['options']['tools']['ide:2022-community'] = {
   'windows' => {
     'features' => {
-      'NetFx3$' => {},
+      'NetFx3' => {},
     },
     'native_packages' => {
       'Visual Studio 2022 Community' => {
@@ -34,7 +34,7 @@ default['gusztavvargadr_visualstudio']['options']['tools']['ide'] = default['gus
 default['gusztavvargadr_visualstudio']['options']['tools']['ide:2019-community'] = {
   'windows' => {
     'features' => {
-      'NetFx3$' => {},
+      'NetFx3' => {},
     },
     'native_packages' => {
       'Visual Studio 2019 Community' => {
