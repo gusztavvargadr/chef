@@ -1,21 +1,12 @@
 unified_mode true
 
+provides :gusztavvargadr_windows_update
+
+property :options, Hash, default: {}
+
 default_action :install
 
-action :enable do
-  windows_service 'wuauserv' do
-    action :configure_startup
-    startup_type :manual
-  end
-end
-
-action :start do
-  windows_service 'wuauserv' do
-    action :start
-  end
-end
-
-action :configure do
+action :initialize do
   windows_update_settings '' do
     disable_automatic_updates true
     action :set
@@ -73,7 +64,7 @@ action :install do
   end
 
   reboot 'gusztavvargadr_windows_updates_install' do
-    action :request_reboot
+    action :reboot_now
     only_if { reboot_pending? }
   end
 end
@@ -86,17 +77,9 @@ action :cleanup do
     EOH
     action :run
   end
-end
 
-action :stop do
-  windows_service 'wuauserv' do
-    action :stop
-  end
-end
-
-action :disable do
-  windows_service 'wuauserv' do
-    action :configure_startup
-    startup_type :disabled
+  reboot 'gusztavvargadr_windows_updates_cleanup' do
+    action :reboot_now
+    only_if { reboot_pending? }
   end
 end

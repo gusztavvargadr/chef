@@ -1,5 +1,7 @@
 unified_mode true
 
+provides :gusztavvargadr_windows_iso
+
 property :iso_path, String, name_property: true
 property :iso_drive_letter, String, required: true
 

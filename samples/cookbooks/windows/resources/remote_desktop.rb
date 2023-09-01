@@ -1,5 +1,7 @@
 unified_mode true
 
+provides :gusztavvargadr_windows_remote_desktop
+
 default_action :enable
 
 action :enable do

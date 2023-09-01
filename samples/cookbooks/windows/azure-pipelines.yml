@@ -13,9 +13,4 @@ stages:
       configurations:
         - name: windows
           instances:
-            - chocolatey-packages-windows
-            - environment-variables-windows
-            - features-windows
-            - files-windows
-            - native-packages-windows
-            - updates-windows
+            - default-windows
