@@ -4,7 +4,7 @@ provides :gusztavvargadr_ubuntu_update
 
 property :options, Hash, default: {}
 
-default_action :install
+default_action :dist_upgrade
 
 action :initialize do
   apt_update "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
@@ -12,10 +12,10 @@ action :initialize do
   end
 end
 
-action :install do
+action :dist_upgrade do
   bash "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
     code <<-EOH
-      DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef #{new_resource.name}
+      DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef dist-upgrade
     EOH
     not_if { shell_out('apt list --upgradable -qq').stdout.empty? }
   end

@@ -13,4 +13,4 @@ stages:
       configurations:
         - name: ubuntu
           instances:
-            - updates-dist-upgrade-ubuntu
+            - updates-ubuntu

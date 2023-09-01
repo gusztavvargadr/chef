@@ -16,8 +16,8 @@ platforms:
       wait_for_retry: 30
 
 suites:
-  - name: updates-dist-upgrade
+  - name: updates
     attributes:
       gusztavvargadr_ubuntu:
         updates:
-          dist-upgrade:
+          dist_upgrade:
