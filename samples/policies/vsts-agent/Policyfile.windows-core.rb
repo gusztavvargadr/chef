@@ -5,6 +5,7 @@ name 'gusztavvargadr_vsts_agent_windows_core'
 gusztavvargadr_chef_sources
 
 run_list(
+  'recipe[gusztavvargadr_windows::default]',
   'recipe[gusztavvargadr_vsts::initialize]',
   'recipe[gusztavvargadr_git::default]',
   'recipe[gusztavvargadr_dotnet::default]',

@@ -1,3 +1,7 @@
+gusztavvargadr_windows:
+  updates:
+    install:
+
 gusztavvargadr_git:
   tools:
     app:latest:

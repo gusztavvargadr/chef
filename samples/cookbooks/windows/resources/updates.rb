@@ -55,17 +55,18 @@ action :initialize do
 end
 
 action :install do
-  powershell_script 'Install Updates' do
-    code <<-EOH
-      Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
-    EOH
-    action :run
-    not_if { powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip == '0' }
-  end
+  while powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip != '0'
+    powershell_script 'Install Updates' do
+      code <<-EOH
+        Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
+      EOH
+      action :run
+    end
 
-  reboot 'gusztavvargadr_windows_updates_install' do
-    action :reboot_now
-    only_if { reboot_pending? }
+    reboot 'gusztavvargadr_windows_updates_install' do
+      action :reboot_now
+      only_if { reboot_pending? }
+    end
   end
 end
 
