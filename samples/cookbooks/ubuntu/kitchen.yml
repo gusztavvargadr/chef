@@ -16,7 +16,7 @@ platforms:
       wait_for_retry: 30
 
 suites:
-  - name: updates
+  - name: default
     attributes:
       gusztavvargadr_ubuntu:
         updates:

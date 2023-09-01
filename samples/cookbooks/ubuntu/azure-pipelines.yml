@@ -13,4 +13,4 @@ stages:
       configurations:
         - name: ubuntu
           instances:
-            - updates-ubuntu
+            - default-ubuntu
