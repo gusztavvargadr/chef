@@ -20,4 +20,4 @@ suites:
     attributes:
       gusztavvargadr_ubuntu:
         updates:
-          dist_upgrade:
+          dist-upgrade:
