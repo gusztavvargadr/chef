@@ -1,6 +1,4 @@
-directory = File.dirname(__FILE__)
-
-require "#{directory}/../../../src/Policyfile"
+require "#{File.dirname(__FILE__)}/../../../src/Policyfile"
 
 name 'gusztavvargadr_windows_core'
 
@@ -12,6 +10,6 @@ run_list(
 
 attributes(
   [
-    "#{directory}/Policyfile.yml",
+    "#{File.dirname(__FILE__)}/Policyfile.yml",
   ]
 )

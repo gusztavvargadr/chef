@@ -13,4 +13,4 @@ stages:
       configurations:
         - name: windows-core
           platforms:
-            - windows
+            - default-windows
