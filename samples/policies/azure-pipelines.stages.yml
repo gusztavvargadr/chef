@@ -12,7 +12,8 @@ stages:
         - job: build_${{ replace(configuration.name, '-', '_') }}
           displayName: Build ${{ configuration.name }}
 
-          pool: ubuntu-virtualbox
+          pool:
+            name: default
 
           steps:
             - checkout: self
@@ -40,7 +41,10 @@ stages:
           - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(platform, '-', '_') }}
             displayName: Test ${{ configuration.name }} on ${{ platform }}
 
-            pool: ubuntu-virtualbox
+            pool:
+              name: default
+              demands:
+                - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER
 
             steps:
               - checkout: self
