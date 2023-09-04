@@ -14,6 +14,10 @@ action :initialize do
 
   agent_user_home = "/home/#{agent_user}"
 
+  chef_gem 'ruby-shadow' do
+    action :install
+  end
+
   user agent_user do
     home agent_user_home
     manage_home true

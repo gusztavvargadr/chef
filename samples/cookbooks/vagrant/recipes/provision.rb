@@ -5,3 +5,8 @@ tools.each do |tool_name, tool_options|
     action :install
   end
 end
+
+reboot 'gusztavvargadr_vagrant::provision' do
+  action :reboot_now
+  only_if { reboot_pending? }
+end
