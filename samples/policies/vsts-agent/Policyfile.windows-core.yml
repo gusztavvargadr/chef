@@ -28,14 +28,12 @@ gusztavvargadr_chef:
 gusztavvargadr_docker:
   tools:
     engine:latest-community:
-      users:
-        vsts:
-  images:
-    hello-world:
 
 gusztavvargadr_vsts:
   tools:
     agent:latest:
+      groups:
+        docker:
       config:
         agent: windows-core
         env:

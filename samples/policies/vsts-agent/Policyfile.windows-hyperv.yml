@@ -28,14 +28,13 @@ gusztavvargadr_chef:
 gusztavvargadr_docker:
   tools:
     engine:latest-community:
-      users:
-        vsts:
-  images:
-    hello-world:
 
 gusztavvargadr_vsts:
   tools:
     agent:latest:
+      groups:
+        docker:
+        Hyper-V Administrators:
       config:
         agent: windows-hyperv
         env:

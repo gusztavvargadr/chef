@@ -28,10 +28,6 @@ gusztavvargadr_chef:
 gusztavvargadr_docker:
   tools:
     engine:latest-community:
-      users:
-        vsts:
-  images:
-    hello-world:
 
 gusztavvargadr_virtualbox:
   tools:
@@ -40,6 +36,8 @@ gusztavvargadr_virtualbox:
 gusztavvargadr_vsts:
   tools:
     agent:latest:
+      groups:
+        docker:
       config:
         agent: ubuntu-virtualbox
         env:
