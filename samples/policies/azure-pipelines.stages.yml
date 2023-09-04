@@ -75,6 +75,12 @@ stages:
 
               - script: |
                   cd samples/policies/${{ configuration.name }}
+                  kitchen create ${{ platform }}
+                displayName: Create
+                condition: failed()
+
+              - script: |
+                  cd samples/policies/${{ configuration.name }}
                   kitchen destroy ${{ platform }}
                 displayName: Clean
                 condition: always()

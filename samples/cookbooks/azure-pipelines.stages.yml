@@ -70,6 +70,12 @@ stages:
 
               - script: |
                   cd ./samples/cookbooks/${{ configuration.name }}
+                  kitchen create ${{ instance }}
+                displayName: Create
+                condition: failed()
+
+              - script: |
+                  cd ./samples/cookbooks/${{ configuration.name }}
                   kitchen destroy ${{ instance }}
                 displayName: Clean
                 condition: always()

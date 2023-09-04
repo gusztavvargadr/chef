@@ -14,12 +14,12 @@ action :initialize do
     windows_feature_dism feature_name do
       all true
       action :install
+      notifies :request_reboot, 'reboot[gusztavvargadr_docker_tool]', :immediately
     end
+  end
 
-    reboot "gusztavvargadr_docker_tool[#{new_resource.name}]" do
-      action :nothing
-      subscribes :reboot_now, "windows_feature_dism[#{feature_name}]"
-    end
+  reboot 'gusztavvargadr_docker_tool' do
+    action :nothing
   end
 end
 

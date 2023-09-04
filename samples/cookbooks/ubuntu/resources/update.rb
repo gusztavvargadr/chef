@@ -20,8 +20,8 @@ action :dist_upgrade do
     not_if { shell_out('apt list --upgradable -qq').stdout.empty? }
   end
 
-  reboot "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
-    action :reboot_now
+  reboot 'gusztavvargadr_ubuntu_update' do
+    action :request_reboot
     only_if { reboot_pending? }
   end
 end

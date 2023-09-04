@@ -5,3 +5,8 @@ updates.each do |update_name, update_options|
     action :cleanup
   end
 end
+
+reboot 'gusztavvargadr_windows::cleanup' do
+  action :reboot_now
+  only_if { reboot_pending? }
+end

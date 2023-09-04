@@ -62,11 +62,11 @@ action :install do
       EOH
       action :run
     end
+  end
 
-    reboot 'gusztavvargadr_windows_updates_install' do
-      action :reboot_now
-      only_if { reboot_pending? }
-    end
+  reboot 'gusztavvargadr_windows_update' do
+    action :request_reboot
+    only_if { reboot_pending? }
   end
 end
 
@@ -79,8 +79,8 @@ action :cleanup do
     action :run
   end
 
-  reboot 'gusztavvargadr_windows_updates_cleanup' do
-    action :reboot_now
+  reboot 'gusztavvargadr_windows_update' do
+    action :request_reboot
     only_if { reboot_pending? }
   end
 end

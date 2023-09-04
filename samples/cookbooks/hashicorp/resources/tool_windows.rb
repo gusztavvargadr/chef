@@ -18,18 +18,17 @@ action :install do
   package_name = options['package'].to_s
   package_version = options['version'].to_s
   package_returns = reboot_packages.include?(options['package']) ? [ 0, 2, 3010 ] : []
+  package_reboot = reboot_packages.include?(options['package'])
 
   chocolatey_package package_name do
     version package_version unless package_version.empty?
     returns package_returns unless package_returns.empty?
     action :install
+    notifies :request_reboot, 'reboot[gusztavvargadr_hashicorp_tool]', :immediately if package_reboot
   end
 
-  if reboot_packages.include? options['package']
-    reboot "gusztavvargadr_hashicorp_tool[#{new_resource.name}]" do
-      action :nothing
-      subscribes :reboot_now, "chocolatey_package[#{options['package']}]", :immediately
-    end
+  reboot 'gusztavvargadr_hashicorp_tool' do
+    action :nothing
   end
 end
 

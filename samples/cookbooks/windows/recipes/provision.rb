@@ -5,3 +5,8 @@ updates.each do |update_name, update_options|
     action update_name.gsub('-', '_')
   end
 end
+
+reboot 'gusztavvargadr_windows::provision' do
+  action :reboot_now
+  only_if { reboot_pending? }
+end
