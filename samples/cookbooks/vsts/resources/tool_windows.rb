@@ -21,6 +21,15 @@ action :initialize do
     password agent_password
     action :create
   end
+
+  groups = options['groups']
+  groups.each do |group_name, _|
+    group group_name do
+      append true
+      members [ agent_user ]
+      action :manage
+    end
+  end
 end
 
 action :install do
@@ -139,5 +148,9 @@ action :remove do
   directory agent_user_work do
     recursive true
     action :delete
+  end
+
+  user agent_user do
+    action :remove
   end
 end

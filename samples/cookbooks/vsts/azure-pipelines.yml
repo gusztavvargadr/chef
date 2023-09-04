@@ -15,3 +15,5 @@ stages:
           instances:
             - default-windows
             - default-ubuntu
+            - destroy-windows
+            - destroy-ubuntu
