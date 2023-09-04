@@ -77,7 +77,7 @@ stages:
                   cd samples/policies/${{ configuration.name }}
                   kitchen create ${{ platform }}
                 displayName: Create
-                condition: failed()
+                condition: not(succeeded())
 
               - script: |
                   cd samples/policies/${{ configuration.name }}

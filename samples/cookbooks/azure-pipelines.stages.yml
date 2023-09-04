@@ -72,7 +72,7 @@ stages:
                   cd ./samples/cookbooks/${{ configuration.name }}
                   kitchen create ${{ instance }}
                 displayName: Create
-                condition: failed()
+                condition: not(succeeded())
 
               - script: |
                   cd ./samples/cookbooks/${{ configuration.name }}
