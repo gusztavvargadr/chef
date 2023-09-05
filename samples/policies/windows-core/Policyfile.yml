@@ -1,11 +1,3 @@
 gusztavvargadr_windows:
   updates:
     install:
-  native_packages:
-    .NET Core 6.1.21 Runtime:
-      source: https://download.visualstudio.microsoft.com/download/pr/31949bf4-c9ef-4e57-9da2-d798ab8b8bbf/fb7a481d9381bb740223629422a006e0/dotnet-runtime-6.0.21-win-x64.exe
-      install:
-        - /install
-        - /quiet
-        - /norestart
-      executable: C:/Program Files/dotnet/dotnet.exe
