@@ -5,7 +5,7 @@ name 'gusztavvargadr_core_windows'
 gusztavvargadr_chef_sources
 
 run_list(
-  'recipe[gusztavvargadr_windows::default]'
+  'recipe[gusztavvargadr_windows::default]',
 )
 
 attributes(
