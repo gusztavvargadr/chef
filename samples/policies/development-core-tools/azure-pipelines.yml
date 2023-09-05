@@ -1,0 +1,22 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/policies/development-core-tools
+      - samples/cookbooks/git
+      - samples/cookbooks/dotnet
+      - samples/cookbooks/hashicorp
+      - samples/cookbooks/chef
+      - samples/cookbooks/docker
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: development-core-tools
+          instances:
+            - default-windows
+            - default-ubuntu
