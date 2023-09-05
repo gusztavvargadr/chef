@@ -1,0 +1,19 @@
+driver:
+  name: vagrant
+  vm_hostname: false
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: ubuntu
+    driver:
+      box: gusztavvargadr/ubuntu-server
+    provisioner:
+      max_retries: 1
+      wait_for_retry: 30
+
+suites:
+  - name: default
