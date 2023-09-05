@@ -12,6 +12,6 @@ stages:
     parameters:
       configurations:
         - name: hello-world
-          platforms:
+          instances:
             - default-windows
             - default-ubuntu

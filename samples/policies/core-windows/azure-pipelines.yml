@@ -4,13 +4,13 @@ trigger:
       - '*'
   paths:
     include:
-      - samples/policies/ubuntu-core
+      - samples/policies/core-windows
 pr: none
 
 stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
-        - name: ubuntu-core
-          platforms:
-            - default-ubuntu
+        - name: core-windows
+          instances:
+            - default-windows

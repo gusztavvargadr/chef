@@ -10,7 +10,7 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - job: build_${{ replace(configuration.name, '-', '_') }}
-          displayName: Build ${{ configuration.name }}
+          displayName: Build cookbook ${{ configuration.name }}
 
           pool:
             name: default
@@ -40,7 +40,7 @@ stages:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each instance in configuration.instances }}:
           - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(instance, '-', '_') }}
-            displayName: Test ${{ configuration.name }} on ${{ instance }}
+            displayName: Test cookbook ${{ configuration.name }} on instance ${{ instance }}
 
             pool:
               name: default

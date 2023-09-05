@@ -1,7 +1,7 @@
 parameters:
   configurations: []
     # - name: string
-    #   platforms: [ string ]
+    #   instances: [ string ]
 
 stages:
   - stage: commit
@@ -10,7 +10,7 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - job: build_${{ replace(configuration.name, '-', '_') }}
-          displayName: Build ${{ configuration.name }}
+          displayName: Build policy ${{ configuration.name }}
 
           pool:
             name: default
@@ -37,9 +37,9 @@ stages:
 
     jobs:
       - ${{ each configuration in parameters.configurations }}:
-        - ${{ each platform in configuration.platforms }}:
-          - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(platform, '-', '_') }}
-            displayName: Test ${{ configuration.name }} on ${{ platform }}
+        - ${{ each instance in configuration.instances }}:
+          - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(instances, '-', '_') }}
+            displayName: Test policy ${{ configuration.name }} on instance ${{ instance }}
 
             pool:
               name: default
@@ -70,17 +70,17 @@ stages:
 
               - script: |
                   cd samples/policies/${{ configuration.name }}
-                  kitchen test ${{ platform }}
+                  kitchen test ${{ instance }}
                 displayName: Test
 
               - script: |
                   cd samples/policies/${{ configuration.name }}
-                  kitchen create ${{ platform }}
+                  kitchen create ${{ instance }}
                 displayName: Create
                 condition: not(succeeded())
 
               - script: |
                   cd samples/policies/${{ configuration.name }}
-                  kitchen destroy ${{ platform }}
+                  kitchen destroy ${{ instance }}
                 displayName: Clean
                 condition: always()

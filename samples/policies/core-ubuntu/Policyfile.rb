@@ -1,6 +1,6 @@
 require "#{File.dirname(__FILE__)}/../../../src/Policyfile"
 
-name 'gusztavvargadr_ubuntu_core'
+name 'gusztavvargadr_core_ubuntu'
 
 gusztavvargadr_chef_sources
 
