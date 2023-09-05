@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
       - samples/policies/core-ubuntu
+      - samples/cookbooks/ubuntu
 pr: none
 
 stages:

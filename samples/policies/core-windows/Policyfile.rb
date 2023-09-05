@@ -1,6 +1,6 @@
 require "#{File.dirname(__FILE__)}/../../../src/Policyfile"
 
-name 'gusztavvargadr_windows_core'
+name 'gusztavvargadr_core_windows'
 
 gusztavvargadr_chef_sources
 

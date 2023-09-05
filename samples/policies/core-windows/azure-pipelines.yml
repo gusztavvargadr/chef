@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
       - samples/policies/core-windows
+      - samples/cookbooks/windows
 pr: none
 
 stages:
