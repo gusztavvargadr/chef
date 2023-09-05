@@ -38,7 +38,7 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each instance in configuration.instances }}:
-          - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(instances, '-', '_') }}
+          - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(instance, '-', '_') }}
             displayName: Test policy ${{ configuration.name }} on instance ${{ instance }}
 
             pool:
