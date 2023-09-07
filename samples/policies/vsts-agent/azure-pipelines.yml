@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
       - samples/policies/vsts-agent
+      - samples/cookbooks/vsts
 pr: none
 
 stages:
@@ -12,11 +13,6 @@ stages:
     parameters:
       configurations:
         - name: vsts-agent
-          platforms:
+          instances:
             - default-windows
             - default-ubuntu
-            - windows-core-windows
-            - windows-hyperv-windows
-            - ubuntu-core-ubuntu
-            - ubuntu-virtualbox-ubuntu
-            - ubuntu-vmware-ubuntu

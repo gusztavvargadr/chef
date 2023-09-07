@@ -13,9 +13,6 @@ platforms:
       box: gusztavvargadr/windows-server-core
     transport:
       elevated: true
-    provisioner:
-      max_retries: 2
-      wait_for_retry: 30
 
   - name: ubuntu
     driver:
@@ -23,33 +20,3 @@ platforms:
 
 suites:
   - name: default
-
-  - name: windows-core
-    provisioner:
-      policyfile_path: Policyfile.windows-core.rb
-    includes:
-      - windows
-
-  - name: windows-hyperv
-    provisioner:
-      policyfile_path: Policyfile.windows-hyperv.rb
-    includes:
-      - windows
-
-  - name: ubuntu-core
-    provisioner:
-      policyfile_path: Policyfile.ubuntu-core.rb
-    includes:
-      - ubuntu
-
-  - name: ubuntu-virtualbox
-    provisioner:
-      policyfile_path: Policyfile.ubuntu-virtualbox.rb
-    includes:
-      - ubuntu
-
-  - name: ubuntu-vmware
-    provisioner:
-      policyfile_path: Policyfile.ubuntu-vmware.rb
-    includes:
-      - ubuntu
