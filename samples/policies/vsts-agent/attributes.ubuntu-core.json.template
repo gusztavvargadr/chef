@@ -1,0 +1,19 @@
+{
+  "gusztavvargadr_vsts": {
+    "tools": {
+      "agent:latest": {
+        "groups": {
+          "docker": {}
+        },
+        "config": {
+          "url": "{{ with secret "/kv/vsts-agent" }}{{ .Data.data.url }}{{end}}",
+          "token": "{{ with secret "/kv/vsts-agent" }}{{ .Data.data.token }}{{end}}",
+          "agent": "ubuntu-core",
+          "env": {
+            "CHEF_LICENSE": "accept-silent"
+          }
+        }
+      }
+    }
+  }
+}

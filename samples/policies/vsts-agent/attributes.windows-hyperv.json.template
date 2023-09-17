@@ -1,0 +1,21 @@
+{
+  "gusztavvargadr_vsts": {
+    "tools": {
+      "agent:latest": {
+        "groups": {
+          "docker": {}
+        },
+        "config": {
+          "url": "{{ with secret "/kv/vsts-agent" }}{{ .Data.data.url }}{{end}}",
+          "token": "{{ with secret "/kv/vsts-agent" }}{{ .Data.data.token }}{{end}}",
+          "agent": "windows-hyperv",
+          "env": {
+            "CHEF_LICENSE": "accept-silent",
+            "VAGRANT_DEFAULT_PROVIDER": "hyperv",
+            "VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER": "hyperv"
+          }
+        }
+      }
+    }
+  }
+}
