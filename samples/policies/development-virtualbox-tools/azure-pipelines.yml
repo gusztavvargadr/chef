@@ -5,7 +5,6 @@ trigger:
   paths:
     include:
       - samples/policies/development-virtualbox-tools
-      - samples/cookbooks/virtualbox
 pr: none
 
 stages:
