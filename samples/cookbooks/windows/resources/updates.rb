@@ -1,21 +1,12 @@
 unified_mode true
 
+provides :gusztavvargadr_windows_update
+
+property :options, Hash, default: {}
+
 default_action :install
 
-action :enable do
-  windows_service 'wuauserv' do
-    action :configure_startup
-    startup_type :manual
-  end
-end
-
-action :start do
-  windows_service 'wuauserv' do
-    action :start
-  end
-end
-
-action :configure do
+action :initialize do
   windows_update_settings '' do
     disable_automatic_updates true
     action :set
@@ -64,15 +55,16 @@ action :configure do
 end
 
 action :install do
-  powershell_script 'Install Updates' do
-    code <<-EOH
-      Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
-    EOH
-    action :run
-    not_if { powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip == '0' }
+  while powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip != '0'
+    powershell_script 'Install Updates' do
+      code <<-EOH
+        Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
+      EOH
+      action :run
+    end
   end
 
-  reboot 'gusztavvargadr_windows_updates_install' do
+  reboot 'gusztavvargadr_windows_update' do
     action :request_reboot
     only_if { reboot_pending? }
   end
@@ -86,17 +78,9 @@ action :cleanup do
     EOH
     action :run
   end
-end
 
-action :stop do
-  windows_service 'wuauserv' do
-    action :stop
-  end
-end
-
-action :disable do
-  windows_service 'wuauserv' do
-    action :configure_startup
-    startup_type :disabled
+  reboot 'gusztavvargadr_windows_update' do
+    action :request_reboot
+    only_if { reboot_pending? }
   end
 end

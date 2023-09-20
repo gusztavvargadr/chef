@@ -1,0 +1,22 @@
+driver:
+  name: vagrant
+  vm_hostname: false
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      box: gusztavvargadr/windows-server
+    transport:
+      elevated: true
+
+  - name: ubuntu
+    driver:
+      box: gusztavvargadr/ubuntu-desktop
+
+suites:
+  - name: default

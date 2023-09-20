@@ -22,5 +22,5 @@ suites:
   - name: default
     attributes:
       gusztavvargadr_chef:
-        apps:
-          - workstation
+        tools:
+          workstation:latest:

@@ -10,10 +10,12 @@ stages:
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - job: build_${{ replace(configuration.name, '-', '_') }}
-          displayName: Build ${{ configuration.name }}
+          displayName: Build cookbook ${{ configuration.name }}
 
           pool:
             name: default
+            demands:
+              - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER
 
           steps:
             - checkout: self
@@ -38,7 +40,7 @@ stages:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each instance in configuration.instances }}:
           - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(instance, '-', '_') }}
-            displayName: Test ${{ configuration.name }} on ${{ instance }}
+            displayName: Test cookbook ${{ configuration.name }} on instance ${{ instance }}
 
             pool:
               name: default
@@ -65,6 +67,12 @@ stages:
                   cd ./samples/cookbooks/${{ configuration.name }}
                   kitchen test ${{ instance }}
                 displayName: Test
+
+              - script: |
+                  cd ./samples/cookbooks/${{ configuration.name }}
+                  kitchen create ${{ instance }}
+                displayName: Create
+                condition: not(succeeded())
 
               - script: |
                   cd ./samples/cookbooks/${{ configuration.name }}

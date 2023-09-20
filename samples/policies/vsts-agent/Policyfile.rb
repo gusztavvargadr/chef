@@ -1,23 +1,20 @@
-directory = File.dirname(__FILE__)
-
-require "#{directory}/../../../src/Policyfile"
+require "#{File.dirname(__FILE__)}/../../../src/Policyfile"
 
 name 'gusztavvargadr_vsts_agent'
 
 gusztavvargadr_chef_sources
 
 run_list(
-  'recipe[gusztavvargadr_vsts::prepare]',
-  'recipe[gusztavvargadr_vsts::add]',
+  'recipe[gusztavvargadr_vsts::default]',
 )
 
 named_run_list(
-  :remove,
-  'recipe[gusztavvargadr_vsts::remove]',
+  :destroy,
+  'recipe[gusztavvargadr_vsts::destroy]',
 )
 
 attributes(
   [
-    "#{directory}/Policyfile.yml",
+    "#{File.dirname(__FILE__)}/Policyfile.yml",
   ]
 )

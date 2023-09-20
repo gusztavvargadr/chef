@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
       - samples/policies/hello-world
+      - samples/cookbooks/hello-world
 pr: none
 
 stages:
@@ -12,6 +13,6 @@ stages:
     parameters:
       configurations:
         - name: hello-world
-          platforms:
-            - windows
-            - ubuntu
+          instances:
+            - default-windows
+            - default-ubuntu

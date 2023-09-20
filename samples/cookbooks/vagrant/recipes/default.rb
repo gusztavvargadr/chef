@@ -1,3 +1,4 @@
-include_recipe 'gusztavvargadr_vagrant::app'
-include_recipe 'gusztavvargadr_vagrant::plugins'
-include_recipe 'gusztavvargadr_vagrant::boxes'
+include_recipe 'gusztavvargadr_vagrant::initialize'
+include_recipe 'gusztavvargadr_vagrant::provision'
+include_recipe 'gusztavvargadr_vagrant::deploy'
+include_recipe 'gusztavvargadr_vagrant::cleanup'

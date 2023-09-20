@@ -22,5 +22,12 @@ suites:
   - name: default
     attributes:
       gusztavvargadr_vsts:
-        apps:
-          - agent
+        tools:
+          agent:latest:
+
+  - name: destroy
+    named_run_list: destroy
+    attributes:
+      gusztavvargadr_vsts:
+        tools:
+          agent:latest:

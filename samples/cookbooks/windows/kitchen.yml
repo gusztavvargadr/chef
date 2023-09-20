@@ -13,54 +13,21 @@ platforms:
       box: gusztavvargadr/windows-server-core
     transport:
       elevated: true
+    provisioner:
+      max_retries: 1
+      wait_for_retry: 30
 
 suites:
-  - name: chocolatey-packages
+  - name: default
     attributes:
       gusztavvargadr_windows:
-        chocolatey_packages:
-          dotnetcore-runtime:
-            version: "2.1.30"
-
-  - name: environment-variables
-    attributes:
-      gusztavvargadr_windows:
-        environment_variables:
-          TEST_NAME:
-            value: Test Value
-
-  - name: features
-    attributes:
-      gusztavvargadr_windows:
-        features:
-          TelnetClient:
-
-  - name: files
-    attributes:
-      gusztavvargadr_windows:
-        files:
-          /tmp/robots.txt:
-            source: https://www.google.com/robots.txt
-
-  - name: native-packages
-    attributes:
-      gusztavvargadr_windows:
+        updates:
+          install:
         native_packages:
-          .NET Core 2.1.30 Runtime:
-            source: https://download.visualstudio.microsoft.com/download/pr/b009808d-e1cc-4d88-b48d-7f465c361d22/8546c452b57896f6ebbdfac1d047f8b6/dotnet-runtime-2.1.30-win-x64.exe
+          .NET Core 6.1.21 Runtime:
+            source: https://download.visualstudio.microsoft.com/download/pr/31949bf4-c9ef-4e57-9da2-d798ab8b8bbf/fb7a481d9381bb740223629422a006e0/dotnet-runtime-6.0.21-win-x64.exe
             install:
               - /install
               - /quiet
               - /norestart
             executable: C:/Program Files/dotnet/dotnet.exe
-
-  - name: updates
-    attributes:
-      gusztavvargadr_windows:
-        updates:
-          actions:
-            - enable
-            - start
-            - configure
-            - stop
-            - disable

@@ -1,11 +1,9 @@
-directory = File.dirname(__FILE__)
-
-require "#{directory}/../../../src/Policyfile"
+require "#{File.dirname(__FILE__)}/../../../src/Policyfile"
 
 name 'gusztavvargadr_hello_world'
 
 gusztavvargadr_chef_sources
 
 run_list(
-  'recipe[gusztavvargadr_hello_world::default]'
+  'recipe[gusztavvargadr_hello_world::default]',
 )

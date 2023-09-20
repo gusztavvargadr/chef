@@ -1,0 +1,21 @@
+driver:
+  name: vagrant
+  vm_hostname: false
+  vagrantfiles:
+    - ./kitchen.Vagrantfile
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows
+    driver:
+      box: gusztavvargadr/windows-server-core
+    transport:
+      elevated: true
+    provisioner:
+      max_retries: 1
+      wait_for_retry: 30
+
+suites:
+  - name: default

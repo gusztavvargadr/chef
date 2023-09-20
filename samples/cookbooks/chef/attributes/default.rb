@@ -1,3 +1,3 @@
 default['gusztavvargadr_chef'] = {
-  'apps' => {},
+  'tools' => {},
 }
