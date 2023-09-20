@@ -1,0 +1,18 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/policies/vagrant
+      - samples/cookbooks/hashicorp
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: vagrant
+          instances:
+            - default-windows
+            - default-ubuntu
