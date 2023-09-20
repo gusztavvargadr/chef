@@ -55,7 +55,7 @@ action :initialize do
 end
 
 action :install do
-  while powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip != '0'
+  while powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip != '0' && !reboot_pending?
     powershell_script 'Install Updates' do
       code <<-EOH
         Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
