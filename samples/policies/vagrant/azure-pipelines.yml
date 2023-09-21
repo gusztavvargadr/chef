@@ -5,7 +5,6 @@ trigger:
   paths:
     include:
       - samples/policies/vagrant
-      - samples/cookbooks/hashicorp
 pr: none
 
 stages:

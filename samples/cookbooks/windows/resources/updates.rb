@@ -55,13 +55,15 @@ action :initialize do
 end
 
 action :install do
-  while powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip != '0'
+  loop do
     powershell_script 'Install Updates' do
       code <<-EOH
         Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
       EOH
       action :run
     end
+
+    break if powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip == '0' || reboot_pending?
   end
 
   reboot 'gusztavvargadr_windows_update' do

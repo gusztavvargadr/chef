@@ -5,7 +5,6 @@ trigger:
   paths:
     include:
       - samples/policies/vsts-agent
-      - samples/cookbooks/vsts
 pr: none
 
 stages:
