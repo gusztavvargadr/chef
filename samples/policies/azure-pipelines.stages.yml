@@ -26,7 +26,7 @@ stages:
             - script: |
                 chef install ./samples/policies/${{ configuration.name }}/Policyfile.rb
                 chef export ./samples/policies/${{ configuration.name }}/Policyfile.rb ./artifacts/policies/${{ configuration.name }}/ --force
-                cp ./attributes.* ./artifacts/policies/${{ configuration.name }}/
+                cp ./samples/policies/${{ configuration.name }}/attributes.* ./artifacts/policies/${{ configuration.name }}/
                 tar -czf ./artifacts/policies/${{ configuration.name }}.tgz -C ./artifacts/policies/${{ configuration.name }}/ .
               displayName: Build
 
