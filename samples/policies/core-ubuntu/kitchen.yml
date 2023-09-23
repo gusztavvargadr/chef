@@ -11,9 +11,6 @@ platforms:
   - name: ubuntu
     driver:
       box: gusztavvargadr/ubuntu-server
-    provisioner:
-      max_retries: 1
-      wait_for_retry: 30
 
 suites:
   - name: default

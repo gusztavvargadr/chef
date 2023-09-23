@@ -17,6 +17,8 @@ platforms:
   - name: ubuntu
     driver:
       box: gusztavvargadr/ubuntu-server
+    provisioner:
+      sudo: false
 
 suites:
   - name: default

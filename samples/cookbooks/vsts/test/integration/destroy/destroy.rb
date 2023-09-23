@@ -1,7 +1,7 @@
-describe user('vsts') do
-  it { should_not exist }
+describe directory('C:/Users/vagrant/opt/vsts-agent') do
+  it { should_not exist } if os.windows?
 end
 
-describe directory('/vsts') do
-  it { should_not exist }
+describe directory('/home/vagrant/opt/vsts-agent') do
+  it { should_not exist } unless os.windows?
 end

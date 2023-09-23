@@ -15,7 +15,6 @@ platforms:
       elevated: true
     provisioner:
       max_retries: 2
-      wait_for_retry: 30
 
   - name: ubuntu
     driver:
