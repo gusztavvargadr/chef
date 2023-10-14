@@ -5,16 +5,16 @@ default['gusztavvargadr_iis']['options']['tools']['server:latest'] = {
       'IIS-ASPNET' => {},
     },
     'native_packages' => {
-      '.NET 7.0.10 Hosting Bundle' => {
-        'source' => 'https://download.visualstudio.microsoft.com/download/pr/d489c5d0-4d0f-4622-ab93-b0f2a3e92eed/101a2fae29a291956d402377b941f401/dotnet-hosting-7.0.10-win.exe',
+      '.NET 7.0.12 Hosting Bundle' => {
+        'source' => 'https://download.visualstudio.microsoft.com/download/pr/723dac98-2f86-4efa-a67d-90b7f88d1a78/325c7069d70a1b23dd1a1545930ac251/dotnet-hosting-7.0.12-win.exe',
         'install' => [
           '/install',
           '/quiet',
           '/norestart',
         ],
       },
-      '.NET 6.0.21 Hosting Bundle' => {
-        'source' => 'https://download.visualstudio.microsoft.com/download/pr/b50f2f63-23ed-4c96-9b38-71d319107d1b/26f8c79415eccaef1f2e0614e10cd701/dotnet-hosting-6.0.21-win.exe',
+      '.NET 6.0.23 Hosting Bundle' => {
+        'source' => 'https://download.visualstudio.microsoft.com/download/pr/34343c71-eb52-4537-b2b9-f25bc8b6c894/c6a39b3b387ad3f9662cd77c220902f5/dotnet-hosting-6.0.23-win.exe',
         'install' => [
           '/install',
           '/quiet',
