@@ -27,6 +27,13 @@ action :install do
     version package_version unless package_version.empty?
     action :install
   end
+
+  unless package_version.empty?
+    apt_package package_name do
+      version package_version
+      action :lock
+    end
+  end
 end
 
 action :configure do
