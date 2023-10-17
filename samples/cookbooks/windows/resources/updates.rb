@@ -55,7 +55,7 @@ action :initialize do
 end
 
 action :install do
-  loop do
+  for _ in 1..5 do
     powershell_script 'Install Updates' do
       code <<-EOH
         Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
