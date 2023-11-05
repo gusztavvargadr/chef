@@ -13,7 +13,7 @@ stages:
       configurations:
         - name: virtualbox
           instances:
-            - 7-0-windows
-            - 7-0-ubuntu
-            - 6-1-windows
-            - 6-1-ubuntu
+            - 7-point-0-windows
+            - 7-point-0-ubuntu
+            - 6-point-1-windows
+            - 6-point-1-ubuntu

@@ -19,13 +19,13 @@ platforms:
       box: gusztavvargadr/ubuntu-desktop
 
 suites:
-  - name: 7-0
+  - name: 7-point-0
     attributes:
       gusztavvargadr_virtualbox:
         tools:
           app:7.0:
 
-  - name: 6-1
+  - name: 6-point-1
     attributes:
       gusztavvargadr_virtualbox:
         tools:
