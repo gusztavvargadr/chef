@@ -1,6 +1,6 @@
 unified_mode true
 
-provides :gusztavvargadr_ubuntu_update
+provides :gusztavvargadr_ubuntu_update, platform: 'ubuntu'
 
 property :options, Hash, default: {}
 
@@ -14,7 +14,7 @@ end
 
 action :dist_upgrade do
   bash "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
-    code <<-EOH
+    code <<~EOH
       DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef dist-upgrade
     EOH
     not_if { shell_out('apt list --upgradable -qq').stdout.empty? }
@@ -28,7 +28,7 @@ end
 
 action :cleanup do
   bash "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
-    code <<-EOH
+    code <<~EOH
       apt-get -y -qq autoremove
       apt-get -y -qq clean
     EOH

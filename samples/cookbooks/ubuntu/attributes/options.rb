@@ -1,0 +1,15 @@
+default['gusztavvargadr_ubuntu']['options']['tools']['desktop:ubuntu'] = {
+  'packages' => [
+    'ubuntu-desktop',
+    'xrdp',
+  ],
+}
+
+default['gusztavvargadr_ubuntu']['options']['tools']['desktop:xubuntu'] = {
+  'packages' => [
+    'xubuntu-desktop',
+    'xrdp',
+  ],
+}
+
+default['gusztavvargadr_ubuntu']['options']['tools']['desktop'] = default['gusztavvargadr_ubuntu']['options']['tools']['desktop:ubuntu']
