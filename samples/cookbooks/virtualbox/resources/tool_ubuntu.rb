@@ -43,7 +43,7 @@ action :install do
 
   virtualbox_extension_pack_hash = '33d7284dc4a0ece381196fda3cfe2ed0e1e8e7ed7f27b9a9ebc4ee22e24bd23c'
   bash 'vboxmanage extpack install' do
-    code <<-EOH
+    code <<~EOH
       vboxmanage extpack install --replace --accept-license=#{virtualbox_extension_pack_hash} #{virtualbox_extension_pack_local_path}
     EOH
     action :run
