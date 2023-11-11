@@ -1,6 +1,6 @@
 unified_mode true
 
-provides :gusztavvargadr_windows_native_package
+provides :gusztavvargadr_windows_native_package, platform: 'windows'
 
 property :options, Hash, default: {}
 

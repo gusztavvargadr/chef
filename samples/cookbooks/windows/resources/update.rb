@@ -1,6 +1,6 @@
 unified_mode true
 
-provides :gusztavvargadr_windows_update
+provides :gusztavvargadr_windows_update, platform: 'windows'
 
 property :options, Hash, default: {}
 
@@ -33,7 +33,7 @@ action :initialize do
   end
 
   powershell_script 'Install PSWindowsUpdate' do
-    code <<-EOH
+    code <<~EOH
       [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
       Install-PackageProvider -Name Nuget -Force
@@ -45,7 +45,7 @@ action :initialize do
   end
 
   powershell_script 'Disable Reserved Storage State' do
-    code <<-EOH
+    code <<~EOH
       DISM.exe /Online /Set-ReservedStorageState /State:Disabled
     EOH
     action :run
@@ -57,7 +57,7 @@ end
 action :install do
   [1..5].each do |_|
     powershell_script 'Install Updates' do
-      code <<-EOH
+      code <<~EOH
         Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
       EOH
       action :run
@@ -74,7 +74,7 @@ end
 
 action :cleanup do
   powershell_script 'Clean up Updates' do
-    code <<-EOH
+    code <<~EOH
       DISM.exe /Online /Cleanup-Image /AnalyzeComponentStore
       DISM.exe /Online /Cleanup-Image /StartComponentCleanup /ResetBase
     EOH
