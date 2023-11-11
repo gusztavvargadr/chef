@@ -1,0 +1,18 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - samples/policies/chef-workstation
+pr: none
+
+stages:
+  - template: ../azure-pipelines.stages.yml
+    parameters:
+      configurations:
+        - name: chef-workstation
+          instances:
+            - default-windows
+            - default-ubuntu-2004
+            - default-ubuntu-2204
