@@ -15,6 +15,6 @@ tools.each do |tool_name, tool_options|
 end
 
 reboot 'gusztavvargadr_ubuntu::provision' do
-  action :reboot_now
+  action :request_reboot
   only_if { reboot_pending? }
 end

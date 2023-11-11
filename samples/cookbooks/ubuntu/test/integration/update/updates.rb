@@ -1,3 +1,3 @@
-describe command('apt list --installed') do
-  its('stdout') { should include 'ubuntu-desktop' }
+describe command('apt list --upgradable -qq') do
+  its('stdout') { should be_empty }
 end
