@@ -25,6 +25,7 @@ stages:
               displayName: Initialize Chef
 
             - script: |
+                export CHEF_LICENSE="accept-silent"
                 chef install ./samples/policies/${{ configuration.name }}/Policyfile.rb
                 chef export ./samples/policies/${{ configuration.name }}/Policyfile.rb ./artifacts/policies/${{ configuration.name }}/ --force
                 cp ./samples/policies/${{ configuration.name }}/attributes.* ./artifacts/policies/${{ configuration.name }}/ || true

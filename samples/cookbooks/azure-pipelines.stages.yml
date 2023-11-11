@@ -25,6 +25,7 @@ stages:
               displayName: Initialize Chef
 
             - script: |
+                export CHEF_LICENSE="accept-silent"
                 chef exec cookstyle ./samples/cookbooks/${{ configuration.name }}
               displayName: Lint
 
