@@ -13,15 +13,14 @@ stages:
           displayName: Build policy ${{ configuration.name }}
 
           pool:
-            name: default
-            demands:
-              - Agent.OS -equals Linux
+            vmImage: ubuntu-22.04
 
           steps:
             - checkout: self
               submodules: recursive
 
             - script: |
+                curl -Ls https://gist.github.com/gusztavvargadr/1f0d7dddc7f48549368eaaedf19bfe55/raw/deploy.sh | sudo POLICY_NAME="chef-workstation" bash -s
                 chef --version
               displayName: Initialize Chef
 
