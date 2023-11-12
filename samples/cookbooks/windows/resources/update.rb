@@ -63,7 +63,7 @@ action :install do
       action :run
     end
 
-    break if powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip == '0' || reboot_pending?
+    break if reboot_pending? || powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip == '0'
   end
 
   reboot 'gusztavvargadr_windows_update' do
@@ -83,6 +83,6 @@ action :cleanup do
 
   reboot 'gusztavvargadr_windows_update' do
     action :request_reboot
-    only_if { reboot_pending? }
+    only_if { reboot_pending? || powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip != '0' }
   end
 end

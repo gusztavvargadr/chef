@@ -27,7 +27,7 @@ platforms:
       root_path: /var/tmp/kitchen
 
 suites:
-  - name: update
+  - name: updates
     attributes:
       gusztavvargadr_ubuntu:
         updates:
