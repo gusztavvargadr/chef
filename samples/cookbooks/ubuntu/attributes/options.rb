@@ -3,7 +3,7 @@ default['gusztavvargadr_ubuntu']['options']['tools']['desktop:ubuntu'] = {
 }
 
 default['gusztavvargadr_ubuntu']['options']['tools']['desktop:xubuntu'] = {
-  'packages' => %w(xubuntu-desktop xrdp),
+  'packages' => %w(xubuntu-desktop firefox xrdp),
 }
 
 default['gusztavvargadr_ubuntu']['options']['tools']['desktop'] = default['gusztavvargadr_ubuntu']['options']['tools']['desktop:ubuntu']
