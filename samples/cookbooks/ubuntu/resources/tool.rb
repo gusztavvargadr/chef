@@ -23,6 +23,26 @@ action :install do
       action :install
     end
   end
+
+  if packages.include? 'xubuntu-desktop'
+    file '/etc/X11/default-display-manager' do
+      content '/usr/sbin/lightdm'
+      action :create
+      notifies :run, 'bash[dpk-reconfigure-lightdm]', :immediately
+    end
+
+    bash 'dpk-reconfigure-lightdm' do
+      code <<~EOH
+        DEBIAN_FRONTEND=noninteractive dpkg-reconfigure lightdm
+      EOH
+      action :nothing
+    end
+
+    link '/etc/alternatives/x-session-manager' do
+      to '/usr/bin/xfce4-session'
+      action :create
+    end
+  end
 end
 
 action :configure do

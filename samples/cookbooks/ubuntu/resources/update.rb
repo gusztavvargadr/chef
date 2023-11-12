@@ -17,6 +17,7 @@ action :dist_upgrade do
     code <<~EOH
       DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef dist-upgrade
     EOH
+    action :run
     not_if { shell_out('apt list --upgradable -qq').stdout.empty? }
   end
 
@@ -32,5 +33,6 @@ action :cleanup do
       apt-get -y -qq autoremove
       apt-get -y -qq clean
     EOH
+    action :run
   end
 end
