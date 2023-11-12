@@ -15,5 +15,7 @@ stages:
           instances:
             - update-ubuntu-2004
             - update-ubuntu-2204
-            - desktop-ubuntu-2004
-            - desktop-ubuntu-2204
+            - desktop-ubuntu-ubuntu-2004
+            - desktop-ubuntu-ubuntu-2204
+            - desktop-xubuntu-ubuntu-2004
+            - desktop-xubuntu-ubuntu-2204

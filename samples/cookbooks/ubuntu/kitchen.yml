@@ -33,8 +33,14 @@ suites:
         updates:
           dist-upgrade:
 
-  - name: desktop
+  - name: desktop-ubuntu
     attributes:
       gusztavvargadr_ubuntu:
         tools:
-          desktop:
+          desktop:ubuntu:
+
+  - name: desktop-xubuntu
+    attributes:
+      gusztavvargadr_ubuntu:
+        tools:
+          desktop:xubuntu:
