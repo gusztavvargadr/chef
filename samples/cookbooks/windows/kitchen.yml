@@ -15,11 +15,15 @@ platforms:
       elevated: true
 
 suites:
-  - name: default
+  - name: updates
     attributes:
       gusztavvargadr_windows:
         updates:
           install:
+
+  - name: native-packages
+    attributes:
+      gusztavvargadr_windows:
         native_packages:
           .NET Core 6.1.23 Runtime:
             source: https://download.visualstudio.microsoft.com/download/pr/0e41930c-8e2d-4fb0-9b50-3a011bbc5338/a5f8b21867caacf4e97bf560eb304f7f/dotnet-runtime-6.0.23-win-x64.exe

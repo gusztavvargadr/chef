@@ -13,4 +13,5 @@ stages:
       configurations:
         - name: windows
           instances:
-            - default-windows
+            - updates-windows
+            - native-packages-windows

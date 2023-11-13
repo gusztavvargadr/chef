@@ -16,9 +16,13 @@ platforms:
     provisioner:
       max_retries: 2
 
-  - name: ubuntu
+  - name: ubuntu-2004
     driver:
       box: gusztavvargadr/ubuntu-server
+
+  - name: ubuntu-2204
+    driver:
+      box: gusztavvargadr/ubuntu-server-2204-lts
 
 suites:
   - name: default

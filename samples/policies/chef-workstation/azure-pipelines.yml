@@ -4,14 +4,15 @@ trigger:
       - '*'
   paths:
     include:
-      - samples/policies/core-ubuntu
+      - samples/policies/chef-workstation
 pr: none
 
 stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
-        - name: core-ubuntu
+        - name: chef-workstation
           instances:
+            - default-windows
             - default-ubuntu-2004
             - default-ubuntu-2204

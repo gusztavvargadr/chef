@@ -40,7 +40,7 @@ action :install do
     end
 
     powershell_script "Execute SQL Server Install for #{new_resource.name}" do
-      code <<-EOH
+      code <<~EOH
         Start-Process "setup.exe" "/CONFIGURATIONFILE=#{configuration_file_path.tr('/', '\\')} /IACCEPTSQLSERVERLICENSETERMS" -Wait
       EOH
       cwd extract_directory_path
@@ -51,8 +51,8 @@ action :install do
     return if service_list.strip.empty?
 
     powershell_script 'Enable Firewall' do
-      code <<-EOH
-      netsh advfirewall firewall add rule name="SQL Server" dir=in localport=1433 protocol=TCP action=allow
+      code <<~EOH
+        netsh advfirewall firewall add rule name="SQL Server" dir=in localport=1433 protocol=TCP action=allow
       EOH
       action :run
     end
@@ -81,7 +81,7 @@ action :install do
     end
 
     powershell_script "Extract SQL Server Patch for #{new_resource.name}" do
-      code <<-EOH
+      code <<~EOH
         Start-Process "#{download_file_path.tr('/', '\\')}" "/x:./ /q" -Wait
       EOH
       cwd extract_directory_path
@@ -89,7 +89,7 @@ action :install do
     end
 
     powershell_script "Execute SQL Server Patch for #{new_resource.name}" do
-      code <<-EOH
+      code <<~EOH
         Start-Process "setup.exe" "/ACTION=PATCH /ALLINSTANCES /IACCEPTSQLSERVERLICENSETERMS /QUIET" -Wait
       EOH
       cwd extract_directory_path

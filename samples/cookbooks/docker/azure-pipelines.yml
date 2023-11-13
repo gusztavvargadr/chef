@@ -14,4 +14,5 @@ stages:
         - name: docker
           instances:
             - default-windows
-            - default-ubuntu
+            - default-ubuntu-2004
+            - default-ubuntu-2204

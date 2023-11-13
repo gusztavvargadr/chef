@@ -14,6 +14,8 @@ stages:
         - name: virtualbox
           instances:
             - 7-point-0-windows
-            - 7-point-0-ubuntu
+            - 7-point-0-ubuntu-2004
+            - 7-point-0-ubuntu-2204
             - 6-point-1-windows
-            - 6-point-1-ubuntu
+            - 6-point-1-ubuntu-2004
+            - 6-point-1-ubuntu-2204
