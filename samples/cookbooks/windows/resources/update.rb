@@ -65,11 +65,6 @@ action :install do
 
     break if reboot_pending? || powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip == '0'
   end
-
-  reboot 'gusztavvargadr_windows_update' do
-    action :request_reboot
-    only_if { reboot_pending? }
-  end
 end
 
 action :cleanup do
@@ -79,10 +74,5 @@ action :cleanup do
       DISM.exe /Online /Cleanup-Image /StartComponentCleanup /ResetBase
     EOH
     action :run
-  end
-
-  reboot 'gusztavvargadr_windows_update' do
-    action :request_reboot
-    only_if { reboot_pending? || powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip != '0' }
   end
 end

@@ -37,12 +37,12 @@ action :install do
   remote_file powershell_target do
     source powershell_source
     action :create
+    notifies :run, 'powershell_script[gusztavvargadr_docker_install]', :immediately
   end
 
   powershell_script 'gusztavvargadr_docker_install' do
     code "#{powershell_target} -NoRestart"
     action :nothing
-    subscribes :run, "remote_file[#{powershell_target}]", :immediately
   end
 
   compose_source = options['compose_source']
