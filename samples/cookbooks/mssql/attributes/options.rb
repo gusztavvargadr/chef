@@ -10,11 +10,11 @@ default['gusztavvargadr_mssql']['options']['tools']['server:2019'] = default['gu
 default['gusztavvargadr_mssql']['options']['tools']['server:latest'] = default['gusztavvargadr_mssql']['options']['tools']['server:2019']
 default['gusztavvargadr_mssql']['options']['tools']['server'] = default['gusztavvargadr_mssql']['options']['tools']['server:latest']
 
-default['gusztavvargadr_mssql']['options']['tools']['management-studio:2019'] = {
+default['gusztavvargadr_mssql']['options']['tools']['management-studio:19'] = {
   'windows' => {
     'native_packages' => {
-      'SSMS 19.1' => {
-        'source' => 'https://download.microsoft.com/download/a/c/a/aca4e29f-6925-4d50-a06b-5576c6ea629f/SSMS-Setup-ENU.exe',
+      'SSMS 19.2' => {
+        'source' => 'https://download.microsoft.com/download/6/2/6/626e40a7-449e-418d-9726-33b523a1e336/SSMS-Setup-ENU.exe',
         'install' => [
           '/install',
           '/quiet',
@@ -26,5 +26,5 @@ default['gusztavvargadr_mssql']['options']['tools']['management-studio:2019'] = 
   },
 }
 
-default['gusztavvargadr_mssql']['options']['tools']['management-studio:latest'] = default['gusztavvargadr_mssql']['options']['tools']['management-studio:2019']
+default['gusztavvargadr_mssql']['options']['tools']['management-studio:latest'] = default['gusztavvargadr_mssql']['options']['tools']['management-studio:19']
 default['gusztavvargadr_mssql']['options']['tools']['management-studio'] = default['gusztavvargadr_mssql']['options']['tools']['management-studio:latest']
