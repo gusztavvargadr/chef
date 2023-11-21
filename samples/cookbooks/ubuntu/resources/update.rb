@@ -20,11 +20,6 @@ action :dist_upgrade do
     action :run
     not_if { shell_out('apt list --upgradable -qq').stdout.empty? }
   end
-
-  reboot 'gusztavvargadr_ubuntu_update' do
-    action :request_reboot
-    only_if { reboot_pending? }
-  end
 end
 
 action :cleanup do
