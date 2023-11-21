@@ -4,6 +4,9 @@ driver:
   vagrantfiles:
     - ./kitchen.Vagrantfile
 
+provisioner:
+  max_retries: 0
+
 verifier:
   name: inspec
 
@@ -15,6 +18,7 @@ platforms:
       elevated: true
     provisioner:
       max_retries: 2
+      wait_for_retry: 60
 
   - name: ubuntu-2004
     driver:
