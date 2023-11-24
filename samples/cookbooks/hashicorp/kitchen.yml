@@ -4,6 +4,9 @@ driver:
   vagrantfiles:
     - ./kitchen.Vagrantfile
 
+provisioner:
+  max_retries: 0
+
 verifier:
   name: inspec
 
@@ -13,6 +16,9 @@ platforms:
       box: gusztavvargadr/windows-server-core
     transport:
       elevated: true
+    provisioner:
+      max_retries: 1
+      wait_for_retry: 60
 
   - name: ubuntu-2004
     driver:

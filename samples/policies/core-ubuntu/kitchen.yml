@@ -4,6 +4,11 @@ driver:
   vagrantfiles:
     - ./kitchen.Vagrantfile
 
+provisioner:
+  max_retries: 1
+  wait_for_retry: 90
+  root_path: /var/tmp/kitchen
+
 verifier:
   name: inspec
 

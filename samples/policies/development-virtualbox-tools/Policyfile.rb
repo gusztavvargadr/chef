@@ -7,9 +7,3 @@ gusztavvargadr_chef_sources
 run_list(
   'recipe[gusztavvargadr_virtualbox::default]',
 )
-
-attributes(
-  [
-    "#{File.dirname(__FILE__)}/Policyfile.yml",
-  ]
-)

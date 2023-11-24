@@ -4,6 +4,9 @@ driver:
   vagrantfiles:
     - ./kitchen.Vagrantfile
 
+provisioner:
+  max_retries: 0
+
 verifier:
   name: inspec
 
@@ -27,6 +30,7 @@ suites:
     attributes:
       gusztavvargadr_dotnet:
         tools:
+          runtime:8.0:
           runtime:7.0:
           runtime:6.0:
 
@@ -34,5 +38,6 @@ suites:
     attributes:
       gusztavvargadr_dotnet:
         tools:
+          sdk:8.0:
           sdk:7.0:
           sdk:6.0:
