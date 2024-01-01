@@ -13,6 +13,5 @@ stages:
       configurations:
         - name: git
           instances:
-            - default-windows
-            - default-ubuntu-2004
+            - default-windows-2022
             - default-ubuntu-2204
