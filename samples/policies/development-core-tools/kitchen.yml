@@ -11,18 +11,14 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows
+  - name: windows-2022
     driver:
-      box: gusztavvargadr/windows-server-core
+      box: gusztavvargadr/windows-server-2022-standard-core
     transport:
       elevated: true
     provisioner:
       max_retries: 2
       wait_for_retry: 60
-
-  - name: ubuntu-2004
-    driver:
-      box: gusztavvargadr/ubuntu-server
 
   - name: ubuntu-2204
     driver:

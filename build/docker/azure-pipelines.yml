@@ -18,51 +18,30 @@ stages:
           platforms:
             - name: windows
               variant: servercore
-              version: 'ltsc2022'
-              isolation: default
-
-            - name: windows
-              variant: servercore
-              version: 'ltsc2019'
-              isolation: hyperv
+              version: ltsc2022
 
             - name: linux
               variant: ubuntu
-              version: '20.04'
-              isolation: default
+              version: '22.04'
 
-        - name: chef-client
-          platforms:
-            - name: windows
-              variant: servercore
-              version: 'ltsc2022'
-              isolation: default
+        # - name: chef-client
+        #   platforms:
+        #     - name: windows
+        #       variant: servercore
+        #       version: ltsc2022
 
-            - name: windows
-              variant: servercore
-              version: 'ltsc2019'
-              isolation: hyperv
+        #     - name: linux
+        #       variant: ubuntu
+        #       version: '22.04'
+        #   dependsOn: chef-core
 
-            - name: linux
-              variant: ubuntu
-              version: '20.04'
-              isolation: default
-          dependsOn: chef-core
+        # - name: chef-workstation
+        #   platforms:
+        #     - name: windows
+        #       variant: servercore
+        #       version: ltsc2022
 
-        - name: chef-workstation
-          platforms:
-            - name: windows
-              variant: servercore
-              version: 'ltsc2022'
-              isolation: default
-
-            - name: windows
-              variant: servercore
-              version: 'ltsc2019'
-              isolation: hyperv
-
-            - name: linux
-              variant: ubuntu
-              version: '20.04'
-              isolation: default
-          dependsOn: chef-core
+        #     - name: linux
+        #       variant: ubuntu
+        #       version: '22.04'
+        #   dependsOn: chef-core

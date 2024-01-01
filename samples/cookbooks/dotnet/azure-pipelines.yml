@@ -13,9 +13,7 @@ stages:
       configurations:
         - name: dotnet
           instances:
-            - runtimes-windows
-            - runtimes-ubuntu-2004
+            - runtimes-windows-2022
             - runtimes-ubuntu-2204
-            - sdks-windows
-            - sdks-ubuntu-2004
+            - sdks-windows-2022
             - sdks-ubuntu-2204

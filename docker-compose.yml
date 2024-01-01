@@ -9,7 +9,6 @@ services:
       args:
         - PLATFORM_VARIANT
         - PLATFORM_VERSION
-    isolation: ${PLATFORM_ISOLATION}
 
   chef-client:
     image: gusztavvargadr/chef-client:${PLATFORM_NAME}-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
@@ -19,7 +18,6 @@ services:
       args:
         - PLATFORM_VARIANT
         - PLATFORM_VERSION
-    isolation: ${PLATFORM_ISOLATION}
 
   chef-workstation:
     image: gusztavvargadr/chef-workstation:${PLATFORM_NAME}-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
@@ -29,42 +27,3 @@ services:
       args:
         - PLATFORM_VARIANT
         - PLATFORM_VERSION
-    isolation: ${PLATFORM_ISOLATION}
-
-  chef-cookbook-lint:
-    build:
-      context: ./
-      dockerfile: ./build/docker/${PLATFORM_NAME}/chef-cookbook-lint.Dockerfile
-
-  chef-cookbook-test:
-    build:
-      context: ./
-      dockerfile: ./build/docker/${PLATFORM_NAME}/chef-cookbook-test.Dockerfile
-
-  chef-policy-build-linux:
-    image: gusztavvargadr/chef-workstation:latet
-    volumes:
-      - ./:/opt/docker/work/
-    entrypoint: /opt/docker/build/chef-workstation.policy-build.sh
-    command: hello-world
-
-  chef-policy-run-linux:
-    image: gusztavvargadr/chef-client:latest
-    volumes:
-      - ./:/opt/docker/work/
-    entrypoint: /opt/docker/build/chef-client.policy-run.sh
-    command: hello-world
-
-  chef-policy-build-windows:
-    image: gusztavvargadr/chef-workstation:latest
-    volumes:
-      - ./:C:/opt/docker/work/
-    entrypoint: powershell -File /opt/docker/build/chef-workstation.policy-build.ps1
-    command: hello-world
-
-  chef-policy-run-windows:
-    image: gusztavvargadr/chef-client:latest
-    volumes:
-      - ./:C:/opt/docker/work/
-    entrypoint: powershell -File /opt/docker/build/chef-client.policy-run.ps1
-    command: hello-world

@@ -1,4 +1,3 @@
 gusztavvargadr_hashicorp:
   tools:
-    vagrant:
-      version: '2.3.4'
+    vagrant:latest:

@@ -13,5 +13,4 @@ stages:
       configurations:
         - name: core-ubuntu
           instances:
-            - default-ubuntu-2004
             - default-ubuntu-2204
