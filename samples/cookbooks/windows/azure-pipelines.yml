@@ -13,5 +13,5 @@ stages:
       configurations:
         - name: windows
           instances:
-            - updates-windows
-            - native-packages-windows
+            - updates-windows-2022
+            - native-packages-windows-2022
