@@ -13,4 +13,4 @@ stages:
       configurations:
         - name: iis
           instances:
-            - default-windows
+            - default-windows-2022

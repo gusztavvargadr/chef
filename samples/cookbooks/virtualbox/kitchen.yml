@@ -11,28 +11,24 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows
+  - name: windows-2022
     driver:
-      box: gusztavvargadr/windows-server
+      box: gusztavvargadr/windows-server-2022-standard-core
     transport:
       elevated: true
-
-  - name: ubuntu-2004
-    driver:
-      box: gusztavvargadr/ubuntu-desktop
 
   - name: ubuntu-2204
     driver:
       box: gusztavvargadr/ubuntu-server-2204-lts
 
 suites:
-  - name: 7-point-0
+  - name: 7-0
     attributes:
       gusztavvargadr_virtualbox:
         tools:
           app:7.0:
 
-  - name: 6-point-1
+  - name: 6-1
     attributes:
       gusztavvargadr_virtualbox:
         tools:

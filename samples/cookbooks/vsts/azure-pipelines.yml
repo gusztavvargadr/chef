@@ -13,9 +13,7 @@ stages:
       configurations:
         - name: vsts
           instances:
-            - default-windows
-            - default-ubuntu-2004
+            - default-windows-2022
             - default-ubuntu-2204
-            - destroy-windows
-            - destroy-ubuntu-2004
+            - destroy-windows-2022
             - destroy-ubuntu-2204
