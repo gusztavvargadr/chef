@@ -13,5 +13,5 @@ stages:
       configurations:
         - name: chef
           instances:
-            - default-windows-2002
+            - default-windows-2022
             - default-ubuntu-2204
