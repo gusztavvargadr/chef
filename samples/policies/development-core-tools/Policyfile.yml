@@ -10,8 +10,7 @@ gusztavvargadr_dotnet:
 
 gusztavvargadr_hashicorp:
   tools:
-    vagrant:
-      version: '2.3.4'
+    vagrant:latest:
     packer:latest:
     terraform:latest:
     consul:latest:

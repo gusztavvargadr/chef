@@ -12,9 +12,9 @@ verifier:
   name: inspec
 
 platforms:
-  - name: windows
+  - name: windows-2022
     driver:
-      box: gusztavvargadr/windows-server-core
+      box: gusztavvargadr/windows-server-2022-standard-core
     transport:
       elevated: true
 
