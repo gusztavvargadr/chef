@@ -20,7 +20,7 @@ stages:
               dependsOn: build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
 
             pool:
-              ${{ if eq(platform.name, 'windows' }}:
+              ${{ if eq(platform.name, 'windows') }}:
                 vmImage: windows-2022
               ${{ else }}:
                 vmImage: ubuntu-22.04
