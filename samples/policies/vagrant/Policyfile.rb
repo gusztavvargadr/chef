@@ -5,7 +5,7 @@ name 'gusztavvargadr_vagrant'
 gusztavvargadr_chef_sources
 
 run_list(
-  'recipe[gusztavvargadr_hashicorp::default]',
+  'recipe[gusztavvargadr_vagrant::default]',
 )
 
 attributes(

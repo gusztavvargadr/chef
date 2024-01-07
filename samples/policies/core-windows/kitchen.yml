@@ -14,7 +14,7 @@ verifier:
 platforms:
   - name: windows-2022
     driver:
-      box: gusztavvargadr/windows-server-2022-standard-core
+      box: gusztavvargadr/kitchen-windows-2022
     transport:
       elevated: true
 

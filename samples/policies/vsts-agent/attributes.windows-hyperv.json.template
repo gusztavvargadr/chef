@@ -9,6 +9,7 @@
           "env": {
             "CHEF_LICENSE": "accept-silent",
             "VAGRANT_DEFAULT_PROVIDER": "hyperv",
+            "VAGRANT_HOST_ARCHITECTURE": "amd64",
             "VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER": "hyperv"
           }
         }
