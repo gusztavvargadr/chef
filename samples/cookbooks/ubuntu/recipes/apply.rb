@@ -13,4 +13,3 @@ tools.each do |tool_name, tool_options|
     action [ :install, :configure ]
   end
 end
-
