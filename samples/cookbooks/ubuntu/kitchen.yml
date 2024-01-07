@@ -15,7 +15,7 @@ verifier:
 platforms:
   - name: ubuntu-2204
     driver:
-      box: gusztavvargadr/ubuntu-server-2204-lts
+      box: gusztavvargadr/kitchen-ubuntu-2204
 
 suites:
   - name: updates
