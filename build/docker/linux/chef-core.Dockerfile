@@ -17,4 +17,5 @@ ENV LC_ALL=en_US.UTF-8
 
 WORKDIR /opt/docker/work/
 
+ENTRYPOINT [ "" ]
 CMD [ "bash", "-c", "uname -a" ]

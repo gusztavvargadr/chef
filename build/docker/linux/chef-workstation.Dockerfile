@@ -12,4 +12,5 @@ RUN ./chef-workstation.install.sh
 
 WORKDIR /opt/docker/work/
 
+ENTRYPOINT [ "" ]
 CMD [ "bash", "-c", "chef --version" ]
