@@ -11,5 +11,4 @@ RUN powershell -File ./chef-workstation.install.ps1
 
 WORKDIR C:/opt/docker/work/
 
-ENTRYPOINT [ "chef-cli.bat" ]
-CMD [ "--version" ]
+CMD [ "chef-cli.bat", "--version" ]
