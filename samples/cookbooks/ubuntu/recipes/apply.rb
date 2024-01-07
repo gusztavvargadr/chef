@@ -10,12 +10,6 @@ tools = node['gusztavvargadr_ubuntu']['tools']
 tools.each do |tool_name, tool_options|
   gusztavvargadr_ubuntu_tool tool_name do
     options tool_options
-    action :install
+    action [ :install, :configure ]
   end
-end
-
-reboot 'gusztavvargadr_ubuntu::provision' do
-  delay_mins 1
-  action :reboot_now
-  only_if { reboot_pending? }
 end

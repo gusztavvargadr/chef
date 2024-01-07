@@ -14,11 +14,11 @@ action :initialize do
     windows_feature_dism feature_name do
       all true
       action :install
-      notifies :request_reboot, 'reboot[gusztavvargadr_docker_tool]', :immediately
+      notifies :request_reboot, 'reboot[gusztavvargadr_docker_tool::initialize]', :immediately
     end
   end
 
-  reboot 'gusztavvargadr_docker_tool' do
+  reboot 'gusztavvargadr_docker_tool::initialize' do
     action :nothing
   end
 end

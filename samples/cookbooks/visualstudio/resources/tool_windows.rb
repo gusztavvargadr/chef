@@ -1,6 +1,6 @@
 unified_mode true
 
-provides :gusztavvargadr_visualstudio_tool
+provides :gusztavvargadr_visualstudio_tool, platform: 'windows'
 
 property :options, Hash, default: {}
 

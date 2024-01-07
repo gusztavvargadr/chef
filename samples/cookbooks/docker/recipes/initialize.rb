@@ -5,8 +5,3 @@ tools.each do |tool_name, tool_options|
     action :initialize
   end
 end
-
-reboot 'gusztavvargadr_docker::initialize' do
-  action :reboot_now
-  only_if { reboot_pending? }
-end

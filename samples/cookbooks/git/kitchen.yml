@@ -13,13 +13,13 @@ verifier:
 platforms:
   - name: windows-2022
     driver:
-      box: gusztavvargadr/windows-server-2022-standard-core
+      box: gusztavvargadr/kitchen-windows-2022
     transport:
       elevated: true
 
   - name: ubuntu-2204
     driver:
-      box: gusztavvargadr/ubuntu-server-2204-lts
+      box: gusztavvargadr/kitchen-ubuntu-2204
 
 suites:
   - name: default
