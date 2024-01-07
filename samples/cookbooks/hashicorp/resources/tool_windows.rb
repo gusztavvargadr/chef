@@ -24,10 +24,10 @@ action :install do
     version package_version unless package_version.empty?
     returns package_returns unless package_returns.empty?
     action :install
-    notifies :request_reboot, 'reboot[gusztavvargadr_hashicorp_tool]', :immediately if package_reboot
+    notifies :request_reboot, 'reboot[gusztavvargadr_hashicorp_tool::install]', :immediately if package_reboot
   end
 
-  reboot 'gusztavvargadr_hashicorp_tool' do
+  reboot 'gusztavvargadr_hashicorp_tool::install' do
     action :nothing
   end
 end
