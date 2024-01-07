@@ -13,4 +13,5 @@ ENV CHEF_LICENSE=accept-silent
 
 WORKDIR C:/opt/docker/work/
 
+ENTRYPOINT [ "" ]
 CMD [ "cmd", "/c", "ver" ]
