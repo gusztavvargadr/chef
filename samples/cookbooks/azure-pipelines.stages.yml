@@ -20,9 +20,11 @@ stages:
               submodules: recursive
 
             - script: |
-                curl -Ls https://gist.github.com/gusztavvargadr/1f0d7dddc7f48549368eaaedf19bfe55/raw/provision.sh | sudo POLICY_NAME="chef-workstation" bash -s
+                curl -Ls https://gist.github.com/gusztavvargadr/1f0d7dddc7f48549368eaaedf19bfe55/raw/provision.sh | sudo -E bash -s
                 chef --version
               displayName: Initialize Chef
+              env:
+                CHEF_POLICY: chef-workstation
 
             - script: |
                 export CHEF_LICENSE="accept-silent"
