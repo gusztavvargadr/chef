@@ -12,4 +12,4 @@ RUN ./chef-client.install.sh
 
 WORKDIR /opt/docker/work/
 
-CMD [ "chef-client", "--version" ]
+CMD [ "bash", "-c", "chef-client --version" ]
