@@ -15,7 +15,7 @@ stages:
           pool:
             vmImage: ubuntu-22.04
 
-          container: gusztavvargadr/chef-workstation
+          container: gusztavvargadr/chef-workstation:latest
 
           steps:
             - checkout: self
