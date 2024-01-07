@@ -15,17 +15,13 @@ stages:
           pool:
             vmImage: ubuntu-22.04
 
+          container: gusztavvargadr/chef-workstation:latest
+
           steps:
             - checkout: self
               submodules: recursive
 
             - script: |
-                curl -Ls https://gist.github.com/gusztavvargadr/1f0d7dddc7f48549368eaaedf19bfe55/raw/provision.sh | sudo CHEF_POLICY="chef-workstation"  bash -s
-                chef --version
-              displayName: Initialize Chef
-
-            - script: |
-                export CHEF_LICENSE="accept-silent"
                 chef install ./samples/policies/${{ configuration.name }}/Policyfile.rb
                 chef export ./samples/policies/${{ configuration.name }}/Policyfile.rb ./artifacts/policies/${{ configuration.name }}/ --force
                 cp ./samples/policies/${{ configuration.name }}/attributes.* ./artifacts/policies/${{ configuration.name }}/ || true
