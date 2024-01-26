@@ -13,8 +13,8 @@ default['gusztavvargadr_mssql']['options']['tools']['server'] = default['gusztav
 default['gusztavvargadr_mssql']['options']['tools']['management-studio:19'] = {
   'windows' => {
     'native_packages' => {
-      'SSMS 19.2' => {
-        'source' => 'https://download.microsoft.com/download/6/2/6/626e40a7-449e-418d-9726-33b523a1e336/SSMS-Setup-ENU.exe',
+      'SSMS 19.3' => {
+        'source' => 'https://download.microsoft.com/download/7/7/3/7738e337-ed99-40ea-b8ae-f639162c83c3/SSMS-Setup-ENU.exe',
         'install' => [
           '/install',
           '/quiet',

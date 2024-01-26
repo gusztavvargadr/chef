@@ -5,24 +5,24 @@ default['gusztavvargadr_iis']['options']['tools']['server:latest'] = {
       'IIS-ASPNET' => {},
     },
     'native_packages' => {
-      '.NET 8.0.0 Hosting Bundle' => {
-        'source' => 'https://download.visualstudio.microsoft.com/download/pr/2a7ae819-fbc4-4611-a1ba-f3b072d4ea25/32f3b931550f7b315d9827d564202eeb/dotnet-hosting-8.0.0-win.exe',
+      '.NET 8.0.1 Hosting Bundle' => {
+        'source' => 'https://download.visualstudio.microsoft.com/download/pr/016c6447-764a-4210-a260-bf7a2880d5c0/a5746437a3862d7803284ae8c2290200/dotnet-hosting-8.0.1-win.exe',
         'install' => [
           '/install',
           '/quiet',
           '/norestart',
         ],
       },
-      '.NET 7.0.14 Hosting Bundle' => {
-        'source' => 'https://download.visualstudio.microsoft.com/download/pr/ac40c925-f49c-4f27-b6f5-540ba6b944d5/457f3e7dbe9feeb2644d5a32fef321e4/dotnet-hosting-7.0.14-win.exe',
+      '.NET 7.0.15 Hosting Bundle' => {
+        'source' => 'https://download.visualstudio.microsoft.com/download/pr/5622bbdd-9184-4dcc-8ea6-7a7f1ce9de74/57103ffa6a60fb2db059d621165ef4b6/dotnet-hosting-7.0.15-win.exe',
         'install' => [
           '/install',
           '/quiet',
           '/norestart',
         ],
       },
-      '.NET 6.0.25 Hosting Bundle' => {
-        'source' => 'https://download.visualstudio.microsoft.com/download/pr/1fd87564-6bdb-4123-90dd-26488ec868c9/6c68988c310805bdcbb07b704fbe3e9d/dotnet-hosting-6.0.25-win.exe',
+      '.NET 6.0.26 Hosting Bundle' => {
+        'source' => 'https://download.visualstudio.microsoft.com/download/pr/16e13e4d-a240-4102-a460-3f4448afe1c3/3d832f15255d62bee8bc86fed40084ef/dotnet-hosting-6.0.26-win.exe',
         'install' => [
           '/install',
           '/quiet',
