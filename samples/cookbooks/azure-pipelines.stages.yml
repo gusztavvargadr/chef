@@ -43,6 +43,9 @@ stages:
               demands:
                 - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER
 
+            workspace:
+              clean: all
+
             steps:
               - checkout: self
                 submodules: recursive
