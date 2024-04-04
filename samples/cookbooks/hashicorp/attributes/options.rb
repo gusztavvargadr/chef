@@ -31,6 +31,17 @@ default['gusztavvargadr_hashicorp']['options']['tools']['terraform:latest'] = {
 
 default['gusztavvargadr_hashicorp']['options']['tools']['terraform'] = default['gusztavvargadr_hashicorp']['options']['tools']['terraform:latest']
 
+default['gusztavvargadr_hashicorp']['options']['tools']['consul-template:latest'] = {
+  'windows' => {
+    'package' => 'consul-template',
+  },
+  'ubuntu' => {
+    'package' => 'consul-template',
+  },
+}
+
+default['gusztavvargadr_hashicorp']['options']['tools']['consul-template'] = default['gusztavvargadr_hashicorp']['options']['tools']['consul-template:latest']
+
 default['gusztavvargadr_hashicorp']['options']['tools']['consul:latest'] = {
   'windows' => {
     'package' => 'consul',
@@ -53,13 +64,13 @@ default['gusztavvargadr_hashicorp']['options']['tools']['vault:latest'] = {
 
 default['gusztavvargadr_hashicorp']['options']['tools']['vault'] = default['gusztavvargadr_hashicorp']['options']['tools']['vault:latest']
 
-default['gusztavvargadr_hashicorp']['options']['tools']['consul-template:latest'] = {
+default['gusztavvargadr_hashicorp']['options']['tools']['nomad:latest'] = {
   'windows' => {
-    'package' => 'consul-template',
+    'package' => 'nomad',
   },
   'ubuntu' => {
-    'package' => 'consul-template',
+    'package' => 'nomad',
   },
 }
 
-default['gusztavvargadr_hashicorp']['options']['tools']['consul-template'] = default['gusztavvargadr_hashicorp']['options']['tools']['consul-template:latest']
+default['gusztavvargadr_hashicorp']['options']['tools']['nomad'] = default['gusztavvargadr_hashicorp']['options']['tools']['nomad:latest']

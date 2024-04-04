@@ -10,6 +10,10 @@ describe command('terraform --version') do
   its('stdout') { should include 'Terraform v1.' }
 end
 
+describe command('consul-template --version') do
+  its('stdout') { should include 'consul-template v0.' } unless os.windows?
+end
+
 describe command('consul --version') do
   its('stdout') { should include 'Consul v1.' }
 end
@@ -18,6 +22,6 @@ describe command('vault --version') do
   its('stdout') { should include 'Vault v1.' }
 end
 
-describe command('consul-template --version') do
-  its('stdout') { should include 'consul-template v0.' } unless os.windows?
+describe command('nomad --version') do
+  its('stdout') { should include 'Nomad v1.' }
 end
