@@ -13,9 +13,10 @@ gusztavvargadr_hashicorp:
     vagrant:latest:
     packer:latest:
     terraform:latest:
+    consul-template:latest:
     consul:latest:
     vault:latest:
-    consul-template:latest:
+    nomad:latest:
 
 gusztavvargadr_chef:
   tools:
