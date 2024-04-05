@@ -32,6 +32,7 @@ suites:
           vagrant:latest:
           packer:latest:
           terraform:latest:
+          consul-template:latest:
           consul:latest:
           vault:latest:
-          consul-template:latest:
+          nomad:latest:

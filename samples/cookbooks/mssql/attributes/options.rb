@@ -14,13 +14,13 @@ default['gusztavvargadr_mssql']['options']['tools']['management-studio:19'] = {
   'windows' => {
     'native_packages' => {
       'SSMS 19.3' => {
-        'source' => 'https://download.microsoft.com/download/7/7/3/7738e337-ed99-40ea-b8ae-f639162c83c3/SSMS-Setup-ENU.exe',
+        'source' => 'https://download.microsoft.com/download/1/b/c/1bc1f462-ac3a-402d-b872-c4cae745c539/SSMS-Setup-ENU.exe',
         'install' => [
           '/install',
           '/quiet',
           '/norestart',
         ],
-        'executable' => 'C:/Program Files (x86)/Microsoft SQL Server Management Studio 19/Common7/IDE/Ssms.exe',
+        'executable' => 'C:/Program Files (x86)/Microsoft SQL Server Management Studio 20/Common7/IDE/Ssms.exe',
       },
     },
   },
