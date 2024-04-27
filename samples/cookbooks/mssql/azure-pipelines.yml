@@ -14,4 +14,4 @@ stages:
         - name: mssql
           instances:
             - server-2019-developer-windows-2022
-            - management-studio-19-windows-2022
+            - management-studio-20-windows-2022

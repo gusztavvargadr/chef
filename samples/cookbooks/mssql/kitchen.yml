@@ -24,8 +24,8 @@ suites:
         tools:
           server:2019-developer:
 
-  - name: management-studio-19
+  - name: management-studio-20
     attributes:
       gusztavvargadr_mssql:
         tools:
-          management-studio:19:
+          management-studio:20:
