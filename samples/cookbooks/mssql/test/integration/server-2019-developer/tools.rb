@@ -3,6 +3,6 @@ describe command('sqlcmd -Q "SELECT @@VERSION"') do
 end
 
 describe command('sqlcmd -Q "SELECT @@VERSION"') do
-  its('stdout') { should include 'CU25' }
-  its('stdout') { should include '15.0.4355.3' }
+  its('stdout') { should include 'CU26' }
+  its('stdout') { should include '15.0.4365.2' }
 end
