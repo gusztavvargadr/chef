@@ -8,6 +8,10 @@ gusztavvargadr_dotnet:
     sdk:7.0:
     sdk:6.0:
 
+gusztavvargadr_docker:
+  tools:
+    engine:latest-community:
+
 gusztavvargadr_hashicorp:
   tools:
     vagrant:latest:
@@ -17,11 +21,3 @@ gusztavvargadr_hashicorp:
     consul:latest:
     vault:latest:
     nomad:latest:
-
-gusztavvargadr_chef:
-  tools:
-    workstation:latest:
-
-gusztavvargadr_docker:
-  tools:
-    engine:latest-community:

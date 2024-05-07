@@ -9,11 +9,11 @@ default_action :install
 action :initialize do
   _ = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  file '/etc/apt/preferences.d/dotnet' do
+  file '/etc/apt/preferences.d/microsoft' do
     content <<~EOH
-      Package: dotnet* aspnet* netstandard*
-      Pin: origin "archive.ubuntu.com"
-      Pin-Priority: -10
+      Package:*
+      Pin: origin "packages.microsoft.com"
+      Pin-Priority: 1001
     EOH
     action :create
   end
