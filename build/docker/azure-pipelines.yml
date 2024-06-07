@@ -16,9 +16,13 @@ stages:
       configurations:
         - name: chef-core
           platforms:
-            # - name: windows
-            #   variant: servercore
-            #   version: ltsc2022
+            - name: windows
+              variant: servercore
+              version: ltsc2022
+
+            - name: linux
+              variant: ubuntu
+              version: '24.04'
 
             - name: linux
               variant: ubuntu
@@ -26,9 +30,13 @@ stages:
 
         - name: chef-client
           platforms:
-            # - name: windows
-            #   variant: servercore
-            #   version: ltsc2022
+            - name: windows
+              variant: servercore
+              version: ltsc2022
+
+            - name: linux
+              variant: ubuntu
+              version: '24.04'
 
             - name: linux
               variant: ubuntu
@@ -37,9 +45,13 @@ stages:
 
         - name: chef-workstation
           platforms:
-            # - name: windows
-            #   variant: servercore
-            #   version: ltsc2022
+            - name: windows
+              variant: servercore
+              version: ltsc2022
+
+            - name: linux
+              variant: ubuntu
+              version: '24.04'
 
             - name: linux
               variant: ubuntu
