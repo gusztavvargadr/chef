@@ -1,7 +1,7 @@
 default['gusztavvargadr_virtualbox']['options']['tools']['app:7.0'] = {
   'windows' => {
     'package' => 'virtualbox',
-    'version' => '7.0.14',
+    'version' => '7.0.18',
   },
   'ubuntu' => {
     'package' => 'virtualbox-7.0',
