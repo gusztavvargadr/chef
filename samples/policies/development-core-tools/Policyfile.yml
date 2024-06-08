@@ -5,7 +5,6 @@ gusztavvargadr_git:
 gusztavvargadr_dotnet:
   tools:
     sdk:8.0:
-    sdk:7.0:
     sdk:6.0:
 
 gusztavvargadr_docker:

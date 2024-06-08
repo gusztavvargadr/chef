@@ -22,6 +22,10 @@ stages:
 
             - name: linux
               variant: ubuntu
+              version: '24.04'
+
+            - name: linux
+              variant: ubuntu
               version: '22.04'
 
         - name: chef-client
@@ -29,6 +33,10 @@ stages:
             # - name: windows
             #   variant: servercore
             #   version: ltsc2022
+
+            # - name: linux
+            #   variant: ubuntu
+            #   version: '24.04'
 
             - name: linux
               variant: ubuntu
@@ -40,6 +48,10 @@ stages:
             # - name: windows
             #   variant: servercore
             #   version: ltsc2022
+
+            # - name: linux
+            #   variant: ubuntu
+            #   version: '24.04'
 
             - name: linux
               variant: ubuntu

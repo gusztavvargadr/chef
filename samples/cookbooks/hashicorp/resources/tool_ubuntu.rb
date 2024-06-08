@@ -39,7 +39,7 @@ end
 action :configure do
   options = node['gusztavvargadr_hashicorp']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  service_packages = %w(consul vault)
+  service_packages = %w(consul vault nomad)
   if service_packages.include? options['package']
     service options['package'] do
       action [ :stop, :disable ]
