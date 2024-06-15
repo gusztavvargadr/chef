@@ -1,9 +1,9 @@
 default['gusztavvargadr_chef']['options']['tools']['workstation:latest'] = {
   'windows' => {
-    'package' => 'chef-workstation',
+    'project' => 'chef-workstation',
   },
   'ubuntu' => {
-    'package' => 'chef-workstation',
+    'project' => 'chef-workstation',
   },
 }
 
