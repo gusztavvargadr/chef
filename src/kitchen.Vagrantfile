@@ -1,5 +1,5 @@
-provider_cpus = ENV["VAGRANT_PROVIDER_CPUS"] || "4"
-provider_memory = ENV["VAGRANT_PROVIDER_MEMORY"] || "8192"
+provider_cpus = ENV["VAGRANT_PROVIDER_CPUS"] || "2"
+provider_memory = ENV["VAGRANT_PROVIDER_MEMORY"] || "4096"
 provider_linked_clone = ENV["VAGRANT_PROVIDER_LINKED_CLONE"] || true
 provider_nested_virtualization = ENV["VAGRANT_PROVIDER_NESTED_VIRTUALIZATION"] || false
 
