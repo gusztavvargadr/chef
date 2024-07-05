@@ -1,7 +1,7 @@
 driver:
   name: ec2
   region: eu-west-1
-  instance_type: c7i.large
+  instance_type: c7i.xlarge
   spot_price: on-demand
   ebs_optimized: true
   block_device_mappings:
