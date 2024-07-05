@@ -6,7 +6,7 @@ driver:
 
 provisioner:
   max_retries: 2
-  wait_for_retry: 120
+  wait_for_retry: 90
 
 verifier:
   name: inspec

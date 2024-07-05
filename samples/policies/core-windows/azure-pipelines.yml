@@ -12,5 +12,5 @@ stages:
     parameters:
       configurations:
         - name: core-windows
-          instances:
-            - default-windows-2022
+          instances: []
+            # - default-windows-2022
