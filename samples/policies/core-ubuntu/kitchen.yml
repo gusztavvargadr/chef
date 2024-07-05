@@ -13,6 +13,10 @@ verifier:
   name: inspec
 
 platforms:
+  - name: ubuntu-2404
+    driver:
+      box: gusztavvargadr/kitchen-ubuntu-2404
+
   - name: ubuntu-2204
     driver:
       box: gusztavvargadr/kitchen-ubuntu-2204
