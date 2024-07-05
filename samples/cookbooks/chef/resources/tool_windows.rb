@@ -13,7 +13,10 @@ end
 action :install do
   options = node['gusztavvargadr_chef']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  chocolatey_package options['package'] do
-    action :install
+  powershell_script 'chef_install' do
+    code <<-EOH
+      iwr -useb https://omnitruck.chef.io/install.ps1 | iex; install -project #{options['project']} -install_strategy once
+    EOH
+    action :run
   end
 end

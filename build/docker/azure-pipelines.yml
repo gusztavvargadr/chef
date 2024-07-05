@@ -34,9 +34,9 @@ stages:
             #   variant: servercore
             #   version: ltsc2022
 
-            # - name: linux
-            #   variant: ubuntu
-            #   version: '24.04'
+            - name: linux
+              variant: ubuntu
+              version: '24.04'
 
             - name: linux
               variant: ubuntu
@@ -49,9 +49,9 @@ stages:
             #   variant: servercore
             #   version: ltsc2022
 
-            # - name: linux
-            #   variant: ubuntu
-            #   version: '24.04'
+            - name: linux
+              variant: ubuntu
+              version: '24.04'
 
             - name: linux
               variant: ubuntu

@@ -18,6 +18,7 @@ Vagrant.configure("2") do |config|
     provider.memory = provider_memory
     provider.linked_clone = provider_linked_clone
     provider.vmx["vhv.enable"] = "TRUE" if provider_nested_virtualization
+    provider.force_vmware_license = "workstation"
   end
 
   config.vm.provider "hyperv" do |provider, override|
