@@ -17,6 +17,10 @@ platforms:
     transport:
       elevated: true
 
+  - name: ubuntu-2404
+    driver:
+      box: gusztavvargadr/kitchen-ubuntu-2404
+
   - name: ubuntu-2204
     driver:
       box: gusztavvargadr/kitchen-ubuntu-2204
@@ -33,3 +37,5 @@ suites:
       gusztavvargadr_virtualbox:
         tools:
           app:6.1:
+    excludes:
+      - ubuntu-2404
