@@ -21,6 +21,7 @@ action :install do
   packages.each do |package_name|
     apt_package package_name do
       action :install
+      timeout 3600
     end
   end
 

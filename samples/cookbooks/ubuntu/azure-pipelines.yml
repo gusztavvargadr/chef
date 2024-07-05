@@ -13,6 +13,9 @@ stages:
       configurations:
         - name: ubuntu
           instances:
+            - updates-ubuntu-2404
             - updates-ubuntu-2204
+            # - desktop-ubuntu-ubuntu-2404
             - desktop-ubuntu-ubuntu-2204
+            # - desktop-xubuntu-ubuntu-2404
             - desktop-xubuntu-ubuntu-2204
