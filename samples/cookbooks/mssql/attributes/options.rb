@@ -2,7 +2,7 @@ default['gusztavvargadr_mssql']['options']['tools']['server:2019-developer'] = {
   'windows' => {
     'install_file_url' => 'https://download.microsoft.com/download/7/c/1/7c14e92e-bdcb-4f89-b7cf-93543e7112d1/SQLServer2019-x64-ENU-Dev.iso',
     'configuration_file_name' => 'server_2019_developer.ini',
-    'patch_file_url' => 'https://catalog.s.download.windowsupdate.com/c/msdownload/update/software/updt/2024/04/sqlserver2019-kb5035123-x64_f4c614713287412219caadffdc8ae0ff00698324.exe',
+    'patch_file_url' => 'https://catalog.s.download.windowsupdate.com/d/msdownload/update/software/updt/2024/06/sqlserver2019-kb5037331-x64_51a3839385638495b5609cfd75acd432d87f0181.exe',
   },
 }
 
