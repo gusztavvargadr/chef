@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
       - build/docker
+      - build/chef
 pr: none
 
 variables:
