@@ -79,35 +79,3 @@ action :configure do
     action :run
   end
 end
-
-action :remove do
-  options = node['gusztavvargadr_vsts']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
-
-  agent_config = options['config']
-  return if agent_config['url'].to_s.empty?
-
-  agent_home = ENV['USERPROFILE']
-  agent_work = "#{agent_home}/opt/vsts-agent"
-
-  agent_env_file_path = "#{agent_work}/.env"
-  return unless ::File.exist?(agent_env_file_path)
-
-  agent_config_script_path = 'config.cmd'
-
-  agent_config_script_environment = {
-    'VSTS_AGENT_INPUT_AUTH' => agent_config['auth'],
-    'VSTS_AGENT_INPUT_TOKEN' => agent_config['token'],
-  }
-
-  execute 'config remove' do
-    command "#{agent_config_script_path} remove"
-    cwd agent_work
-    environment agent_config_script_environment
-    action :run
-  end
-
-  directory agent_work do
-    recursive true
-    action :delete
-  end
-end

@@ -31,10 +31,3 @@ suites:
       gusztavvargadr_vsts:
         tools:
           agent:latest:
-
-  - name: destroy
-    named_run_list: destroy
-    attributes:
-      gusztavvargadr_vsts:
-        tools:
-          agent:latest:
