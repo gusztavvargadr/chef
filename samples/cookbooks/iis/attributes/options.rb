@@ -14,7 +14,7 @@ default['gusztavvargadr_iis']['options']['tools']['server:latest'] = {
         ],
       },
       '.NET 6.0.32 Hosting Bundle' => {
-        'source' => 'https://download.visualstudio.microsoft.com/download/pr/67acc6b0-c653-4abf-af31-96edf0f75b24/90a29be6426124af37a70871fe1c0509/dotnet-hosting-6.0.32-win.exe,
+        'source' => 'https://download.visualstudio.microsoft.com/download/pr/67acc6b0-c653-4abf-af31-96edf0f75b24/90a29be6426124af37a70871fe1c0509/dotnet-hosting-6.0.32-win.exe',
         'install' => [
           '/install',
           '/quiet',
