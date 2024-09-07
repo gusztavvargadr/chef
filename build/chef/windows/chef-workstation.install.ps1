@@ -1,4 +1,4 @@
-$CHEF_WORKSTATION_VERSION="24.6.1066"
+$CHEF_WORKSTATION_VERSION="24.8.1068"
 
 . { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef-workstation -version $CHEF_WORKSTATION_VERSION
 
