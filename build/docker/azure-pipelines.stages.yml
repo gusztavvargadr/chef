@@ -20,10 +20,15 @@ stages:
               dependsOn: build_${{ replace(configuration.dependsOn, '-', '_') }}_${{ platform.name }}_${{ platform.variant }}_${{ replace(platform.version, '.', '_') }}
 
             pool:
-              ${{ if eq(platform.name, 'windows') }}:
-                vmImage: windows-2022
-              ${{ else }}:
-                vmImage: ubuntu-22.04
+              name: default
+              demands:
+                - ${{ if eq(platform.name, 'windows') }}:
+                  - Agent.OS -equals Windows_NT
+                - ${{ else }}:
+                  - Agent.OS -equals Linux
+
+            workspace:
+              clean: all
 
             steps:
               - checkout: self
@@ -81,7 +86,10 @@ stages:
           condition: eq(variables.isPublishEnabled, 'true')
 
           pool:
-            vmImage: ubuntu-22.04
+            name: default
+
+          workspace:
+            clean: all
 
           steps:
             - checkout: self

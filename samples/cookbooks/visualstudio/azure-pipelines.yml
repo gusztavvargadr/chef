@@ -14,4 +14,4 @@ stages:
         - name: visualstudio
           instances:
             - ide-2022-community-windows-2022
-            - ide-2019-community-windows-2022
+            # - ide-2019-community-windows-2022
