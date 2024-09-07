@@ -23,9 +23,9 @@ stages:
               name: default
               demands:
                 - ${{ if eq(platform.name, 'windows') }}:
-                  - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER -equals 'Windows'
+                  - Agent.OS -equals 'Windows'
                 - ${{ else }}:
-                  - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER -equals 'Linux'
+                  - Agent.OS -equals 'Linux'
 
             workspace:
               clean: all
