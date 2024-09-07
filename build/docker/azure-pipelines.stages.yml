@@ -23,7 +23,7 @@ stages:
               name: default
               demands:
                 - ${{ if eq(platform.name, 'windows') }}:
-                  - Agent.OS -equals Windows
+                  - Agent.OS -equals Windows_NT
                 - ${{ else }}:
                   - Agent.OS -equals Linux
 
