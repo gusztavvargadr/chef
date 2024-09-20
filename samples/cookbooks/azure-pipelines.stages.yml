@@ -40,9 +40,7 @@ stages:
             displayName: Test cookbook ${{ configuration.name }} on instance ${{ instance }}
 
             pool:
-              name: default
-              demands:
-                - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER
+              name: ubuntu-virtualbox
 
             workspace:
               clean: all
