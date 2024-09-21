@@ -40,7 +40,10 @@ stages:
             displayName: Test cookbook ${{ configuration.name }} on instance ${{ instance }}
 
             pool:
-              name: ubuntu-virtualbox
+              ${{ if contains(instance, 'windows') }}:
+                name: windows-2022-hyperv
+              ${{ else }}:
+                name: ubuntu-2204-virtualbox
 
             workspace:
               clean: all
