@@ -68,14 +68,14 @@ stages:
                   dotnet --info
                   dotnet tool restore
 
-                  dotnet cake --configuration ${{ configuration.name }} --target acceptance-init
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }} --target acceptance-init
                 displayName: Init
 
               - script: |
-                  dotnet cake --configuration ${{ configuration.name }} --target acceptance-test
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }} --target acceptance-test
                 displayName: Test
 
               - script: |
-                  dotnet cake --configuration ${{ configuration.name }} --target acceptance-clean
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }} --target acceptance-clean
                 displayName: Clean
                 condition: always()
