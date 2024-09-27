@@ -12,7 +12,7 @@ driver:
   tags:
     Stack: gusztavvargadr-chef
     Service: cookbooks
-    Component: hello-world
+    Component: hashicorp
 
 provisioner:
   max_retries: 0
@@ -30,6 +30,9 @@ platforms:
         Environment: kitchen-windows-2022
     transport:
       elevated: true
+    provisioner:
+      max_retries: 1
+      wait_for_retry: 120
 
   - name: ubuntu-2404
     driver:
@@ -49,3 +52,13 @@ platforms:
 
 suites:
   - name: default
+    attributes:
+      gusztavvargadr_hashicorp:
+        tools:
+          vagrant:latest:
+          packer:latest:
+          terraform:latest:
+          consul-template:latest:
+          consul:latest:
+          vault:latest:
+          nomad:latest:

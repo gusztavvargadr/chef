@@ -23,12 +23,24 @@ stages:
               submodules: recursive
 
             - script: |
-                chef exec cookstyle ./samples/cookbooks/${{ configuration.name }}
+                dotnet --info
+                dotnet tool restore
+
+                dotnet cake --configuration ${{ configuration.name }} --target commit-init
+              displayName: Init
+
+            - script: |
+                dotnet cake --configuration ${{ configuration.name }} --target commit-lint
               displayName: Lint
 
             - script: |
-                chef exec rspec ./samples/cookbooks/${{ configuration.name }}
+                dotnet cake --configuration ${{ configuration.name }} --target commit-test
               displayName: Test
+
+            - script: |
+                dotnet cake --configuration ${{ configuration.name }} --target commit-clean
+              displayName: Clean
+              condition: always()
 
   - stage: acceptance
     displayName: Acceptance
@@ -53,30 +65,17 @@ stages:
                 submodules: recursive
 
               - script: |
-                  chef --version
-                displayName: Initialize Chef
+                  dotnet --info
+                  dotnet tool restore
+
+                  dotnet cake --configuration ${{ configuration.name }} --target acceptance-init
+                displayName: Init
 
               - script: |
-                  vagrant --version
-                  vagrant plugin list
-
-                  vagrant box list
-                  vagrant global-status --prune
-                displayName: Initialize Vagrant
-
-              - script: |
-                  cd ./samples/cookbooks/${{ configuration.name }}
-                  kitchen test ${{ instance }}
+                  dotnet cake --configuration ${{ configuration.name }} --target acceptance-test
                 displayName: Test
 
               - script: |
-                  cd ./samples/cookbooks/${{ configuration.name }}
-                  kitchen create ${{ instance }}
-                displayName: Create
-                condition: not(succeeded())
-
-              - script: |
-                  cd ./samples/cookbooks/${{ configuration.name }}
-                  kitchen destroy ${{ instance }}
+                  dotnet cake --configuration ${{ configuration.name }} --target acceptance-clean
                 displayName: Clean
                 condition: always()
