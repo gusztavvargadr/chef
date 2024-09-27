@@ -90,7 +90,8 @@ void Chef(params string[] arguments) {
 }
 
 void Kitchen(params string[] arguments) {
-  var result = StartProcess("kitchen", new ProcessSettings {
+  var executable = IsRunningOnWindows() ? @"C:\opscode\chef-workstation\bin\kitchen.bat" : "kitchen";
+  var result = StartProcess(executable, new ProcessSettings {
     Arguments = ProcessArgumentBuilder.FromStrings(arguments),
     WorkingDirectory = cookbookDirectory,
     EnvironmentVariables = new Dictionary<string, string> {
