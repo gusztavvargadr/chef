@@ -1,3 +1,9 @@
+parameters:
+  - name: force_publish
+    displayName: Force Publish
+    type: boolean
+    default: false
+
 trigger:
   branches:
     include:
@@ -9,7 +15,7 @@ trigger:
 pr: none
 
 variables:
-  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  isPublishEnabled: $[or(parameters.force_publish, eq(variables['Build.SourceBranch'], 'refs/heads/master'))]
 
 stages:
   - template: ./azure-pipelines.stages.yml
