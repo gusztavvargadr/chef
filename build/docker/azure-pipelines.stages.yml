@@ -5,6 +5,7 @@ parameters:
     #     - name: string
     #       variant: string
     #       version: string
+    #       base: string
     #   dependsOn: string
 
 stages:
@@ -44,7 +45,7 @@ stages:
                 displayName: Initialize Docker
 
               - script: |
-                  docker build -f ./build/docker/${{ platform.name }}/${{ configuration.name }}.Dockerfile --build-arg PLATFORM_VARIANT=${{ platform.variant }} --build-arg PLATFORM_VERSION=${{ platform.version }} -t gusztavvargadr/${{ configuration.name }}:${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} .
+                  docker build -f ./build/docker/${{ platform.name }}/${{ configuration.name }}.Dockerfile --build-arg PLATFORM_VARIANT=${{ platform.variant }} --build-arg PLATFORM_VERSION=${{ platform.version }} --build-arg PLATFORM_BASE=${{ platform.base }} -t gusztavvargadr/${{ configuration.name }}:${{ platform.name }}-${{ platform.variant }}-${{ platform.version }} .
                 displayName: Build
 
               - script: |

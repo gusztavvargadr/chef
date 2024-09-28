@@ -30,10 +30,12 @@ stages:
             - name: linux
               variant: ubuntu
               version: '24.04'
+              base: '8.0-noble'
 
             - name: linux
               variant: ubuntu
               version: '22.04'
+              base: '8.0-jammy'
 
         - name: chef-client
           platforms:
@@ -44,10 +46,12 @@ stages:
             - name: linux
               variant: ubuntu
               version: '24.04'
+              base: '8.0-noble'
 
             - name: linux
               variant: ubuntu
               version: '22.04'
+              base: '8.0-jammy'
           dependsOn: chef-core
 
         - name: chef-workstation
@@ -59,8 +63,10 @@ stages:
             - name: linux
               variant: ubuntu
               version: '24.04'
+              base: '8.0-noble'
 
             - name: linux
               variant: ubuntu
               version: '22.04'
+              base: '8.0-jammy'
           dependsOn: chef-core
