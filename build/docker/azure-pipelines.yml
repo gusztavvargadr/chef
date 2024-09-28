@@ -15,7 +15,7 @@ trigger:
 pr: none
 
 variables:
-  isPublishEnabled: $[or(parameters.force_publish, eq(variables['Build.SourceBranch'], 'refs/heads/master'))]
+  isPublishEnabled: ${{ or(parameters.force_publish, eq(variables['Build.SourceBranch'], 'refs/heads/master')) }}
 
 stages:
   - template: ./azure-pipelines.stages.yml
