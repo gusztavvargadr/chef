@@ -13,7 +13,7 @@ stages:
           displayName: Build cookbook ${{ configuration.name }}
 
           pool:
-            name: default
+            vmImage: ubuntu-22.04
 
           container: gusztavvargadr/chef-workstation:linux-ubuntu-22.04
 
