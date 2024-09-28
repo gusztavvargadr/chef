@@ -1,0 +1,15 @@
+suites:
+  - name: default
+    provisioner:
+      max_retries: 1
+      wait_for_retry: 120
+    attributes:
+      gusztavvargadr_hashicorp:
+        tools:
+          vagrant:latest:
+          packer:latest:
+          terraform:latest:
+          consul-template:latest:
+          consul:latest:
+          vault:latest:
+          nomad:latest:

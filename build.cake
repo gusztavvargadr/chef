@@ -91,11 +91,12 @@ void Chef(params string[] arguments) {
 
 void Kitchen(params string[] arguments) {
   var executable = IsRunningOnWindows() ? @"C:\opscode\chef-workstation\bin\kitchen.bat" : "kitchen";
+
   var result = StartProcess(executable, new ProcessSettings {
     Arguments = ProcessArgumentBuilder.FromStrings(arguments),
     WorkingDirectory = cookbookDirectory,
     EnvironmentVariables = new Dictionary<string, string> {
-      { "KITCHEN_YAML", $"kitchen.{driver}.yml" }
+      { "KITCHEN_GLOBAL_YAML", $"../../../src/kitchen.{driver}.yml" }
     },
   });
   
