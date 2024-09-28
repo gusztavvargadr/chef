@@ -1,6 +1,6 @@
 ARG PLATFORM_BASE
 
-FROM ${PLATFORM_BASE}
+FROM mcr.microsoft.com/dotnet/sdk:${PLATFORM_BASE}
 
 WORKDIR /opt/docker/build/
 
