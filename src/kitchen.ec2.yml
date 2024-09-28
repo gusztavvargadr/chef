@@ -37,6 +37,8 @@ platforms:
         name: kitchen-ubuntu-2404-*
       tags:
         Environment: kitchen-ubuntu-2404
+    provisioner:
+      root_path: /var/tmp/kitchen
 
   - name: ubuntu-2204
     driver:
@@ -45,3 +47,5 @@ platforms:
         name: kitchen-ubuntu-2204-*
       tags:
         Environment: kitchen-ubuntu-2204
+    provisioner:
+      root_path: /var/tmp/kitchen

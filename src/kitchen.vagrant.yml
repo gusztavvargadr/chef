@@ -20,7 +20,11 @@ platforms:
   - name: ubuntu-2404
     driver:
       box: gusztavvargadr/kitchen-ubuntu-2404
+    provisioner:
+      root_path: /var/tmp/kitchen
 
   - name: ubuntu-2204
     driver:
       box: gusztavvargadr/kitchen-ubuntu-2204
+    provisioner:
+      root_path: /var/tmp/kitchen

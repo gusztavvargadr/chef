@@ -1,24 +1,7 @@
-driver:
-  name: vagrant
-  vm_hostname: false
-  vagrantfiles:
-    - ./kitchen.Vagrantfile
-
-provisioner:
-  max_retries: 0
-
-verifier:
-  name: inspec
-
-platforms:
-  - name: windows-2022
-    driver:
-      box: gusztavvargadr/kitchen-windows-2022
-    transport:
-      elevated: true
-
 suites:
   - name: default
+    includes:
+      - windows-2022
     attributes:
       gusztavvargadr_iis:
         tools:
