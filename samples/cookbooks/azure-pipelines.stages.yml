@@ -47,6 +47,9 @@ stages:
   - stage: acceptance
     displayName: Acceptance
 
+    variables:
+      - group: kitchen-ec2
+
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each instance in configuration.instances }}:
@@ -54,10 +57,9 @@ stages:
             displayName: Test cookbook ${{ configuration.name }} on instance ${{ instance }}
 
             pool:
-              ${{ if contains(instance, 'windows') }}:
-                name: windows-2022-hyperv
-              ${{ else }}:
-                name: ubuntu-2204-virtualbox
+              vmImage: ubuntu-22.04
+
+            container: gusztavvargadr/chef-workstation:linux-ubuntu-22.04
 
             workspace:
               clean: all
@@ -70,14 +72,23 @@ stages:
                   dotnet --info
                   dotnet tool restore
 
-                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }} --target acceptance-init
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance-init
                 displayName: Init
+                env:
+                  AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+                  AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
 
               - script: |
-                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }} --target acceptance-test
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance-test
                 displayName: Test
+                env:
+                  AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+                  AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
 
               - script: |
-                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }} --target acceptance-clean
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance-clean
                 displayName: Clean
+                env:
+                  AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+                  AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
                 condition: always()
