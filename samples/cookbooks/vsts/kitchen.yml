@@ -1,5 +1,8 @@
 suites:
   - name: default
+    includes:
+      - windows-2022
+      - ubuntu-2204
     attributes:
       gusztavvargadr_vsts:
         tools:

@@ -11,7 +11,6 @@ driver:
         volume_size: 127
   tags:
     Stack: gusztavvargadr-chef
-    Service: cookbooks
 
 provisioner:
   max_retries: 0
@@ -26,7 +25,7 @@ platforms:
         owner-id: "668508375233"
         name: kitchen-windows-2022-*
       tags:
-        Environment: kitchen-windows-2022
+        Service: kitchen-windows-2022
     transport:
       elevated: true
 
@@ -36,7 +35,7 @@ platforms:
         owner-id: "668508375233"
         name: kitchen-ubuntu-2404-*
       tags:
-        Environment: kitchen-ubuntu-2404
+        Service: kitchen-ubuntu-2404
     provisioner:
       root_path: /var/tmp/kitchen
 
@@ -46,6 +45,6 @@ platforms:
         owner-id: "668508375233"
         name: kitchen-ubuntu-2204-*
       tags:
-        Environment: kitchen-ubuntu-2204
+        Service: kitchen-ubuntu-2204
     provisioner:
       root_path: /var/tmp/kitchen

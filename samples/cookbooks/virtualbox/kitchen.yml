@@ -6,9 +6,10 @@ suites:
           app:7.0:
 
   - name: 6-1
+    includes:
+      - windows-2022
+      - ubuntu-2204
     attributes:
       gusztavvargadr_virtualbox:
         tools:
           app:6.1:
-    excludes:
-      - ubuntu-2404
