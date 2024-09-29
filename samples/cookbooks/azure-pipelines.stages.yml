@@ -13,7 +13,9 @@ stages:
           displayName: Build cookbook ${{ configuration.name }}
 
           pool:
-            name: default
+            vmImage: ubuntu-22.04
+
+          container: gusztavvargadr/chef-workstation:linux-ubuntu-22.04
 
           workspace:
             clean: all
@@ -23,15 +25,24 @@ stages:
               submodules: recursive
 
             - script: |
-                chef exec cookstyle ./samples/cookbooks/${{ configuration.name }}
-              displayName: Lint
+                dotnet --info
+                dotnet tool restore
+              displayName: Init
 
             - script: |
-                chef exec rspec ./samples/cookbooks/${{ configuration.name }}
-              displayName: Test
+                dotnet cake --configuration ${{ configuration.name }} --target commit
+              displayName: Build
+
+            - script: |
+                dotnet cake --configuration ${{ configuration.name }} --target commit-clean
+              displayName: Clean
+              condition: always()
 
   - stage: acceptance
     displayName: Acceptance
+
+    variables:
+      - group: kitchen-ec2
 
     jobs:
       - ${{ each configuration in parameters.configurations }}:
@@ -40,9 +51,9 @@ stages:
             displayName: Test cookbook ${{ configuration.name }} on instance ${{ instance }}
 
             pool:
-              name: default
-              demands:
-                - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER
+              vmImage: ubuntu-22.04
+
+            container: gusztavvargadr/chef-workstation:linux-ubuntu-22.04
 
             workspace:
               clean: all
@@ -52,30 +63,21 @@ stages:
                 submodules: recursive
 
               - script: |
-                  chef --version
-                displayName: Initialize Chef
+                  dotnet --info
+                  dotnet tool restore
+                displayName: Init
 
               - script: |
-                  vagrant --version
-                  vagrant plugin list
-
-                  vagrant box list
-                  vagrant global-status --prune
-                displayName: Initialize Vagrant
-
-              - script: |
-                  cd ./samples/cookbooks/${{ configuration.name }}
-                  kitchen test ${{ instance }}
-                displayName: Test
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance
+                displayName: Build
+                env:
+                  AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+                  AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
 
               - script: |
-                  cd ./samples/cookbooks/${{ configuration.name }}
-                  kitchen create ${{ instance }}
-                displayName: Create
-                condition: not(succeeded())
-
-              - script: |
-                  cd ./samples/cookbooks/${{ configuration.name }}
-                  kitchen destroy ${{ instance }}
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance-clean
                 displayName: Clean
+                env:
+                  AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
+                  AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
                 condition: always()

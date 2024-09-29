@@ -1,0 +1,50 @@
+driver:
+  name: ec2
+  region: eu-west-1
+  instance_type: c7i.xlarge
+  spot_price: on-demand
+  ebs_optimized: true
+  block_device_mappings:
+    - device_name: /dev/sda1
+      ebs:
+        volume_type: gp3
+        volume_size: 127
+  tags:
+    Stack: gusztavvargadr-chef
+
+provisioner:
+  max_retries: 0
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: windows-2022
+    driver:
+      image_search:
+        owner-id: "668508375233"
+        name: kitchen-windows-2022-*
+      tags:
+        Service: kitchen-windows-2022
+    transport:
+      elevated: true
+
+  - name: ubuntu-2404
+    driver:
+      image_search:
+        owner-id: "668508375233"
+        name: kitchen-ubuntu-2404-*
+      tags:
+        Service: kitchen-ubuntu-2404
+    provisioner:
+      root_path: /var/tmp/kitchen
+
+  - name: ubuntu-2204
+    driver:
+      image_search:
+        owner-id: "668508375233"
+        name: kitchen-ubuntu-2204-*
+      tags:
+        Service: kitchen-ubuntu-2204
+    provisioner:
+      root_path: /var/tmp/kitchen

@@ -1,3 +1,9 @@
+parameters:
+  - name: force_publish
+    displayName: Force Publish
+    type: boolean
+    default: false
+
 trigger:
   branches:
     include:
@@ -9,7 +15,7 @@ trigger:
 pr: none
 
 variables:
-  isPublishEnabled: $[eq(variables['Build.SourceBranch'], 'refs/heads/master')]
+  isPublishEnabled: ${{ or(parameters.force_publish, eq(variables['Build.SourceBranch'], 'refs/heads/master')) }}
 
 stages:
   - template: ./azure-pipelines.stages.yml
@@ -24,10 +30,12 @@ stages:
             - name: linux
               variant: ubuntu
               version: '24.04'
+              base: '8.0-noble'
 
             - name: linux
               variant: ubuntu
               version: '22.04'
+              base: '8.0-jammy'
 
         - name: chef-client
           platforms:
@@ -38,10 +46,12 @@ stages:
             - name: linux
               variant: ubuntu
               version: '24.04'
+              base: '8.0-noble'
 
             - name: linux
               variant: ubuntu
               version: '22.04'
+              base: '8.0-jammy'
           dependsOn: chef-core
 
         - name: chef-workstation
@@ -53,8 +63,10 @@ stages:
             - name: linux
               variant: ubuntu
               version: '24.04'
+              base: '8.0-noble'
 
             - name: linux
               variant: ubuntu
               version: '22.04'
+              base: '8.0-jammy'
           dependsOn: chef-core

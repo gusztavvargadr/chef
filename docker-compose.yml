@@ -7,8 +7,7 @@ services:
       context: ./
       dockerfile: ./build/docker/${PLATFORM_NAME}/chef-core.Dockerfile
       args:
-        - PLATFORM_VARIANT
-        - PLATFORM_VERSION
+        - PLATFORM_BASE
 
   chef-client:
     image: gusztavvargadr/chef-client:${PLATFORM_NAME}-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
