@@ -27,17 +27,11 @@ stages:
             - script: |
                 dotnet --info
                 dotnet tool restore
-
-                dotnet cake --configuration ${{ configuration.name }} --target commit-init
               displayName: Init
 
             - script: |
-                dotnet cake --configuration ${{ configuration.name }} --target commit-lint
-              displayName: Lint
-
-            - script: |
-                dotnet cake --configuration ${{ configuration.name }} --target commit-test
-              displayName: Test
+                dotnet cake --configuration ${{ configuration.name }} --target commit
+              displayName: Build
 
             - script: |
                 dotnet cake --configuration ${{ configuration.name }} --target commit-clean
@@ -71,16 +65,11 @@ stages:
               - script: |
                   dotnet --info
                   dotnet tool restore
-
-                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance-init
                 displayName: Init
-                env:
-                  AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
-                  AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
 
               - script: |
-                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance-test
-                displayName: Test
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance
+                displayName: Build
                 env:
                   AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
                   AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)

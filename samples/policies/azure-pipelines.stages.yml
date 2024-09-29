@@ -13,7 +13,9 @@ stages:
           displayName: Build policy ${{ configuration.name }}
 
           pool:
-            name: default
+            vmImage: ubuntu-22.04
+
+          container: gusztavvargadr/chef-workstation:linux-ubuntu-22.04
 
           workspace:
             clean: all
@@ -92,7 +94,9 @@ stages:
           displayName: Publish policy ${{ configuration.name }}
 
           pool:
-            name: default
+            vmImage: ubuntu-22.04
+
+          container: gusztavvargadr/chef-workstation:linux-ubuntu-22.04
 
           workspace:
             clean: all

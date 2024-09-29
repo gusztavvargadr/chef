@@ -1,12 +1,3 @@
-              // - script: |
-              //     vagrant --version
-              //     vagrant plugin list
-
-              //     vagrant box list
-              //     vagrant global-status --prune
-              //   displayName: Initialize Vagrant
-
-
 var configuration = Argument("configuration", string.Empty);
 var target = Argument("target", "default");
 
@@ -28,6 +19,11 @@ Task("commit-lint")
     Chef("exec", "cookstyle");
   });
 
+Task("commit-build")
+  .Does(() => {
+    Chef("update");
+  });
+
 Task("commit-test")
   .Does(() => {
     Chef("exec", "rspec");
@@ -41,6 +37,7 @@ Task("commit-clean")
 Task("commit")
   .IsDependentOn("commit-init")
   .IsDependentOn("commit-lint")
+  .IsDependentOn("commit-build")
   .IsDependentOn("commit-test");
 
 Task("acceptance-init")
