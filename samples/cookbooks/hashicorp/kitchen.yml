@@ -14,5 +14,3 @@ suites:
           consul:latest:
           vault:latest:
           nomad:latest:
-
-// split
