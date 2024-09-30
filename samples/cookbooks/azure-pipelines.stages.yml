@@ -33,6 +33,10 @@ stages:
                 dotnet cake --configuration ${{ configuration.name }} --target commit
               displayName: Run build
 
+            - publish: artifacts
+              displayName: Publish artifacts
+              artifact: ${{ configuration.name }}
+
             - script: |
                 dotnet cake --configuration ${{ configuration.name }} --target commit-clean
               displayName: Clean build
