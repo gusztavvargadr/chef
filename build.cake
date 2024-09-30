@@ -29,7 +29,7 @@ Task("commit-build")
       Chef("update", policyfileName, "--attributes");
       Chef("export", policyfileName, MakeAbsolute(artifactsDirectory).ToString(), "--force", "--archive");
 
-      foreach (var archive in GetFiles($"{artifactsDirectory}/*{cookbook}*-*.tgz")) {
+      foreach (var archive in GetFiles($"{artifactsDirectory}/*{cookbook.Replace('-', '_')}*-*.tgz")) {
         var archiveTarget = $"{artifactsDirectory}/{string.Join('-', archive.GetFilename().ToString().Split('-').SkipLast(1))}.tgz";
         
         if (FileExists(archiveTarget)) {
