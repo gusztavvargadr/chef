@@ -3,11 +3,6 @@ provisioner:
   wait_for_retry: 120
 
 suites:
-  - name: default
-    includes:
-      - ubuntu-2404
-      - ubuntu-2204
-
   - name: updates
     provisioner:
       policyfile_path: Policyfile.updates.rb
