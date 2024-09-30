@@ -5,6 +5,7 @@ trigger:
   paths:
     include:
       - samples/cookbooks/visualstudio
+      - samples/cookbooks/windows
 pr: none
 
 stages:
