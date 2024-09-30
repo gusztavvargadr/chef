@@ -4,7 +4,8 @@ gusztavvargadr_git:
 
 gusztavvargadr_dotnet:
   tools:
-    sdk:latest:
+    sdk:8.0:
+    sdk:6.0:
 
 gusztavvargadr_docker:
   tools:
@@ -19,7 +20,3 @@ gusztavvargadr_hashicorp:
     consul:latest:
     vault:latest:
     nomad:latest:
-
-gusztavvargadr_chef:
-  tools:
-    workstation:latest:
