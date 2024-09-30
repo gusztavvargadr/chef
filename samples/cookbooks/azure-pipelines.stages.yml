@@ -27,15 +27,15 @@ stages:
             - script: |
                 dotnet --info
                 dotnet tool restore
-              displayName: Init
+              displayName: Initialize build
 
             - script: |
                 dotnet cake --configuration ${{ configuration.name }} --target commit
-              displayName: Build
+              displayName: Run build
 
             - script: |
                 dotnet cake --configuration ${{ configuration.name }} --target commit-clean
-              displayName: Clean
+              displayName: Clean build
               condition: always()
 
   - stage: acceptance
@@ -65,19 +65,19 @@ stages:
               - script: |
                   dotnet --info
                   dotnet tool restore
-                displayName: Init
+                displayName: Initialize build
 
               - script: |
                   dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance
-                displayName: Build
+                displayName: Run build
                 env:
                   AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
                   AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
 
               - script: |
                   dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance-clean
-                displayName: Clean
+                displayName: Clean build
+                condition: always()
                 env:
                   AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
                   AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
-                condition: always()

@@ -21,7 +21,8 @@ Task("commit-lint")
 
 Task("commit-build")
   .Does(() => {
-    Chef("update");
+    Chef("install");
+    Chef("update", "--attributes");
   });
 
 Task("commit-test")
