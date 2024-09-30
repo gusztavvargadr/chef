@@ -6,6 +6,9 @@ trigger:
     include:
       - samples/cookbooks/development
       - samples/cookbooks/git
+      - samples/cookbooks/dotnet
+      - samples/cookbooks/docker
+      - samples/cookbooks/hashicorp
 pr: none
 
 stages:
