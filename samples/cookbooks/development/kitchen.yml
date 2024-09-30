@@ -1,0 +1,6 @@
+provisioner:
+  max_retries: 1
+  wait_for_retry: 120
+
+suites:
+  - name: default

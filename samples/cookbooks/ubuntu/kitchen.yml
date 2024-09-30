@@ -4,28 +4,22 @@ provisioner:
 
 suites:
   - name: updates
+    provisioner:
+      policyfile_path: Policyfile.updates.rb
     includes:
       - ubuntu-2404
       - ubuntu-2204
-    attributes:
-      gusztavvargadr_ubuntu:
-        updates:
-          dist-upgrade:
 
   - name: desktop-ubuntu
+    provisioner:
+      policyfile_path: Policyfile.desktop-ubuntu.rb
     includes:
       - ubuntu-2404
       - ubuntu-2204
-    attributes:
-      gusztavvargadr_ubuntu:
-        tools:
-          desktop:ubuntu:
 
   - name: desktop-xubuntu
+    provisioner:
+      policyfile_path: Policyfile.desktop-xubuntu.rb
     includes:
       - ubuntu-2404
       - ubuntu-2204
-    attributes:
-      gusztavvargadr_ubuntu:
-        tools:
-          desktop:xubuntu:

@@ -4,16 +4,12 @@ provisioner:
 
 suites:
   - name: updates
+    provisioner:
+      policyfile_path: Policyfile.updates.rb
     includes:
       - windows-2022
-    attributes:
-      gusztavvargadr_windows:
-        updates:
-          install:
 
   - name: native-packages
-    includes:
-      - windows-2022
     attributes:
       gusztavvargadr_windows:
         native_packages:
@@ -24,3 +20,5 @@ suites:
               - /quiet
               - /norestart
             executable: C:/Program Files/dotnet/dotnet.exe
+    includes:
+      - windows-2022

@@ -4,7 +4,10 @@ trigger:
       - '*'
   paths:
     include:
-      - samples/cookbooks/vagrant
+      - samples/cookbooks/development
+      - samples/cookbooks/git
+      - samples/cookbooks/dotnet
+      - samples/cookbooks/docker
       - samples/cookbooks/hashicorp
 pr: none
 
@@ -12,7 +15,7 @@ stages:
   - template: ../azure-pipelines.stages.yml
     parameters:
       configurations:
-        - name: vagrant
+        - name: development
           instances:
             - default-windows-2022
             - default-ubuntu-2404

@@ -21,7 +21,23 @@ Task("commit-lint")
 
 Task("commit-build")
   .Does(() => {
-    Chef("update");
+    var policyfiles = GetFiles($"{cookbookDirectory}/Policyfile*.rb");
+    foreach (var policyfile in policyfiles) {
+      var policyfileName = policyfile.GetFilename().ToString();
+      
+      Chef("install", policyfileName);
+      Chef("update", policyfileName, "--attributes");
+      Chef("export", policyfileName, MakeAbsolute(artifactsDirectory).ToString(), "--force", "--archive");
+
+      foreach (var archive in GetFiles($"{artifactsDirectory}/*{cookbook.Replace('-', '_')}*-*.tgz")) {
+        var archiveTarget = $"{artifactsDirectory}/{string.Join('-', archive.GetFilename().ToString().Split('-').SkipLast(1))}.tgz";
+        
+        if (FileExists(archiveTarget)) {
+          DeleteFile(archiveTarget);
+        }
+        MoveFile(archive, $"{archiveTarget}");
+      }
+    }
   });
 
 Task("commit-test")
@@ -59,11 +75,7 @@ Task("acceptance-test")
 
 Task("acceptance-clean")
   .Does(() => {
-    try {
-      Kitchen("destroy", instance);
-    } finally {
-      CleanDirectory(artifactsDirectory);
-    }
+    Kitchen("destroy", instance);
   });
 
 Task("acceptance")
