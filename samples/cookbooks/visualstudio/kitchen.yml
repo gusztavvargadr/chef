@@ -6,11 +6,3 @@ suites:
       gusztavvargadr_visualstudio:
         tools:
           ide:2022-community:
-
-  - name: ide-2019-community
-    includes:
-      - windows-2022
-    attributes:
-      gusztavvargadr_visualstudio:
-        tools:
-          ide:2019-community:
