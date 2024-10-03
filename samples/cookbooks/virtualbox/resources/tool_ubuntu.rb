@@ -34,12 +34,12 @@ action :install do
   virtualbox_extension_pack_list = shell_out('vboxmanage list extpacks').stdout.strip
   return if virtualbox_extension_pack_list.include?(virtualbox_version)
 
-  virtualbox_extension_pack_file = 
+  virtualbox_extension_pack_file =
     if virtualbox_version.start_with?('7.0')
       "Oracle_VM_VirtualBox_Extension_Pack-#{virtualbox_version}.vbox-extpack"
     else
       "Oracle_VirtualBox_Extension_Pack-#{virtualbox_version}.vbox-extpack"
-    end  
+    end
   virtualbox_extension_pack_download_uri = "https://download.virtualbox.org/virtualbox/#{virtualbox_version}/#{virtualbox_extension_pack_file}"
 
   virtualbox_extension_pack_local_path = "#{Chef::Config['file_cache_path']}/#{virtualbox_extension_pack_file}"
