@@ -3,12 +3,12 @@ suites:
     attributes:
       gusztavvargadr_dotnet:
         tools:
+          runtime:9.0:
           runtime:8.0:
-          runtime:6.0:
 
   - name: sdks
     attributes:
       gusztavvargadr_dotnet:
         tools:
+          sdk:9.0:
           sdk:8.0:
-          sdk:6.0:
