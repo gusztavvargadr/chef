@@ -3,6 +3,6 @@ describe port(80) do
 end
 
 describe command('dotnet --list-runtimes') do
+  its('stdout') { should include '9.0.' }
   its('stdout') { should include '8.0.' }
-  its('stdout') { should include '6.0.' }
 end

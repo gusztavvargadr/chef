@@ -4,8 +4,8 @@ gusztavvargadr_git:
 
 gusztavvargadr_dotnet:
   tools:
+    sdk:9.0:
     sdk:8.0:
-    sdk:6.0:
 
 gusztavvargadr_docker:
   tools:

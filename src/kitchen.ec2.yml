@@ -23,7 +23,7 @@ platforms:
     driver:
       image_search:
         owner-id: "668508375233"
-        name: kitchen-windows-2022-*
+        name: "*kitchen-windows-2022*"
       tags:
         Service: kitchen-windows-2022
     transport:
@@ -33,7 +33,7 @@ platforms:
     driver:
       image_search:
         owner-id: "668508375233"
-        name: kitchen-ubuntu-2404-*
+        name: "*kitchen-ubuntu-2404*"
       tags:
         Service: kitchen-ubuntu-2404
     provisioner:
@@ -43,7 +43,7 @@ platforms:
     driver:
       image_search:
         owner-id: "668508375233"
-        name: kitchen-ubuntu-2204-*
+        name: "*kitchen-ubuntu-2204*"
       tags:
         Service: kitchen-ubuntu-2204
     provisioner:

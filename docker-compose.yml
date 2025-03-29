@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   chef-core:
     image: gusztavvargadr/chef-core:${PLATFORM_NAME}-${PLATFORM_VARIANT}-${PLATFORM_VERSION}
