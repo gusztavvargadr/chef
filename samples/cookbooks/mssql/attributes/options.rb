@@ -13,14 +13,13 @@ default['gusztavvargadr_mssql']['options']['tools']['server'] = default['gusztav
 default['gusztavvargadr_mssql']['options']['tools']['management-studio:21'] = {
   'windows' => {
     'native_packages' => {
-      'SSMS 21.2' => {
+      'SSMS 21.1.3' => {
         'source' => 'https://download.visualstudio.microsoft.com/download/pr/d2fa077f-a814-4fb2-b903-1fca7658d17e/b5bd22685adb8e8ac81c53936c0a8bea85e9ad0aa7594d7c7b63eb388c910953/vs_SSMS.exe',
         'install' => [
-          '/install',
-          '/quiet',
-          '/norestart',
+          '--quiet',
+          '--norestart',
         ],
-        'executable' => 'C:/Program Files (x86)/Microsoft SQL Server Management Studio 21/Common7/IDE/Ssms.exe',
+        'executable' => 'C:/Program Files/Microsoft SQL Server Management Studio 21/Release/Common7/IDE/Ssms.exe',
       },
     },
   },
