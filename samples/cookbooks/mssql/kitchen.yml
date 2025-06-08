@@ -7,10 +7,10 @@ suites:
         tools:
           server:2019-developer:
 
-  - name: management-studio-20
+  - name: management-studio-21
     includes:
       - windows-2022
     attributes:
       gusztavvargadr_mssql:
         tools:
-          management-studio:20:
+          management-studio:21:

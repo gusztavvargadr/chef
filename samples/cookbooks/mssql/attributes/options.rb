@@ -10,21 +10,21 @@ default['gusztavvargadr_mssql']['options']['tools']['server:2019'] = default['gu
 default['gusztavvargadr_mssql']['options']['tools']['server:latest'] = default['gusztavvargadr_mssql']['options']['tools']['server:2019']
 default['gusztavvargadr_mssql']['options']['tools']['server'] = default['gusztavvargadr_mssql']['options']['tools']['server:latest']
 
-default['gusztavvargadr_mssql']['options']['tools']['management-studio:20'] = {
+default['gusztavvargadr_mssql']['options']['tools']['management-studio:21'] = {
   'windows' => {
     'native_packages' => {
-      'SSMS 20.2' => {
-        'source' => 'https://download.microsoft.com/download/9/b/e/9bee9f00-2ee2-429a-9462-c9bc1ce14c28/SSMS-Setup-ENU.exe',
+      'SSMS 21.2' => {
+        'source' => 'https://download.visualstudio.microsoft.com/download/pr/d2fa077f-a814-4fb2-b903-1fca7658d17e/b5bd22685adb8e8ac81c53936c0a8bea85e9ad0aa7594d7c7b63eb388c910953/vs_SSMS.exe',
         'install' => [
           '/install',
           '/quiet',
           '/norestart',
         ],
-        'executable' => 'C:/Program Files (x86)/Microsoft SQL Server Management Studio 20/Common7/IDE/Ssms.exe',
+        'executable' => 'C:/Program Files (x86)/Microsoft SQL Server Management Studio 21/Common7/IDE/Ssms.exe',
       },
     },
   },
 }
 
-default['gusztavvargadr_mssql']['options']['tools']['management-studio:latest'] = default['gusztavvargadr_mssql']['options']['tools']['management-studio:20']
+default['gusztavvargadr_mssql']['options']['tools']['management-studio:latest'] = default['gusztavvargadr_mssql']['options']['tools']['management-studio:21']
 default['gusztavvargadr_mssql']['options']['tools']['management-studio'] = default['gusztavvargadr_mssql']['options']['tools']['management-studio:latest']
