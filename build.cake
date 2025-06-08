@@ -54,10 +54,12 @@ Task("commit")
   .IsDependentOn("commit-init")
   .IsDependentOn("commit-lint")
   .IsDependentOn("commit-build")
-  .IsDependentOn("commit-test");
+  .IsDependentOn("commit-test")
+  .IsDependentOn("commit-clean");
 
 Task("acceptance-init")
   .Does(() => {
+    Chef("--version");
     Kitchen("--version");
 
     Kitchen("list", instance);
@@ -80,7 +82,12 @@ Task("acceptance-clean")
 
 Task("acceptance")
   .IsDependentOn("acceptance-init")
-  .IsDependentOn("acceptance-test");
+  .IsDependentOn("acceptance-test")
+  .IsDependentOn("acceptance-clean");
+
+Task("all")
+  .IsDependentOn("commit")
+  .IsDependentOn("acceptance");
 
 Task("default")
   .IsDependentOn("commit");
