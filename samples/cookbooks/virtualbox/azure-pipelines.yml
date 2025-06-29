@@ -14,8 +14,8 @@ stages:
         - name: virtualbox
           instances:
             - 7-1-windows-2022
-            - 7-1-ubuntu-2404
-            - 7-1-ubuntu-2204
+            # - 7-1-ubuntu-2404
+            # - 7-1-ubuntu-2204
             - 7-0-windows-2022
-            - 7-0-ubuntu-2404
-            - 7-0-ubuntu-2204
+            # - 7-0-ubuntu-2404
+            # - 7-0-ubuntu-2204
