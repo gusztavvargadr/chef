@@ -24,7 +24,7 @@ action :install do
   return unless ::Dir.empty?(agent_work)
 
   agent_archive_name = "vsts-agent-linux-#{agent_arch}-#{agent_version}.tar.gz"
-  agent_archive_download_uri = "https://vstsagentpackage.azureedge.net/agent/#{agent_version}/#{agent_archive_name}"
+  agent_archive_download_uri = "https://download.agent.dev.azure.com/agent/#{agent_version}/#{agent_archive_name}"
   agent_archive_local_path = "#{Chef::Config['file_cache_path']}/#{agent_archive_name}"
 
   remote_file agent_archive_local_path do
