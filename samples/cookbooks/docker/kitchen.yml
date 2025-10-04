@@ -4,9 +4,3 @@ provisioner:
 
 suites:
   - name: default
-    attributes:
-      gusztavvargadr_docker:
-        tools:
-          engine:latest-community:
-        images:
-          hello-world:

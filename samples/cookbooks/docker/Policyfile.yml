@@ -1,0 +1,5 @@
+gusztavvargadr_docker:
+  tools:
+    engine:latest-community:
+  images:
+    hello-world:
