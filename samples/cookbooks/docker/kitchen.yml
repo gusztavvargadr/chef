@@ -4,3 +4,7 @@ provisioner:
 
 suites:
   - name: default
+    attributes:
+      gusztavvargadr_docker:
+        images:
+          hello-world:

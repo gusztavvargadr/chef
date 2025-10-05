@@ -6,8 +6,6 @@ suites:
   - name: default
     attributes:
       gusztavvargadr_vagrant:
-        tools:
-          app:latest:
         plugins:
           vagrant-vmware-desktop:
         boxes:
