@@ -1,6 +1,6 @@
 require "#{File.dirname(__FILE__)}/../../../src/Policyfile"
 
-name 'gusztavvargadr_virtualbox_7_0'
+name 'gusztavvargadr_virtualbox_7_2'
 
 gusztavvargadr_chef_sources
 
@@ -10,6 +10,6 @@ run_list(
 
 attributes(
   [
-    "#{File.dirname(__FILE__)}/Policyfile.7-0.yml",
+    "#{File.dirname(__FILE__)}/Policyfile.7-2.yml",
   ]
 )

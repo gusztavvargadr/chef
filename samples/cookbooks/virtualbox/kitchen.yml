@@ -1,8 +1,8 @@
 suites:
+  - name: 7-2
+    provisioner:
+      policyfile_path: Policyfile.7-2.rb
+
   - name: 7-1
     provisioner:
       policyfile_path: Policyfile.7-1.rb
-
-  - name: 7-0
-    provisioner:
-      policyfile_path: Policyfile.7-0.rb
