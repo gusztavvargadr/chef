@@ -14,4 +14,4 @@ stages:
       configurations:
         - name: visualstudio
           instances:
-            - ide-2022-community-windows-2022
+            - default-windows-2022
