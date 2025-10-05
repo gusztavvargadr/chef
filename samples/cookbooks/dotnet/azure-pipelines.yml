@@ -13,6 +13,9 @@ stages:
       configurations:
         - name: dotnet
           instances:
+            - default-windows-2022
+            - default-ubuntu-2404
+            - default-ubuntu-2204
             - runtimes-windows-2022
             - runtimes-ubuntu-2404
             - runtimes-ubuntu-2204
