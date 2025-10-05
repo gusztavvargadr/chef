@@ -4,13 +4,3 @@ provisioner:
 
 suites:
   - name: default
-    attributes:
-      gusztavvargadr_hashicorp:
-        tools:
-          vagrant:latest:
-          packer:latest:
-          terraform:latest:
-          consul-template:latest:
-          consul:latest:
-          vault:latest:
-          nomad:latest:

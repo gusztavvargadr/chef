@@ -1,6 +1,2 @@
 suites:
   - name: default
-    attributes:
-      gusztavvargadr_vsts:
-        tools:
-          agent:latest:

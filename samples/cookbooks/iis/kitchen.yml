@@ -2,7 +2,3 @@ suites:
   - name: default
     includes:
       - windows-2022
-    attributes:
-      gusztavvargadr_iis:
-        tools:
-          server:latest:

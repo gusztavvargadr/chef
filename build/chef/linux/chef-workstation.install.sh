@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-CHEF_WORKSTATION_VERSION="25.5.1084"
+CHEF_WORKSTATION_VERSION="25.9.1094"
 
 curl -Ls https://omnitruck.chef.io/install.sh | bash -s -- -P chef-workstation -v $CHEF_WORKSTATION_VERSION
 

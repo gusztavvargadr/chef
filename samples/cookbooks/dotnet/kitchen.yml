@@ -1,4 +1,6 @@
 suites:
+  - name: default
+
   - name: runtimes
     attributes:
       gusztavvargadr_dotnet:

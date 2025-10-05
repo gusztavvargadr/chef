@@ -8,7 +8,6 @@ version '0.0.0'
 depends 'gusztavvargadr_git'
 depends 'gusztavvargadr_dotnet'
 depends 'gusztavvargadr_docker'
-depends 'gusztavvargadr_hashicorp'
 
 chef_version '>= 18.0'
 supports 'windows'

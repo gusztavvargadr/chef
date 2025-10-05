@@ -10,13 +10,3 @@ gusztavvargadr_dotnet:
 gusztavvargadr_docker:
   tools:
     engine:latest-community:
-
-gusztavvargadr_hashicorp:
-  tools:
-    vagrant:latest:
-    packer:latest:
-    terraform:latest:
-    consul-template:latest:
-    consul:latest:
-    vault:latest:
-    nomad:latest:

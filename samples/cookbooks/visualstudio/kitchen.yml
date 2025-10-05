@@ -1,8 +1,4 @@
 suites:
-  - name: ide-2022-community
+  - name: default
     includes:
       - windows-2022
-    attributes:
-      gusztavvargadr_visualstudio:
-        tools:
-          ide:2022-community:
