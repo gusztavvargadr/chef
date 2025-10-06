@@ -7,6 +7,7 @@ suites:
     provisioner:
       policyfile_path: Policyfile.updates.rb
     includes:
+      - windows-2025
       - windows-2022
 
   - name: native-packages
@@ -21,4 +22,5 @@ suites:
               - /norestart
             executable: C:/Program Files/dotnet/dotnet.exe
     includes:
+      - windows-2025
       - windows-2022

@@ -13,6 +13,7 @@ action :initialize do
     uri 'https://apt.releases.hashicorp.com'
     key 'https://apt.releases.hashicorp.com/gpg'
     components ['main']
+    trusted true
     action :add
   end
 end
