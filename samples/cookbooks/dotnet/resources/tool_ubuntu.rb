@@ -14,6 +14,7 @@ action :initialize do
   apt_repository 'dotnet-backports' do
     uri 'ppa:dotnet/backports'
     key 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x45a3f127159be9e5017811c62125b164e8e5d3fa'
+    trusted true
     action :add
   end
 
@@ -43,7 +44,7 @@ action :initialize do
     action :delete
   end
 
-  apt_update do
+  apt_update "gusztavvargadr_dotnet_tool[#{new_resource.name}]" do
     action :update
   end
 

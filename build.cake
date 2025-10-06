@@ -54,8 +54,7 @@ Task("commit")
   .IsDependentOn("commit-init")
   .IsDependentOn("commit-lint")
   .IsDependentOn("commit-build")
-  .IsDependentOn("commit-test")
-  .IsDependentOn("commit-clean");
+  .IsDependentOn("commit-test");
 
 Task("acceptance-init")
   .Does(() => {
@@ -82,7 +81,10 @@ Task("acceptance-clean")
 
 Task("acceptance")
   .IsDependentOn("acceptance-init")
-  .IsDependentOn("acceptance-test")
+  .IsDependentOn("acceptance-test");
+
+Task("clean")
+  .IsDependentOn("commit-clean")
   .IsDependentOn("acceptance-clean");
 
 Task("all")

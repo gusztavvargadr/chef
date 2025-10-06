@@ -1,4 +1,5 @@
 suites:
   - name: default
     includes:
+      - windows-2025
       - windows-2022

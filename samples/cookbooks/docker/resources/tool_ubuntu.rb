@@ -16,6 +16,7 @@ action :initialize do
     key 'https://download.docker.com/linux/ubuntu/gpg'
     components ['stable']
     arch apt_repository_arch
+    trusted true
     action :add
   end
 end

@@ -15,6 +15,7 @@ action :initialize do
     key 'https://www.virtualbox.org/download/oracle_vbox_2016.asc'
     components ['contrib']
     arch apt_repository_arch
+    trusted true
     action :add
   end
 
