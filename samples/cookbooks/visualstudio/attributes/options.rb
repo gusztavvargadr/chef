@@ -1,7 +1,6 @@
 default['gusztavvargadr_visualstudio']['options']['tools']['ide:2022-community'] = {
   'windows' => {
     'features' => {
-      'NetFx3' => {},
     },
     'native_packages' => {
       'Visual Studio 2022 Community' => {
@@ -13,9 +12,6 @@ default['gusztavvargadr_visualstudio']['options']['tools']['ide:2022-community']
           '--add Microsoft.VisualStudio.Workload.NetWeb',
           '--add Microsoft.VisualStudio.Workload.Data',
           '--add Microsoft.VisualStudio.Workload.Azure',
-          '--add Microsoft.VisualStudio.Workload.NetCoreTools',
-          '--add Microsoft.VisualStudio.Component.TestTools.Core',
-          '--add Microsoft.Net.Component.3.5.DeveloperTools',
           '--includeRecommended',
           '--includeOptional',
           '--quiet',
