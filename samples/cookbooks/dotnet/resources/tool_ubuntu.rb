@@ -7,9 +7,9 @@ property :options, Hash, default: {}
 default_action :install
 
 action :initialize do
-  _ = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
+  options = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  os_version = node['platform_version']
+  return if options['package'].include?('10.0')
 
   apt_repository 'dotnet-backports' do
     uri 'ppa:dotnet/backports'
@@ -24,42 +24,21 @@ action :initialize do
     pin_priority '1000'
     action :add
   end
-
-  return unless os_version.equal?('22.04')
-
-  deb_source = "https://packages.microsoft.com/config/ubuntu/#{os_version}/packages-microsoft-prod.deb"
-  deb_target = "#{Chef::Config[:file_cache_path]}/packages-microsoft-prod.deb"
-
-  remote_file deb_target do
-    source deb_source
-    action :create
-  end
-
-  dpkg_package 'packages-microsoft-prod' do
-    source deb_target
-    action :install
-  end
-
-  file deb_target do
-    action :delete
-  end
-
-  apt_update "gusztavvargadr_dotnet_tool[#{new_resource.name}]" do
-    action :update
-  end
-
-  apt_preference 'microsoft' do
-    glob '*'
-    pin 'origin packages.microsoft.com'
-    pin_priority '1001'
-    action :add
-  end
 end
 
 action :install do
   options = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  apt_package options['package'] do
-    action :install
+  if options['package'].include?('10.0')
+    bash 'dotnet_install' do
+      code <<~EOH
+        curl -L https://dot.net/v1/dotnet-install.sh | sudo bash -s -- --channel 10.0
+      EOH
+      action :run
+    end
+  else
+    apt_package options['package'] do
+      action :install
+    end
   end
 end
