@@ -18,18 +18,24 @@ Vagrant.configure("2") do |config|
     override.vm.network "private_network", bridge: hyperv_network_bridge
   end
 
-  config.vm.provider "virtualbox" do |provider, _override|
+  config.vm.provider "virtualbox" do |provider|
     provider.cpus = provider_cpus unless provider_cpus.to_s.empty?
     provider.memory = provider_memory unless provider_memory.to_s.empty?
     provider.customize [ "modifyvm", :id, "--nested-hw-virt", "on" ] if provider_nested_virtualization
     provider.linked_clone = provider_linked_clone
   end
 
-  config.vm.provider "vmware_desktop" do |provider, _override|
+  config.vm.provider "vmware_desktop" do |provider|
     provider.cpus = provider_cpus unless provider_cpus.to_s.empty?
     provider.memory = provider_memory unless provider_memory.to_s.empty?
     provider.vmx["vhv.enable"] = "TRUE" if provider_nested_virtualization
     provider.linked_clone = provider_linked_clone
+  end
+
+  config.vm.provider "libvirt" do |provider|
+    provider.cpus = provider_cpus.to_i unless provider_cpus.to_s.empty?
+    provider.memory = provider_memory.to_i unless provider_memory.to_s.empty?
+    provider.nested = true if provider_nested_virtualization
   end
 
   config.vm.synced_folder ".", "/vagrant", disabled: true if provider_synced_folder_disabled
