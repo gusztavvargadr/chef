@@ -1,5 +1,5 @@
 describe command('docker version -f "{{ .Server.Version }}"') do
-  its('stdout') { should include '28.' }
+  its('stdout') { should include '29.' }
 end
 
 describe command('docker version -f "{{ .Server.Platform.Name }}"') do
@@ -7,7 +7,7 @@ describe command('docker version -f "{{ .Server.Platform.Name }}"') do
 end
 
 describe command('docker version -f "{{ .Client.Version }}"') do
-  its('stdout') { should include '28.' }
+  its('stdout') { should include '29.' }
 end
 
 describe command('docker version -f "{{ .Client.Platform.Name }}"') do

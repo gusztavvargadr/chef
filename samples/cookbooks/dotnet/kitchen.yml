@@ -5,6 +5,7 @@ suites:
     attributes:
       gusztavvargadr_dotnet:
         tools:
+          runtime:10.0:
           runtime:9.0:
           runtime:8.0:
 
@@ -12,5 +13,6 @@ suites:
     attributes:
       gusztavvargadr_dotnet:
         tools:
+          sdk:10.0:
           sdk:9.0:
           sdk:8.0:
