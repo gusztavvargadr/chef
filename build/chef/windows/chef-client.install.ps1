@@ -1,4 +1,4 @@
-$CHEF_CLIENT_VERSION="18.8.54"
+$CHEF_CLIENT_VERSION="18.9.4"
 
 . { iwr -useb https://omnitruck.chef.io/install.ps1 } | iex; install -project chef -version $CHEF_CLIENT_VERSION
 
