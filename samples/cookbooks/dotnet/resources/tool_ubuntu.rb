@@ -7,9 +7,7 @@ property :options, Hash, default: {}
 default_action :install
 
 action :initialize do
-  options = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
-
-  return if options['package'].include?('10.0')
+  _ = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   apt_repository 'dotnet-backports' do
     uri 'ppa:dotnet/backports'
@@ -29,16 +27,7 @@ end
 action :install do
   options = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  if options['package'].include?('10.0')
-    bash 'dotnet_install' do
-      code <<~EOH
-        curl -L https://dot.net/v1/dotnet-install.sh | sudo bash -s -- --channel 10.0
-      EOH
-      action :run
-    end
-  else
-    apt_package options['package'] do
-      action :install
-    end
+  apt_package options['package'] do
+    action :install
   end
 end

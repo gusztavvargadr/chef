@@ -1,0 +1,5 @@
+gusztavvargadr_dotnet:
+  tools:
+    sdk:8.0:
+    sdk:9.0:
+    sdk:10.0:

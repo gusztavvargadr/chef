@@ -64,6 +64,36 @@ Task("acceptance-init")
     Kitchen("list", instance);
   });
 
+Task("acceptance-create")
+  .Does(() => {
+    try {
+      Kitchen("create", instance);
+    } catch (Exception) {
+      Kitchen("create", instance);
+      throw;
+    }
+  });
+
+Task("acceptance-converge")
+  .Does(() => {
+    try {
+      Kitchen("converge", instance);
+    } catch (Exception) {
+      Kitchen("create", instance);
+      throw;
+    }
+  });
+
+Task("acceptance-verify")
+  .Does(() => {
+    try {
+      Kitchen("verify", instance);
+    } catch (Exception) {
+      Kitchen("create", instance);
+      throw;
+    }
+  });
+
 Task("acceptance-test")
   .Does(() => {
     try {

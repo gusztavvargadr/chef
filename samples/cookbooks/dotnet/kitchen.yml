@@ -2,17 +2,9 @@ suites:
   - name: default
 
   - name: runtimes
-    attributes:
-      gusztavvargadr_dotnet:
-        tools:
-          runtime:10.0:
-          runtime:9.0:
-          runtime:8.0:
+    provisioner:
+      policyfile_path: Policyfile.runtimes.rb
 
   - name: sdks
-    attributes:
-      gusztavvargadr_dotnet:
-        tools:
-          sdk:10.0:
-          sdk:9.0:
-          sdk:8.0:
+    provisioner:
+      policyfile_path: Policyfile.sdks.rb

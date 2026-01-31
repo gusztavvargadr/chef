@@ -1,0 +1,5 @@
+gusztavvargadr_dotnet:
+  tools:
+    runtime:8.0:
+    runtime:9.0:
+    runtime:10.0:

@@ -15,8 +15,9 @@ end
 action :dist_upgrade do
   bash "gusztavvargadr_ubuntu_update[#{new_resource.name}]" do
     code <<~EOH
-      DEBIAN_FRONTEND=noninteractive apt-get -y -qq -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef dist-upgrade
+      apt-get -y -qq -o Dpkg::Options::=--force-confold -o Dpkg::Options::=--force-confdef dist-upgrade
     EOH
+    environment 'DEBIAN_FRONTEND' => 'noninteractive'
     action :run
     not_if { shell_out('apt list --upgradable -qq').stdout.empty? }
   end
@@ -28,6 +29,7 @@ action :cleanup do
       apt-get -y -qq autoremove
       apt-get -y -qq clean
     EOH
+    environment 'DEBIAN_FRONTEND' => 'noninteractive'
     action :run
   end
 end
