@@ -7,7 +7,7 @@ property :options, Hash, default: {}
 default_action :install
 
 action :initialize do
-  options = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
+  _ = node['gusztavvargadr_dotnet']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   apt_repository 'dotnet-backports' do
     uri 'ppa:dotnet/backports'
