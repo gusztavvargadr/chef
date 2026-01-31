@@ -15,5 +15,5 @@ describe command('docker version -f "{{ .Client.Platform.Name }}"') do
 end
 
 describe command('docker compose version') do
-  its('stdout') { should include 'Docker Compose version v2.' }
+  its('stdout') { should include 'Docker Compose version v5.' }
 end
