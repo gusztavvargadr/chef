@@ -1,6 +1,6 @@
 default['gusztavvargadr_vsts']['options']['tools']['agent:latest'] = {
   'windows' => {
-    'version' => '4.264.2',
+    'version' => '4.266.2',
     'arch' => 'x64',
     'config' => {
       'url' => '',
@@ -12,7 +12,7 @@ default['gusztavvargadr_vsts']['options']['tools']['agent:latest'] = {
     },
   },
   'ubuntu' => {
-    'version' => '4.264.2',
+    'version' => '4.266.2',
     'arch' => 'x64',
     'config' => {
       'url' => '',
