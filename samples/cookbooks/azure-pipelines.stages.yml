@@ -45,19 +45,23 @@ stages:
   - stage: acceptance
     displayName: Acceptance
 
-    variables:
-      - group: kitchen-ec2
-
     jobs:
       - ${{ each configuration in parameters.configurations }}:
         - ${{ each instance in configuration.instances }}:
           - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(instance, '-', '_') }}
             displayName: Test cookbook ${{ configuration.name }} on instance ${{ instance }}
 
-            pool:
-              vmImage: ubuntu-22.04
+            ${{ if contains(instance, 'windows') }}:
+              pool:
+                name: default
+                demands:
+                  - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER -equals hyperv
 
-            container: gusztavvargadr/chef-workstation:linux-ubuntu-22.04
+            ${{ if contains(instance, 'ubuntu') }}:
+              pool:
+                name: default
+                demands:
+                  - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER -equals qemu
 
             workspace:
               clean: all
