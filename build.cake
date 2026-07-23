@@ -19,6 +19,11 @@ Task("commit-lint")
     Chef("exec", "cookstyle");
   });
 
+Task("commit-lint-fix")
+  .Does(() => {
+    Chef("exec", "cookstyle", "--autocorrect");
+  });
+
 Task("commit-build")
   .Does(() => {
     var policyfiles = GetFiles($"{cookbookDirectory}/Policyfile*.rb");

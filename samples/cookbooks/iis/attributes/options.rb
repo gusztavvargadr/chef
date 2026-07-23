@@ -2,7 +2,7 @@ default['gusztavvargadr_iis']['options']['tools']['server:latest'] = {
   'windows' => {
     'features' => {
       'IIS-WebServer' => {},
-      'IIS-ASPNET' => {}
+      'IIS-ASPNET' => {},
     },
     'native_packages' => {
       '.NET 10.0.10 Hosting Bundle' => {
