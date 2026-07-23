@@ -1,6 +1,7 @@
 driver:
   name: vagrant
   vm_hostname: false
+  vagrantfile_erb: ../../../src/kitchen.Vagrantfile.erb
   vagrantfiles:
     - ../../../src/kitchen.Vagrantfile
 
