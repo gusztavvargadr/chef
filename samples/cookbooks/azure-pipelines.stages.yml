@@ -76,16 +76,10 @@ stages:
                 displayName: Initialize build
 
               - script: |
-                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }} --target acceptance
                 displayName: Run build
-                env:
-                  AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
-                  AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
 
               - script: |
-                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }}/ec2 --target acceptance-clean
+                  dotnet cake --configuration ${{ configuration.name }}/${{ instance }} --target acceptance-clean
                 displayName: Clean build
                 condition: always()
-                env:
-                  AWS_ACCESS_KEY_ID: $(AWS_ACCESS_KEY_ID)
-                  AWS_SECRET_ACCESS_KEY: $(AWS_SECRET_ACCESS_KEY)
