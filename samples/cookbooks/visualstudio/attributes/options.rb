@@ -1,7 +1,6 @@
 default['gusztavvargadr_visualstudio']['options']['tools']['ide:2022-community'] = {
   'windows' => {
-    'features' => {
-    },
+    'features' => {},
     'native_packages' => {
       'Visual Studio 2022 Community' => {
         'source' => 'https://download.visualstudio.microsoft.com/download/pr/f7f5ecbc-83ca-4cf0-bdb2-aaf70efb6d97/d3cc238063d64e6448afbe4dfd69254af37adb4ff47e158fea2280bcafd098c4/vs_Community.exe',

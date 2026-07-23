@@ -12,7 +12,7 @@ action :install do
   features = options['features']
   native_packages = options['native_packages']
 
-  features.each do |feature_name, _|
+  features.each_key do |feature_name|
     windows_feature_dism feature_name do
       all true
       action :install
