@@ -4,7 +4,7 @@ default['gusztavvargadr_visualstudio']['options']['tools']['ide:2022-community']
     },
     'native_packages' => {
       'Visual Studio 2022 Community' => {
-        'source' => 'https://download.visualstudio.microsoft.com/download/pr/dc2793e9-7b80-4f11-9e33-85833e8921a6/3e99b3943dceebd42d08e48c1d86422bce270dac46bb718d4e8e4a61034d52ce/vs_Community.exe',
+        'source' => 'https://download.visualstudio.microsoft.com/download/pr/f7f5ecbc-83ca-4cf0-bdb2-aaf70efb6d97/d3cc238063d64e6448afbe4dfd69254af37adb4ff47e158fea2280bcafd098c4/vs_Community.exe',
         'install' => [
           '--installPath ""C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\Community""',
           '--add Microsoft.VisualStudio.Workload.CoreEditor',
