@@ -1,7 +1,7 @@
 default['gusztavvargadr_virtualbox']['options']['tools']['app:7.2'] = {
   'windows' => {
     'package' => 'virtualbox',
-    'version' => '7.2.6',
+    'version' => '7.2.14',
   },
   'ubuntu' => {
     'package' => 'virtualbox-7.2',
@@ -11,7 +11,7 @@ default['gusztavvargadr_virtualbox']['options']['tools']['app:7.2'] = {
 default['gusztavvargadr_virtualbox']['options']['tools']['app:7.1'] = {
   'windows' => {
     'package' => 'virtualbox',
-    'version' => '7.1.16',
+    'version' => '7.1.18',
   },
   'ubuntu' => {
     'package' => 'virtualbox-7.1',
