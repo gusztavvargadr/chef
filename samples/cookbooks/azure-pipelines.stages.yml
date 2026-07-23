@@ -13,9 +13,10 @@ stages:
           displayName: Build cookbook ${{ configuration.name }}
 
           pool:
-            vmImage: ubuntu-22.04
-
-          container: gusztavvargadr/chef-workstation:linux-ubuntu-22.04
+            name: default
+            demands:
+              - Agent.OS -equals Linux
+              - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER -equals none
 
           workspace:
             clean: all
