@@ -16,6 +16,7 @@ stages:
       configurations:
         - name: development
           instances:
+            - default-windows-2025
             - default-windows-2022
             - default-ubuntu-2404
             - default-ubuntu-2204

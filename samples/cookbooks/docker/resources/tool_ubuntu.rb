@@ -9,14 +9,15 @@ default_action :install
 action :initialize do
   _ = node['gusztavvargadr_docker']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
-  apt_repository_arch = shell_out('dpkg --print-architecture').stdout.strip
+  apt_repository_arch = node['kernel']['machine'] == 'x86_64' ? 'amd64' : shell_out('dpkg --print-architecture').stdout.strip
 
   apt_repository 'docker' do
     uri 'https://download.docker.com/linux/ubuntu'
     key 'https://download.docker.com/linux/ubuntu/gpg'
     components ['stable']
     arch apt_repository_arch
-    trusted true
+    distribution node['lsb']['codename']
+    signed_by true
     action :add
   end
 end
