@@ -16,7 +16,6 @@ action :initialize do
     key 'https://download.docker.com/linux/ubuntu/gpg'
     components ['stable']
     arch apt_repository_arch
-    distribution node['lsb']['codename']
     signed_by true
     action :add
   end

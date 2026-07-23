@@ -8,7 +8,7 @@ tools.each do |tool_name, tool_options|
 end
 
 images = node['gusztavvargadr_docker']['images']
-images.each do |image_name, _|
+images.each_key do |image_name|
   gusztavvargadr_docker_image image_name do
     action :pull
     not_if { reboot_pending? }
