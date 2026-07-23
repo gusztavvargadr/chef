@@ -75,6 +75,11 @@ Task("acceptance-create")
     }
   });
 
+Task("acceptance-login")
+  .Does(() => {
+    Kitchen("login", instance);
+  });
+
 Task("acceptance-converge")
   .Does(() => {
     try {

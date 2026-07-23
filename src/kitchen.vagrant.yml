@@ -6,6 +6,10 @@ driver:
     - ../../../src/kitchen.Vagrantfile
 
 provisioner:
+  name: chef_infra
+  product_name: chef
+  product_version: 18.10.17
+  install_strategy: always
   max_retries: 0
 
 verifier:
