@@ -60,7 +60,7 @@ action :configure do
 
   agent_env_vars = agent_config['env'] || {}
   file agent_env_file_path do
-    content (agent_env_vars.map { |key, value| "#{key}=#{value}" }).join($RS).concat($RS)
+    content agent_env_vars.map { |key, value| "#{key}=#{value}" }.join($RS).concat($RS)
     action :create
   end
 

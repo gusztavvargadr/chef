@@ -10,7 +10,7 @@ action :initialize do
   options = node['gusztavvargadr_visualstudio']['options']['tools'][new_resource.name][node['platform']].merge(new_resource.options)
 
   features = options['features']
-  features.each do |feature_name, _|
+  features.each_key do |feature_name|
     windows_feature_dism feature_name do
       all true
       action :install

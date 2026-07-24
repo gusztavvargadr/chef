@@ -19,6 +19,11 @@ Task("commit-lint")
     Chef("exec", "cookstyle");
   });
 
+Task("commit-lint-fix")
+  .Does(() => {
+    Chef("exec", "cookstyle", "--autocorrect");
+  });
+
 Task("commit-build")
   .Does(() => {
     var policyfiles = GetFiles($"{cookbookDirectory}/Policyfile*.rb");
@@ -54,7 +59,8 @@ Task("commit")
   .IsDependentOn("commit-init")
   .IsDependentOn("commit-lint")
   .IsDependentOn("commit-build")
-  .IsDependentOn("commit-test");
+  .IsDependentOn("commit-test")
+  .IsDependentOn("commit-clean");
 
 Task("acceptance-init")
   .Does(() => {
@@ -72,6 +78,11 @@ Task("acceptance-create")
       Kitchen("create", instance);
       throw;
     }
+  });
+
+Task("acceptance-login")
+  .Does(() => {
+    Kitchen("login", instance);
   });
 
 Task("acceptance-converge")
@@ -111,10 +122,7 @@ Task("acceptance-clean")
 
 Task("acceptance")
   .IsDependentOn("acceptance-init")
-  .IsDependentOn("acceptance-test");
-
-Task("clean")
-  .IsDependentOn("commit-clean")
+  .IsDependentOn("acceptance-test")
   .IsDependentOn("acceptance-clean");
 
 Task("all")

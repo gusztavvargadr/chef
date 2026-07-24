@@ -3,7 +3,7 @@ gusztavvargadr_hashicorp:
     vagrant:latest:
     packer:latest:
     terraform:latest:
-    consul-template:latest:
-    consul:latest:
-    vault:latest:
-    nomad:latest:
+    # consul-template:latest:
+    # consul:latest:
+    # vault:latest:
+    # nomad:latest:
