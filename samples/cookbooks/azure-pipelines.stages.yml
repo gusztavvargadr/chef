@@ -15,8 +15,7 @@ stages:
           pool:
             name: default
             demands:
-              - Agent.OS -equals Linux
-              - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER -equals none
+              - VSTS_AGENT_CAP_CHEF -equals build
 
           workspace:
             clean: all
@@ -52,17 +51,11 @@ stages:
           - job: test_${{ replace(configuration.name, '-', '_') }}_${{ replace(instance, '-', '_') }}
             displayName: Test cookbook ${{ configuration.name }} on instance ${{ instance }}
 
-            ${{ if contains(instance, 'windows') }}:
-              pool:
-                name: default
-                demands:
-                  - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER -equals hyperv
-
-            ${{ if contains(instance, 'ubuntu') }}:
-              pool:
-                name: default
-                demands:
-                  - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER -equals qemu
+            pool:
+              name: default
+              demands:
+                - VSTS_AGENT_CAP_CHEF -equals test
+                - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER
 
             workspace:
               clean: all
