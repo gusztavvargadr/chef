@@ -55,16 +55,41 @@ action :initialize do
 end
 
 action :install do
-  [1..5].each do |_|
-    powershell_script 'Install Updates' do
+  updates_installed = false
+  updates_installed_path = "#{Chef::Config[:file_cache_path]}/windows-updates-installed.txt"
+
+  (1..1).each do |attempt|
+    updates_available = powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip.to_i
+
+    log "Windows Update scan found #{updates_available} available update(s) (attempt #{attempt})"
+    break if updates_available.zero?
+
+    ::File.delete(updates_installed_path) if ::File.exist?(updates_installed_path)
+
+    powershell_script "Install Updates (attempt #{attempt})" do
       code <<~EOH
-        Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot
+        $updates = [System.Collections.ArrayList]::new()
+
+        Get-WUInstall -MicrosoftUpdate -AcceptAll -Install -IgnoreUserInput -IgnoreReboot -Verbose | ForEach-Object {
+          [void] $updates.Add($_)
+          Write-Output $_
+        }
+
+        $updatesInstalled = @($updates | Where-Object { $_.Result -eq 'Installed' }).Count
+        Write-Output "Windows Update installed $updatesInstalled update(s)"
+        Set-Content -LiteralPath '#{updates_installed_path}' -Value $updatesInstalled -NoNewline
       EOH
+      live_stream true
       action :run
     end
 
-    break if reboot_pending? || powershell_out('(Get-WUInstall -MicrosoftUpdate).Count').stdout.strip == '0'
+    updates_installed_count = ::File.read(updates_installed_path).strip.to_i
+    updates_installed ||= updates_installed_count.positive?
+    break if updates_installed_count.zero? || reboot_pending?
   end
+
+  ::File.delete(updates_installed_path) if ::File.exist?(updates_installed_path)
+  node.run_state['gusztavvargadr_windows_updates_installed'] = updates_installed
 end
 
 action :cleanup do

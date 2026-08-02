@@ -15,5 +15,3 @@ stages:
           instances:
             - updates-windows-2025
             - updates-windows-2022
-            # - native-packages-windows-2025
-            # - native-packages-windows-2022
