@@ -42,7 +42,7 @@ The shared Kitchen configuration knows nothing about any one cookbook.
 
 ## Docker images
 
-The images are built from the Dockerfiles under `build/docker/linux` and `build/docker/windows`, one per image, and are tagged `gusztavvargadr/<image>:<platform>-<variant>-<version>`. `docker-compose.yml` names each image that way, from the platform, variant, version, and base image in an `.env.<platform>-<variant>-<version>` file.
+The images are built from the Dockerfiles under `build/docker/linux` and `build/docker/windows`, one per image, and are tagged `gusztavvargadr/<image>:<platform>-<variant>-<version>`. `docker-compose.yml` names each image that way, from the platform, variant, and version in an `.env.<platform>-<variant>-<version>` file. Only the Linux files also name a base image, the `mcr.microsoft.com/dotnet/sdk` tag their `chef-core` builds from, because the Windows `chef-core` builds from `mcr.microsoft.com/windows/<variant>:<version>`.
 
 | Image | Built from | Adds |
 | --- | --- | --- |

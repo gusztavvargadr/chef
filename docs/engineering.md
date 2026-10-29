@@ -50,10 +50,10 @@ Every target runs its commands in the cookbook's directory:
 | Target | What it runs |
 | --- | --- |
 | `commit-init` | `chef --version` |
-| `commit-lint` | `cookstyle` |
-| `commit-lint-fix` | `cookstyle --autocorrect` |
+| `commit-lint` | `chef exec cookstyle` |
+| `commit-lint-fix` | `chef exec cookstyle --autocorrect` |
 | `commit-build` | `chef install`, `chef update --attributes`, and `chef export --archive` for each `Policyfile*.rb`, leaving `artifacts/<policy name>.tgz` |
-| `commit-test` | `rspec` |
+| `commit-test` | `chef exec rspec` |
 | `commit-clean` | Empties `artifacts` |
 | `commit` | `commit-init`, `commit-lint`, `commit-build`, and `commit-test` |
 | `acceptance-init` | `chef --version`, `kitchen --version`, and `kitchen list` |
