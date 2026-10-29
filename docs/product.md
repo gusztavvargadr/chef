@@ -22,7 +22,7 @@ The repository started in 2016 as a set of Chef samples for provisioning Windows
 
 Today the repository has the `gusztavvargadr_*` cookbooks under `samples/cookbooks`, the shared policy helpers and Kitchen configuration under `src`, and the `gusztavvargadr/chef-core`, `chef-client`, and `chef-workstation` Docker images, which its pipeline publishes to Docker Hub for Ubuntu 22.04 and 24.04.
 
-It does not publish the cookbooks to a Chef Supermarket, and a consumer takes them from the repository. The `chef-policy` Chocolatey package under `build/chocolatey` is not maintained and is pending removal.
+It does not publish the cookbooks to a Chef Supermarket, and a consumer takes them from the repository. The Chef Docker images and the `chef-policy` Chocolatey package under `build/chocolatey` are not maintained and are pending removal.
 
 ## Terms
 
