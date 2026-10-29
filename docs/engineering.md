@@ -13,7 +13,7 @@ A machine that builds and tests the cookbooks needs:
 
 Vagrant downloads the `gusztavvargadr/kitchen-<platform>` box of each platform the first time it creates one. `src/kitchen.Vagrantfile` sizes each machine from `VAGRANT_PROVIDER_CPUS` and `VAGRANT_PROVIDER_MEMORY`, 4 CPUs and 8192 MB where they are unset.
 
-A machine that builds the images needs Docker with Compose, and a Windows container host for the Windows images.
+A machine that builds the images needs Docker with Compose.
 
 The repository pins no version of the .NET SDK, Chef Workstation, or Vagrant on the machine. It pins these:
 
@@ -64,7 +64,7 @@ Every target runs its commands in the cookbook's directory:
 
 `Policyfile*.lock.json` is ignored rather than committed, so `commit-build` in a clean clone, as in the pipelines, resolves each policy's cookbooks afresh.
 
-`build.cake` does not build the images: `docker-compose.yml` builds and runs each one for the platform an `.env.<platform>-<variant>-<version>` file names.
+`build.cake` does not build the images: `docker-compose.yml` builds and runs each Linux image for the platform an `.env.linux-<variant>-<version>` file names. Building the Windows images with `docker-compose.yml` is not supported.
 
 ## Checks
 
@@ -83,7 +83,7 @@ dotnet cake --configuration docker --target commit
 dotnet cake --configuration docker/default-ubuntu-2204 --target acceptance
 ```
 
-`commit-lint-fix` corrects the offenses Cookstyle can correct by itself. `commit-test` finds no examples and passes, because no cookbook has a `spec` directory, so what a cookbook installs is proven in acceptance, by the InSpec tests under its `test/integration/<suite>`.
+`commit-lint-fix` corrects the offenses Cookstyle can correct by itself. `commit-test` finds no examples and passes, because no cookbook has a `spec` directory. What a cookbook installs is proven in acceptance instead, by the InSpec tests under its `test/integration/<suite>`, for every cookbook but `gusztavvargadr_hello_world`, whose `hello-world` directory has no `test` directory.
 
 An image is checked by building and running it, `chef-core` first, so `chef-client` and `chef-workstation` build on the changed `chef-core` rather than on the published one:
 
