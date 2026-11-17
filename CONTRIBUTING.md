@@ -2,7 +2,7 @@
 
 ## Layout
 
-- `samples/cookbooks/<name>`: one cookbook each, named `gusztavvargadr_<name>`, with its policies, `kitchen.yml`, and pipeline. A new cookbook starts from a copy of `samples/cookbooks/hello-world`.
+- `samples/cookbooks/<name>`: one cookbook each, named `gusztavvargadr_<name>`, with its policies, `kitchen.yml`, and pipeline.
 - `src`: the shared policy helpers every policy requires, and the Test Kitchen configuration of each driver.
 - `build`: the Chef Docker images and the Chocolatey package.
 
@@ -11,6 +11,8 @@
 - The `default` recipe runs `initialize`, `apply`, and `cleanup`, in that order.
 - A cookbook reads its settings only from `node['gusztavvargadr_<name>']`.
 - A cookbook knows nothing about the cookbooks that depend on it, the policies that use it, Test Kitchen, or the build.
+
+`samples/cookbooks/hello-world` is a minimal sample of a cookbook that follows these conventions.
 
 ## Prerequisites
 
