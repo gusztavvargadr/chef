@@ -4,7 +4,7 @@ Read [README.md](README.md) and [CONTRIBUTING.md](CONTRIBUTING.md) before changi
 
 ## Ask before
 
-- Running any `acceptance-*` target, `acceptance`, or `all` with the `ec2` driver, because it launches AWS instances that cost money until they are destroyed.
+- Running any `acceptance-*` target, `acceptance`, or `all` with the `ec2` driver, because it launches AWS instances that cost money until they are destroyed. The `ec2` driver is experimental: its AMIs are gone, so such a run fails at create.
 
 Everything else, including acceptance with the `vagrant` driver, needs no approval.
 

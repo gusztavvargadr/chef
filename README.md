@@ -7,7 +7,7 @@ The cookbooks live under `samples/cookbooks`, a path kept for historical reasons
 ## Requirements
 
 - [Chef Workstation](https://docs.chef.io/workstation/), to resolve and export a policy.
-- Chef Infra Client 18 or later on each machine a policy provisions.
+- Chef Infra Client or [Cinc Client](https://cinc.sh) 18 or later on each machine a policy provisions.
 
 ## Usage
 
