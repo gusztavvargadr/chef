@@ -15,7 +15,7 @@ driver:
 provisioner:
   name: chef_infra
   require_chef_omnibus: 18.11.11
-  chef_omnibus_url: https://omnitruck.cinc.sh/stable/cinc/install.sh
+  chef_omnibus_url: https://omnitruck.cinc.sh/install.sh
   chef_omnibus_root: /opt/cinc
   max_retries: 0
 
@@ -31,6 +31,7 @@ platforms:
       tags:
         Service: kitchen-windows-2022
     provisioner:
+      install_msi_url: https://packages.cinc.sh/files/stable/cinc/18.11.11/windows/2016/cinc-18.11.11-1-x64.msi
       chef_omnibus_root: $env:systemdrive\cinc-project\cinc
     transport:
       elevated: true
