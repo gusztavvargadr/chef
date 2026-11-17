@@ -18,7 +18,7 @@
 - The .NET SDK, to run [Cake](https://cakebuild.net).
 - Chef Workstation. On Windows, `build.cake` expects it under `C:\opscode\chef-workstation`.
 - For acceptance with the `vagrant` driver: Vagrant and a provider, which `VAGRANT_DEFAULT_PROVIDER` selects and which is `virtualbox` when unset.
-- For acceptance with the `ec2` driver: AWS credentials.
+- For acceptance with the `ec2` driver, which is experimental: AWS credentials.
 
 ## Build and test
 
@@ -31,7 +31,7 @@ dotnet cake --cookbook <cookbook> [--instance <instance>] [--driver <driver>] --
 
 - `--cookbook` is a directory under `samples/cookbooks`, such as `docker`.
 - `--instance` is a Test Kitchen instance, such as `default-ubuntu-2204`. Without it, a target acts on every instance.
-- `--driver` is `vagrant` or `ec2`, and `vagrant` when left out.
+- `--driver` is `vagrant` or `ec2`, and `vagrant` when left out. `ec2` is experimental: the AMIs `src/kitchen.ec2.yml` searches for are gone and are to be built with packer, and the pipelines use `vagrant` on the self-hosted agents.
 - `--configuration <cookbook>/<instance>/<driver>` is a shortcut for the three, where trailing parts can be left out, such as `--configuration docker/default-ubuntu-2204`.
 - `--showtree` in place of `--target` lists the targets.
 
@@ -42,7 +42,7 @@ dotnet cake --cookbook <cookbook> [--instance <instance>] [--driver <driver>] --
 
 ### Acceptance
 
-- `acceptance` creates, converges, verifies, and destroys each instance with Test Kitchen.
+- `acceptance` creates, converges, verifies, and destroys each instance with Test Kitchen. Converging installs [Cinc Client](https://cinc.sh) where the instance doesn't have it yet, because Chef Infra Client's packages need a Progress license.
 - `acceptance-create`, `-converge`, `-verify`, `-test`, and `-login` each run the [Test Kitchen](https://kitchen.ci/docs/getting-started/) command of the same name, and `acceptance-clean` runs `kitchen destroy`.
 
 ### Checks
