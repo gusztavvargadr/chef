@@ -1,20 +1,16 @@
 # Agents
 
-This file lists every guide an agent working in this repository reads, and when to read it.
+Read [README.md](README.md) and [CONTRIBUTING.md](CONTRIBUTING.md) before changing anything.
 
-## Setup
+## Ask before
 
-This repository is set up with [gusztavvargadr/skills](https://github.com/gusztavvargadr/skills) at commit `efe121af650fc8b5b0095edf48ef5764a3be03b3`, installed at user level, so the guides the setup installs are read through `guides-g`.
+- Running an `acceptance` target with the `ec2` driver, because it launches AWS instances that cost money until they are destroyed.
+- Running `docker compose push`, or the image pipeline with its `Force Publish` parameter, because it replaces the published images.
 
-## Guides
+Everything else, including acceptance with the `vagrant` driver, needs no approval.
 
-| Guide | When to read it |
-| --- | --- |
-| [Product](docs/product.md) | Before any change, to judge whether it belongs here. |
-| [Architecture](docs/architecture.md) | Before changing the shape of the system, and when checking a change against its invariants. |
-| [Engineering](docs/engineering.md) | Before building, testing, or checking a change. |
-| [Usage](docs/usage.md) | Before installing or using what the repository produces, or changing how it is used. |
-| [Reference](docs/reference.md) | When looking up a cookbook's name, directory, recipes, collections, or options, or changing one of them. |
-| The delivery guide `guides-g` lists | Before taking part in a delivery. |
-| The backlog guide `guides-g` lists | Before capturing, organizing, or promoting an idea. |
-| The writing guide `guides-g` lists | Before writing anything in this repository, or on its issues and pull requests. |
+## Conventions
+
+- Specs and plans go on the issue or the pull request, not in `docs/superpowers`.
+- Review findings become issues.
+- CI passes, and is the evidence. Where no pipeline covers a change, run the checks [CONTRIBUTING.md](CONTRIBUTING.md) lists locally, and say in the pull request which ones ran.

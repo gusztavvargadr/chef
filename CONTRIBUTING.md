@@ -4,7 +4,7 @@
 
 - `samples/cookbooks/<name>`: one cookbook each, named `gusztavvargadr_<name>`, with its policies, `kitchen.yml`, and pipeline.
 - `src`: the shared policy helpers every policy requires, and the Test Kitchen configuration of each driver.
-- `build`: the Chef Docker images and the Chocolatey package, both pending removal.
+- `build`: the Chef Docker images and the Chocolatey package.
 
 ## Cookbook conventions
 
