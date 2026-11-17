@@ -42,7 +42,7 @@ dotnet cake --cookbook <cookbook> [--instance <instance>] [--driver <driver>] --
 
 ### Acceptance
 
-- `acceptance` creates, converges, verifies, and destroys each instance with Test Kitchen. Converging installs [Cinc Client](https://cinc.sh) where the instance doesn't have its version yet, because Chef Infra Client's packages need a Progress license.
+- `acceptance` creates, converges, verifies, and destroys each instance with Test Kitchen. Converging installs [Cinc Client](https://cinc.sh) where the instance doesn't have it yet, because Chef Infra Client's packages need a Progress license.
 - `acceptance-create`, `-converge`, `-verify`, `-test`, and `-login` each run the [Test Kitchen](https://kitchen.ci/docs/getting-started/) command of the same name, and `acceptance-clean` runs `kitchen destroy`.
 
 ### Checks
