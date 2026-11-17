@@ -5,7 +5,6 @@ Read [README.md](README.md) and [CONTRIBUTING.md](CONTRIBUTING.md) before changi
 ## Ask before
 
 - Running any `acceptance-*` target, `acceptance`, or `all` with the `ec2` driver, because it launches AWS instances that cost money until they are destroyed.
-- Running `docker compose push`, or the image pipeline with its `Force Publish` parameter, because it replaces the published images.
 
 Everything else, including acceptance with the `vagrant` driver, needs no approval.
 
