@@ -1,6 +1,6 @@
 # chef
 
-[Chef](https://www.chef.io) cookbooks for provisioning Windows and Ubuntu machines: Docker, .NET, Git, IIS, Visual Studio, HashiCorp tools, VirtualBox, Vagrant, Azure Pipelines agents, and operating system setup.
+[Chef](https://www.chef.io) cookbooks for provisioning Windows and Ubuntu environments.
 
 The cookbooks live under `samples/cookbooks`, a path kept for historical reasons. The Chef Docker images under `build/docker` and the Chocolatey package under `build/chocolatey` are not maintained and are pending removal.
 

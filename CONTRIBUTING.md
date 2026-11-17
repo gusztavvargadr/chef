@@ -26,12 +26,13 @@
 
 ```sh
 dotnet tool restore
-dotnet cake --configuration <cookbook>[/<instance>[/<driver>]] --target <target>
+dotnet cake --cookbook <cookbook> [--instance <instance>] [--driver <driver>] --target <target>
 ```
 
-- `<cookbook>` is a directory under `samples/cookbooks`, such as `docker`.
-- `<instance>` is a Test Kitchen instance, such as `default-ubuntu-2204`. Without it, a target acts on every instance.
-- `<driver>` is `vagrant` or `ec2`, and `vagrant` when left out.
+- `--cookbook` is a directory under `samples/cookbooks`, such as `docker`.
+- `--instance` is a Test Kitchen instance, such as `default-ubuntu-2204`. Without it, a target acts on every instance.
+- `--driver` is `vagrant` or `ec2`, and `vagrant` when left out.
+- `--configuration <cookbook>/<instance>/<driver>` is a shortcut for the three, where trailing parts can be left out, such as `--configuration docker/default-ubuntu-2204`.
 - `--showtree` in place of `--target` lists the targets.
 
 ### Commit
@@ -42,8 +43,7 @@ dotnet cake --configuration <cookbook>[/<instance>[/<driver>]] --target <target>
 ### Acceptance
 
 - `acceptance` creates, converges, verifies, and destroys each instance with Test Kitchen.
-- `acceptance-converge`, `acceptance-verify`, and `acceptance-login` work one step at a time.
-- A machine stays until a passing `acceptance` or `acceptance-clean` destroys it.
+- `acceptance-create`, `-converge`, `-verify`, `-test`, and `-login` each run the [Test Kitchen](https://kitchen.ci/docs/getting-started/) command of the same name, and `acceptance-clean` runs `kitchen destroy`.
 
 ### Checks
 
