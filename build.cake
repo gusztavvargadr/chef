@@ -8,6 +8,8 @@ var driver = configurationParts.ElementAtOrDefault(2) ?? Argument("driver", "vag
 
 var cookbookDirectory = Directory($"samples/cookbooks/{cookbook}");
 var artifactsDirectory = Directory($"artifacts");
+var bootstrapDirectory = Directory($"src/bootstrap");
+var bootstrapMachines = new [] { "ubuntu", "ubuntu-chef", "windows", "windows-chef" };
 
 Task("commit-init")
   .Does(() => {
@@ -123,6 +125,35 @@ Task("acceptance")
   .IsDependentOn("acceptance-init")
   .IsDependentOn("acceptance-test");
 
+Task("bootstrap-init")
+  .Does(() => {
+    Vagrant("--version");
+
+    Vagrant("status");
+  });
+
+Task("bootstrap-test")
+  .Does(() => {
+    foreach (var machine in string.IsNullOrEmpty(instance) ? bootstrapMachines : new [] { instance }) {
+      Vagrant("up", machine, "--provision");
+      Vagrant("provision", machine);
+    }
+  });
+
+Task("bootstrap-clean")
+  .Does(() => {
+    if (string.IsNullOrEmpty(instance)) {
+      Vagrant("destroy", "-f");
+    } else {
+      Vagrant("destroy", "-f", instance);
+    }
+  });
+
+Task("bootstrap")
+  .IsDependentOn("bootstrap-init")
+  .IsDependentOn("bootstrap-test")
+  .IsDependentOn("bootstrap-clean");
+
 Task("all")
   .IsDependentOn("commit")
   .IsDependentOn("acceptance");
@@ -156,5 +187,19 @@ void Kitchen(params string[] arguments) {
   
   if (result != 0) {
     throw new Exception($"Kitchen failed with code {result} .");
+  }
+}
+
+void Vagrant(params string[] arguments) {
+  var result = StartProcess("vagrant", new ProcessSettings {
+    Arguments = ProcessArgumentBuilder.FromStrings(arguments),
+    WorkingDirectory = bootstrapDirectory,
+    EnvironmentVariables = new Dictionary<string, string> {
+      { "CHEF_POLICY_PATH", MakeAbsolute(File($"{artifactsDirectory}/gusztavvargadr_{cookbook.Replace('-', '_')}.tgz")).ToString() }
+    },
+  });
+
+  if (result != 0) {
+    throw new Exception($"Vagrant failed with code {result} .");
   }
 }

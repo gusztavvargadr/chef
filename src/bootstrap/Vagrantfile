@@ -1,0 +1,47 @@
+load "#{File.dirname(__FILE__)}/../kitchen.Vagrantfile"
+
+machines = {
+  'ubuntu' => { box: 'gusztavvargadr/ubuntu-server-2404-lts', windows: false, chef: false },
+  'ubuntu-chef' => { box: 'gusztavvargadr/kitchen-ubuntu-2404', windows: false, chef: true },
+  'windows' => { box: 'gusztavvargadr/windows-server-2025-standard', windows: true, chef: false },
+  'windows-chef' => { box: 'gusztavvargadr/kitchen-windows-2025', windows: true, chef: true },
+}
+
+provision_env = %w(
+  CHEF_VERSION
+  CHEF_POLICY
+  CHEF_POLICY_URL
+  CHEF_POLICY_PATH
+  CHEF_ATTRIBUTES
+  CHEF_RUN_LIST
+).to_h { |name| [name, ENV[name].to_s] }.reject { |_, value| value.empty? }
+
+policy_path = provision_env['CHEF_POLICY_PATH'].to_s
+policy_file = File.file?(policy_path) ? File.expand_path(policy_path) : nil
+
+Vagrant.configure('2') do |config|
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+
+  machines.each do |name, machine|
+    config.vm.define name, autostart: false do |config|
+      config.vm.box = machine[:box]
+
+      env = provision_env.dup
+
+      if machine[:windows]
+        # Provisioners in Task 2.
+      else
+        if policy_file
+          env['CHEF_POLICY_PATH'] = "/tmp/#{File.basename(policy_file)}"
+          config.vm.provision 'file', source: policy_file, destination: env['CHEF_POLICY_PATH']
+        end
+
+        config.vm.provision 'shell', path: "#{File.dirname(__FILE__)}/provision.sh", env: env
+
+        if machine[:chef]
+          config.vm.provision 'shell', inline: 'if [ -e /opt/cinc ]; then echo "Cinc was installed next to Chef Infra Client." >&2; exit 1; fi'
+        end
+      end
+    end
+  end
+end
