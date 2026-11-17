@@ -56,4 +56,4 @@ dotnet cake --cookbook <cookbook> [--instance <instance>] [--driver <driver>] --
 The Azure Pipelines run on a push to any branch, and not on pull requests.
 
 - Each cookbook's `azure-pipelines.yml` runs `commit` and then `acceptance` when its directory, or the directory of a cookbook it depends on, changes. A new cookbook adds one, and a new dependency adds that cookbook's directory to its path filter.
-- The first push of a new branch starts no pipeline when it carries more than one commit, although later pushes do. Push a new branch after its first commit, or queue its first build by hand.
+- The first push of a new branch starts no pipeline when it carries more than one commit, although later pushes do. Push a new branch after its first commit, or queue by hand the pipelines its first push should have started.
