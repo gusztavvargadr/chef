@@ -12,6 +12,8 @@
 - A cookbook reads its settings only from `node['gusztavvargadr_<name>']`.
 - A cookbook knows nothing about the cookbooks that depend on it, the policies that use it, Test Kitchen, or the build.
 
+`samples/cookbooks/hello-world` is a minimal sample of a cookbook that follows these conventions.
+
 ## Prerequisites
 
 - The .NET SDK, to run [Cake](https://cakebuild.net).
