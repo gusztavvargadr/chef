@@ -1,0 +1,66 @@
+# Contributing
+
+## Layout
+
+- `samples/cookbooks/<name>`: one cookbook each, named `gusztavvargadr_<name>`, with its policies, `kitchen.yml`, and pipeline.
+- `src`: the shared policy helpers every policy requires, and the Test Kitchen configuration of each driver.
+- `build`: the Chef Docker images and the Chocolatey package, both pending removal.
+
+## Cookbook conventions
+
+- The `default` recipe runs `initialize`, `apply`, and `cleanup`, in that order.
+- A cookbook reads its settings only from `node['gusztavvargadr_<name>']`.
+- A cookbook knows nothing about the cookbooks that depend on it, the policies that use it, Test Kitchen, or the build.
+
+## Prerequisites
+
+- The .NET SDK, to run [Cake](https://cakebuild.net).
+- Chef Workstation. On Windows, `build.cake` expects it under `C:\opscode\chef-workstation`.
+- For acceptance with the `vagrant` driver: Vagrant and a provider, which `VAGRANT_DEFAULT_PROVIDER` selects and which is `virtualbox` when unset.
+- For acceptance with the `ec2` driver: AWS credentials.
+- For the images: Docker with Compose.
+
+## Build and test
+
+`build.cake` runs a target for one cookbook:
+
+```sh
+dotnet tool restore
+dotnet cake --configuration <cookbook>[/<instance>[/<driver>]] --target <target>
+```
+
+- `<cookbook>` is a directory under `samples/cookbooks`, such as `docker`.
+- `<instance>` is a Test Kitchen instance, such as `default-ubuntu-2204`. Without it, a target acts on every instance.
+- `<driver>` is `vagrant` or `ec2`, and `vagrant` when left out.
+- `--showtree` in place of `--target` lists the targets.
+
+### Commit
+
+- `commit`, the default target, lints with Cookstyle, exports every policy of the cookbook, and runs its specs.
+- `commit-lint-fix` corrects the lint offenses Cookstyle can correct by itself.
+
+### Acceptance
+
+- `acceptance` creates, converges, verifies, and destroys each instance with Test Kitchen.
+- `acceptance-converge`, `acceptance-verify`, and `acceptance-login` work one step at a time.
+- A machine stays until a passing `acceptance` or `acceptance-clean` destroys it.
+
+A change to a cookbook is checked with `commit` on it and on each cookbook that depends on it, then `acceptance` on the instances its pipeline lists.
+
+## Images
+
+Build and run `chef-core` first, so `chef-client` and `chef-workstation` build on the changed one:
+
+```sh
+docker compose --env-file .env.linux-ubuntu-22.04 build chef-core
+docker compose --env-file .env.linux-ubuntu-22.04 run --rm chef-core
+```
+
+Building the Windows images with Compose is not supported.
+
+## Pipelines
+
+The Azure Pipelines run on a push to any branch, and not on pull requests.
+
+- Each cookbook's `azure-pipelines.yml` runs `commit` and then `acceptance` when its directory, or the directory of a cookbook it depends on, changes. A new cookbook adds one, and a new dependency adds that cookbook's directory to its path filter.
+- `build/docker/azure-pipelines.yml` builds and runs the images when `build/docker` or `build/chef` changes, and publishes them from `master`.
