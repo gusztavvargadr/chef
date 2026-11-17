@@ -2,7 +2,7 @@
 
 [Chef](https://www.chef.io) cookbooks for provisioning Windows and Ubuntu environments.
 
-The cookbooks live under `samples/cookbooks`, a path kept for historical reasons. The Chef Docker images under `build/docker` and the Chocolatey package under `build/chocolatey` are not maintained and are pending removal.
+The cookbooks live under `samples/cookbooks`, a path kept for historical reasons. The Chef Docker images under `build/docker` are not maintained and are pending removal.
 
 ## Requirements
 
