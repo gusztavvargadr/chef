@@ -32,7 +32,6 @@ platforms:
         Service: kitchen-windows-2022
     provisioner:
       chef_omnibus_root: $env:systemdrive\cinc-project\cinc
-      chef_omnibus_install_options: -P chef # Kitchen fails on Windows without a project; chef keeps the metadata endpoint
     transport:
       elevated: true
 
