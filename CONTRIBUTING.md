@@ -2,7 +2,7 @@
 
 ## Layout
 
-- `samples/cookbooks/<name>`: one cookbook each, named `gusztavvargadr_<name>`, with its policies, `kitchen.yml`, and pipeline.
+- `samples/cookbooks/<name>`: one cookbook each, named `gusztavvargadr_<name>`, with its policies, `kitchen.yml`, and pipeline. A new cookbook starts from a copy of `samples/cookbooks/hello-world`.
 - `src`: the shared policy helpers every policy requires, and the Test Kitchen configuration of each driver.
 - `build`: the Chef Docker images and the Chocolatey package.
 
