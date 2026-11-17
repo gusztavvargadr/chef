@@ -45,7 +45,11 @@ dotnet cake --configuration <cookbook>[/<instance>[/<driver>]] --target <target>
 - `acceptance-converge`, `acceptance-verify`, and `acceptance-login` work one step at a time.
 - A machine stays until a passing `acceptance` or `acceptance-clean` destroys it.
 
-A change to a cookbook is checked with `commit` on it and on each cookbook that depends on it, then `acceptance` on the instances its pipeline lists.
+### Checks
+
+- A cookbook: `commit` on it and on each cookbook that depends on it, then `acceptance` on the instances its pipeline lists.
+- `src/Policyfile.rb`: `commit` on every cookbook.
+- `src/kitchen.*`: `acceptance` on the driver and platforms it changes.
 
 ## Images
 
