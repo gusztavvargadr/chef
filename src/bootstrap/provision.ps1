@@ -34,6 +34,17 @@ if (Test-Path $cincClient) {
 } elseif (Test-Path $chefClient) {
   $client = $chefClient
 } else {
+  # The Cinc MSI replaces Chef Infra Client as a major upgrade, so never install it where Chef Infra Client is registered.
+  $uninstallKeys = @(
+    'HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\*',
+    'HKLM:\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\*'
+  )
+  $chefProduct = Get-ItemProperty $uninstallKeys -ErrorAction Ignore | Where-Object { $_.DisplayName -like 'Chef Infra Client*' } | Select-Object -First 1
+  if ($chefProduct) {
+    [Console]::Error.WriteLine("$($chefProduct.DisplayName) is installed, but not at $($chefClient). provision.ps1 doesn't install Cinc Client, which would replace it.")
+    exit 1
+  }
+
   Write-Host "Installing Cinc Client $($chefVersion)."
   . { Invoke-WebRequest -UseBasicParsing https://omnitruck.cinc.sh/install.ps1 } | Invoke-Expression
   install -project cinc -version $chefVersion

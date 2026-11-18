@@ -79,7 +79,8 @@ The script exits with the client's exit code, so the PowerShell one-liner runs i
 | `CHEF_RUN_LIST` | empty | A named run list of the policy to run. |
 
 - The policies are the `.tgz` assets of the [`latest` release](https://github.com/gusztavvargadr/chef/releases/tag/latest), named after the policy.
-- A machine that has Chef Infra Client keeps it, and the script runs the policy with it.
+- A machine that has Chef Infra Client keeps it, and the script runs the policy with it. On Windows, where Chef Infra Client is installed somewhere other than `C:\opscode\chef`, the script stops instead of installing Cinc Client, whose installer would replace it.
+- On Windows, the script also installs [Chocolatey](https://chocolatey.org) where it's missing, because some cookbooks install packages with it. `CHOCOLATEY_VERSION` sets its version, `2.7.3` by default. The script needs Windows Server 2019, Windows 10 1803, or later, for `tar`.
 - Exit code 35 means a reboot is pending. Run the script again after the reboot.
 - The release always holds the latest scripts and archives, from `master`. Earlier versions aren't kept.
 
