@@ -119,13 +119,13 @@ stages:
           - checkout: self
 
           - task: GitHubRelease@1
-            displayName: Publish to release latest
+            displayName: Publish to release rolling
             condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
             inputs:
               gitHubConnection: github-releases
               repositoryName: $(Build.Repository.Name)
               action: edit
-              tag: latest
+              tag: rolling
               assets: |
                 $(Build.SourcesDirectory)/src/bootstrap/provision.sh
                 $(Build.SourcesDirectory)/src/bootstrap/provision.ps1
@@ -135,13 +135,13 @@ stages:
               addChangeLog: false
 
           - task: GitHubRelease@1
-            displayName: Publish to release latest-draft
+            displayName: Publish to release rolling-draft
             condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
             inputs:
               gitHubConnection: github-releases
               repositoryName: $(Build.Repository.Name)
               action: edit
-              tag: latest-draft
+              tag: rolling-draft
               assets: |
                 $(Build.SourcesDirectory)/src/bootstrap/provision.sh
                 $(Build.SourcesDirectory)/src/bootstrap/provision.ps1

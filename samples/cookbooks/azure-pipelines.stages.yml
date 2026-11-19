@@ -102,13 +102,13 @@ stages:
               artifact: ${{ configuration.name }}
 
             - task: GitHubRelease@1
-              displayName: Publish to release latest
+              displayName: Publish to release rolling
               condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
               inputs:
                 gitHubConnection: github-releases
                 repositoryName: $(Build.Repository.Name)
                 action: edit
-                tag: latest
+                tag: rolling
                 assets: $(Pipeline.Workspace)/${{ configuration.name }}/*.tgz
                 assetUploadMode: replace
                 isDraft: false
@@ -116,13 +116,13 @@ stages:
                 addChangeLog: false
 
             - task: GitHubRelease@1
-              displayName: Publish to release latest-draft
+              displayName: Publish to release rolling-draft
               condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
               inputs:
                 gitHubConnection: github-releases
                 repositoryName: $(Build.Repository.Name)
                 action: edit
-                tag: latest-draft
+                tag: rolling-draft
                 assets: $(Pipeline.Workspace)/${{ configuration.name }}/*.tgz
                 assetUploadMode: replace
                 isDraft: true
