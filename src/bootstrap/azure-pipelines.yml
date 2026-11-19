@@ -1,0 +1,151 @@
+trigger:
+  branches:
+    include:
+      - '*'
+  paths:
+    include:
+      - src/bootstrap
+      - src/kitchen.Vagrantfile
+pr: none
+
+parameters:
+  - name: machines
+    type: object
+    default:
+      - ubuntu
+      - ubuntu-chef
+      - windows
+      - windows-chef
+
+variables:
+  configuration: hello-world
+
+stages:
+  - stage: commit
+    displayName: Commit
+
+    jobs:
+      - job: build_hello_world
+        displayName: Build cookbook hello-world
+
+        pool:
+          name: default
+          demands:
+            - VSTS_AGENT_CAP_CHEF -equals build
+
+        workspace:
+          clean: all
+
+        steps:
+          - checkout: self
+            submodules: recursive
+
+          - script: |
+              dotnet --info
+              dotnet tool restore
+            displayName: Initialize build
+
+          - script: |
+              dotnet cake --configuration $(configuration) --target commit
+            displayName: Run build
+
+          - publish: artifacts
+            displayName: Publish artifacts
+            artifact: $(configuration)
+
+          - script: |
+              dotnet cake --configuration $(configuration) --target commit-clean
+            displayName: Clean build
+            condition: always()
+
+  - stage: bootstrap
+    displayName: Bootstrap
+
+    jobs:
+      - ${{ each machine in parameters.machines }}:
+        - job: test_${{ replace(machine, '-', '_') }}
+          displayName: Test bootstrap on machine ${{ machine }}
+
+          pool:
+            name: default
+            demands:
+              - VSTS_AGENT_CAP_CHEF -equals test
+              - VSTS_AGENT_CAP_VIRTUALIZATION_PROVIDER
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: self
+              submodules: recursive
+
+            - script: |
+                dotnet --info
+                dotnet tool restore
+              displayName: Initialize build
+
+            - task: DownloadPipelineArtifact@2
+              displayName: Download artifacts
+              inputs:
+                buildType: current
+                artifactName: $(configuration)
+                targetPath: $(Build.SourcesDirectory)/artifacts
+
+            - script: |
+                dotnet cake --configuration $(configuration)/${{ machine }} --target bootstrap
+              displayName: Run build
+
+            - script: |
+                dotnet cake --configuration $(configuration)/${{ machine }} --target bootstrap-clean
+              displayName: Clean build
+              condition: always()
+
+  - stage: publish
+    displayName: Publish
+
+    jobs:
+      - job: publish
+        displayName: Publish bootstrap scripts
+
+        pool:
+          name: default
+          demands:
+            - VSTS_AGENT_CAP_CHEF -equals build
+
+        workspace:
+          clean: all
+
+        steps:
+          - checkout: self
+
+          - task: GitHubRelease@1
+            displayName: Publish to release rolling
+            condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+            inputs:
+              gitHubConnection: github-releases
+              repositoryName: $(Build.Repository.Name)
+              action: edit
+              tag: rolling
+              assets: |
+                $(Build.SourcesDirectory)/src/bootstrap/provision.sh
+                $(Build.SourcesDirectory)/src/bootstrap/provision.ps1
+              assetUploadMode: replace
+              isDraft: false
+              makeLatest: 'true'
+              addChangeLog: false
+
+          - task: GitHubRelease@1
+            displayName: Publish to release rolling-draft
+            condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+            inputs:
+              gitHubConnection: github-releases
+              repositoryName: $(Build.Repository.Name)
+              action: edit
+              tag: rolling-draft
+              assets: |
+                $(Build.SourcesDirectory)/src/bootstrap/provision.sh
+                $(Build.SourcesDirectory)/src/bootstrap/provision.ps1
+              assetUploadMode: replace
+              isDraft: true
+              makeLatest: 'false'
+              addChangeLog: false

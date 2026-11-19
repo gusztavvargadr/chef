@@ -77,3 +77,54 @@ stages:
                   dotnet cake --configuration ${{ configuration.name }}/${{ instance }} --target acceptance-clean
                 displayName: Clean build
                 condition: always()
+
+  - stage: publish
+    displayName: Publish
+
+    jobs:
+      - ${{ each configuration in parameters.configurations }}:
+        - job: publish_${{ replace(configuration.name, '-', '_') }}
+          displayName: Publish cookbook ${{ configuration.name }}
+
+          pool:
+            name: default
+            demands:
+              - VSTS_AGENT_CAP_CHEF -equals build
+
+          workspace:
+            clean: all
+
+          steps:
+            - checkout: none
+
+            - download: current
+              displayName: Download artifacts
+              artifact: ${{ configuration.name }}
+
+            - task: GitHubRelease@1
+              displayName: Publish to release rolling
+              condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+              inputs:
+                gitHubConnection: github-releases
+                repositoryName: $(Build.Repository.Name)
+                action: edit
+                tag: rolling
+                assets: $(Pipeline.Workspace)/${{ configuration.name }}/*.tgz
+                assetUploadMode: replace
+                isDraft: false
+                makeLatest: 'true'
+                addChangeLog: false
+
+            - task: GitHubRelease@1
+              displayName: Publish to release rolling-draft
+              condition: and(succeeded(), ne(variables['Build.SourceBranch'], 'refs/heads/master'))
+              inputs:
+                gitHubConnection: github-releases
+                repositoryName: $(Build.Repository.Name)
+                action: edit
+                tag: rolling-draft
+                assets: $(Pipeline.Workspace)/${{ configuration.name }}/*.tgz
+                assetUploadMode: replace
+                isDraft: true
+                makeLatest: 'false'
+                addChangeLog: false
