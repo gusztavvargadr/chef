@@ -1,5 +1,5 @@
 # Installs Cinc Client where no client is installed, then runs a chef policy in local mode.
-# Usage, in an elevated session:
+# Usage, in an elevated session, or in any session where a client is already installed:
 # $env:CHEF_POLICY = '<policy>'; powershell -NoProfile -ExecutionPolicy Bypass -Command "iwr -useb https://github.com/gusztavvargadr/chef/releases/latest/download/provision.ps1 | iex"
 
 $ErrorActionPreference = 'Stop'
@@ -20,10 +20,7 @@ $chefRunList = Get-Setting 'CHEF_RUN_LIST' ''
 $chocolateyVersion = Get-Setting 'CHOCOLATEY_VERSION' '2.7.3'
 
 $principal = New-Object Security.Principal.WindowsPrincipal ([Security.Principal.WindowsIdentity]::GetCurrent())
-if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-  [Console]::Error.WriteLine('provision.ps1 needs an elevated session. Run it as Administrator.')
-  exit 1
-}
+$elevated = $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
 $env:CHEF_LICENSE = 'accept-silent'
 
@@ -45,6 +42,11 @@ if (Test-Path $cincClient) {
     exit 1
   }
 
+  if (-not $elevated) {
+    [Console]::Error.WriteLine('No client is installed, and installing Cinc Client needs an elevated session. Run provision.ps1 as Administrator.')
+    exit 1
+  }
+
   Write-Host "Installing Cinc Client $($chefVersion)."
   . { Invoke-WebRequest -UseBasicParsing https://omnitruck.cinc.sh/install.ps1 } | Invoke-Expression
   install -project cinc -version $chefVersion
@@ -57,9 +59,14 @@ Write-Host "Using $($client)."
 & $client --version
 
 if (-not (Get-Command 'choco' -ErrorAction Ignore)) {
-  Write-Host "Installing Chocolatey $($chocolateyVersion)."
-  $env:chocolateyVersion = $chocolateyVersion
-  Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+  # Chocolatey installs machine-wide, as do the packages it installs, so a session that isn't elevated goes on without it.
+  if ($elevated) {
+    Write-Host "Installing Chocolatey $($chocolateyVersion)."
+    $env:chocolateyVersion = $chocolateyVersion
+    Invoke-Expression ((New-Object Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+  } else {
+    Write-Host 'Chocolatey is missing, and installing it needs an elevated session, so the policy runs without it.'
+  }
 }
 
 if ([string]::IsNullOrEmpty($chefPolicy) -and [string]::IsNullOrEmpty($chefPolicyPath)) {

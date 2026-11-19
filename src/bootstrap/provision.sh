@@ -2,6 +2,7 @@
 
 # Installs Cinc Client where no client is installed, then runs a chef policy in local mode.
 # Usage: curl -fsSL https://github.com/gusztavvargadr/chef/releases/latest/download/provision.sh | sudo CHEF_POLICY=<policy> bash
+# Without sudo, it runs where a client is already installed.
 
 set -euo pipefail
 
@@ -14,11 +15,6 @@ main() {
   CHEF_ATTRIBUTES="${CHEF_ATTRIBUTES:-default}"
   CHEF_RUN_LIST="${CHEF_RUN_LIST:-}"
 
-  if [ "$(id -u)" -ne 0 ]; then
-    echo "provision.sh needs root. Run it with sudo." >&2
-    exit 1
-  fi
-
   export CHEF_LICENSE="accept-silent"
 
   if [ -x /opt/cinc/bin/cinc-client ]; then
@@ -26,6 +22,10 @@ main() {
   elif [ -x /opt/chef/bin/chef-client ]; then
     client=/opt/chef/bin/chef-client
   else
+    if [ "$(id -u)" -ne 0 ]; then
+      echo "No client is installed, and installing Cinc Client needs root. Run provision.sh with sudo." >&2
+      exit 1
+    fi
     echo "Installing Cinc Client ${CHEF_VERSION}."
     curl -fsSL https://omnitruck.cinc.sh/install.sh | bash -s -- -P cinc -v "${CHEF_VERSION}"
     client=/opt/cinc/bin/cinc-client
