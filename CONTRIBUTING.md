@@ -65,9 +65,8 @@ dotnet cake --cookbook <cookbook> [--instance <instance>] [--driver <driver>] --
 The Azure Pipelines run on a push to any branch, and not on pull requests.
 
 - Each cookbook's `azure-pipelines.yml` runs `commit` and then `acceptance` when its directory, or the directory of a cookbook it depends on, changes. A new cookbook adds one, and a new dependency adds that cookbook's directory to its path filter.
-- `src/bootstrap/azure-pipelines.yml`, the `src.bootstrap` pipeline, runs `commit` on `hello-world`, then `bootstrap` on each machine with its archive, and then publishes `provision.sh` and `provision.ps1`, when `src/bootstrap` or `src/kitchen.Vagrantfile` changes.
-- Each cookbook's pipeline ends with a `publish` stage, which uploads its policy archives after `acceptance` passes.
-- Publishing replaces the assets of the same name in the release `latest` on `master`, and in the draft release `latest-draft` on other branches, which no machine downloads. It needs the service connection `github-releases`, which uses a GitHub token that can write this repository's contents.
+- `src/bootstrap/azure-pipelines.yml` tests and publishes the bootstrap scripts, and each cookbook's pipeline publishes its policy archives.
+- Publishing goes to the release `latest` on `master`, and to the draft release `latest-draft` on other branches. It needs the service connection `github-releases`, which uses a GitHub token that can write this repository's contents.
 - Publishing never deletes an asset. Delete a removed or renamed policy's archive from `latest` by hand.
 - `src/Policyfile.rb` isn't in the cookbooks' path filters. After it changes, queue every cookbook pipeline on `master` to republish the archives.
 - The first push of a new branch starts no pipeline when it carries more than one commit, although later pushes do. Push a new branch after its first commit, or queue by hand the pipelines its first push should have started.
